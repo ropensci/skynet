@@ -74,7 +74,7 @@ netUnd <- function(x = netMerged, disp = FALSE, cap = FALSE, merge = TRUE){
     gUnd_cap <- subgraph.edges(gUnd, which(E(gUnd)$weight > max(E(gUnd)$weight)*.10), delete.vertices = TRUE)
 
     # Create datafram based on collapsed edges graph
-    netUnd_cap <- as_data_frame(gUnd_cap)
+    netUnd_cap <- igraph::as_data_frame(gUnd_cap)
 
     netUnd_cap <- netUnd_cap %>%
       rename(ORIGIN = from, DEST = to)
@@ -111,7 +111,7 @@ netUnd <- function(x = netMerged, disp = FALSE, cap = FALSE, merge = TRUE){
   }else{
 
     # Create datafram based on collapsed edges graph
-    netUnd_all <- as_data_frame(gUnd)
+    netUnd_all <- igraph::as_data_frame(gUnd)
 
     netUnd_all <- netUnd_all %>%
       rename(ORIGIN = from, DEST = to)

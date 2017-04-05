@@ -65,7 +65,7 @@ netDir <- function(x = netMerged, disp = FALSE, cap = FALSE){
       mutate(ORIGIN_char = as.character(ORIGIN), DEST_char = as.character(DEST))
 
     #Creates Dataframe from graph
-    netDir_cap <- as_data_frame(gDir_cap)
+    netDir_cap <- igraph::as_data_frame(gDir_cap)
 
     netDir_cap <- netDir_cap %>%
       rename(ORIGIN = from, DEST = to)
