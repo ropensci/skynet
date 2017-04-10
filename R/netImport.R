@@ -1,10 +1,19 @@
-# Skynet network analysis for BTS Data
+#' Skynet network analysis for BTS Data
+#' Creates networks from the BTS Airline Origin and Destination Survey (DB1B)
+#'
+#' Given the DB1BCoupon and DB1BTicket csv's exported
+#' this package allows creating sociomatrixes and subsequent igraph graphs.
+#' @include netDir.R
+#' @include netUnd.R
+#' @include netMetro.R
+#' @author Filipe Teixeira
+#' @references NA.
+#' NA.
+#' @examples
+#' NA
+#' @import data.table dplyr igraph disparityfilter poweRlaw
+#' @export
 
-library(data.table)
-library(dplyr)
-library(igraph)
-library(disparityfilter)
-library(poweRlaw)
 
 #netImport function
 netImport <- function(x, y){
