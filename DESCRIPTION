@@ -4,8 +4,14 @@ Title: Generates networks from BTS data
 Version: 0.2.0
 Author: Filipe Teixeira
 Maintainer: Filipe Teixeira <Filipe.MarquesTeixeira@Ugent.be>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Description: This package generates networks based on the BTS Data.
+License: GNU GPL (>= 2)
 Encoding: UTF-8
 LazyData: true
+RoxygenNote: 6.0.1
+Collate: 
+    'PowerLaw.R'
+    'netDir.R'
+    'netMetro.R'
+    'netUnd.R'
+    'netImport.R'
