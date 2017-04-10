@@ -1,4 +1,6 @@
-#netMetro
+#' netMetro
+#' @export
+
 netMetro <- function(x = netMerged, undirected = FALSE, merge = TRUE){
 
   netMet <- x %>%

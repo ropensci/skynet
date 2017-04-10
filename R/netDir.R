@@ -1,4 +1,5 @@
-# netDir
+#' netDir
+#' @export
 ###don't forget to add the filtering option###
 
 netDir <- function(x = netMerged, disp = FALSE, cap = FALSE){

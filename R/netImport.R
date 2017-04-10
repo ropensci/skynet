@@ -11,7 +11,11 @@
 #' NA.
 #' @examples
 #' NA
-#' @import data.table dplyr igraph disparityfilter poweRlaw
+#' @import data.table
+#' @import dplyr
+#' @import igraph
+#' @import semnet
+#' @import poweRlaw
 #' @export
 
 

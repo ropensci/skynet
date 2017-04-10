@@ -1,4 +1,6 @@
-# netUnd
+#' netUnd
+#' @export
+
 netUnd <- function(x = netMerged, disp = FALSE, cap = FALSE, merge = TRUE){
 
   netUnd_all <- x %>%
