@@ -23,31 +23,45 @@ netUnd <- function(x = netMerged, disp = FALSE, cap = FALSE, merge = TRUE){
 
     if(disp == TRUE){
 
-    # Run disparity filter
+      # Run disparity filter
+      # Creates numeric version for dispfilter issue
 
-    #Create lookup table
-    value_edges <- netUnd_all %>%
-      select(ORIGIN, DEST) %>%
-      mutate(ORIGIN_char = as.character(ORIGIN), DEST_char = as.character(DEST))
+      #Create lookup table
+      value_edges <- netUnd_all %>%
+        select(ORIGIN, DEST) %>%
+        mutate(ORIGIN_num = as.numeric(ORIGIN), DEST_num = as.numeric(DEST))
+      ##distinct()## to remove later
 
-    # Creates igraph object
-    gUnd_disp <<- semnet::getBackboneNetwork(gUnd, delete.isolates = F, alpha = 0.003)
-    netUnd_disp <<- get.data.frame(gUnd_disp)
+      edges <- netUnd_all %>%
+        as.data.frame() %>%
+        mutate(ORIGIN = as.numeric(ORIGIN), DEST = as.numeric(DEST))
 
-    # Recode with Factor info
-    netUnd_disp <- netUnd_disp %>%
-      rename(ORIGIN = from, DEST = to)
+      nodestemp <- nodes %>%
+        mutate(ORIGIN = as.numeric(ORIGIN))
 
-    netUnd_disp <- left_join(netUnd_disp, value_edges,
-                             by = c("ORIGIN" = "ORIGIN_char", "DEST" = "DEST_char"))
+      # ---------------------------------------------------------------------------------- #
 
-    netUnd_disp <- netUnd_disp %>%
-      select(ORIGIN.y, DEST.y, weight, alpha) %>%
-      mutate(ORIGIN = ORIGIN.y, DEST = DEST.y, ORIGIN.y = NULL, DEST.y = NULL) %>%
-      select(ORIGIN, DEST, weight, alpha)
+      #Creates igraph object
+      gUnd_disp <- graph_from_data_frame(edges, directed = FALSE, vertices = nodestemp)
+      netUnd_disp <- backbone(gUnd_disp, weights = E(gUnd_disp)$weight, alpha = 0.003)
 
-    gUnd_disp <<- gUnd_disp
-    netUnd_disp <<- netUnd_disp
+      #Recode with Factor info
+      netUnd_disp <- netUnd_disp %>%
+        mutate(ORIGIN = as.numeric(from), DEST = as.numeric(to))
+
+      netUnd_disp <- left_join(netUnd_disp, value_edges,
+                               by = c("ORIGIN" = "ORIGIN_num", "DEST" = "DEST_num"))
+
+      netUnd_disp <- netUnd_disp %>%
+        select(ORIGIN.y, DEST.y, weight, alpha) %>%
+        mutate(ORIGIN = ORIGIN.y, DEST = DEST.y, ORIGIN.y = NULL, DEST.y = NULL) %>%
+        select(ORIGIN, DEST, weight, alpha)
+
+      gDir_disp <- graph_from_data_frame(netUnd_disp, directed = TRUE, vertices = nodes)
+
+      gUnd_disp <<- gUnd_disp
+      netUnd_disp <<- netUnd_disp
+
 
     # ----------------------------------------------------------------------------- #
                            # End of 10% filter command #

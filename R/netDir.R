@@ -1,4 +1,5 @@
 #' netDir
+#' Creates Directed Network
 #' @export
 ###don't forget to add the filtering option###
 
@@ -11,28 +12,41 @@ netDir <- function(x = netMerged, disp = FALSE, cap = FALSE){
   gDir <- graph_from_data_frame(netDir_all, directed = TRUE, vertices = nodes)
 
   if(disp == TRUE){
-    # Run disparity filter
 
-    # Create lookup table
+    # Run disparity filter
+    # Creates numeric version for dispfilter issue
+
+    #Create lookup table
     value_edges <- netDir_all %>%
       select(ORIGIN, DEST) %>%
-      mutate(ORIGIN_char = as.character(ORIGIN), DEST_char = as.character(DEST))
+      mutate(ORIGIN_num = as.numeric(ORIGIN), DEST_num = as.numeric(DEST))
 
-    # Create igraph
-    gDir_disp <<- semnet::getBackboneNetwork(gDir, delete.isolates = F, alpha = 0.003)
-    netDir_disp <<- get.data.frame(gDir_disp)
+    edges <- netDir_all %>%
+      as.data.frame() %>%
+      mutate(ORIGIN = as.numeric(ORIGIN), DEST = as.numeric(DEST))
 
-    # Recode with Factor info
-    netDir_disp <- netDir_disp %>%
-      rename(ORIGIN = from, DEST = to)
+    nodestemp <- nodes %>%
+      mutate(ORIGIN = as.numeric(ORIGIN))
+
+    # ---------------------------------------------------------------------------------- #
+
+    #Creates igraph object
+    gDir_disp <- graph_from_data_frame(edges, directed = TRUE, vertices = nodestemp)
+    netDir_temp <- backbone(gDir_disp, weights = E(gDir_disp)$weight, alpha = 0.003)
+
+    #Recode with Factor info
+    netDir_disp <- netDir_temp %>%
+      mutate(ORIGIN = as.numeric(from), DEST = as.numeric(to))
 
     netDir_disp <- left_join(netDir_disp, value_edges,
-                             by = c("ORIGIN" = "ORIGIN_char", "DEST" = "DEST_char"))
+                             by = c("ORIGIN" = "ORIGIN_num", "DEST" = "DEST_num"))
 
     netDir_disp <- netDir_disp %>%
       select(ORIGIN.y, DEST.y, weight, alpha) %>%
       mutate(ORIGIN = ORIGIN.y, DEST = DEST.y, ORIGIN.y = NULL, DEST.y = NULL) %>%
       select(ORIGIN, DEST, weight, alpha)
+
+    gDir_disp <- graph_from_data_frame(netDir_disp, directed = TRUE, vertices = nodes)
 
     gDir_disp <<- gDir_disp
     netDir_disp <<- netDir_disp

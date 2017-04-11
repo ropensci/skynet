@@ -2,10 +2,12 @@
 % Please edit documentation in R/netDir.R
 \name{netDir}
 \alias{netDir}
-\title{netDir}
+\title{netDir
+Creates Directed Network}
 \usage{
 netDir(x = netMerged, disp = FALSE, cap = FALSE)
 }
 \description{
 netDir
+Creates Directed Network
 }
