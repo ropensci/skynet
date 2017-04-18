@@ -2,6 +2,6 @@
 
 export(netDir)
 export(netImport)
+export(netInt)
 export(netMetro)
 export(netUnd)
-importFrom(semnet,getBackboneNetwork)

@@ -12,7 +12,7 @@
 #' @include netDir.R
 #' @include netUnd.R
 #' @include netMetro.R
-#' @importFrom semnet getBackboneNetwork
+#' #@importFrom semnet getBackboneNetwork
 #' @export
 
 

@@ -1,7 +1,7 @@
 Package: skynet
 Type: Package
 Title: Generates networks from BTS data
-Version: 0.2.0
+Version: 0.3.0
 Author: Filipe Teixeira
 Maintainer: Filipe Teixeira <Filipe.MarquesTeixeira@Ugent.be>
 Description: This package generates networks based on the BTS Data.
@@ -13,6 +13,7 @@ Collate:
     'PowerLaw.R'
     'data.R'
     'netDir.R'
+    'netInt.R'
     'netMetro.R'
     'netUnd.R'
     'plot_degree_distribution.R'
@@ -20,8 +21,7 @@ Collate:
 Depends:
     data.table,
     igraph,
-    dplyr,
     poweRlaw,
-    disparityfilter
+    dplyr
 Imports:
     semnet

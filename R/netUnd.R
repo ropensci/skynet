@@ -3,6 +3,11 @@
 
 netUnd <- function(x = netMerged, disp = FALSE, cap = FALSE, merge = TRUE){
 
+  if(grepl("Int", deparse(substitute(x)), ignore.case = TRUE) == TRUE)
+    nodes.y = nodesInt
+  else
+    nodes.y = nodes
+
   netUnd_all <- x %>%
     select(ORIGIN, DEST, PASSENGERS) %>%
     group_by(ORIGIN, DEST) %>%
@@ -18,7 +23,7 @@ netUnd <- function(x = netMerged, disp = FALSE, cap = FALSE, merge = TRUE){
     select(DEST, ORIGIN, DEST_char, ORIGIN_char) %>%
     rename(ORIGIN = DEST, DEST = ORIGIN, ORIGIN_char = DEST_char, DEST_char = ORIGIN_char)
 
-  gUnd <<- graph_from_data_frame(netUnd_all, directed = TRUE, vertices = nodes)
+  gUnd <<- graph_from_data_frame(netUnd_all, directed = TRUE, vertices = nodes.y)
   gUnd <<- as.undirected(gUnd, mode = "collapse", edge.attr.comb=list(weight = "sum"))
 
     if(disp == TRUE){
@@ -31,7 +36,7 @@ netUnd <- function(x = netMerged, disp = FALSE, cap = FALSE, merge = TRUE){
       mutate(ORIGIN_char = as.character(ORIGIN), DEST_char = as.character(DEST))
 
     # Creates igraph object
-    gUnd_disp <<- semnet::getBackboneNetwork(gUnd, delete.isolates = F, alpha = 0.003)
+    gUnd_disp <<- semnet::getBackboneNetwork(gUnd, delete.isolates = T, alpha = 0.003)
     netUnd_disp <<- get.data.frame(gUnd_disp)
 
     # Recode with Factor info
@@ -91,7 +96,7 @@ netUnd <- function(x = netMerged, disp = FALSE, cap = FALSE, merge = TRUE){
       group_by(ORIGIN, DEST) %>%
       summarise(weight = sum(PASSENGERS))
 
-    gUnd <<- graph_from_data_frame(netUnd_all, directed = FALSE, vertices = nodes)
+    gUnd <<- graph_from_data_frame(netUnd_all, directed = FALSE, vertices = nodes.y)
     netUnd_all <<- netUnd_all
 
   }else{
