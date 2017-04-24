@@ -24,13 +24,15 @@ netImport <- function(x, y){
   #OriginCityMarketID, DestCityMarketID and Trip Break (8 variables)
   coupon <- fread(x, header = TRUE, sep = ",", stringsAsFactors = TRUE,
                   integer64 = "numeric")
-  coupon[,"V9"] <- NULL
+  coupon <- select(coupon, -grep("V", names(coupon)))
+  #coupon[,"V9"] <- NULL
 
   # Import Ticket file
   # Include ItinID, RoundTrip, Passengers and ItinFare (4 variables)
   ticket <- fread(y, header = TRUE, sep = ",", stringsAsFactors = TRUE,
                   integer64 = "numeric")
-  ticket[,"V5"] <-  NULL
+  ticket <- select(ticket, -grep("V", names(ticket)))
+  #ticket[,"V5"] <-  NULL
 
   #Merge data
   netMerged <<- merge(coupon, ticket, by = "ITIN_ID", all.x = TRUE)
@@ -41,8 +43,9 @@ netImport <- function(x, y){
 
   nodesTemp <- netMerged %>%
     group_by(DEST) %>%
-    summarize(PASSENGERS = sum(PASSENGERS))
-  colnames(nodesTemp)[1] <- "ORIGIN"
+    summarize(PASSENGERS = sum(PASSENGERS)) %>%
+    rename(ORIGIN = DEST)
+  #colnames(nodesTemp)[1] <- "ORIGIN"
 
   nodes <- netMerged %>%
     group_by(ORIGIN) %>%
@@ -64,8 +67,9 @@ netImport <- function(x, y){
 
   nodesTemp <- netMergedtemp %>%
     group_by(DEST) %>%
-    summarize(PASSENGERS = sum(PASSENGERS))
-  colnames(nodesTemp)[1] <- "ORIGIN"
+    summarize(PASSENGERS = sum(PASSENGERS)) %>%
+    rename(ORIGIN = DEST)
+  #colnames(nodesTemp)[1] <- "ORIGIN"
 
   nodesTr <- netMergedtemp %>%
     group_by(ORIGIN) %>%

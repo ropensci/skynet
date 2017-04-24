@@ -13,15 +13,14 @@ netUnd <- function(x = netMerged, disp = FALSE, cap = FALSE, merge = TRUE){
     group_by(ORIGIN, DEST) %>%
     summarise(weight = sum(PASSENGERS))
 
-  value_edges <- netUnd_all %>%
-    select(ORIGIN, DEST) %>%
-    mutate(ORIGIN_char = as.character(ORIGIN), DEST_char = as.character(DEST))
+  # Airport shit to replace value_edges
+  air1 <- airportCode %>%
+    mutate(ORIGIN_char = as.character(ORIGIN)) %>%
+    select(ORIGIN, ORIGIN_char)
 
-  value_edges2 <- netUnd_all %>%
-    select(DEST, ORIGIN) %>%
-    mutate(ORIGIN_char = as.character(ORIGIN), DEST_char = as.character(DEST)) %>%
-    select(DEST, ORIGIN, DEST_char, ORIGIN_char) %>%
-    rename(ORIGIN = DEST, DEST = ORIGIN, ORIGIN_char = DEST_char, DEST_char = ORIGIN_char)
+  air2 <- airportCode %>%
+    mutate(DEST_char = as.character(ORIGIN), DEST = ORIGIN) %>%
+    select(DEST, DEST_char)
 
   gUnd <<- graph_from_data_frame(netUnd_all, directed = TRUE, vertices = nodes.y)
   gUnd <<- as.undirected(gUnd, mode = "collapse", edge.attr.comb=list(weight = "sum"))
@@ -71,14 +70,14 @@ netUnd <- function(x = netMerged, disp = FALSE, cap = FALSE, merge = TRUE){
       rename(ORIGIN = from, DEST = to)
 
     netUnd_cap <- netUnd_cap %>%
-      left_join(value_edges,
-                by = c("ORIGIN" = "ORIGIN_char", "DEST" = "DEST_char")) %>%
-      left_join(value_edges2,
-                by = c("ORIGIN" = "ORIGIN_char", "DEST" = "DEST_char")) %>%
-      mutate(Col1 = if_else(is.na(ORIGIN.y),ORIGIN.y.y, ORIGIN.y),
-             Col2 = if_else(is.na(DEST.y),DEST.y.y, DEST.y)) %>%
-      select(Col1, Col2, weight) %>%
-      rename(ORIGIN = Col1, DEST = Col2)
+      left_join(air1,
+                by = c("ORIGIN" = "ORIGIN_char")) %>%
+      select(ORIGIN.y, DEST, weight) %>%
+      rename(ORIGIN = ORIGIN.y) %>%
+      left_join(air2,
+                by = c("DEST" = "DEST_char")) %>%
+      select(ORIGIN, DEST.y, weight) %>%
+      rename(DEST = DEST.y)
 
     netUnd_cap <<- netUnd_cap
     gUnd_cap <<- gUnd_cap
@@ -107,15 +106,26 @@ netUnd <- function(x = netMerged, disp = FALSE, cap = FALSE, merge = TRUE){
     netUnd_all <- netUnd_all %>%
       rename(ORIGIN = from, DEST = to)
 
+
     netUnd_all <- netUnd_all %>%
-      left_join(value_edges,
-                by = c("ORIGIN" = "ORIGIN_char", "DEST" = "DEST_char")) %>%
-      left_join(value_edges2,
-                by = c("ORIGIN" = "ORIGIN_char", "DEST" = "DEST_char")) %>%
-      mutate(Col1 = if_else(is.na(ORIGIN.y),ORIGIN.y.y, ORIGIN.y),
-             Col2 = if_else(is.na(DEST.y),DEST.y.y, DEST.y)) %>%
-      select(Col1, Col2, weight) %>%
-      rename(ORIGIN = Col1, DEST = Col2)
+      left_join(air1,
+                by = c("ORIGIN" = "ORIGIN_char")) %>%
+      select(ORIGIN.y, DEST, weight) %>%
+      rename(ORIGIN = ORIGIN.y) %>%
+      left_join(air2,
+                by = c("DEST" = "DEST_char")) %>%
+      select(ORIGIN, DEST.y, weight) %>%
+      rename(DEST = DEST.y)
+
+
+
+      ########
+#      mutate(Col1 = if_else(is.na(ORIGIN.y),ORIGIN.y.y, ORIGIN.y),
+#             Col2 = if_else(is.na(DEST.y),DEST.y.y, DEST.y)) %>%
+#      select(Col1, Col2, weight) %>%
+#      rename(ORIGIN = Col1, DEST = Col2)
+###########
+
 
     netUnd_all <<- netUnd_all
 
