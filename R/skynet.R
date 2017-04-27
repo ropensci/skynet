@@ -19,17 +19,26 @@
 # netImport function
 netImport <- function(x, y){
 
+  if(grepl("Ticket", deparse(substitute(x)), ignore.case = TRUE) == TRUE)
+    t = x
+  if(grepl("Ticket", deparse(substitute(y)), ignore.case = TRUE) == TRUE)
+    t = y
+  if(grepl("Coupon", deparse(substitute(x)), ignore.case = TRUE) == TRUE)
+    c = x
+  if(grepl("Coupon", deparse(substitute(y)), ignore.case = TRUE) == TRUE)
+    c = y
+
   # Import Coupon file
   # Include ItinID, MktID, Origin, Dest, SeqNum,
   #OriginCityMarketID, DestCityMarketID and Trip Break (8 variables)
-  coupon <- fread(x, header = TRUE, sep = ",", stringsAsFactors = TRUE,
+  coupon <- fread(c, header = TRUE, sep = ",", stringsAsFactors = TRUE,
                   integer64 = "numeric")
   coupon <- select(coupon, -grep("V", names(coupon)))
   #coupon[,"V9"] <- NULL
 
   # Import Ticket file
   # Include ItinID, RoundTrip, Passengers and ItinFare (4 variables)
-  ticket <- fread(y, header = TRUE, sep = ",", stringsAsFactors = TRUE,
+  ticket <- fread(t, header = TRUE, sep = ",", stringsAsFactors = TRUE,
                   integer64 = "numeric")
   ticket <- select(ticket, -grep("V", names(ticket)))
   #ticket[,"V5"] <-  NULL

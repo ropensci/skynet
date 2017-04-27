@@ -4,7 +4,8 @@
 \alias{netUnd}
 \title{netUnd}
 \usage{
-netUnd(x = netMerged, disp = FALSE, cap = FALSE, merge = TRUE)
+netUnd(x = netMerged, disp = FALSE, cap = FALSE, merge = TRUE,
+  alpha = 0.003, pct = 10)
 }
 \description{
 netUnd

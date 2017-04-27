@@ -3,7 +3,7 @@
 #' @export
 ###don't forget to add the filtering option###
 
-netDir <- function(x = netMerged, disp = FALSE, cap = FALSE){
+netDir <- function(x = netMerged, disp = FALSE, cap = FALSE, alpha = 0.003, pct = 10){
 
   if(grepl("Int", deparse(substitute(x)), ignore.case = TRUE) == TRUE)
     nodes.y = nodesInt
@@ -26,7 +26,7 @@ netDir <- function(x = netMerged, disp = FALSE, cap = FALSE){
       mutate(ORIGIN_char = as.character(ORIGIN), DEST_char = as.character(DEST))
 
     # Create igraph
-    gDir_disp <<- semnet::getBackboneNetwork(gDir, delete.isolates = T, alpha = 0.003)
+    gDir_disp <<- semnet::getBackboneNetwork(gDir, delete.isolates = T, alpha = alpha)
     netDir_disp <<- get.data.frame(gDir_disp)
 
     # Recode with Factor info
@@ -52,7 +52,7 @@ netDir <- function(x = netMerged, disp = FALSE, cap = FALSE){
 
     # Applies 10% cap
     gDir_cap <- graph_from_data_frame(netDir_all, directed = TRUE, vertices = nodes.y)
-    gDir_cap <- subgraph.edges(gDir_cap, which(E(gDir_cap)$weight > max(E(gDir_cap)$weight)*.10), delete.vertices = TRUE)
+    gDir_cap <- subgraph.edges(gDir_cap, which(E(gDir_cap)$weight > quantile(E(gDir_cap)$weight, prob = 1-pct/100)), delete.vertices = TRUE)
     ###netDir_gr <- delete_vertices(netDir_gr, degree(netDir_gr, mode = "in")==0)
 
     #Create lookup table

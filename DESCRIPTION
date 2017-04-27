@@ -15,6 +15,7 @@ Collate:
     'netDir.R'
     'netInt.R'
     'netMetro.R'
+    'netPath.R'
     'netUnd.R'
     'plot_degree_distribution.R'
     'skynet.R'
@@ -24,4 +25,5 @@ Depends:
     poweRlaw,
     dplyr
 Imports:
-    semnet
+    semnet,
+    stringr

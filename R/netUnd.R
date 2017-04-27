@@ -1,7 +1,7 @@
 #' netUnd
 #' @export
 
-netUnd <- function(x = netMerged, disp = FALSE, cap = FALSE, merge = TRUE){
+netUnd <- function(x = netMerged, disp = FALSE, cap = FALSE, merge = TRUE, alpha = 0.003, pct = 10){
 
   if(grepl("Int", deparse(substitute(x)), ignore.case = TRUE) == TRUE)
     nodes.y = nodesInt
@@ -13,7 +13,7 @@ netUnd <- function(x = netMerged, disp = FALSE, cap = FALSE, merge = TRUE){
     group_by(ORIGIN, DEST) %>%
     summarise(weight = sum(PASSENGERS))
 
-  # Airport shit to replace value_edges
+  # Airport lookup
   air1 <- airportCode %>%
     mutate(ORIGIN_char = as.character(ORIGIN)) %>%
     select(ORIGIN, ORIGIN_char)
@@ -35,7 +35,7 @@ netUnd <- function(x = netMerged, disp = FALSE, cap = FALSE, merge = TRUE){
       mutate(ORIGIN_char = as.character(ORIGIN), DEST_char = as.character(DEST))
 
     # Creates igraph object
-    gUnd_disp <<- semnet::getBackboneNetwork(gUnd, delete.isolates = T, alpha = 0.003)
+    gUnd_disp <<- semnet::getBackboneNetwork(gUnd, delete.isolates = T, alpha = alpha)
     netUnd_disp <<- get.data.frame(gUnd_disp)
 
     # Recode with Factor info
@@ -61,7 +61,7 @@ netUnd <- function(x = netMerged, disp = FALSE, cap = FALSE, merge = TRUE){
   }else if(cap == TRUE){
 
     #Run 10% cap
-    gUnd_cap <- subgraph.edges(gUnd, which(E(gUnd)$weight > max(E(gUnd)$weight)*.10), delete.vertices = TRUE)
+    gUnd_cap <- subgraph.edges(gUnd, which(E(gDir_cap)$weight > quantile(E(gDir_cap)$weight, prob = 1-pct/100)), delete.vertices = TRUE)
 
     # Create datafram based on collapsed edges graph
     netUnd_cap <- igraph::as_data_frame(gUnd_cap)

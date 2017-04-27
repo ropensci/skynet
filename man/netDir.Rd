@@ -5,7 +5,8 @@
 \title{netDir
 Creates Directed Network}
 \usage{
-netDir(x = netMerged, disp = FALSE, cap = FALSE)
+netDir(x = netMerged, disp = FALSE, cap = FALSE, alpha = 0.003,
+  pct = 10)
 }
 \description{
 netDir
