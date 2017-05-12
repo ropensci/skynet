@@ -2,10 +2,13 @@
 % Please edit documentation in R/nodesTr.R
 \name{make.nodesTr}
 \alias{make.nodesTr}
-\title{Transfer nodes}
+\title{Transfer Nodes}
 \usage{
 make.nodesTr(x)
 }
+\arguments{
+\item{x}{Data set}
+}
 \description{
-Transfer nodes
+Extracts Nodes used only by transfer passengers
 }
