@@ -11,22 +11,25 @@ LazyData: true
 RoxygenNote: 6.0.1
 Collate: 
     'PowerLaw.R'
+    'createNodes.R'
     'data.R'
     'netDir.R'
     'netMetro.R'
     'netUnd.R'
     'netImport.R'
     'netInt.R'
-    'netOD.R'
+    'netMap.R'
     'netPath.R'
     'nodesTr.R'
-    'plot_degree_distribution.R'
     'skynet.R'
 Depends:
     data.table,
     igraph,
     poweRlaw,
-    dplyr
+    dplyr,
+    maps,
+    ggrepel
 Imports:
     semnet,
-    stringr
+    stringr,
+    geosphere

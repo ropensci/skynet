@@ -4,7 +4,8 @@
 #'
 #' @param x Data set
 #'
-#' @example make.nodesTr(OD_2016Q1)
+#' @examples
+#' make.nodesTr(OD_2016Q1)
 #'
 #' @export
 

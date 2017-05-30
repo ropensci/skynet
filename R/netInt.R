@@ -38,7 +38,7 @@ make.netInt <- function(x = NULL, m, Q = NULL){
 
   netMergedInt <- rbind(netMergedInt, IntFilter)
 
-  assign(paste(deparse(substitute(m)), "Int", sep = "_"), netMergedInt, .GlobalEnv)
+  #assign(paste(deparse(substitute(m)), "Int", sep = "_"), netMergedInt, .GlobalEnv)
 
 # airLookup <- airportCode %>%
 #  select(ORIGIN) %>%
@@ -54,28 +54,34 @@ make.netInt <- function(x = NULL, m, Q = NULL){
 
 # Creates nodes for netInt
 
-nodesTemp <- netMergedInt %>%
-  data.frame() %>%
-  group_by(DEST) %>%
-  summarize(PASSENGERS = sum(PASSENGERS)) %>%
-  rename(ORIGIN = DEST)
+#nodesTemp <- netMergedInt %>%
+#  group_by(DEST) %>%
+#  summarize(PASSENGERS = sum(PASSENGERS)) %>%
+#  rename(ORIGIN = DEST)
 
-nodesInt <- netMergedInt %>%
-  select(ORIGIN, PASSENGERS) %>%
-  group_by(ORIGIN) %>%
-  summarize(PASSENGERS = sum(PASSENGERS))
+#nodesInt <- netMergedInt %>%
+#  select(ORIGIN, PASSENGERS) %>%
+#  group_by(ORIGIN) %>%
+#  summarize(PASSENGERS = sum(PASSENGERS))
 
-nodesInt <- nodesInt %>%
-  merge(nodesTemp, by = "ORIGIN", all = TRUE) %>%
-  mutate(PASSENGERS.x = replace(PASSENGERS.x, is.na(PASSENGERS.x), 0),
-         PASSENGERS.y = replace(PASSENGERS.y, is.na(PASSENGERS.y), 0),
-         freq = (PASSENGERS.x + PASSENGERS.y)) %>%
-  select(ORIGIN, freq) %>%
- # merge(airLookup, by = "ORIGIN", all.x = TRUE) %>%
-  merge(airportCode, by = "ORIGIN", all.x = TRUE) %>%
-  select(ORIGIN, freq, Latitude, Longitude)
+#nodesInt <- nodesInt %>%
+#  merge(nodesTemp, by = "ORIGIN", all = TRUE) %>%
+#  mutate(PASSENGERS.x = replace(PASSENGERS.x, is.na(PASSENGERS.x), 0),
+#         PASSENGERS.y = replace(PASSENGERS.y, is.na(PASSENGERS.y), 0),
+#         freq = (PASSENGERS.x + PASSENGERS.y)) %>%
+#  select(ORIGIN, freq) %>%
+#  merge(airportCode, by = "ORIGIN", all.x = TRUE) %>%
 
-assign("nodesInt", nodesInt, .GlobalEnv)
+#  nodesInt <- createNodes(netMergedInt)
+
+#  select(ORIGIN, freq, Latitude, Longitude)
+
+  return(netMergedInt)
+
+#return(list(netInt = netMergedInt, nodesInt = nodesInt))
+
+
+#assign("nodesInt", nodesInt, .GlobalEnv)
 
 }
 }

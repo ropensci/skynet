@@ -12,7 +12,7 @@
 #' and summing their weights.
 #'
 #' @examples
-#' make.netUnd(OD_2016Q1)
+#' make.netMetro(OD_2016Q1)
 #'
 #' # Apply Disparity Filter
 #' make.netUnd(OD_2016Q1, disp = TRUE, alpha = 0.05)
@@ -39,21 +39,26 @@ make.netMetro <- function(x = NULL, undirected = FALSE, merge = TRUE){
            ORIGIN_CITY = ORIGIN_CITY_MARKET_NAME) %>%
     select(ORIGIN, DEST, ORIGIN_CITY, DEST_CITY, weight)
 
-  gMet_dir <<- graph_from_data_frame(netMet, directed = TRUE)
-  netMet <<- netMet
+  gMet_dir <- graph_from_data_frame(netMet, directed = TRUE)
+
+  return(list(netMet = netMet, gMet_dir = gMet_dir))
+
+#  gMet_dir <- graph_from_data_frame(netMet, directed = TRUE)
+#  netMet <<- netMet
 
   if(undirected == TRUE){
 
-  gMet_und <<- graph_from_data_frame(netMet, directed = FALSE)
-  gMet_und <<- as.undirected(gMet_und, mode = "collapse", edge.attr.comb=list(weight = "sum"))
+    gMet_und <- graph_from_data_frame(netMet, directed = FALSE)
+    gMet_und <- as.undirected(gMet_und, mode = "collapse", edge.attr.comb=list(weight = "sum"))
+    return(list(netMet = netMet, gMet_und = gMet_und))
 
   }else if(merge == FALSE){
 
-  gMet_und <<- graph_from_data_frame(netMet, directed = FALSE)
+    gMet_und <- graph_from_data_frame(netMet, directed = FALSE)
+    return(list(netMet = netMet, gMet_und = gMet_und))
+
 
   }
-
-
 
 }
 

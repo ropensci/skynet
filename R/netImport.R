@@ -46,24 +46,24 @@ netImport <- function(x, y){
 
     #Create nodes and node frequency
 
-    nodesTemp <- T100 %>%
-      group_by(DEST) %>%
-      summarize(PASSENGERS = sum(PASSENGERS)) %>%
-      rename(ORIGIN = DEST)
+#    nodesTemp <- T100 %>%
+#      group_by(DEST) %>%
+#      summarize(PASSENGERS = sum(PASSENGERS)) %>%
+#      rename(ORIGIN = DEST)
 
-    nodesT <- T100 %>%
-      group_by(ORIGIN) %>%
-      summarize(PASSENGERS = sum(PASSENGERS))
+#    nodesT <- T100 %>%
+#      group_by(ORIGIN) %>%
+#      summarize(PASSENGERS = sum(PASSENGERS))
 
-    nodesT <- nodesT %>%
-      merge(nodesTemp, by = "ORIGIN", all = TRUE) %>%
-      mutate(PASSENGERS.x = replace(PASSENGERS.x, is.na(PASSENGERS.x), 0),
-             PASSENGERS.y = replace(PASSENGERS.y, is.na(PASSENGERS.y), 0),
-             freq = (PASSENGERS.x + PASSENGERS.y)) %>%
-      select(ORIGIN, freq) %>%
-      merge(airportCode, by = "ORIGIN", all.x = TRUE)
+#    nodesT <- nodesT %>%
+#      merge(nodesTemp, by = "ORIGIN", all = TRUE) %>%
+#      mutate(PASSENGERS.x = replace(PASSENGERS.x, is.na(PASSENGERS.x), 0),
+#             PASSENGERS.y = replace(PASSENGERS.y, is.na(PASSENGERS.y), 0),
+#             freq = (PASSENGERS.x + PASSENGERS.y)) %>%
+#      select(ORIGIN, freq) %>%
+#      merge(airportCode, by = "ORIGIN", all.x = TRUE)
 
-    nodesT <<- nodesT
+#    nodesT <<- nodesT
 
   }
   else
@@ -112,52 +112,51 @@ DB1BImport <- function(x, y){
   filename <- substring(filename, (nchar(filename)-5))
   assign(paste("OD",filename, sep = "_"), netMerged, .GlobalEnv)
 
-
   #--------------------------------------------------------------------------
 
   #Create nodes and node frequency
 
-  nodesTemp <- netMerged %>%
-    group_by(DEST) %>%
-    summarize(PASSENGERS = sum(PASSENGERS)) %>%
-    rename(ORIGIN = DEST)
+#  nodesTemp <- netMerged %>%
+#    group_by(DEST) %>%
+#    summarize(PASSENGERS = sum(PASSENGERS)) %>%
+#    rename(ORIGIN = DEST)
 
-  nodesOD <- netMerged %>%
-    group_by(ORIGIN) %>%
-    summarize(PASSENGERS = sum(PASSENGERS))
+#  nodesOD <- netMerged %>%
+#    group_by(ORIGIN) %>%
+#    summarize(PASSENGERS = sum(PASSENGERS))
 
-  nodesOD <- nodesOD %>%
-    merge(nodesTemp, by = "ORIGIN", all = TRUE) %>%
-    mutate(PASSENGERS.x = replace(PASSENGERS.x, is.na(PASSENGERS.x), 0),
-           PASSENGERS.y = replace(PASSENGERS.y, is.na(PASSENGERS.y), 0),
-           freq = (PASSENGERS.x + PASSENGERS.y)) %>%
-    select(ORIGIN, freq) %>%
-    merge(airportCode, by = "ORIGIN", all.x = TRUE)
+#  nodesOD <- nodesOD %>%
+#    merge(nodesTemp, by = "ORIGIN", all = TRUE) %>%
+#    mutate(PASSENGERS.x = replace(PASSENGERS.x, is.na(PASSENGERS.x), 0),
+#           PASSENGERS.y = replace(PASSENGERS.y, is.na(PASSENGERS.y), 0),
+#           freq = (PASSENGERS.x + PASSENGERS.y)) %>%
+#    select(ORIGIN, freq) %>%
+#    merge(airportCode, by = "ORIGIN", all.x = TRUE)
 
-  nodesOD <<- nodesOD
+#  nodesOD <<- nodesOD
 
   #Create nodes for transfer info
-  netMergedtemp <- netMerged
-  netMergedtemp <- dplyr::filter(netMergedtemp, TRIP_BREAK == "")
+#  netMergedtemp <- netMerged
+#  netMergedtemp <- dplyr::filter(netMergedtemp, TRIP_BREAK == "")
 
-  nodesTemp <- netMergedtemp %>%
-    group_by(DEST) %>%
-    summarize(PASSENGERS = sum(PASSENGERS)) %>%
-    rename(ORIGIN = DEST)
+#  nodesTemp <- netMergedtemp %>%
+#    group_by(DEST) %>%
+#    summarize(PASSENGERS = sum(PASSENGERS)) %>%
+#    rename(ORIGIN = DEST)
 
-  nodesTr <- netMergedtemp %>%
-    group_by(ORIGIN) %>%
-    summarize(PASSENGERS = sum(PASSENGERS))
+#  nodesTr <- netMergedtemp %>%
+#    group_by(ORIGIN) %>%
+#    summarize(PASSENGERS = sum(PASSENGERS))
 
-  nodesTr <- nodesTr %>%
-    merge(nodesTemp, by = "ORIGIN", all = TRUE) %>%
-    mutate(PASSENGERS.x = replace(PASSENGERS.x, is.na(PASSENGERS.x), 0),
-           PASSENGERS.y = replace(PASSENGERS.y, is.na(PASSENGERS.y), 0),
-           freq = (PASSENGERS.x + PASSENGERS.y)) %>%
-    select(ORIGIN, freq) %>%
-    merge(airportCode, by = "ORIGIN", all.x = TRUE)
+#  nodesTr <- nodesTr %>%
+#    merge(nodesTemp, by = "ORIGIN", all = TRUE) %>%
+#    mutate(PASSENGERS.x = replace(PASSENGERS.x, is.na(PASSENGERS.x), 0),
+#           PASSENGERS.y = replace(PASSENGERS.y, is.na(PASSENGERS.y), 0),
+#           freq = (PASSENGERS.x + PASSENGERS.y)) %>%
+#    select(ORIGIN, freq) %>%
+#    merge(airportCode, by = "ORIGIN", all.x = TRUE)
 
-  nodesTr <<- nodesTr
+#  nodesTr <<- nodesTr
 
 }
 

@@ -25,21 +25,18 @@
 
 make.netUnd <- function(x, disp = FALSE, cap = FALSE, merge = TRUE, alpha = 0.003, pct = 10){
 
-  if(grepl("Int", deparse(substitute(x)), ignore.case = TRUE) == TRUE)
-    nodes.y = nodesInt
-  else
-    nodes.y = nodesOD
-
+  #-------------------------------------------------
   netUnd_all <- x %>%
-    data.frame() %>%
     select(ORIGIN, DEST, PASSENGERS) %>%
     group_by(ORIGIN, DEST) %>%
     summarise(weight = sum(PASSENGERS))
 
+  #-------------------------------------------------
 
-  gUnd <<- graph_from_data_frame(netUnd_all, directed = TRUE, vertices = nodes.y)
+  nodes <- createNodes(x)
 
-  gUnd <<- as.undirected(gUnd, mode = "collapse", edge.attr.comb=list(weight = "sum"))
+  gUnd <- graph_from_data_frame(netUnd_all, directed = TRUE, vertices = nodes)
+  gUnd <- as.undirected(gUnd, mode = "collapse", edge.attr.comb=list(weight = "sum"))
 
     if(disp == TRUE){
 
@@ -50,22 +47,23 @@ make.netUnd <- function(x, disp = FALSE, cap = FALSE, merge = TRUE, alpha = 0.00
 
     # Rename fields
     netUnd_disp <- netUnd_disp %>%
-      rename(ORIGIN = from, DEST = to)
+      rename(ORIGIN = from, DEST = to, PASSENGERS = weight)
 
     # Add city name
     netUnd_disp <- netUnd_disp %>%
       left_join(airportCode, by = "ORIGIN") %>%
       rename(ORIGIN_CITY = CITY, ORIGIN_CITY_MARKET_ID = CITY_MARKET_ID)
 
-    airportCode <- airportCode %>%
+    airtemp <- airportCode %>%
       rename(DEST = ORIGIN, DEST_CITY = CITY, DEST_CITY_MARKET_ID = CITY_MARKET_ID)
 
     netUnd_disp <- netUnd_disp %>%
-      left_join(airportCode, by = "DEST") %>%
+      left_join(airtemp, by = "DEST") %>%
       select(-Latitude.x, -Latitude.y, -Longitude.x, -Longitude.y)
 
-    gUnd_disp <<- gUnd_disp
-    netUnd_disp <<- netUnd_disp
+    nodes <- createNodes(netUnd_disp)
+
+    return(list(gUnd_disp = gUnd_disp, netUnd_disp = netUnd_disp, nodes = nodes))
 
     # ----------------------------------------------------------------------------- #
                            # End of 10% filter command #
@@ -75,28 +73,30 @@ make.netUnd <- function(x, disp = FALSE, cap = FALSE, merge = TRUE, alpha = 0.00
   }else if(cap == TRUE){
 
     #Run 10% cap
-    gUnd_cap <- subgraph.edges(gUnd, which(E(gDir_cap)$weight > quantile(E(gDir_cap)$weight, prob = 1-pct/100)), delete.vertices = TRUE)
+    gUnd_cap <- gUnd
+    gUnd_cap <- subgraph.edges(gUnd_cap, which(E(gUnd_cap)$weight > quantile(E(gUnd_cap)$weight, prob = 1-pct/100)), delete.vertices = TRUE)
 
     # Create datafram based on collapsed edges graph
     netUnd_cap <- igraph::as_data_frame(gUnd_cap)
 
     netUnd_cap <- netUnd_cap %>%
-      rename(ORIGIN = from, DEST = to)
+      rename(ORIGIN = from, DEST = to, PASSENGERS = weight)
 
     # Add city name
     netUnd_cap <- netUnd_cap %>%
       left_join(airportCode, by = "ORIGIN") %>%
       rename(ORIGIN_CITY = CITY, ORIGIN_CITY_MARKET_ID = CITY_MARKET_ID)
 
-    airportCode <- airportCode %>%
+    airtemp <- airportCode %>%
       rename(DEST = ORIGIN, DEST_CITY = CITY, DEST_CITY_MARKET_ID = CITY_MARKET_ID)
 
     netUnd_cap <- netUnd_cap %>%
-      left_join(airportCode, by = "DEST") %>%
+      left_join(airtemp, by = "DEST") %>%
       select(-Latitude.x, -Latitude.y, -Longitude.x, -Longitude.y)
 
-    netUnd_cap <<- netUnd_cap
-    gUnd_cap <<- gUnd_cap
+    nodes <- createNodes(netUnd_cap)
+
+    return(list(gUnd_cap = gUnd_cap, netUnd_cap = netUnd_cap, nodes = nodes))
 
     # ----------------------------------------------------------------------------- #
     # End of 10% filter command #
@@ -111,8 +111,11 @@ make.netUnd <- function(x, disp = FALSE, cap = FALSE, merge = TRUE, alpha = 0.00
       group_by(ORIGIN, DEST) %>%
       summarise(weight = sum(PASSENGERS))
 
-    gUnd <<- graph_from_data_frame(netUnd_all, directed = FALSE, vertices = nodes.y)
-    netUnd_all <<- netUnd_all
+    nodes <- createNodes(x)
+
+    gUnd <- graph_from_data_frame(netUnd_all, directed = FALSE, vertices = nodes)
+
+    return(list(netUnd = netUnd_all, gUnd = gUnd, nodes = nodes))
 
   }else{
 
@@ -120,21 +123,24 @@ make.netUnd <- function(x, disp = FALSE, cap = FALSE, merge = TRUE, alpha = 0.00
     netUnd_all <- igraph::as_data_frame(gUnd)
 
     netUnd_all <- netUnd_all %>%
-      rename(ORIGIN = from, DEST = to)
+      rename(ORIGIN = from, DEST = to, PASSENGERS = weight)
 
     # Add city name
     netUnd_all <- netUnd_all %>%
       left_join(airportCode, by = "ORIGIN") %>%
       rename(ORIGIN_CITY = CITY, ORIGIN_CITY_MARKET_ID = CITY_MARKET_ID)
 
-    airportCode <- airportCode %>%
+    airtemp <- airportCode %>%
       rename(DEST = ORIGIN, DEST_CITY = CITY, DEST_CITY_MARKET_ID = CITY_MARKET_ID)
 
     netUnd_all <- netUnd_all %>%
-      left_join(airportCode, by = "DEST") %>%
+      left_join(airtemp, by = "DEST") %>%
       select(-Latitude.x, -Latitude.y, -Longitude.x, -Longitude.y)
 
-    netUnd_all <<- netUnd_all
+    nodes <- createNodes(netUnd_all)
+
+    return(list(gUnd = gUnd, netUnd = netUnd_all, nodes))
+
 
   }
 }
@@ -145,4 +151,3 @@ make.netUnd <- function(x, disp = FALSE, cap = FALSE, merge = TRUE, alpha = 0.00
                             # End of netUnd command #
 # ----------------------------------------------------------------------------- #
 # ----------------------------------------------------------------------------- #
-
