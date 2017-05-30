@@ -12,3 +12,7 @@ make.nodesTr(x)
 \description{
 Extracts Nodes used only by transfer passengers
 }
+\examples{
+make.nodesTr(OD_2016Q1)
+
+}
