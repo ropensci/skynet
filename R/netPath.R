@@ -22,11 +22,12 @@ make.Path <- function(x, leg = FALSE){
     #alternative1
   DT <- as.data.table(x)
   DT <- DT[order(MKT_ID, SEQ_NUM)]
+#  DT <- DT[, , by = MKT_ID]
   DT <- DT[, .(ORIGIN=ORIGIN[1], DEST=DEST[.N], ITIN_FARE=ITIN_FARE[1], PASSENGERS = PASSENGERS[1],
-               ROUNDTRIP = ROUNDTRIP[1]), by=MKT_ID]
+               ROUNDTRIP = ROUNDTRIP[1], ITIN_YIELD = ITIN_YIELD[1], NUM_STOPS = .N), by=MKT_ID]
 
   DT <- DT[, ITIN_FARE := ITIN_FARE/(1+ROUNDTRIP)]
-  netOD <- DT[, .( PASSENGERS = sum(PASSENGERS), ITIN_FARE = sum(ITIN_FARE)), by=.(ORIGIN, DEST)][order(ORIGIN, DEST)]
+  netOD <- DT[, .(PASSENGERS = sum(PASSENGERS),FARE_SD = round(sd(ITIN_FARE), 2), ITIN_FARE = round(sum(ITIN_FARE)/(.N), 2), ITIN_YIELD = round(sum(ITIN_YIELD)/(.N), 3), MEAN_STOPS = round(sum(NUM_STOPS)/(.N))), by=.(ORIGIN, DEST)][order(ORIGIN, DEST)]
 
 
   # Add city name
@@ -40,7 +41,8 @@ make.Path <- function(x, leg = FALSE){
   netOD <- netOD %>%
     left_join(airportCode, by = "DEST") %>%
     select(-Latitude.x, -Latitude.y, -Longitude.x, -Longitude.y) %>%
-    mutate(Fare_PP = round(ITIN_FARE/PASSENGERS))
+    mutate(FARE_SD = ifelse(is.na(FARE_SD), 0, FARE_SD))
+    #mutate(ITIN_FARE = round(ITIN_FARE/PASSENGERS, 2), ITIN_YIELD = round(ITIN_YIELD/PASSENGERS, 2))
 
   if(leg == FALSE){
     return(netOD)
@@ -48,7 +50,7 @@ make.Path <- function(x, leg = FALSE){
 
   if(leg == TRUE){
 
-    print("This code might take about 3 minutes to execute")
+    print("This code might take longer than usual to execute")
 
     # Group into different paths (MKT_ID)
   netPath <- x %>%
@@ -75,7 +77,7 @@ make.Path <- function(x, leg = FALSE){
   # Count words
   netPath$legCount <- stringr::str_count(netPath$Path, "\\S+")
 
-  return(list(netOD = netOD, netLegCount = netLegCount))
+  return(list(netOD = netOD, netLegCount = netPath))
 
   #assign("netLegCount",netPath, .GlobalEnv)
 }

@@ -27,23 +27,28 @@ make.netUnd <- function(x, disp = FALSE, cap = FALSE, merge = TRUE, alpha = 0.00
 
   #-------------------------------------------------
   netUnd_all <- x %>%
-    select(ORIGIN, DEST, PASSENGERS) %>%
+    select(ORIGIN, DEST, PASSENGERS,OPERATING_CARRIER, ITIN_FARE, ITIN_YIELD, ROUNDTRIP) %>%
+    mutate(ITIN_FARE = ITIN_FARE/(1+ROUNDTRIP)) %>%
     group_by(ORIGIN, DEST) %>%
-    summarise(weight = sum(PASSENGERS))
+    summarise(weight = sum(PASSENGERS), FARE_SD = round(sd(ITIN_FARE), 2), ITIN_FARE = round(mean(ITIN_FARE), 2), ITIN_YIELD = round(mean(ITIN_YIELD), 2)) %>%
+    mutate(FARE_SD = ifelse(is.na(FARE_SD), 0, FARE_SD))
+#    mutate(ITIN_FARE = round(ITIN_FARE/n, 2), ITIN_YIELD = round(ITIN_YIELD/n, 2)) %>%
+#    select(-n)
+
 
   #-------------------------------------------------
 
   nodes <- createNodes(x)
 
   gUnd <- graph_from_data_frame(netUnd_all, directed = TRUE, vertices = nodes)
-  gUnd <- as.undirected(gUnd, mode = "collapse", edge.attr.comb=list(weight = "sum"))
+  gUnd <- as.undirected(gUnd, mode = "collapse", edge.attr.comb=list(weight = "sum", ITIN_FARE = "mean", ITIN_YIELD = "mean", FARE_SD = "mean"))
 
     if(disp == TRUE){
 
     # Run disparity filter
     # Creates igraph object
-    gUnd_disp <<- semnet::getBackboneNetwork(gUnd, delete.isolates = T, alpha = alpha)
-    netUnd_disp <<- get.data.frame(gUnd_disp)
+    gUnd_disp <- semnet::getBackboneNetwork(gUnd, delete.isolates = T, alpha = alpha)
+    netUnd_disp <- get.data.frame(gUnd_disp)
 
     # Rename fields
     netUnd_disp <- netUnd_disp %>%
@@ -137,9 +142,10 @@ make.netUnd <- function(x, disp = FALSE, cap = FALSE, merge = TRUE, alpha = 0.00
       left_join(airtemp, by = "DEST") %>%
       select(-Latitude.x, -Latitude.y, -Longitude.x, -Longitude.y)
 
+
     nodes <- createNodes(netUnd_all)
 
-    return(list(gUnd = gUnd, netUnd = netUnd_all, nodes))
+    return(list(gUnd = gUnd, netUnd = netUnd_all, nodes = nodes))
 
 
   }

@@ -25,9 +25,13 @@ make.netDir <- function(x, disp = FALSE, cap = FALSE, alpha = 0.003, pct = 10){
 
   #-------------------------------------------------
   netDir_all <- x %>%
-    select(ORIGIN, DEST, PASSENGERS, OPERATING_CARRIER) %>%
+    select(ORIGIN, DEST, PASSENGERS, OPERATING_CARRIER, ITIN_FARE, ITIN_YIELD, ROUNDTRIP) %>%
     group_by(ORIGIN, DEST) %>%
-    summarise(weight = sum(PASSENGERS))
+    mutate(ITIN_FARE = ITIN_FARE/(1+ROUNDTRIP)) %>%
+    summarise(weight = sum(PASSENGERS),FARE_SD = round(sd(ITIN_FARE), 2), ITIN_FARE = mean(ITIN_FARE), ITIN_YIELD = mean(ITIN_YIELD)) %>%
+    mutate(FARE_SD = ifelse(is.na(FARE_SD), 0, FARE_SD))
+#    mutate(ITIN_FARE = round(ITIN_FARE/n, 2), ITIN_YIELD = round(ITIN_YIELD/n, 2)) %>%
+#    select(-n)
 
   #-------------------------------------------------
 

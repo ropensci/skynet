@@ -41,7 +41,9 @@ make.netMetro <- function(x = NULL, undirected = FALSE, merge = TRUE){
 
   gMet_dir <- graph_from_data_frame(netMet, directed = TRUE)
 
-  return(list(netMet = netMet, gMet_dir = gMet_dir))
+  nodes <- metroNodes(netMet)
+
+  return(list(netMet = netMet, gMet_dir = gMet_dir, nodes = nodes))
 
 #  gMet_dir <- graph_from_data_frame(netMet, directed = TRUE)
 #  netMet <<- netMet

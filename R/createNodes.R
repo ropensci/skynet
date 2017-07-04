@@ -72,3 +72,37 @@ transferNodes <- function (x, y) {
 
 
 }
+
+
+
+#' Create Metro Nodes
+#'
+#'
+#' @param y Data Frame
+#'
+
+metroNodes <- function(y){
+
+  nodesTemp <- y %>%
+    group_by(DEST) %>%
+    summarize(PASSENGERS = sum(weight)) %>%
+    rename(ORIGIN = DEST)
+
+  nodes <- y %>%
+    rename(PASSENGERS = weight) %>%
+    group_by(ORIGIN) %>%
+    summarize(PASSENGERS = sum(PASSENGERS))
+
+  airportCode <- airportCode %>%
+    select(CITY_MARKET_ID, Latitude, Longitude, AIRPORT_STATE_CODE, DISPLAY_AIRPORT_CITY_NAME_FULL) %>%
+    rename(ORIGIN = CITY_MARKET_ID)
+
+  nodes <- nodes %>%
+    merge(nodesTemp, by = "ORIGIN", all = TRUE) %>%
+    mutate(PASSENGERS.x = replace(PASSENGERS.x, is.na(PASSENGERS.x), 0),
+           PASSENGERS.y = replace(PASSENGERS.y, is.na(PASSENGERS.y), 0),
+           freq = (PASSENGERS.x + PASSENGERS.y)) %>%
+    select(ORIGIN, freq) %>%
+    merge(airportCodeFull, by = "ORIGIN", all.x = TRUE)
+
+}
