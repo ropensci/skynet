@@ -5,7 +5,7 @@
 \title{Undirected Network}
 \usage{
 make.netUnd(x, disp = FALSE, cap = FALSE, merge = TRUE, alpha = 0.003,
-  pct = 10)
+  pct = 10, carrier = FALSE)
 }
 \arguments{
 \item{x}{Data frame}

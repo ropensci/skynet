@@ -24,7 +24,7 @@ Generates Metro Network with an iGraph object and a Data Frame.
 Still to fix some details
 }
 \examples{
-make.netUnd(OD_2016Q1)
+make.netMetro(OD_2016Q1)
 
 # Apply Disparity Filter
 make.netUnd(OD_2016Q1, disp = TRUE, alpha = 0.05)

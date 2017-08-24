@@ -18,5 +18,4 @@
 #' @import dplyr
 #'
 #'
-#'
 "_PACKAGE"

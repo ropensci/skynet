@@ -4,7 +4,7 @@
 \alias{make.Path}
 \title{Path and OD Network}
 \usage{
-make.Path(x, leg = FALSE)
+make.Path(x, leg = FALSE, zero = FALSE, airlines = FALSE)
 }
 \arguments{
 \item{x}{Data frame}

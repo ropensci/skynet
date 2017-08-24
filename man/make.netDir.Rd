@@ -4,7 +4,8 @@
 \alias{make.netDir}
 \title{Directed network}
 \usage{
-make.netDir(x, disp = FALSE, cap = FALSE, alpha = 0.003, pct = 10)
+make.netDir(x, disp = FALSE, cap = FALSE, alpha = 0.003, pct = 10,
+  carrier = FALSE)
 }
 \arguments{
 \item{x}{Data frame}

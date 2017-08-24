@@ -2,6 +2,7 @@
 
 export(fitPlaw)
 export(make.Path)
+export(make.gMap)
 export(make.netDir)
 export(make.netInt)
 export(make.netMetro)

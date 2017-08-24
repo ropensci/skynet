@@ -21,17 +21,27 @@
 #' @export
 #'
 
-make.netDir <- function(x, disp = FALSE, cap = FALSE, alpha = 0.003, pct = 10){
+make.netDir <- function(x, disp = FALSE, cap = FALSE, alpha = 0.003, pct = 10, carrier = FALSE){
 
   #-------------------------------------------------
-  netDir_all <- x %>%
-    select(ORIGIN, DEST, PASSENGERS, OPERATING_CARRIER, ITIN_FARE, ITIN_YIELD, ROUNDTRIP) %>%
-    group_by(ORIGIN, DEST) %>%
-    mutate(ITIN_FARE = ITIN_FARE/(1+ROUNDTRIP)) %>%
-    summarise(weight = sum(PASSENGERS),FARE_SD = round(sd(ITIN_FARE), 2), ITIN_FARE = mean(ITIN_FARE), ITIN_YIELD = mean(ITIN_YIELD)) %>%
-    mutate(FARE_SD = ifelse(is.na(FARE_SD), 0, FARE_SD))
-#    mutate(ITIN_FARE = round(ITIN_FARE/n, 2), ITIN_YIELD = round(ITIN_YIELD/n, 2)) %>%
-#    select(-n)
+  if(carrier == TRUE){
+
+    netDir_all <- x %>%
+      select(origin, dest, passengers, op_carrier, itin_fare, itin_yield, roundtrip) %>%
+      group_by(origin, dest, op_carrier) %>%
+      mutate(itin_fare = itin_fare/(1+roundtrip)) %>%
+      summarise(weight = sum(passengers), fare_sd = round(sd(itin_fare), 2), itin_fare = mean(itin_fare), itin_yield = mean(itin_yield)) %>%
+      mutate(fare_sd = ifelse(is.na(fare_sd), 0, fare_sd))
+  }
+  else{
+    netDir_all <- x %>%
+      select(origin, dest, passengers, op_carrier, itin_fare, itin_yield, roundtrip) %>%
+      group_by(origin, dest) %>%
+      mutate(itin_fare = itin_fare/(1+roundtrip)) %>%
+      summarise(weight = sum(passengers), fare_sd = round(sd(itin_fare), 2), itin_fare = mean(itin_fare), itin_yield = mean(itin_yield)) %>%
+      mutate(fare_sd = ifelse(is.na(fare_sd), 0, fare_sd))
+  }
+
 
   #-------------------------------------------------
 
@@ -49,20 +59,20 @@ make.netDir <- function(x, disp = FALSE, cap = FALSE, alpha = 0.003, pct = 10){
     netDir_disp <- get.data.frame(gDir_disp)
 
     netDir_disp <- netDir_disp %>%
-      rename(ORIGIN = from, DEST = to, PASSENGERS = weight)
+      rename(origin = from, dest = to, passengers = weight)
 
 
     # Add city name
     netDir_disp <- netDir_disp %>%
-      left_join(airportCode, by = "ORIGIN") %>%
-      rename(ORIGIN_CITY = CITY, ORIGIN_CITY_MARKET_ID = CITY_MARKET_ID)
+      left_join(airportCode, by = "origin") %>%
+      rename(origin_city = city, origin_city_mkt_id = city_mkt_id)
 
     airTemp <- airportCode %>%
-      rename(DEST = ORIGIN, DEST_CITY = CITY, DEST_CITY_MARKET_ID = CITY_MARKET_ID)
+      rename(dest = origin, dest_city = city, dest_city_mkt_id = city_mkt_id)
 
     netDir_disp <- netDir_disp %>%
-      left_join(airTemp, by = "DEST") %>%
-      select(-Latitude.x, -Latitude.y, -Longitude.x, -Longitude.y)
+      left_join(airTemp, by = "dest") %>%
+      select(-latitude.x, -latitude.y, -longitude.x, -longitude.y)
 
     nodes <- createNodes(netDir_disp)
 
@@ -83,19 +93,19 @@ make.netDir <- function(x, disp = FALSE, cap = FALSE, alpha = 0.003, pct = 10){
     netDir_cap <- igraph::as_data_frame(gDir_cap)
 
     netDir_cap <- netDir_cap %>%
-      rename(ORIGIN = from, DEST = to, PASSENGERS = weight)
+      rename(origin = from, dest = to, passengers = weight)
 
     # Add city name
     netDir_cap <- netDir_cap %>%
-      left_join(airportCode, by = "ORIGIN") %>%
-      rename(ORIGIN_CITY = CITY, ORIGIN_CITY_MARKET_ID = CITY_MARKET_ID)
+      left_join(airportCode, by = "origin") %>%
+      rename(origin_city = city, origin_city_mkt_id = city_mkt_id)
 
     airtemp <- airportCode %>%
-      rename(DEST = ORIGIN, DEST_CITY = CITY, DEST_CITY_MARKET_ID = CITY_MARKET_ID)
+      rename(dest = origin, dest_city = city, dest_city_mkt_id = city_mkt_id)
 
     netDir_cap <- netDir_cap %>%
-      left_join(airtemp, by = "DEST") %>%
-      select(-Latitude.x, -Latitude.y, -Longitude.x, -Longitude.y)
+      left_join(airtemp, by = "dest") %>%
+      select(-latitude.x, -latitude.y, -longitude.x, -longitude.y)
 
     nodes <- createNodes(netDir_cap)
 
@@ -113,15 +123,15 @@ make.netDir <- function(x, disp = FALSE, cap = FALSE, alpha = 0.003, pct = 10){
 
     # Add city name
     netDir_all <- netDir_all %>%
-      left_join(airportCode, by = "ORIGIN") %>%
-      rename(ORIGIN_CITY = CITY, ORIGIN_CITY_MARKET_ID = CITY_MARKET_ID, PASSENGERS = weight)
+      left_join(airportCode, by = "origin") %>%
+      rename(origin_city = city, origin_city_mkt_id = city_mkt_id, passengers = weight)
 
     airtemp <- airportCode %>%
-      rename(DEST = ORIGIN, DEST_CITY = CITY, DEST_CITY_MARKET_ID = CITY_MARKET_ID)
+      rename(dest = origin, dest_city = city, dest_city_mkt_id = city_mkt_id)
 
     netDir_all <- netDir_all %>%
-      left_join(airtemp, by = "DEST") %>%
-      select(-Latitude.x, -Latitude.y, -Longitude.x, -Longitude.y)
+      left_join(airtemp, by = "dest") %>%
+      select(-latitude.x, -latitude.y, -longitude.x, -longitude.y)
 
 
     return(list(gDir = gDir, netDir = netDir_all, nodes = nodes))

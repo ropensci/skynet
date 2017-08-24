@@ -23,17 +23,33 @@
 #'
 #' @export
 
-make.netUnd <- function(x, disp = FALSE, cap = FALSE, merge = TRUE, alpha = 0.003, pct = 10){
+make.netUnd <- function(x, disp = FALSE, cap = FALSE, merge = TRUE, alpha = 0.003, pct = 10, carrier = FALSE){
 
   #-------------------------------------------------
-  netUnd_all <- x %>%
-    select(ORIGIN, DEST, PASSENGERS,OPERATING_CARRIER, ITIN_FARE, ITIN_YIELD, ROUNDTRIP) %>%
-    mutate(ITIN_FARE = ITIN_FARE/(1+ROUNDTRIP)) %>%
-    group_by(ORIGIN, DEST) %>%
-    summarise(weight = sum(PASSENGERS), FARE_SD = round(sd(ITIN_FARE), 2), ITIN_FARE = round(mean(ITIN_FARE), 2), ITIN_YIELD = round(mean(ITIN_YIELD), 2)) %>%
-    mutate(FARE_SD = ifelse(is.na(FARE_SD), 0, FARE_SD))
-#    mutate(ITIN_FARE = round(ITIN_FARE/n, 2), ITIN_YIELD = round(ITIN_YIELD/n, 2)) %>%
-#    select(-n)
+  if(carrier == TRUE){
+
+    netUnd_all <- x %>%
+      select(origin, dest, passengers, op_carrier, itin_fare, itin_yield, roundtrip) %>%
+      group_by(origin, dest, op_carrier) %>%
+      mutate(itin_fare = itin_fare/(1+roundtrip)) %>%
+      summarise(weight = sum(passengers), fare_sd = round(sd(itin_fare), 2),
+                itin_fare = round(mean(itin_fare), 2),
+                itin_yield = round(mean(itin_yield), 2)) %>%
+      mutate(fare_sd = ifelse(is.na(fare_sd), 0, fare_sd))
+
+  }
+  else{
+
+   netUnd_all <- x %>%
+    select(origin, dest, passengers, op_carrier, itin_fare, itin_yield, roundtrip) %>%
+    group_by(origin, dest) %>%
+    mutate(itin_fare = itin_fare/(1+roundtrip)) %>%
+    summarise(weight = sum(passengers), fare_sd = round(sd(itin_fare), 2),
+               itin_fare = round(mean(itin_fare), 2),
+               itin_yield = round(mean(itin_yield), 2)) %>%
+    mutate(fare_sd = ifelse(is.na(fare_sd), 0, fare_sd))
+
+  }
 
 
   #-------------------------------------------------
@@ -41,7 +57,7 @@ make.netUnd <- function(x, disp = FALSE, cap = FALSE, merge = TRUE, alpha = 0.00
   nodes <- createNodes(x)
 
   gUnd <- graph_from_data_frame(netUnd_all, directed = TRUE, vertices = nodes)
-  gUnd <- as.undirected(gUnd, mode = "collapse", edge.attr.comb=list(weight = "sum", ITIN_FARE = "mean", ITIN_YIELD = "mean", FARE_SD = "mean"))
+  gUnd <- as.undirected(gUnd, mode = "collapse", edge.attr.comb=list(weight = "sum", itin_fare = "mean", itin_yield = "mean", fare_sd = "mean"))
 
     if(disp == TRUE){
 
@@ -52,19 +68,19 @@ make.netUnd <- function(x, disp = FALSE, cap = FALSE, merge = TRUE, alpha = 0.00
 
     # Rename fields
     netUnd_disp <- netUnd_disp %>%
-      rename(ORIGIN = from, DEST = to, PASSENGERS = weight)
+      rename(origin = from, dest = to, passengers = weight)
 
     # Add city name
     netUnd_disp <- netUnd_disp %>%
-      left_join(airportCode, by = "ORIGIN") %>%
-      rename(ORIGIN_CITY = CITY, ORIGIN_CITY_MARKET_ID = CITY_MARKET_ID)
+      left_join(airportCode, by = "origin") %>%
+      rename(origin_city = city, origin_city_mkt_id = city_mkt_id)
 
     airtemp <- airportCode %>%
-      rename(DEST = ORIGIN, DEST_CITY = CITY, DEST_CITY_MARKET_ID = CITY_MARKET_ID)
+      rename(dest = origin, dest_city = city, dest_city_mkt_id = city_mkt_id)
 
     netUnd_disp <- netUnd_disp %>%
-      left_join(airtemp, by = "DEST") %>%
-      select(-Latitude.x, -Latitude.y, -Longitude.x, -Longitude.y)
+      left_join(airtemp, by = "dest") %>%
+      select(-latitude.x, -latitude.y, -longitude.x, -longitude.y)
 
     nodes <- createNodes(netUnd_disp)
 
@@ -85,19 +101,19 @@ make.netUnd <- function(x, disp = FALSE, cap = FALSE, merge = TRUE, alpha = 0.00
     netUnd_cap <- igraph::as_data_frame(gUnd_cap)
 
     netUnd_cap <- netUnd_cap %>%
-      rename(ORIGIN = from, DEST = to, PASSENGERS = weight)
+      rename(origin = from, dest = to, passengers = weight)
 
     # Add city name
     netUnd_cap <- netUnd_cap %>%
-      left_join(airportCode, by = "ORIGIN") %>%
-      rename(ORIGIN_CITY = CITY, ORIGIN_CITY_MARKET_ID = CITY_MARKET_ID)
+      left_join(airportCode, by = "origin") %>%
+      rename(origin_city = city, origin_city_mkt_id = city_mkt_id)
 
     airtemp <- airportCode %>%
-      rename(DEST = ORIGIN, DEST_CITY = CITY, DEST_CITY_MARKET_ID = CITY_MARKET_ID)
+      rename(dest = origin, dest_city = city, dest_city_mkt_id = city_mkt_id)
 
     netUnd_cap <- netUnd_cap %>%
-      left_join(airtemp, by = "DEST") %>%
-      select(-Latitude.x, -Latitude.y, -Longitude.x, -Longitude.y)
+      left_join(airtemp, by = "dest") %>%
+      select(-latitude.x, -latitude.y, -longitude.x, -longitude.y)
 
     nodes <- createNodes(netUnd_cap)
 
@@ -112,9 +128,9 @@ make.netUnd <- function(x, disp = FALSE, cap = FALSE, merge = TRUE, alpha = 0.00
 
     # Run undirected with merge
     netUnd_all <- x %>%
-      select(ORIGIN, DEST, PASSENGERS) %>%
-      group_by(ORIGIN, DEST) %>%
-      summarise(weight = sum(PASSENGERS))
+      select(origin, dest, passengers) %>%
+      group_by(origin, dest) %>%
+      summarise(weight = sum(passengers))
 
     nodes <- createNodes(x)
 
@@ -128,19 +144,19 @@ make.netUnd <- function(x, disp = FALSE, cap = FALSE, merge = TRUE, alpha = 0.00
     netUnd_all <- igraph::as_data_frame(gUnd)
 
     netUnd_all <- netUnd_all %>%
-      rename(ORIGIN = from, DEST = to, PASSENGERS = weight)
+      rename(origin = from, dest = to, passengers = weight)
 
     # Add city name
     netUnd_all <- netUnd_all %>%
-      left_join(airportCode, by = "ORIGIN") %>%
-      rename(ORIGIN_CITY = CITY, ORIGIN_CITY_MARKET_ID = CITY_MARKET_ID)
+      left_join(airportCode, by = "origin") %>%
+      rename(origin_city = city, origin_city_mkt_id = city_mkt_id)
 
     airtemp <- airportCode %>%
-      rename(DEST = ORIGIN, DEST_CITY = CITY, DEST_CITY_MARKET_ID = CITY_MARKET_ID)
+      rename(dest = origin, dest_city = city, dest_city_mkt_id = city_mkt_id)
 
     netUnd_all <- netUnd_all %>%
-      left_join(airtemp, by = "DEST") %>%
-      select(-Latitude.x, -Latitude.y, -Longitude.x, -Longitude.y)
+      left_join(airtemp, by = "dest") %>%
+      select(-latitude.x, -latitude.y, -longitude.x, -longitude.y)
 
 
     nodes <- createNodes(netUnd_all)

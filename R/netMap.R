@@ -1,47 +1,69 @@
 #' netMap
 #'
-#'
-#' library(maps)
+#' library(ggplot2)
 #' library(ggrepel)
-#' library(geosphere)
+#' library(ggmap)
+#' @param x Data frame
+#'
+#' @examples
+#' make.gMap(OD_2016Q1)
+#'
+#' @export
+#'
 
-makemap <- function(net, nodes){
-
-  # Create map
-
-  map("world", c("USA", "Hawaii", "Puerto Rico"), xlim = c(-170, -65), ylim = c(16, 72),
-      col="lightgrey", fill=TRUE, bg="white", lwd=0.1, mar = c(0,2,0,2))
-
-
-  # Network A
-  # Edge Colors
-  col.1 <- adjustcolor("steelblue3", alpha=0.4)
-  col.2 <- adjustcolor("steelblue3", alpha=0.4)
-  edge.pal <- colorRampPalette(c(col.1, col.2), alpha = TRUE)
-  edge.col <- edge.pal(100)
+# Plot flight routes
 
 
-  # Create edges
-
-  for(i in 1:nrow(net))  {
-    node1 <- nodes[nodes$ORIGIN == net[i,]$ORIGIN,]
-    node2 <- nodes[nodes$ORIGIN == net[i,]$DEST,]
-
-    arc <- geosphere::gcIntermediate( c(node1[1,]$Longitude, node1[1,]$Latitude),
-                                      c(node2[1,]$Longitude, node2[1,]$Latitude),
-                                      n=1000, addStartEnd=TRUE)
-    edge.ind <- round(100*net[i,]$weight / max(net$weight))
-
-    lines(arc, col=edge.col[edge.ind], lwd=edge.ind/40)
 
 
-  }
+make.gMap <- function(x){
+
+  airports <- select(airportCode, origin, latitude, longitude)
+  airports
+
+  #-----------------------------------------------------
+  # Get list object names
+
+  y <- grep("net", names(x), value = TRUE)
+
+  data <- x[[y]]
+
+  # Merges flights and airport data for Latitude/Longitude info
+
+  flights <- merge(data, airports, by = "origin")
+  flights <- select(flights, origin, dest, passengers, latitude, longitude)
+  flights <- merge(flights, airports, by.x = "dest", by.y = "origin")
+
+  nodes <- x[["nodes"]]
+
+  #-----------------------------------------------------
 
 
-  text(nodes$Longitude[nodes$freq > quantile(nodes$freq, prob = .96)], nodes$Latitude[nodes$freq > quantile(nodes$freq, prob = .96)],
-       nodes$ORIGIN[nodes$freq > quantile(nodes$freq, prob = .96)],cex=.5, adj=0, pos=2, offset=0.15 ,col="black")
+  # Create World and Plot Map
 
-  points(x=nodes$Longitude, y=nodes$Latitude, pch=21,
-         cex=nodes$freq/(17^5), col="black", bg = adjustcolor("royalblue", alpha=0.7), lwd = .1)
+  worldmap <- borders("world", colour="lightgrey", fill="lightgrey") # create a layer of borders
+
+
+  ggplot() + worldmap +
+    geom_curve(data=flights[flights$passengers > quantile(flights$passengers, prob = 1-0.6),], aes(x = longitude.x, y = latitude.x, xend = longitude.y,
+                                 yend = latitude.y , size = passengers),
+               col = "royalblue",
+               alpha = .6, curvature = .2) +
+    scale_size_continuous(range = c(.0001,0.6)) +
+    geom_point(data = nodes[nodes$freq > quantile(nodes$freq, prob = 1-0.6),],
+               aes(x = Longitude, y = Latitude), col = "royalblue", alpha = .8,
+               size = .1) +
+    geom_text_repel(data = nodes[nodes$freq > quantile(nodes$freq, prob = 1-4/100),], aes(x = longitude, y = latitude,
+                label = ORIGIN), col = "black", size = 2, segment.color = NA, fontface = "bold") +
+    coord_cartesian(xlim = c(-160, -65), ylim = c(16, 65)) +
+    theme(panel.background = element_rect(fill="white"),
+          axis.line = element_blank(),
+          axis.text.x = element_blank(),
+          axis.text.y = element_blank(),
+          axis.ticks = element_blank(),
+          axis.title.x = element_blank(),
+          axis.title.y = element_blank(),
+          legend.position = "none")
+
 
 }

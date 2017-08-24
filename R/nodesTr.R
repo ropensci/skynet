@@ -17,21 +17,21 @@ make.nodesTr <- function (x) {
   netMergedtemp <- dplyr::filter(netMergedtemp, TRIP_BREAK == "")
 
   nodesTemp <- netMergedtemp %>%
-    group_by(DEST) %>%
-    summarize(PASSENGERS = sum(PASSENGERS)) %>%
-    rename(ORIGIN = DEST)
+    group_by(dest) %>%
+    summarize(passengers = sum(passengers)) %>%
+    rename(origin = dest)
 
   nodesTr <- netMergedtemp %>%
-    group_by(ORIGIN) %>%
-    summarize(PASSENGERS = sum(PASSENGERS))
+    group_by(origin) %>%
+    summarize(passengers = sum(passengers))
 
   nodesTr <- nodesTr %>%
-    merge(nodesTemp, by = "ORIGIN", all = TRUE) %>%
-    mutate(PASSENGERS.x = replace(PASSENGERS.x, is.na(PASSENGERS.x), 0),
-           PASSENGERS.y = replace(PASSENGERS.y, is.na(PASSENGERS.y), 0),
-           freq = (PASSENGERS.x + PASSENGERS.y)) %>%
-    select(ORIGIN, freq) %>%
-    merge(airportCode, by = "ORIGIN", all.x = TRUE)
+    merge(nodesTemp, by = "origin", all = TRUE) %>%
+    mutate(passengers.x = replace(passengers.x, is.na(passengers.x), 0),
+           passengers.y = replace(passengers.y, is.na(passengers.y), 0),
+           freq = (passengers.x + passengers.y)) %>%
+    select(origin, freq) %>%
+    merge(airportCode, by = "origin", all.x = TRUE)
 
   assign("nodesTr", nodesTr, .GlobalEnv)
 }

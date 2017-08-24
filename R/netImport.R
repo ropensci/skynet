@@ -3,6 +3,7 @@
 #' Imports data from BTS/RITA/Transtats website
 #' File order doesn't matter, but it is recomended to name the files using the following
 #' syntax: \emph{"Coupon YearQuarter.csv", "Ticket YearQuarter.csv", "T100 Year".}
+#' Note: We do recommend sparklyr to be used for larger sets of data.
 #'
 #' @param x First csv file to be imported, in case of DB1B database, or in case of using
 #' the T-100 database, the only file to be included.
@@ -92,17 +93,24 @@ DB1BImport <- function(x, y){
   #OriginCityMarketID, DestCityMarketID and Trip Break (8 variables)
   coupon <- fread(c, header = TRUE, sep = ",", stringsAsFactors = FALSE,
                   integer64 = "numeric")
-  coupon <- select(coupon, -grep("V", names(coupon)))
-  #coupon[,"V9"] <- NULL
+  coupon <- coupon %>%
+    select(-grep("V", names(coupon))) %>%
+    rename(itin_id = ITIN_ID, mkt_id = MKT_ID, seq_num = SEQ_NUM,
+           origin_mkt_id = ORIGIN_CITY_MARKET_ID, origin = ORIGIN, year = YEAR, quarter = QUARTER,
+           dest_mkt_id = DEST_CITY_MARKET_ID , dest = DEST, trip_break = TRIP_BREAK,
+           op_carrier = OPERATING_CARRIER, distance = DISTANCE, gateway = GATEWAY)
 
   # Import Ticket file
   # Include ItinID, RoundTrip, Passengers and ItinFare (4 variables)
   ticket <- fread(t, header = TRUE, sep = ",", stringsAsFactors = FALSE,
                   integer64 = "numeric")
-  ticket <- select(ticket, -grep("V", names(ticket)))
+  ticket <- ticket %>%
+    select(-grep("V", names(ticket))) %>%
+    rename(itin_id = ITIN_ID, roundtrip = ROUNDTRIP, itin_yield = ITIN_YIELD, passengers = PASSENGERS,
+             itin_fare = ITIN_FARE, bulk_fare = BULKFARE, distance_full = DISTANCE_FULL)
 
   #Merge data
-  netMerged <- merge(coupon, ticket, by = "ITIN_ID", all.x = TRUE)
+  netMerged <- merge(coupon, ticket, by = "itin_id", all.x = TRUE)
   netMerged <- data.frame(netMerged)
 
   # Get name from file
@@ -111,52 +119,6 @@ DB1BImport <- function(x, y){
                      basename(x)))
   filename <- substring(filename, (nchar(filename)-5))
   assign(paste("OD",filename, sep = "_"), netMerged, .GlobalEnv)
-
-  #--------------------------------------------------------------------------
-
-  #Create nodes and node frequency
-
-#  nodesTemp <- netMerged %>%
-#    group_by(DEST) %>%
-#    summarize(PASSENGERS = sum(PASSENGERS)) %>%
-#    rename(ORIGIN = DEST)
-
-#  nodesOD <- netMerged %>%
-#    group_by(ORIGIN) %>%
-#    summarize(PASSENGERS = sum(PASSENGERS))
-
-#  nodesOD <- nodesOD %>%
-#    merge(nodesTemp, by = "ORIGIN", all = TRUE) %>%
-#    mutate(PASSENGERS.x = replace(PASSENGERS.x, is.na(PASSENGERS.x), 0),
-#           PASSENGERS.y = replace(PASSENGERS.y, is.na(PASSENGERS.y), 0),
-#           freq = (PASSENGERS.x + PASSENGERS.y)) %>%
-#    select(ORIGIN, freq) %>%
-#    merge(airportCode, by = "ORIGIN", all.x = TRUE)
-
-#  nodesOD <<- nodesOD
-
-  #Create nodes for transfer info
-#  netMergedtemp <- netMerged
-#  netMergedtemp <- dplyr::filter(netMergedtemp, TRIP_BREAK == "")
-
-#  nodesTemp <- netMergedtemp %>%
-#    group_by(DEST) %>%
-#    summarize(PASSENGERS = sum(PASSENGERS)) %>%
-#    rename(ORIGIN = DEST)
-
-#  nodesTr <- netMergedtemp %>%
-#    group_by(ORIGIN) %>%
-#    summarize(PASSENGERS = sum(PASSENGERS))
-
-#  nodesTr <- nodesTr %>%
-#    merge(nodesTemp, by = "ORIGIN", all = TRUE) %>%
-#    mutate(PASSENGERS.x = replace(PASSENGERS.x, is.na(PASSENGERS.x), 0),
-#           PASSENGERS.y = replace(PASSENGERS.y, is.na(PASSENGERS.y), 0),
-#           freq = (PASSENGERS.x + PASSENGERS.y)) %>%
-#    select(ORIGIN, freq) %>%
-#    merge(airportCode, by = "ORIGIN", all.x = TRUE)
-
-#  nodesTr <<- nodesTr
 
 }
 

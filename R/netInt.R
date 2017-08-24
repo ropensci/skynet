@@ -26,62 +26,20 @@ make.netInt <- function(x = NULL, m, Q = NULL){
 
    # Create Filter
    IntFilter <- International %>%
-      select(ORIGIN, DEST, ORIGIN_CITY_MARKET_ID, DEST_CITY_MARKET_ID,
-         PASSENGERS, QUARTER) %>%
-      filter(PASSENGERS > 0, QUARTER == Q) %>%
-      select(ORIGIN, DEST, ORIGIN_CITY_MARKET_ID, DEST_CITY_MARKET_ID, PASSENGERS)
+      select(origin, dest, origin_city_mkt_id, dest_city_mkt_id,
+         passengers, quarter) %>%
+      filter(passengers > 0, quarter == Q) %>%
+      select(origin, dest, origin_city_mkt_id, dest_city_mkt_id, passengers)
 
  # Merges netMerged with international filter
 
   netMergedInt <- m %>%
-    select(ORIGIN, DEST, ORIGIN_CITY_MARKET_ID, DEST_CITY_MARKET_ID, PASSENGERS)
+    select(origin, dest, origin_city_mkt_id, dest_city_mkt_id, passengers)
 
   netMergedInt <- rbind(netMergedInt, IntFilter)
 
-  #assign(paste(deparse(substitute(m)), "Int", sep = "_"), netMergedInt, .GlobalEnv)
-
-# airLookup <- airportCode %>%
-#  select(ORIGIN) %>%
-#  mutate(ORIGIN_chr = as.character(ORIGIN))
-
-# netMergedInt <- left_join(netMergedInt, airLookup, by = c("ORIGIN" = "ORIGIN_chr"))
-# netMergedInt <- left_join(netMergedInt, airLookup, by = c("DEST" = "ORIGIN_chr"))
-
-# netMergedInt <- netMergedInt %>%
-#  select(ORIGIN.y, ORIGIN.y.y, PASSENGERS) %>%
-#  rename(ORIGIN = ORIGIN.y, DEST = ORIGIN.y.y)
-
-
-# Creates nodes for netInt
-
-#nodesTemp <- netMergedInt %>%
-#  group_by(DEST) %>%
-#  summarize(PASSENGERS = sum(PASSENGERS)) %>%
-#  rename(ORIGIN = DEST)
-
-#nodesInt <- netMergedInt %>%
-#  select(ORIGIN, PASSENGERS) %>%
-#  group_by(ORIGIN) %>%
-#  summarize(PASSENGERS = sum(PASSENGERS))
-
-#nodesInt <- nodesInt %>%
-#  merge(nodesTemp, by = "ORIGIN", all = TRUE) %>%
-#  mutate(PASSENGERS.x = replace(PASSENGERS.x, is.na(PASSENGERS.x), 0),
-#         PASSENGERS.y = replace(PASSENGERS.y, is.na(PASSENGERS.y), 0),
-#         freq = (PASSENGERS.x + PASSENGERS.y)) %>%
-#  select(ORIGIN, freq) %>%
-#  merge(airportCode, by = "ORIGIN", all.x = TRUE) %>%
-
-#  nodesInt <- createNodes(netMergedInt)
-
-#  select(ORIGIN, freq, Latitude, Longitude)
 
   return(netMergedInt)
-
-#return(list(netInt = netMergedInt, nodesInt = nodesInt))
-
-
-#assign("nodesInt", nodesInt, .GlobalEnv)
 
 }
 }

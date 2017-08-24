@@ -16,33 +16,53 @@
 #'
 #'
 
-make.Path <- function(x, leg = FALSE){
+make.Path <- function(x, leg = FALSE, zero = FALSE, airlines = FALSE){
 
 
-    #alternative1
+# Gets lasts values by Market and Sequence number
   DT <- as.data.table(x)
-  DT <- DT[order(MKT_ID, SEQ_NUM)]
-#  DT <- DT[, , by = MKT_ID]
-  DT <- DT[, .(ORIGIN=ORIGIN[1], DEST=DEST[.N], ITIN_FARE=ITIN_FARE[1], PASSENGERS = PASSENGERS[1],
-               ROUNDTRIP = ROUNDTRIP[1], ITIN_YIELD = ITIN_YIELD[1], NUM_STOPS = .N), by=MKT_ID]
+  DT <- DT[order(mkt_id, seq_num)]
 
-  DT <- DT[, ITIN_FARE := ITIN_FARE/(1+ROUNDTRIP)]
-  netOD <- DT[, .(PASSENGERS = sum(PASSENGERS),FARE_SD = round(sd(ITIN_FARE), 2), ITIN_FARE = round(sum(ITIN_FARE)/(.N), 2), ITIN_YIELD = round(sum(ITIN_YIELD)/(.N), 3), MEAN_STOPS = round(sum(NUM_STOPS)/(.N))), by=.(ORIGIN, DEST)][order(ORIGIN, DEST)]
+  if(zero == TRUE){
 
+    DT <- DT[, .(origin=origin[1], dest=dest[.N], itin_fare=itin_fare[1], passengers = passengers[1],
+                 roundtrip = roundtrip[1], itin_yield = itin_yield[1], num_stops = .N,
+                 pct_zero = ifelse(itin_fare == 0, 1, 0)), by=mkt_id]
+
+    # Calculates averages and sums
+    DT <- DT[, itin_fare := itin_fare/(1+roundtrip)]
+    netOD <- DT[, .(passengers = sum(passengers),fare_sd = round(sd(itin_fare), 2), itin_fare = round(sum(itin_fare)/(.N), 2),
+                    itin_yield = round(sum(itin_yield)/(.N), 3), mean_stops = round(sum(num_stops)/(.N)),
+                    pct_zero = round((sum(pct_zero)*100), 2)/(.N)), by=.(origin, dest)][order(origin, dest)]
+
+  }
+
+  else{
+
+
+  DT <- DT[, .(origin=origin[1], dest=dest[.N], itin_fare=itin_fare[1], passengers = passengers[1],
+               roundtrip = roundtrip[1], itin_yield = itin_yield[1], num_stops = .N), by=mkt_id]
+
+  # Calculates averages and sums
+  DT <- DT[, itin_fare := itin_fare/(1+roundtrip)]
+  netOD <- DT[, .(passengers = sum(passengers),fare_sd = round(sd(itin_fare), 2),
+                  itin_fare = round(sum(itin_fare)/(.N), 2), itin_yield = round(sum(itin_yield)/(.N), 3),
+                  mean_stops = round(sum(num_stops)/(.N))), by=.(origin, dest)][order(origin, dest)]
+
+  }
 
   # Add city name
   netOD <- netOD %>%
-    left_join(airportCode, by = "ORIGIN") %>%
-    rename(ORIGIN_CITY = CITY, ORIGIN_CITY_MARKET_ID = CITY_MARKET_ID)
+    left_join(airportCode, by = "origin") %>%
+    rename(origin_city = city, origin_city_mkt_id = city_mkt_id)
 
   airportCode <- airportCode %>%
-    rename(DEST = ORIGIN, DEST_CITY = CITY, DEST_CITY_MARKET_ID = CITY_MARKET_ID)
+    rename(dest = origin, dest_city = city, dest_city_mkt_id = city_mkt_id)
 
   netOD <- netOD %>%
-    left_join(airportCode, by = "DEST") %>%
-    select(-Latitude.x, -Latitude.y, -Longitude.x, -Longitude.y) %>%
-    mutate(FARE_SD = ifelse(is.na(FARE_SD), 0, FARE_SD))
-    #mutate(ITIN_FARE = round(ITIN_FARE/PASSENGERS, 2), ITIN_YIELD = round(ITIN_YIELD/PASSENGERS, 2))
+    left_join(airportCode, by = "dest") %>%
+    select(-latitude.x, -latitude.y, -longitude.x, -longitude.y) %>%
+    mutate(fare_sd = ifelse(is.na(fare_sd), 0, fare_sd))
 
   if(leg == FALSE){
     return(netOD)
@@ -52,35 +72,28 @@ make.Path <- function(x, leg = FALSE){
 
     print("This code might take longer than usual to execute")
 
-    # Group into different paths (MKT_ID)
-  netPath <- x %>%
-    select(MKT_ID, ORIGIN, DEST, PASSENGERS, SEQ_NUM, OPERATING_CARRIER) %>%
-    arrange(MKT_ID, SEQ_NUM)
 
-  # Selects and merges
-  # Data.table method
+  DT <- data.table(x)
 
-  DT <- data.table(netPath)
+  DT <- DT[order(mkt_id, seq_num)]
+  DT <- DT[,.(passengers = passengers[1], op_carrier,
+              path = paste(origin[1], paste(dest, collapse = " "),
+                           collapse = " ")), by=mkt_id]
 
-  netPath <- DT[,.(PASSENGERS, SEQ_NUM, OPERATING_CARRIER, Path = paste(ORIGIN[1],paste(DEST, collapse = " "),
-                                                                        collapse = " ")), by=MKT_ID]
 
-  # Merge everything
-  netPath <- netPath %>%
-    group_by(Path, OPERATING_CARRIER) %>%
-    summarise(Passengers = sum(PASSENGERS)) %>%
-    left_join(carriers, by = "OPERATING_CARRIER") %>%
-    select(Path, OPERATING_CARRIER, Description, Passengers) %>%
-    arrange(Path)
+
+  DT <- DT[,.(passengers = sum(passengers)), by = .(path, op_carrier) ]
+  DT <- DT %>%
+    left_join(carriers, by = "op_carrier") %>%
+    select(path, op_carrier, description, passengers) %>%
+    arrange(path)
 
 
   # Count words
-  netPath$legCount <- stringr::str_count(netPath$Path, "\\S+")
+  DT$legCount <- stringr::str_count(DT$path, "\\S+")
 
-  return(list(netOD = netOD, netLegCount = netPath))
+  return(list(netOD = netOD, netLegCount = DT))
 
-  #assign("netLegCount",netPath, .GlobalEnv)
 }
-
 
 }

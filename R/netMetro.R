@@ -1,7 +1,7 @@
 #' Metro Network
 #'
 #' Generates Metro Network with an iGraph object and a Data Frame.
-#' Still to fix some details
+#' Still to fix some details - IMPORTANT!!!!!!!!!!!!!!!
 #'
 #' @param disp Uses the Serrano's disparity filter (\url{http://www.pnas.org/content/106/16/6483.full})
 #' to extract the backbone of the network.
@@ -24,34 +24,38 @@
 make.netMetro <- function(x = NULL, undirected = FALSE, merge = TRUE){
 
   netMet <- x %>%
-    select(ORIGIN_CITY_MARKET_ID, DEST_CITY_MARKET_ID, PASSENGERS) %>%
-    group_by(ORIGIN_CITY_MARKET_ID, DEST_CITY_MARKET_ID) %>%
-    summarise(weight = sum(PASSENGERS)) %>%
-    merge(MetroLookup, by = "ORIGIN_CITY_MARKET_ID", all.x = TRUE) %>%
-    rename(ORIGIN_CITY_MARKET_NAME = Description)
+    select(origin_city_mkt_id, dest_city_mkt_id, passengers, op_carrier, itin_fare, itin_yield, roundtrip) %>%
+    group_by(origin_city_mkt_id, dest_city_mkt_id) %>%
+    mutate(itin_fare = itin_fare/(1+roundtrip)) %>%
+    summarise(weight = sum(passengers), fare_sd = round(sd(itin_fare), 2),
+              itin_fare = mean(itin_fare), itin_yield = mean(itin_yield)) %>%
+    merge(MetroLookup, by = "origin_city_mkt_id", all.x = TRUE) %>%
+    rename(origin_city = description)
 
   MetroLookupDest <- MetroLookup %>%
-    rename(DEST_CITY_MARKET_ID = ORIGIN_CITY_MARKET_ID)
+    rename(dest_city_mkt_id = origin_city_mkt_id)
 
   netMet <- netMet %>%
-    merge(MetroLookupDest, by = "DEST_CITY_MARKET_ID", all.x = TRUE) %>%
-    rename(DEST_CITY = Description, ORIGIN = ORIGIN_CITY_MARKET_ID, DEST = DEST_CITY_MARKET_ID,
-           ORIGIN_CITY = ORIGIN_CITY_MARKET_NAME) %>%
-    select(ORIGIN, DEST, ORIGIN_CITY, DEST_CITY, weight)
+    merge(MetroLookupDest, by = "dest_city_mkt_id", all.x = TRUE) %>%
+    rename(dest_city = description, origin = origin_city_mkt_id,
+           dest = dest_city_mkt_id) %>%
+    select(origin, dest, origin_city, dest_city, weight)
 
   gMet_dir <- graph_from_data_frame(netMet, directed = TRUE)
+
+  netMet <- rename(netMet, passengers = weight)
 
   nodes <- metroNodes(netMet)
 
   return(list(netMet = netMet, gMet_dir = gMet_dir, nodes = nodes))
 
-#  gMet_dir <- graph_from_data_frame(netMet, directed = TRUE)
-#  netMet <<- netMet
 
   if(undirected == TRUE){
 
     gMet_und <- graph_from_data_frame(netMet, directed = FALSE)
-    gMet_und <- as.undirected(gMet_und, mode = "collapse", edge.attr.comb=list(weight = "sum"))
+    gMet_und <- as.undirected(gMet_und, mode = "collapse",
+                              edge.attr.comb=list(weight = "sum", itin_fare = "mean",
+                                                  itin_yield = "mean", fare_sd = "mean"))
     return(list(netMet = netMet, gMet_und = gMet_und))
 
   }else if(merge == FALSE){
