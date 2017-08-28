@@ -1,0 +1,101 @@
+---
+title: "Introduction to Skynet"
+author: "Filipe Teixeira"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introduction to Skynet}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+Skynet, contrarily to the 1984 Terminator movie franchise neural net based conscious group, which after gaining self-consciousness would end up destroying mankind, our package emerged at first as an R package’s answer to some of the previously mentioned research challenges.
+The need of having a tool perfectly integrated into an environment capable of statistical and network analysis, has grown together with the volume of data available. As for most research questions, the BTS databases are perfectly capable to provide the researchers with enough raw data, Skynet package was developed with that in mind.
+
+There are several challenges associated with handling large amounts of data. From processing power to disk space and RAM memory, hardware constraints and the way raw data is presented, often present themselves as a cumbersome challenge to researchers. The BTS data, as mentioned above, is delivered in the form of individual csv files, divided by quarter. When dealing with longitudinal studies involving more than one year, it is recommended to convert the csv files into an SQL format or similar. The interoperability of R, allows researchers to access their data in several formats from csv to SQL, being this one among many of the reasons why R it is often a one stop tool for researchers. 
+
+
+## Aims of this package
+
+The rationale behind Skynet, is to provide researchers with a unifying tool overcoming some of the challenges faced when dealing with the BTS DB1B and T100 data.
+Researchers handling large datasets often spend 80% of data analysis on the process of cleaning and preparing the data (Dasu & Johnson, 2003).
+
+Skynet is effectively divided into four segments:
+
+1. Import Data
+1. Generate Air Networks
+1. Generate Travel Intention Networks
+1. Plot Air Networks
+
+
+
+
+## Import Data
+
+To import data, simply type `net.Import()` including the path to your desired file.
+    
+```{r, eval=FALSE}
+ library(skynet)
+ net.Import("/folder1/Coupon 2016Q1.csv", "/folder/Ticket 2016Q1.csv") 
+```
+
+We do recommend working with pre-cleaned files before importing them using the import function.
+The BTS DB1B data consists of 2 sets of files, `Coupon` and `Ticket`.
+They can be both downloaded at https://www.transtats.bts.gov/DL_SelectFields.asp?Table_ID=289 and https://www.transtats.bts.gov/DL_SelectFields.asp?Table_ID=272 respectively.
+
+Despite being possible to download the complete zipped file, which includes all variables, due to its size, we recommend selecting the following set.
+
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, results='asis'}
+knitr::kable(data.frame(Coupon = c("ITIN_ID", "MKT_ID", "SEQ_NUM", "ORIGIN_CITY_MARKET_ID",  
+"ORIGIN", "YEAR", "QUARTER", "DEST_CITY_MARKET_ID", "DEST", "TRIP_BREAK", "OPERATING_CARRIER", 
+"DISTANCE", "GATEWAY"),
+Ticket = c("ITIN_ID", "ROUNDTRIP", "ITIN_YIELD", "PASSENGERS",
+"ITIN_FARE", "BULKFARE", "DISTANCE_FULL","","","","","","")))
+```
+
+
+As it's not always convenient to follow the procedure mentioned above, we created a `netConvert()` function which allows to convert the raw csv DB1B files, into the format which includes all the necessary variables.
+
+## Create networks
+
+Skynet creates three types of networks and an extra option:
+
+1. Directed Network
+1. Undirected Network
+1. Metro Network
+1. International Option
+
+When generating a network, SKYNET, creates a list which includes:
+
+1. Dataframe from original data (example below)
+1. iGraph object
+1. Dataframe with nodes(airports) information, including absolute frequency of passengers.
+
+```{r, echo=FALSE, results='asis'}
+knitr::kable(data.frame(origin = c("ABI", "ABI", "ADK", "ADQ", "AKN"),
+dest = c("ABQ", "AMA", "ANC", "ANC", "ANC"),
+passengers = c(2, 4, 88, 1768, 55),
+fare_sd = c(13.79, 12.525, 411.815, 293.44, 338.4),
+itin_fare = c(236.25, 262.5, 427.69, 329.64, 482.265),
+itin_yield = c(0.19, 0.695, 0.27, 0.36,0.265),
+origin_city_mkt_id = c(30136, 30136, 30165, 30070, 30245),
+origin_city = c("Abilene, TX", "Abilene, TX", "Adak Island, AK", "Kodiak, AK", "King Salmon, AK"),
+dest_city_mkt_id = c(30140, 30279, 30299, 30299, 30299),
+dest_city = c("Albuquerque, NM", "Amarillo, TX", "Anchorage, AK", "Anchorage, AK", "Anchorage, AK"))
+)
+```
+
+
+`Dataframe created from make.netDir() function`
+
+
+
+
+## Create Maps
+
+One of SKYNET's advantages is the possibility of plotting maps without having to recur to external software.
+
+Typing `make.gMap()` plots a ggplot2 based map with OD information.
+
+
