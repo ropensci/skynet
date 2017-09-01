@@ -2,10 +2,27 @@
 % Please edit documentation in R/importRaw.R
 \name{netConvert}
 \alias{netConvert}
-\title{Raw Extract}
+\title{Extract Variables}
 \usage{
 netConvert(x, y)
 }
+\arguments{
+\item{x}{First csv file to be processed}
+
+\item{y}{Second csv file to be processed}
+}
 \description{
-Raw Extract
+Extracts necessary variables from BTS/RITA/Transtats website raw data (prezipped file), for SKYNET's import function.
+}
+\details{
+File order doesn't matter, but it is recomended to name the files using the following
+syntax: \emph{"Origin_and_Destination_Survey_DB1BCoupon_year_quarter.csv", "Origin_and_Destination_Survey_DB1BTicket_year_quarter.csv".}
+Note: We do recommend sparklyr to be used for larger sets of data.
+}
+\examples{
+
+# DB1B Database Files - Ticket and Coupon order doesn't matter
+netImport("Origin_and_Destination_Survey_DB1BCoupon_2017_1.csv",
+"Origin_and_Destination_Survey_DB1BTicket_2017_1.csv")
+
 }

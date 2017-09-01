@@ -1,6 +1,8 @@
 #' International Data
 #'
 #' Imports International data to complement to the DB1B data set.
+#' NOTE: When using this function, certain variables will be skewed as the T100 dataset does not contain
+#' all the data the DB1B dataset contains.
 #'
 #' @param x T-100 International Segment csv file
 #' @param m Data set to merge with

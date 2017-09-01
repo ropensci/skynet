@@ -15,6 +15,8 @@ make.netInt(x = NULL, m, Q = NULL)
 }
 \description{
 Imports International data to complement to the DB1B data set.
+NOTE: When using this function, certain variables will be skewed as the T100 dataset does not contain
+all the data the DB1B dataset contains.
 }
 \examples{
 make.netInt("T100 2016", OD_2016Q1, 1)

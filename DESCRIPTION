@@ -13,6 +13,8 @@ Collate:
     'PowerLaw.R'
     'createNodes.R'
     'data.R'
+    'findairport.R'
+    'fromto.R'
     'importRaw.R'
     'netDir.R'
     'netMetro.R'
@@ -22,8 +24,8 @@ Collate:
     'netMap.R'
     'netPath.R'
     'nodesTr.R'
+    'plotdegree.R'
     'skynet.R'
-    'subFunctions.R'
 Depends:
     data.table,
     igraph,

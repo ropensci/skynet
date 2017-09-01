@@ -3,7 +3,7 @@
 skynet
 ======
 
-The rationale behind Skynet, is to provide researchers with a unifying tool overcoming some of the challenges faced when dealing with the BTS DB1B and T100 data.
+The rationale behind Skynet, is to provide researchers with a unifying tool overcoming some of the challenges faced when dealing with the Bureau of Transport Statistics, DB1B and T100 data.
 
 Installation
 ------------
@@ -18,8 +18,7 @@ devtools::install_github("FilipeamTeixeira/Skynet")
 Example
 -------
 
-This is a basic example which shows you how to solve a common problem:
+To generate a directed network, you only need to type:
 
-``` r
-## basic example code
-```
+    library(skynet)
+    make.netDir(OD_2011Q1, disp = TRUE, alpha = 0.05)

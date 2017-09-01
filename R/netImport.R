@@ -45,27 +45,6 @@ netImport <- function(x, y){
                        basename(x)))
     assign(paste(filename), T100, .GlobalEnv)
 
-    #Create nodes and node frequency
-
-#    nodesTemp <- T100 %>%
-#      group_by(DEST) %>%
-#      summarize(PASSENGERS = sum(PASSENGERS)) %>%
-#      rename(ORIGIN = DEST)
-
-#    nodesT <- T100 %>%
-#      group_by(ORIGIN) %>%
-#      summarize(PASSENGERS = sum(PASSENGERS))
-
-#    nodesT <- nodesT %>%
-#      merge(nodesTemp, by = "ORIGIN", all = TRUE) %>%
-#      mutate(PASSENGERS.x = replace(PASSENGERS.x, is.na(PASSENGERS.x), 0),
-#             PASSENGERS.y = replace(PASSENGERS.y, is.na(PASSENGERS.y), 0),
-#             freq = (PASSENGERS.x + PASSENGERS.y)) %>%
-#      select(ORIGIN, freq) %>%
-#      merge(airportCode, by = "ORIGIN", all.x = TRUE)
-
-#    nodesT <<- nodesT
-
   }
   else
 

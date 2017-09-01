@@ -29,7 +29,6 @@ devtools::install_github("FilipeamTeixeira/Skynet")
 
 To generate a directed network, you only need to type:
 
-```{r example}
-## basic example code
-make.netDir(OD_2011Q1, disp = TRUE, alpha = 0.05)
-```
+    library(skynet)
+    make.netDir(OD_2011Q1, disp = TRUE, alpha = 0.05)
+
