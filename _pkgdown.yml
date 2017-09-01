@@ -1,0 +1,26 @@
+url: http://filipeamteixeira.github.io/skynet/
+
+template:
+  params:
+    bootswatch: cerulean
+
+reference:
+- title: All functions
+  desc: ~
+  contents:
+  - '`createNodes`'
+  - '`findAirport`'
+  - '`fitPlaw`'
+  - '`fromto.stat`'
+  - '`make.gMap`'
+  - '`make.netDir`'
+  - '`make.netInt`'
+  - '`make.netMetro`'
+  - '`make.netUnd`'
+  - '`make.nodesTr`'
+  - '`make.Path`'
+  - '`metroNodes`'
+  - '`netConvert`'
+  - '`netImport`'
+  - '`plot_degree`'
+  - '`transferNodes`'
