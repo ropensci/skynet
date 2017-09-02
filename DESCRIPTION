@@ -1,7 +1,7 @@
 Package: skynet
 Type: Package
 Title: Generates networks from BTS data
-Version: 0.9.0
+Version: 0.9.2
 Authors@R: person("Filipe", "Teixeira", email = "Filipe.MarquesTeixeira@Ugent.be", role = c("aut", "cre"))
 Maintainer: Filipe Teixeira <Filipe.MarquesTeixeira@Ugent.be>
 Description: This package generates networks based on the BTS Data.
@@ -9,10 +9,13 @@ License: GNU GPL-3
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.0.1
-Collate:
+Collate: 
     'PowerLaw.R'
     'createNodes.R'
-    'data.R'
+    'data_ODsample.R'
+    'data_airports.R'
+    'data_carriers.R'
+    'data_metro.R'
     'findairport.R'
     'fromto.R'
     'importRaw.R'
@@ -24,18 +27,18 @@ Collate:
     'netMap.R'
     'netPath.R'
     'nodesTr.R'
-    'plotdegree.R'
     'skynet.R'
 Depends:
+    R (>= 3.1.2),
     data.table,
     igraph,
-    poweRlaw,
-    dplyr,
+    dplyr
+Imports:
+    ggplot2,
     maps,
     ggrepel,
-    ggplot2,
-    ggmap
-Imports:
+    ggmap,
+    poweRlaw,
     semnet,
     stringr,
     geosphere
@@ -43,3 +46,4 @@ Suggests: knitr,
     rmarkdown,
     testthat
 VignetteBuilder: knitr
+Remotes: kasperwelbers/semnet

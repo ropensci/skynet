@@ -7,28 +7,23 @@
 make.netMetro(x = NULL, undirected = FALSE, merge = TRUE)
 }
 \arguments{
+\item{x}{data frame}
+
+\item{undirected}{If true, creates undirected network}
+
 \item{merge}{When set to FALSE, it keeps parallel edges instead of collapsing them
 and summing their weights.}
-
-\item{disp}{Uses the Serrano's disparity filter (\url{http://www.pnas.org/content/106/16/6483.full})
-to extract the backbone of the network.}
-
-\item{alpha}{Argument for disparity filter.}
-
-\item{cap}{Filters original data based on the edge weight.}
-
-\item{pct}{Argument for cap filter. Value should be imput as percentage.}
 }
 \description{
 Generates Metro Network with an iGraph object and a Data Frame.
 Still to fix some details - IMPORTANT!!!!!!!!!!!!!!!
 }
 \examples{
+\dontrun{
 make.netMetro(OD_2016Q1)
 
-# Apply Disparity Filter
-make.netUnd(OD_2016Q1, disp = TRUE, alpha = 0.05)
+# Creates undirected network with merged edges
+make.netUnd(OD_2016Q1, undirected = TRUE, merge = TRUE)
+}
 
-# Apply Percentage Cap
-make.netUnd(OD_2016Q1, cap = TRUE, pct = 20)
 }

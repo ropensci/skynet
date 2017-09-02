@@ -3,22 +3,19 @@
 #' Generates Metro Network with an iGraph object and a Data Frame.
 #' Still to fix some details - IMPORTANT!!!!!!!!!!!!!!!
 #'
-#' @param disp Uses the Serrano's disparity filter (\url{http://www.pnas.org/content/106/16/6483.full})
-#' to extract the backbone of the network.
-#' @param alpha Argument for disparity filter.
-#' @param cap Filters original data based on the edge weight.
-#' @param pct Argument for cap filter. Value should be imput as percentage.
+#' @param x data frame
+#' @param undirected If true, creates undirected network
 #' @param merge When set to FALSE, it keeps parallel edges instead of collapsing them
 #' and summing their weights.
 #'
 #' @examples
+#' \dontrun{
 #' make.netMetro(OD_2016Q1)
 #'
-#' # Apply Disparity Filter
-#' make.netUnd(OD_2016Q1, disp = TRUE, alpha = 0.05)
+#' # Creates undirected network with merged edges
+#' make.netUnd(OD_2016Q1, undirected = TRUE, merge = TRUE)
+#' }
 #'
-#' # Apply Percentage Cap
-#' make.netUnd(OD_2016Q1, cap = TRUE, pct = 20)
 #' @export
 
 make.netMetro <- function(x = NULL, undirected = FALSE, merge = TRUE){

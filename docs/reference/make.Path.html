@@ -99,17 +99,27 @@
     </tr>
     <tr>
       <th>leg</th>
-      <td><p>Generates Leg Count Data frame, based on Path taken.
-For example, all passengers doing the BOS-ATL-LAX path, are summed by Air Carrier.</p></td>
+      <td><p>Generates Leg Count Data frame, based on Path taken.</p></td>
+    </tr>
+    <tr>
+      <th>zero</th>
+      <td><p>Displays percentage of 0 usd tickets</p></td>
+    </tr>
+    <tr>
+      <th>airlines</th>
+      <td><p>Groups data per airline</p>
+<p>For example, all passengers doing the BOS-ATL-LAX path, are summed by Air Carrier.</p></td>
     </tr>
     </table>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>make.Path</span>(<span class='no'>OD_2016Q1</span>)</div><div class='output co'>#&gt; <span class='error'>Error in as.data.table(x): object 'OD_2016Q1' not found</span></div><div class='input'>
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='fu'>make.Path</span>(<span class='no'>OD_2016Q1</span>)
+
 <span class='co'># Generate Leg Count</span>
-<span class='fu'>make.Path</span>(<span class='no'>OD_2016Q1</span>, <span class='kw'>leg</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='error'>Error in as.data.table(x): object 'OD_2016Q1' not found</span></div><div class='input'>
-</div></pre>
+<span class='fu'>make.Path</span>(<span class='no'>OD_2016Q1</span>, <span class='kw'>leg</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

@@ -120,16 +120,23 @@ and summing their weights.</p></td>
       <th>pct</th>
       <td><p>Argument for cap filter. Value should be imput as percentage.</p></td>
     </tr>
+    <tr>
+      <th>carrier</th>
+      <td><p>Groups data per carrier and OD</p></td>
+    </tr>
     </table>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>make.netUnd</span>(<span class='no'>OD_2016Q1</span>)</div><div class='output co'>#&gt; <span class='error'>Error in eval(lhs, parent, parent): object 'OD_2016Q1' not found</span></div><div class='input'>
-<span class='co'># Apply Disparity Filter</span>
-<span class='fu'>make.netUnd</span>(<span class='no'>OD_2016Q1</span>, <span class='kw'>disp</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>0.05</span>)</div><div class='output co'>#&gt; <span class='error'>Error in eval(lhs, parent, parent): object 'OD_2016Q1' not found</span></div><div class='input'>
-<span class='co'># Apply Percentage Cap</span>
-<span class='fu'>make.netUnd</span>(<span class='no'>OD_2016Q1</span>, <span class='kw'>cap</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>pct</span> <span class='kw'>=</span> <span class='fl'>20</span>)</div><div class='output co'>#&gt; <span class='error'>Error in eval(lhs, parent, parent): object 'OD_2016Q1' not found</span></div><div class='input'>
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='fu'>make.netUnd</span>(<span class='no'>OD_2016Q1</span>)
 
+<span class='co'># Apply Disparity Filter</span>
+<span class='fu'>make.netUnd</span>(<span class='no'>OD_2016Q1</span>, <span class='kw'>disp</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>0.05</span>)
+
+<span class='co'># Apply Percentage Cap</span>
+<span class='fu'>make.netUnd</span>(<span class='no'>OD_2016Q1</span>, <span class='kw'>cap</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>pct</span> <span class='kw'>=</span> <span class='fl'>20</span>)
+<span class='co'># }</span><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

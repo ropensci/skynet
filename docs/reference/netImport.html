@@ -109,11 +109,13 @@ the T-100 database, the only file to be included.</p></td>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
+    <pre class="examples"><span class='co'># NOT RUN {</span>
 <span class='co'># DB1B Database Files - Ticket and Coupon order doesn't matter</span>
-<span class='fu'>netImport</span>(<span class='st'>"Coupon 2016Q1.csv"</span>, <span class='st'>"Ticket 2016Q1.csv"</span>)</div><div class='output co'>#&gt; <span class='error'>Error in fread(c, header = TRUE, sep = ",", stringsAsFactors = FALSE,     integer64 = "numeric"): File is empty: /var/folders/pn/znrfljtn6294chn01y_f3ngr0000gn/T//RtmpExv4MO/file19ea68313a69</span></div><div class='input'>
+<span class='fu'>netImport</span>(<span class='st'>"Coupon 2016Q1.csv"</span>, <span class='st'>"Ticket 2016Q1.csv"</span>)
+
 <span class='co'># T-100</span>
-<span class='fu'>netImport</span>(<span class='st'>"T100 2016.csv"</span>)</div><div class='output co'>#&gt; <span class='error'>Error in fread(x, header = TRUE, sep = ",", stringsAsFactors = FALSE,     integer64 = "numeric"): File is empty: /var/folders/pn/znrfljtn6294chn01y_f3ngr0000gn/T//RtmpExv4MO/file19ea77f1f8ef</span></div><div class='input'>
+<span class='fu'>netImport</span>(<span class='st'>"T100 2016.csv"</span>)
+<span class='co'># }</span><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

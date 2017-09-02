@@ -8,8 +8,10 @@
 #' @param alpha Argument for disparity filter.
 #' @param cap Filters original data based on the edge weight.
 #' @param pct Argument for cap filter. Value should be imput as percentage.
+#' @param carrier Groups data per carrier and OD
 #'
 #' @examples
+#' \dontrun{
 #' make.netDir(OD_2016Q1)
 #'
 #' # Apply Disparity Filter
@@ -17,7 +19,7 @@
 #'
 #' # Apply Percentage Cap
 #' make.netDir(OD_2016Q1, cap = TRUE, pct = 20)
-#'
+#' }
 #' @export
 #'
 

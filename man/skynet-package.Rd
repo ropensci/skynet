@@ -22,9 +22,4 @@ NA
 \author{
 Filipe Teixeira
 }
-\keyword{#@import}
-\keyword{#@importFrom}
-\keyword{data.table}
-\keyword{getBackboneNetwork}
 \keyword{internal}
-\keyword{semnet}

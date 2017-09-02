@@ -18,11 +18,14 @@ to extract the backbone of the network.}
 \item{alpha}{Argument for disparity filter.}
 
 \item{pct}{Argument for cap filter. Value should be imput as percentage.}
+
+\item{carrier}{Groups data per carrier and OD}
 }
 \description{
 Generates Directed Network with an iGraph object and a Data Frame.
 }
 \examples{
+\dontrun{
 make.netDir(OD_2016Q1)
 
 # Apply Disparity Filter
@@ -30,5 +33,5 @@ make.netDir(OD_2016Q1, disp = TRUE, alpha = 0.05)
 
 # Apply Percentage Cap
 make.netDir(OD_2016Q1, cap = TRUE, pct = 20)
-
+}
 }

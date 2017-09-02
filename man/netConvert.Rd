@@ -22,7 +22,8 @@ Note: We do recommend sparklyr to be used for larger sets of data.
 \examples{
 
 # DB1B Database Files - Ticket and Coupon order doesn't matter
+\dontrun{
 netImport("Origin_and_Destination_Survey_DB1BCoupon_2017_1.csv",
 "Origin_and_Destination_Survey_DB1BTicket_2017_1.csv")
-
+}
 }

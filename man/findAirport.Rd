@@ -6,6 +6,16 @@
 \usage{
 findAirport(x)
 }
+\arguments{
+\item{x}{airport IATA code or city name}
+}
 \description{
-Find Airport function
+Searches for airport information based on its IATA code or city name
+}
+\examples{
+\dontrun{
+findAirport("Atlanta")
+
+findAirport("ATL")
+}
 }

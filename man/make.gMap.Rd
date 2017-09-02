@@ -2,7 +2,7 @@
 % Please edit documentation in R/netMap.R
 \name{make.gMap}
 \alias{make.gMap}
-\title{netMap}
+\title{Net Map}
 \usage{
 make.gMap(x)
 }
@@ -10,11 +10,11 @@ make.gMap(x)
 \item{x}{Data frame}
 }
 \description{
-library(ggplot2)
-library(ggrepel)
-library(ggmap)
+Creates OD ggplot2 generated maps from make.net functions
+Shows sample of 60% of flights
 }
 \examples{
+\dontrun{
 make.gMap(OD_2016Q1)
-
+}
 }

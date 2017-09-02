@@ -5,8 +5,9 @@
 #' @param x Data set
 #'
 #' @examples
+#' \dontrun{
 #' make.nodesTr(OD_2016Q1)
-#'
+#' }
 #' @export
 
 
@@ -33,5 +34,6 @@ make.nodesTr <- function (x) {
     select(origin, freq) %>%
     merge(airportCode, by = "origin", all.x = TRUE)
 
-  assign("nodesTr", nodesTr, .GlobalEnv)
+  return(nodesTr)
+  #assign("nodesTr", nodesTr, .GlobalEnv)
 }

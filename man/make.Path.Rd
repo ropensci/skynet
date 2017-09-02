@@ -9,16 +9,22 @@ make.Path(x, leg = FALSE, zero = FALSE, airlines = FALSE)
 \arguments{
 \item{x}{Data frame}
 
-\item{leg}{Generates Leg Count Data frame, based on Path taken.
+\item{leg}{Generates Leg Count Data frame, based on Path taken.}
+
+\item{zero}{Displays percentage of 0 usd tickets}
+
+\item{airlines}{Groups data per airline
+
 For example, all passengers doing the BOS-ATL-LAX path, are summed by Air Carrier.}
 }
 \description{
 Generates an OD network and a Leg Count data frame(on demand)
 }
 \examples{
+\dontrun{
 make.Path(OD_2016Q1)
 
 # Generate Leg Count
 make.Path(OD_2016Q1, leg = TRUE)
-
+}
 }

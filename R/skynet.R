@@ -12,10 +12,10 @@
 #'
 #' @keywords internal
 #'
-#' #@import data.table
-#' #@importFrom semnet getBackboneNetwork
-#' @importFrom data.table data.table
-#' @import dplyr
 #'
+#' @importFrom data.table data.table fread
+#' @importFrom dplyr rename summarize mutate group_by select summarise left_join
+#' @importFrom ggplot2 borders geom_curve ggplot
+#' @importFrom ggplot2 scale_size_continuous geom_point coord_cartesian theme aes
 #'
 "_PACKAGE"

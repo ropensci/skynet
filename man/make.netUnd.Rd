@@ -21,11 +21,14 @@ and summing their weights.}
 \item{alpha}{Argument for disparity filter.}
 
 \item{pct}{Argument for cap filter. Value should be imput as percentage.}
+
+\item{carrier}{Groups data per carrier and OD}
 }
 \description{
 Generates Undirected Network with an iGraph object and a Data Frame.
 }
 \examples{
+\dontrun{
 make.netUnd(OD_2016Q1)
 
 # Apply Disparity Filter
@@ -33,6 +36,6 @@ make.netUnd(OD_2016Q1, disp = TRUE, alpha = 0.05)
 
 # Apply Percentage Cap
 make.netUnd(OD_2016Q1, cap = TRUE, pct = 20)
-
+}
 
 }

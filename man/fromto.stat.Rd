@@ -2,10 +2,25 @@
 % Please edit documentation in R/fromto.R
 \name{fromto.stat}
 \alias{fromto.stat}
-\title{"From To" function}
+\title{From To function}
 \usage{
 fromto.stat(x, y, orig)
 }
+\arguments{
+\item{x}{igraph object to query}
+
+\item{y}{origin airport IATA code}
+
+\item{orig}{"from" or "to" options}
+}
 \description{
-Calculate edges weight form Airport IATA code
+Calculate edges weight from IATA Code
+}
+\examples{
+\dontrun{
+fromto.stat(netDir11$gDir, "JFK", orig = "from")
+
+fromto.stat(netDir11$gDir, "JFK", orig = "to")
+}
+
 }

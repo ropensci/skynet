@@ -4,14 +4,18 @@
 #'
 #' @param x Data frame
 #' @param leg Generates Leg Count Data frame, based on Path taken.
+#' @param zero Displays percentage of 0 usd tickets
+#' @param airlines Groups data per airline
+#'
 #' For example, all passengers doing the BOS-ATL-LAX path, are summed by Air Carrier.
 #'
 #' @examples
+#' \dontrun{
 #' make.Path(OD_2016Q1)
 #'
 #' # Generate Leg Count
 #' make.Path(OD_2016Q1, leg = TRUE)
-#'
+#' }
 #' @export
 #'
 #'

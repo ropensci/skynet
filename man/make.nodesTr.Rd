@@ -13,6 +13,7 @@ make.nodesTr(x)
 Extracts Nodes used only by transfer passengers
 }
 \examples{
+\dontrun{
 make.nodesTr(OD_2016Q1)
-
+}
 }

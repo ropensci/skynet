@@ -19,11 +19,12 @@ syntax: \emph{"Coupon YearQuarter.csv", "Ticket YearQuarter.csv", "T100 Year".}
 Note: We do recommend sparklyr to be used for larger sets of data.
 }
 \examples{
-
+\dontrun{
 # DB1B Database Files - Ticket and Coupon order doesn't matter
 netImport("Coupon 2016Q1.csv", "Ticket 2016Q1.csv")
 
 # T-100
 netImport("T100 2016.csv")
+}
 
 }

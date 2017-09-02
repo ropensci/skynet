@@ -10,8 +10,10 @@
 #' @param pct Argument for cap filter. Value should be imput as percentage.
 #' @param merge When set to FALSE, it keeps parallel edges instead of collapsing them
 #' and summing their weights.
+#' @param carrier Groups data per carrier and OD
 #'
 #' @examples
+#' \dontrun{
 #' make.netUnd(OD_2016Q1)
 #'
 #' # Apply Disparity Filter
@@ -19,7 +21,7 @@
 #'
 #' # Apply Percentage Cap
 #' make.netUnd(OD_2016Q1, cap = TRUE, pct = 20)
-#'
+#' }
 #'
 #' @export
 

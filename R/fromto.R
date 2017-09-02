@@ -1,6 +1,17 @@
-#' "From To" function
+#' From To function
 #'
-#' Calculate edges weight form Airport IATA code
+#' Calculate edges weight from IATA Code
+#'
+#' @param x igraph object to query
+#' @param y origin airport IATA code
+#' @param orig "from" or "to" options
+#'
+#' @examples
+#' \dontrun{
+#' fromto.stat(netDir11$gDir, "JFK", orig = "from")
+#'
+#' fromto.stat(netDir11$gDir, "JFK", orig = "to")
+#' }
 #'
 #' @export
 #'
