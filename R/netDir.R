@@ -25,6 +25,12 @@
 
 make.netDir <- function(x, disp = FALSE, cap = FALSE, alpha = 0.003, pct = 10, carrier = FALSE){
 
+  if(carrier == TRUE & disp == TRUE){
+
+      stop("SKYNET doesn't support yet parallel edges on its disparity filter.
+           Not including the carrier option on the disparity filter mode, or running the carriers option without the disparity filter mode, solves the issue for now.")
+  }
+
   #-------------------------------------------------
   if(carrier == TRUE){
 
@@ -57,7 +63,7 @@ make.netDir <- function(x, disp = FALSE, cap = FALSE, alpha = 0.003, pct = 10, c
     # Run disparity filter
 
     # Create igraph
-    gDir_disp <- semnet::getBackboneNetwork(gDir, delete.isolates = T, alpha = alpha)
+    gDir_disp <- dispfilter(gDir, alpha = alpha)
     netDir_disp <- get.data.frame(gDir_disp)
 
     netDir_disp <- netDir_disp %>%
@@ -142,6 +148,10 @@ make.netDir <- function(x, disp = FALSE, cap = FALSE, alpha = 0.003, pct = 10, c
   }
 
 }
+
+globalVariables(c("op_carrier", "itin_fare", "itin_yield", "roundtrip", "sd",
+                  "fare_sd", "city_mkt_id", "latitude.x", "latitude.x", "longitude.x",
+                  "longitude.y", "quantile"))
 
 # ----------------------------------------------------------------------------- #
 # ----------------------------------------------------------------------------- #

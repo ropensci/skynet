@@ -27,3 +27,5 @@ fromto.stat <- function(x, y, orig){
   else
     sum(E(x)[to(V(x)[y])]$weight)
 }
+
+globalVariables(c("from", "to"))

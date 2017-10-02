@@ -15,6 +15,14 @@
 #' @export
 #'
 
+############ ------------------------------------- ###############
+############ ------------------------------------- ###############
+############ NOTE: TAKE CARE OF VARIABLES AND CODE ###############
+############ ------------------------------------- ###############
+############ ------------------------------------- ###############
+
+
+
 make.netInt <- function(x = NULL, m, Q = NULL){
 
   if(is.null(Q))
@@ -22,22 +30,27 @@ make.netInt <- function(x = NULL, m, Q = NULL){
   if(!is.null(x)){
 
 # International option
-  International <- fread(x, header = TRUE, sep = ",", stringsAsFactors = TRUE,
+  International <- fread(x, header = TRUE, sep = ",", stringsAsFactors = FALSE,
       integer64 = "numeric")
+
+  International <- International %>%
+    select(ORIGIN, DEST, ORIGIN_CITY_MARKET_ID, DEST_CITY_MARKET_ID, PASSENGERS, CARRIER) %>%
+    rename(origin = ORIGIN ,dest = DEST ,origin_mkt_id = ORIGIN_CITY_MARKET_ID,
+           dest_mkt_id = DEST_CITY_MARKET_ID, passengers = PASSENGERS, op_carrier = CARRIER)
 
  }else{
 
    # Create Filter
    IntFilter <- International %>%
-      select(origin, dest, origin_city_mkt_id, dest_city_mkt_id,
+      select(origin, dest, origin_mkt_id, dest_mkt_id,
          passengers, quarter) %>%
-      filter(passengers > 0, quarter == Q) %>%
-      select(origin, dest, origin_city_mkt_id, dest_city_mkt_id, passengers)
+      filter(passengers > 0, quarter = 1) %>%
+      select(origin, dest, origin_mkt_id, dest_mkt_id, passengers)
 
  # Merges netMerged with international filter
 
   netMergedInt <- m %>%
-    select(origin, dest, origin_city_mkt_id, dest_city_mkt_id, passengers)
+    select(origin, dest, origin_mkt_id, dest_mkt_id, passengers)
 
   netMergedInt <- rbind(netMergedInt, IntFilter)
 
@@ -46,3 +59,6 @@ make.netInt <- function(x = NULL, m, Q = NULL){
 
 }
 }
+
+globalVariables(c("ORIGIN", "DEST", "ORIGIN_CITY_MARKET_ID", "DEST_CITY_MARKET_ID",
+                  "PASSENGERS", "CARRIER", "origin_mkt_id", "dest_mkt_id", "quarter"))

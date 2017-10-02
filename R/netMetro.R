@@ -65,3 +65,6 @@ make.netMetro <- function(x = NULL, undirected = FALSE, merge = TRUE){
 
 }
 
+globalVariables(c("origin_city_mkt_id", "dest_city_mkt_id", "dest_city", "MetroLookup",
+                  "origin_city"))
+

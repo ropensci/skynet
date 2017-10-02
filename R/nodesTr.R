@@ -37,3 +37,5 @@ make.nodesTr <- function (x) {
   return(nodesTr)
   #assign("nodesTr", nodesTr, .GlobalEnv)
 }
+
+globalVariables("TRIP_BREAK")

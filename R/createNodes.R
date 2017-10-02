@@ -66,7 +66,7 @@ transferNodes <- function (x, y) {
            latitude = latitude.y, longitude = longitude.y)
 
 
-   assign(deparse(substitute(y)), c(y, list(nodesTr = nodesTr)), .GlobalEnv)
+   assign(deparse(substitute(y)), c(y, list(nodesTr = nodesTr)), envir = envir)
 
 
 }
@@ -82,24 +82,31 @@ transferNodes <- function (x, y) {
 metroNodes <- function(y){
 
   nodesTemp <- y %>%
-    group_by(DEST) %>%
-    summarize(PASSENGERS = sum(PASSENGERS)) %>%
-    rename(ORIGIN = DEST)
+    group_by(dest) %>%
+    summarize(passengers = sum(passengers)) %>%
+    rename(origin = dest)
 
   nodes <- y %>%
-    group_by(ORIGIN) %>%
-    summarize(PASSENGERS = sum(PASSENGERS))
+    group_by(origin) %>%
+    summarize(passengers = sum(passengers))
 
   airportCodeFull <- airportCodeFull %>%
-    select(CITY_MARKET_ID, Latitude, Longitude, AIRPORT_STATE_CODE, DISPLAY_AIRPORT_CITY_NAME_FULL) %>%
-    rename(ORIGIN = CITY_MARKET_ID)
+    select(city_mkt_id, latitude, longitude, airport_state, airport_city_name) %>%
+    rename(origin = city_mkt_id)
 
   nodes <- nodes %>%
-    merge(nodesTemp, by = "ORIGIN", all = TRUE) %>%
-    mutate(PASSENGERS.x = replace(PASSENGERS.x, is.na(PASSENGERS.x), 0),
-           PASSENGERS.y = replace(PASSENGERS.y, is.na(PASSENGERS.y), 0),
-           freq = (PASSENGERS.x + PASSENGERS.y)) %>%
-    select(ORIGIN, freq) %>%
-    merge(airportCodeFull, by = "ORIGIN", all.x = TRUE)
+    merge(nodesTemp, by = "origin", all = TRUE) %>%
+    mutate(passengers.x = replace(passengers.x, is.na(passengers.x), 0),
+           passengers.y = replace(passengers.y, is.na(passengers.y), 0),
+           freq = (passengers.x + passengers.y)) %>%
+    select(origin, freq) %>%
+    merge(airportCodeFull, by = "origin", all.x = TRUE)
 
 }
+
+globalVariables(c("dest", "passengers", "origin", "passengers.x", "passengers.y",
+                  "freq", "airportCode", "airport_state", "airport_city_name",
+                  "trip_break", "freq.y", "city.y", "city_mkt_id.y"))
+
+pos = 1
+envir = as.environment(pos)

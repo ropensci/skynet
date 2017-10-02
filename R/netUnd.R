@@ -27,6 +27,12 @@
 
 make.netUnd <- function(x, disp = FALSE, cap = FALSE, merge = TRUE, alpha = 0.003, pct = 10, carrier = FALSE){
 
+  if(carrier == TRUE & disp == TRUE){
+
+    stop("SKYNET doesn't support yet parallel edges on its disparity filter.
+         Not including the carrier option on the disparity filter mode, or running the carriers option without the disparity filter mode, solves the issue for now.")
+  }
+
   #-------------------------------------------------
   if(carrier == TRUE){
 
@@ -65,7 +71,7 @@ make.netUnd <- function(x, disp = FALSE, cap = FALSE, merge = TRUE, alpha = 0.00
 
     # Run disparity filter
     # Creates igraph object
-    gUnd_disp <- semnet::getBackboneNetwork(gUnd, delete.isolates = T, alpha = alpha)
+    gUnd_disp <- dispfilter(gUnd, alpha = alpha)
     netUnd_disp <- get.data.frame(gUnd_disp)
 
     # Rename fields

@@ -4,10 +4,11 @@
 #' Shows sample of 60% of flights
 #'
 #' @param x Data frame
+#' @param pct percentage of edges to include
 #'
 #' @examples
 #' \dontrun{
-#' make.gMap(OD_2016Q1)
+#' make.gMap(OD_2016Q1, pct = 10)
 #' }
 #' @export
 #'
@@ -15,10 +16,9 @@
 # Plot flight routes
 
 
-make.gMap <- function(x){
+make.gMap <- function(x, pct = 60){
 
   airports <- select(airportCode, origin, latitude, longitude)
-  #airports
 
   #-----------------------------------------------------
   # Get list object names
@@ -44,7 +44,7 @@ make.gMap <- function(x){
 
 
   ggplot() + worldmap +
-    geom_curve(data=flights[flights$passengers > quantile(flights$passengers, prob = 1-0.6),], aes(x = longitude.x, y = latitude.x, xend = longitude.y,
+    geom_curve(data=flights[flights$passengers > quantile(flights$passengers, prob = 1-(pct/100)),], aes(x = longitude.x, y = latitude.x, xend = longitude.y,
                                  yend = latitude.y , size = passengers),
                col = "royalblue",
                alpha = .6, curvature = .2) +
@@ -66,3 +66,5 @@ make.gMap <- function(x){
 
 
 }
+
+globalVariables(c("latitude", "longitude", "latitude.y"))

@@ -4,10 +4,12 @@
 \alias{make.gMap}
 \title{Net Map}
 \usage{
-make.gMap(x)
+make.gMap(x, pct = 60)
 }
 \arguments{
 \item{x}{Data frame}
+
+\item{pct}{percentage of edges to include}
 }
 \description{
 Creates OD ggplot2 generated maps from make.net functions
@@ -15,6 +17,6 @@ Shows sample of 60% of flights
 }
 \examples{
 \dontrun{
-make.gMap(OD_2016Q1)
+make.gMap(OD_2016Q1, pct = 10)
 }
 }

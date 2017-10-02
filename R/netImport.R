@@ -20,7 +20,6 @@
 #'
 #' @export
 
-
 netImport <- function(x, y){
 
   if(grepl("T100", deparse(substitute(x)), ignore.case = TRUE) == TRUE){
@@ -40,7 +39,7 @@ netImport <- function(x, y){
     filename <- gsub(" ", "",
                      tools::file_path_sans_ext(
                        basename(x)))
-    assign(paste(filename), T100, .GlobalEnv)
+    assign(paste(filename), T100, envir = envir)
 
   }
   else
@@ -94,11 +93,17 @@ DB1BImport <- function(x, y){
                    tools::file_path_sans_ext(
                      basename(x)))
   filename <- substring(filename, (nchar(filename)-5))
-  assign(paste("OD",filename, sep = "_"), netMerged, .GlobalEnv)
+  assign(paste("OD",filename, sep = "_"), netMerged, envir = envir)
 
 }
 
+globalVariables(c("ITIN_ID", "MKT_ID", "SEQ_NUM", "YEAR", "QUARTER", "TRIP_BREAK",
+                  "OPERATING_CARRIER", "DISTANCE", "GATEWAY", "ROUNDTRIP", "ITIN_YIELD",
+                  "ITIN_FARE", "BULKFARE", "DISTANCE_FULL", "UNIQUE_CARRIER",
+                  "UNIQUE_CARRIER_NAME", "MONTH"))
 
+pos = 1
+envir = as.environment(pos)
 
 #--------------------------------------------------------------------------------
                               # END OF SCRIPT

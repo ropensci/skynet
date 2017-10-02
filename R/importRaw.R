@@ -59,3 +59,7 @@ netConvert <- function(x,y){
 
 
 }
+
+globalVariables(c("ItinID", "RoundTrip", "FarePerMile", "Passengers", "ItinFare",
+"BulkFare", "Distance", "MktID", "SeqNum", "OriginCityMarketID", "Origin", "Year",
+"Quarter", "DestCityMarketID", "Dest", "Break", "OpCarrier", "Gateway"))

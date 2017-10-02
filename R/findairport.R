@@ -17,3 +17,5 @@
 findAirport <- function(x){
   filter(airportCode, grepl(x, origin) | grepl (x, city))
 }
+
+globalVariables(c("airportCode", "origin", "city"))

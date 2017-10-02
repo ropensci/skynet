@@ -14,7 +14,9 @@ knitr::opts_chunk$set(
 
 # skynet
 
+[![Build Status](https://travis-ci.com/FilipeamTeixeira/skynet.svg)](https://travis-ci.com/FilipeamTeixeira/skynet.svg)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/skynet)](https://cran.r-project.org/package=skynet)
+
 
 
 # Overview
