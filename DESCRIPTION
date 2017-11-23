@@ -1,7 +1,7 @@
 Package: skynet
 Type: Package
 Title: Generates networks from BTS data
-Version: 0.9.3
+Version: 0.9.4
 Authors@R: person("Filipe", "Teixeira", email = "Filipe.MarquesTeixeira@Ugent.be", role = c("aut", "cre"))
 Maintainer: Filipe Teixeira <Filipe.MarquesTeixeira@Ugent.be>
 Description: This package generates networks based on the BTS Data.
@@ -29,6 +29,10 @@ Collate:
     'netPath.R'
     'nodesTr.R'
     'skynet.R'
+    'nodeStats.R'
+    'importtest.R'
+    'findCarrier.R'
+    'plotMap.R'
 Depends:
     R (>= 3.1.2)
 Imports:
@@ -39,8 +43,8 @@ Imports:
     maps,
     ggrepel,
     ggmap,
-    poweRlaw,
     stringr,
+    poweRlaw,
     geosphere
 Suggests: knitr,
     rmarkdown,

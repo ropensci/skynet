@@ -84,12 +84,16 @@ make.Path <- function(x, leg = FALSE, zero = FALSE, airlines = FALSE){
               path = paste(origin[1], paste(dest, collapse = " "),
                            collapse = " ")), by=mkt_id]
 
-
+# Filter carriers
+  y <- as.numeric(x[1, "year"])
+  car <- carriers %>%
+    filter(from < y & (to > y | is.na(to))) %>%
+    select(op_carrier, carrier_name)
 
   DT <- DT[,.(passengers = sum(passengers)), by = .(path, op_carrier) ]
   DT <- DT %>%
-    left_join(carriers, by = "op_carrier") %>%
-    select(path, op_carrier, description, passengers) %>%
+    left_join(car, by = "op_carrier") %>%
+    select(path, op_carrier, carrier_name, passengers) %>%
     arrange(path)
 
 
@@ -103,4 +107,4 @@ make.Path <- function(x, leg = FALSE, zero = FALSE, airlines = FALSE){
 }
 
 globalVariables(c("mkt_id", "seq_num", "num_stops", "pct_zero", "latitude.y", "carriers",
-                  "description", "."))
+                  "description", ".", "carrier_name"))

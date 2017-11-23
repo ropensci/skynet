@@ -21,6 +21,6 @@
 #' @importFrom ggplot2 scale_size_continuous geom_point coord_cartesian theme aes
 #' @importFrom graphics curve plot
 #' @importFrom stats coef lm
-#' @importFrom utils write.csv
+#' @importFrom utils write.csv globalVariables
 #'
 "_PACKAGE"

@@ -19,6 +19,9 @@
 * Small performace improvements
 * Corrected spelling
 
+# skynet 0.9.4
 
+* Added T-100 import.
+* Corrected issue with general import for international option
 
 

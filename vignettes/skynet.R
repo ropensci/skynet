@@ -13,7 +13,7 @@ Ticket = c("Itinerary ID", "Roundtrip", "Itinerary Yield", "Passengers",
 library(skynet)
 data("OD_Sample")
 rownames(OD_Sample) <- NULL
-pander::pandoc.table(head(OD_Sample, 5))
+knitr::kable(head(OD_Sample, 5))
 
 ## ---- echo=FALSE, message=FALSE, warning=FALSE, dpi=140, results='asis'----
 library(skynet)
