@@ -1,6 +1,6 @@
-#' Extract Variables
+#' Convert Raw
 #'
-#' Extracts necessary variables from BTS/RITA/Transtats website raw data (prezipped file), for SKYNET's import function.
+#' Converts T100 and DB1B files from BTS/RITA/Transtats website raw data (prezipped file), for SKYNET's import function.
 #'
 #' File order doesn't matter, but it is recomended to name the files using the following
 #' syntax: \emph{"Origin_and_Destination_Survey_DB1BCoupon_year_quarter.csv", "Origin_and_Destination_Survey_DB1BTicket_year_quarter.csv".}
@@ -13,13 +13,13 @@
 #'
 #' # DB1B Database Files - Ticket and Coupon order doesn't matter
 #' \dontrun{
-#' netImport("Origin_and_Destination_Survey_DB1BCoupon_2017_1.csv",
+#' netConvert("Origin_and_Destination_Survey_DB1BCoupon_2017_1.csv",
 #' "Origin_and_Destination_Survey_DB1BTicket_2017_1.csv")
 #' }
 #' @export
 #'
 
-netConvert <- function(x,y){
+convertRaw <- function(x,y){
 
 
   if(grepl("Ticket", deparse(substitute(x)), ignore.case = TRUE) == TRUE)

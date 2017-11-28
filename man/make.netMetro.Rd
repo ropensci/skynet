@@ -16,7 +16,6 @@ and summing their weights.}
 }
 \description{
 Generates Metro Network with an iGraph object and a Data Frame.
-Still to fix some details - IMPORTANT!!!!!!!!!!!!!!!
 }
 \examples{
 \dontrun{

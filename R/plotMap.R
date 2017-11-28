@@ -13,10 +13,7 @@
 #' @export
 #'
 
-# Plot flight routes
-
-
-plot.netMap <- function(x, pct = 60){
+netMap <- function(x, pct = 60){
 
   airports <- select(airportCode, origin, latitude, longitude)
 

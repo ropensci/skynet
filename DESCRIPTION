@@ -1,7 +1,7 @@
 Package: skynet
 Type: Package
 Title: Generates networks from BTS data
-Version: 0.9.4
+Version: 0.9.6
 Authors@R: person("Filipe", "Teixeira", email = "Filipe.MarquesTeixeira@Ugent.be", role = c("aut", "cre"))
 Maintainer: Filipe Teixeira <Filipe.MarquesTeixeira@Ugent.be>
 Description: This package generates networks based on the BTS Data.
@@ -19,18 +19,16 @@ Collate:
     'disparityfilter.R'
     'findairport.R'
     'fromto.R'
-    'importRaw.R'
+    'convertRaw.R'
     'netDir.R'
     'netMetro.R'
     'netUnd.R'
     'netImport.R'
     'netInt.R'
-    'netMap.R'
     'netPath.R'
-    'nodesTr.R'
     'skynet.R'
     'nodeStats.R'
-    'importtest.R'
+    'importT100.R'
     'findCarrier.R'
     'plotMap.R'
 Depends:

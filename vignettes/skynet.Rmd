@@ -84,12 +84,11 @@ knitr::kable(head(OD_Sample, 5))
 
 One of SKYNET's advantages is the possibility of plotting maps without having to recur to external software.
 
-Typing `make.gMap()` plots a ggplot2 based map with OD information.
+Typing `netMap(list$netDir)` plots a ggplot2 based map with OD information.
 
-
-```{r, echo=FALSE, message=FALSE, warning=FALSE, dpi=140, results='asis'}
+```{r, echo=FALSE, message=FALSE, warning=FALSE, results='asis'}
 library(skynet)
 data("OD_Sample")
 test <- make.netDir(OD_Sample)
-make.gMap(test, pct = 10)
+netMap(test$netDir, pct = 10)
 ```

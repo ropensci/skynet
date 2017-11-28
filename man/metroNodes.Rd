@@ -2,7 +2,7 @@
 % Please edit documentation in R/createNodes.R
 \name{metroNodes}
 \alias{metroNodes}
-\title{Create Metro Nodes}
+\title{Create Transfer nodes}
 \usage{
 metroNodes(y)
 }
@@ -10,5 +10,9 @@ metroNodes(y)
 \item{y}{Data Frame}
 }
 \description{
+#@param x Original Data Frame to extract nodes from
+#@param y List to include it into
+}
+\details{
 Create Metro Nodes
 }

@@ -53,7 +53,7 @@ make.netDir <- function(x, disp = FALSE, cap = FALSE, alpha = 0.003, pct = 10, c
 
   #-------------------------------------------------
 
-  nodes <- createNodes(x)
+  nodes <- nodeStats(x)
 
   gDir <- igraph::graph_from_data_frame(netDir_all, directed = TRUE, vertices = nodes)
 
@@ -82,7 +82,9 @@ make.netDir <- function(x, disp = FALSE, cap = FALSE, alpha = 0.003, pct = 10, c
       left_join(airTemp, by = "dest") %>%
       select(-latitude.x, -latitude.y, -longitude.x, -longitude.y)
 
-    nodes <- createNodes(netDir_disp)
+  #  nodes <- nodeStats(netDir_disp) - old code
+
+     nodes <- as.data.frame(get.vertex.attribute(gDir_disp))
 
     return(list(gDir_disp = gDir_disp,netDir_disp = netDir_disp,
                 nodes = nodes))
@@ -115,7 +117,9 @@ make.netDir <- function(x, disp = FALSE, cap = FALSE, alpha = 0.003, pct = 10, c
       left_join(airtemp, by = "dest") %>%
       select(-latitude.x, -latitude.y, -longitude.x, -longitude.y)
 
-    nodes <- createNodes(netDir_cap)
+  #  nodes <- nodeStats(netDir_cap) - old code
+
+     nodes <- as.data.frame(get.vertex.attribute(gDir_cap))
 
     return(list(gDir_cap = gDir_cap, netDir_cap = netDir_cap, nodes = nodes))
 

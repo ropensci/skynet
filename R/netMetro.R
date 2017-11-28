@@ -1,7 +1,6 @@
 #' Metro Network
 #'
 #' Generates Metro Network with an iGraph object and a Data Frame.
-#' Still to fix some details - IMPORTANT!!!!!!!!!!!!!!!
 #'
 #' @param x data frame
 #' @param undirected If true, creates undirected network
@@ -39,9 +38,7 @@ make.netMetro <- function(x = NULL, undirected = FALSE, merge = TRUE){
     select(origin, dest, origin_city, dest_city, weight)
 
   gMet_dir <- graph_from_data_frame(netMet, directed = TRUE)
-
   netMet <- rename(netMet, passengers = weight)
-
   nodes <- metroNodes(netMet)
 
   return(list(netMet = netMet, gMet_dir = gMet_dir, nodes = nodes))

@@ -22,6 +22,7 @@
 
 make.Path <- function(x, leg = FALSE, zero = FALSE, airlines = FALSE){
 
+  print("This code might take longer than usual to execute")
 
 # Gets lasts values by Market and Sequence number
   DT <- as.data.table(x)
@@ -39,10 +40,21 @@ make.Path <- function(x, leg = FALSE, zero = FALSE, airlines = FALSE){
                     itin_yield = round(sum(itin_yield)/(.N), 3), mean_stops = round(sum(num_stops)/(.N)),
                     pct_zero = round((sum(pct_zero)*100), 2)/(.N)), by=.(origin, dest)][order(origin, dest)]
 
-  }
+  }else{
 
-  else{
+    if(airlines == TRUE){
 
+      DT <- DT[, .(origin=origin[1], dest=dest[.N], itin_fare=itin_fare[1], passengers = passengers[1],
+                   roundtrip = roundtrip[1], itin_yield = itin_yield[1], op_carrier = op_carrier[1], num_stops = .N), by=mkt_id]
+
+      # Calculates averages and sums
+      DT <- DT[, itin_fare := itin_fare/(1+roundtrip)]
+      netOD <- DT[, .(passengers = sum(passengers),fare_sd = round(sd(itin_fare), 2),
+                      itin_fare = round(sum(itin_fare)/(.N), 2), itin_yield = round(sum(itin_yield)/(.N), 3),
+                      mean_stops = round(sum(num_stops)/(.N))), by=.(origin, dest, op_carrier)][order(origin, dest, op_carrier)]
+
+
+    }else{
 
   DT <- DT[, .(origin=origin[1], dest=dest[.N], itin_fare=itin_fare[1], passengers = passengers[1],
                roundtrip = roundtrip[1], itin_yield = itin_yield[1], num_stops = .N), by=mkt_id]
@@ -74,9 +86,6 @@ make.Path <- function(x, leg = FALSE, zero = FALSE, airlines = FALSE){
 
   if(leg == TRUE){
 
-    print("This code might take longer than usual to execute")
-
-
   DT <- data.table(x)
 
   DT <- DT[order(mkt_id, seq_num)]
@@ -102,8 +111,8 @@ make.Path <- function(x, leg = FALSE, zero = FALSE, airlines = FALSE){
 
   return(list(netOD = netOD, netLegCount = DT))
 
-}
-
+  }
+  }
 }
 
 globalVariables(c("mkt_id", "seq_num", "num_stops", "pct_zero", "latitude.y", "carriers",

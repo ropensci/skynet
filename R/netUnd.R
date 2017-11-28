@@ -62,7 +62,7 @@ make.netUnd <- function(x, disp = FALSE, cap = FALSE, merge = TRUE, alpha = 0.00
 
   #-------------------------------------------------
 
-  nodes <- createNodes(x)
+  nodes <- nodeStats(x)
 
   gUnd <- graph_from_data_frame(netUnd_all, directed = TRUE, vertices = nodes)
   gUnd <- as.undirected(gUnd, mode = "collapse", edge.attr.comb=list(weight = "sum", itin_fare = "mean", itin_yield = "mean", fare_sd = "mean"))
@@ -90,7 +90,7 @@ make.netUnd <- function(x, disp = FALSE, cap = FALSE, merge = TRUE, alpha = 0.00
       left_join(airtemp, by = "dest") %>%
       select(-latitude.x, -latitude.y, -longitude.x, -longitude.y)
 
-    nodes <- createNodes(netUnd_disp)
+    nodes <- as.data.frame(get.vertex.attribute(gUnd_disp))
 
     return(list(gUnd_disp = gUnd_disp, netUnd_disp = netUnd_disp, nodes = nodes))
 
@@ -123,7 +123,7 @@ make.netUnd <- function(x, disp = FALSE, cap = FALSE, merge = TRUE, alpha = 0.00
       left_join(airtemp, by = "dest") %>%
       select(-latitude.x, -latitude.y, -longitude.x, -longitude.y)
 
-    nodes <- createNodes(netUnd_cap)
+    nodes <- as.data.frame(get.vertex.attribute(gUnd_cap))
 
     return(list(gUnd_cap = gUnd_cap, netUnd_cap = netUnd_cap, nodes = nodes))
 
@@ -140,7 +140,7 @@ make.netUnd <- function(x, disp = FALSE, cap = FALSE, merge = TRUE, alpha = 0.00
       group_by(origin, dest) %>%
       summarise(weight = sum(passengers))
 
-    nodes <- createNodes(x)
+    nodes <- nodeStats(x)
 
     gUnd <- graph_from_data_frame(netUnd_all, directed = FALSE, vertices = nodes)
 
@@ -167,7 +167,7 @@ make.netUnd <- function(x, disp = FALSE, cap = FALSE, merge = TRUE, alpha = 0.00
       select(-latitude.x, -latitude.y, -longitude.x, -longitude.y)
 
 
-    nodes <- createNodes(netUnd_all)
+    nodes <- nodeStats(netUnd_all)
 
     return(list(gUnd = gUnd, netUnd = netUnd_all, nodes = nodes))
 

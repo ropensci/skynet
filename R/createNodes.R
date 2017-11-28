@@ -16,7 +16,6 @@ createNodes <- function(y){
     rename(origin = dest)
 
   nodes <- y %>%
-    rename(passengers = passengers) %>%
     group_by(origin) %>%
     summarize(passengers = sum(passengers))
 
@@ -34,42 +33,42 @@ createNodes <- function(y){
 #' Create Transfer nodes
 #'
 #'
-#' @param x Original Data Frame to extract nodes from
-#' @param y List to include it into
+#' #@param x Original Data Frame to extract nodes from
+#' #@param y List to include it into
 #'
 
-transferNodes <- function (x, y) {
-  netTemp <- x
-  netTemp <- dplyr::filter(netTemp, trip_break == "")
+#transferNodes <- function (x, y) {
+#  netTemp <- x
+#  netTemp <- dplyr::filter(netTemp, trip_break == "")
 
-  nodesTemp <- netTemp %>%
-    group_by(dest) %>%
-    summarize(passengers = sum(passengers)) %>%
-    rename(origin = dest)
+#  nodesTemp <- netTemp %>%
+#    group_by(dest) %>%
+#    summarize(passengers = sum(passengers)) %>%
+#    rename(origin = dest)
 
-  nodesTr <- netTemp %>%
-    group_by(origin) %>%
-    summarize(passengers = sum(passengers))
+#  nodesTr <- netTemp %>%
+#    group_by(origin) %>%
+#    summarize(passengers = sum(passengers))
 
-  nodesTr <- nodesTr %>%
-    merge(nodesTemp, by = "origin", all = TRUE) %>%
-    mutate(passengers.x = replace(passengers.x, is.na(passengers.x), 0),
-           passengers.y = replace(passengers.y, is.na(passengers.y), 0),
-           freq = (passengers.x + passengers.y)) %>%
-    select(origin, freq) %>%
-    merge(airportCode, by = "origin", all.x = TRUE)
-
-
-  nodesTr <- left_join(y[["nodes"]], nodesTr, by = "origin") %>%
-    select(origin, freq.y, city.y, city_mkt_id.y, latitude.y, longitude.y) %>%
-    rename(freq = freq.y, city = city.y, city_mkt_id = city_mkt_id.y,
-           latitude = latitude.y, longitude = longitude.y)
+#  nodesTr <- nodesTr %>%
+#    merge(nodesTemp, by = "origin", all = TRUE) %>%
+#    mutate(passengers.x = replace(passengers.x, is.na(passengers.x), 0),
+#           passengers.y = replace(passengers.y, is.na(passengers.y), 0),
+#           freq = (passengers.x + passengers.y)) %>%
+#    select(origin, freq) %>%
+#    merge(airportCode, by = "origin", all.x = TRUE)
 
 
-   assign(deparse(substitute(y)), c(y, list(nodesTr = nodesTr)), envir = envir)
+#  nodesTr <- left_join(y[["nodes"]], nodesTr, by = "origin") %>%
+#    select(origin, freq.y, city.y, city_mkt_id.y, latitude.y, longitude.y) %>%
+#    rename(freq = freq.y, city = city.y, city_mkt_id = city_mkt_id.y,
+#           latitude = latitude.y, longitude = longitude.y)
 
 
-}
+#   assign(deparse(substitute(y)), c(y, list(nodesTr = nodesTr)), envir = envir)
+
+
+#}
 
 
 
