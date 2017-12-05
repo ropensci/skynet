@@ -1,32 +1,30 @@
 ---
-title: "Introduction to Skynet"
+title: "Introduction to SKYNET"
 author: "Filipe Teixeira"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Introduction to Skynet}
+  %\VignetteIndexEntry{Introduction to SKYNET}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
-Skynet, contrarily to the 1984 Terminator movie franchise neural net based conscious group, which after gaining self-consciousness would end up destroying mankind, our package emerged at first as an R package’s answer to some of the previously mentioned research challenges.
-The need of having a tool perfectly integrated into an environment capable of statistical and network analysis, has grown together with the volume of data available. As for most research questions, the BTS databases are perfectly capable to provide the researchers with enough raw data, Skynet package was developed with that in mind.
+SKYNET, contrarily to the 1984 Terminator movie franchise neural net based conscious group, which after gaining self-consciousness would end up destroying mankind, our package emerged at first as an R package’s answer to some of the previously mentioned research challenges.
+The need of having a tool perfectly integrated into an environment capable of statistical and network analysis, has grown together with the volume of data available. As for most research questions, the BTS databases are perfectly capable to provide the researchers with enough raw data, SKYNET package was developed with that in mind.
 
 There are several challenges associated with handling large amounts of data. From processing power to disk space and RAM memory, hardware constraints and the way raw data is presented, often present themselves as a cumbersome challenge to researchers. The BTS data, as mentioned above, is delivered in the form of individual csv files, divided by quarter. When dealing with longitudinal studies involving more than one year, it is recommended to convert the csv files into an SQL format or similar. The interoperability of R, allows researchers to access their data in several formats from csv to SQL, being this one among many of the reasons why R it is often a one stop tool for researchers. 
 
 
 ## Aims of this package
 
-The rationale behind Skynet, is to provide researchers with a unifying tool overcoming some of the challenges faced when dealing with the BTS DB1B and T100 data.
+The rationale behind SKYNET, is to provide researchers with a unifying tool overcoming some of the challenges faced when dealing with the BTS DB1B and T100 data.
 Researchers handling large datasets often spend 80% of data analysis on the process of cleaning and preparing the data (Dasu & Johnson, 2003).
 
-Skynet is effectively divided into four segments:
+SKYNET is effectively divided into four segments:
 
 1. Import Data
 1. Generate Air Networks
-1. Generate Travel Intention Networks
 1. Plot Air Networks
-
 
 
 
@@ -39,7 +37,6 @@ To import data, simply type `net.Import()` including the path to your desired fi
  net.Import("/folder1/Coupon 2016Q1.csv", "/folder/Ticket 2016Q1.csv") 
 ```
 
-We do recommend working with pre-cleaned files before importing them using the import function.
 The BTS DB1B data consists of 2 sets of files, `Coupon` and `Ticket`.
 They can be both downloaded at https://www.transtats.bts.gov/DL_SelectFields.asp?Table_ID=289 and https://www.transtats.bts.gov/DL_SelectFields.asp?Table_ID=272 respectively.
 
@@ -54,23 +51,26 @@ Ticket = c("Itinerary ID", "Roundtrip", "Itinerary Yield", "Passengers",
 "Itinerary Fare", "Bulkfare Indicator", "Distance Full","","","","","","")))
 ```
 
+However, when importing from the prezipped file, just add the argument `zip = TRUE` to the `netImport()` function.
+In order to save space, it is possible as well to import the prezipped file, and convert it to a smaller file with only the necessary variables, with the function `convertRaw()`.
 
-As it's not always convenient to follow the procedure mentioned above, we created a `netConvert()` function which allows to convert the raw csv DB1B files, into the format which includes all the necessary variables.
+
 
 ## Create networks
 
-Skynet creates three types of networks and an extra option:
+SKYNET creates three types of networks and an extra option:
 
-1. Directed Network
-1. Undirected Network
-1. Metro Network
-1. International Option
+1. Directed Network - `make.netDir()`
+1. Undirected Network - `make.netUnd()`
+1. Path Network - `make.netPath()`
+1. Metro Network - `make.netMetro()`
+1. International Option - `make.netInt()`
 
 When generating a network, SKYNET, creates a list which includes:
 
 1. Dataframe from original data (example below)
 1. iGraph object
-1. Dataframe with nodes(airports) information, including absolute frequency of passengers.
+1. Dataframe with nodes(airports) statistics
 
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE, results='asis'}
@@ -80,13 +80,21 @@ rownames(OD_Sample) <- NULL
 knitr::kable(head(OD_Sample, 5))
 ```
 
+When generating a network with SKYNET, it is possible use the following arguments:  
+1. `carriers` - groups OD data per carrier when `TRUE`  
+
+To extract the backbone of the network:  
+1. `cap` (to be used with `pct`) - filters the network based on a given percentage (default percentage = 10%)  
+1. `disp` (to be used with `alpha`) - filters the network using the Serrano et all backbone extraction algorithm (default alpha = 0.003)  
+
 ## Create Maps
 
 One of SKYNET's advantages is the possibility of plotting maps without having to recur to external software.
 
-Typing `netMap(list$netDir)` plots a ggplot2 based map with OD information.
+Typing `netMap(list$netDir)` plots a ggplot2 based map with OD information. When specifying the group by carrier option when generating a network, `netMap` distinguishes carriers with different colors.
+It is important to point the path to the dataframe created by SKYNET.
 
-```{r, echo=FALSE, message=FALSE, warning=FALSE, results='asis'}
+```{r, echo=FALSE, message=FALSE, warning=FALSE,dpi = 300, fig.width = 6, fig.height= 4, out.width=500, }
 library(skynet)
 data("OD_Sample")
 test <- make.netDir(OD_Sample)

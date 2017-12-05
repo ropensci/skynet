@@ -27,14 +27,21 @@ arrivals <- x %>%
   summarise(pass_arr = sum(passengers)) %>%
   rename(airport = dest)
 
-transfers <- x %>%
-  group_by(dest) %>%
-  filter(trip_break == "") %>%
-  summarise(pass_tr = sum(passengers)) %>%
-  rename(airport = dest)
+if(!is.null(x[["trip_break"]])){
 
-nodeStat <- merge(departures, arrivals, by = "airport", all = TRUE)
-nodeStat <- merge(nodeStat, transfers, by = "airport", all = TRUE)
+  transfers <- x %>%
+    group_by(dest) %>%
+    filter(trip_break == "") %>%
+    summarise(pass_tr = sum(passengers)) %>%
+    rename(airport = dest)
+
+    nodeStat <- merge(departures, arrivals, by = "airport", all = TRUE)
+    nodeStat <- merge(nodeStat, transfers, by = "airport", all = TRUE)
+
+}else{
+  nodeStat <- merge(departures, arrivals, by = "airport", all = TRUE)
+}
+
 nodeStat <- nodeStat %>%
   merge(airportCodeFull, by.x = "airport", by.y = "origin", all.x = TRUE) %>%
   mutate(freq = pass_dep + pass_arr)

@@ -20,21 +20,21 @@
 make.netMetro <- function(x = NULL, undirected = FALSE, merge = TRUE){
 
   netMet <- x %>%
-    select(origin_city_mkt_id, dest_city_mkt_id, passengers, op_carrier, itin_fare, itin_yield, roundtrip) %>%
-    group_by(origin_city_mkt_id, dest_city_mkt_id) %>%
+    select(origin_mkt_id, dest_mkt_id, passengers, op_carrier, itin_fare, itin_yield, roundtrip) %>%
+    group_by(origin_mkt_id, dest_mkt_id) %>%
     mutate(itin_fare = itin_fare/(1+roundtrip)) %>%
     summarise(weight = sum(passengers), fare_sd = round(sd(itin_fare), 2),
               itin_fare = mean(itin_fare), itin_yield = mean(itin_yield)) %>%
-    merge(MetroLookup, by = "origin_city_mkt_id", all.x = TRUE) %>%
+    merge(MetroLookup, by = "origin_mkt_id", all.x = TRUE) %>%
     rename(origin_city = description)
 
   MetroLookupDest <- MetroLookup %>%
-    rename(dest_city_mkt_id = origin_city_mkt_id)
+    rename(dest_mkt_id = origin_mkt_id)
 
   netMet <- netMet %>%
-    merge(MetroLookupDest, by = "dest_city_mkt_id", all.x = TRUE) %>%
-    rename(dest_city = description, origin = origin_city_mkt_id,
-           dest = dest_city_mkt_id) %>%
+    merge(MetroLookupDest, by = "dest_mkt_id", all.x = TRUE) %>%
+    rename(dest_city = description, origin = origin_mkt_id,
+           dest = dest_mkt_id) %>%
     select(origin, dest, origin_city, dest_city, weight)
 
   gMet_dir <- graph_from_data_frame(netMet, directed = TRUE)
@@ -62,6 +62,6 @@ make.netMetro <- function(x = NULL, undirected = FALSE, merge = TRUE){
 
 }
 
-globalVariables(c("origin_city_mkt_id", "dest_city_mkt_id", "dest_city", "MetroLookup",
+globalVariables(c("origin_mkt_id", "dest_mkt_id", "dest_city", "MetroLookup",
                   "origin_city"))
 

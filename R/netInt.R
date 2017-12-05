@@ -15,14 +15,6 @@
 #' @export
 #'
 
-############ ------------------------------------- ###############
-############ ------------------------------------- ###############
-############ NOTE: TAKE CARE OF VARIABLES AND CODE ###############
-############ ------------------------------------- ###############
-############ ------------------------------------- ###############
-
-
-
 make.netInt <- function(x = NULL, m, Q = NULL){
 
   if(is.null(Q))
@@ -34,18 +26,17 @@ make.netInt <- function(x = NULL, m, Q = NULL){
       integer64 = "numeric")
 
   International <- International %>%
-    select(ORIGIN, DEST, ORIGIN_CITY_MARKET_ID, DEST_CITY_MARKET_ID, PASSENGERS, CARRIER) %>%
+    select(ORIGIN, DEST, ORIGIN_CITY_MARKET_ID, DEST_CITY_MARKET_ID,
+           PASSENGERS, CARRIER, QUARTER, YEAR) %>%
     rename(origin = ORIGIN ,dest = DEST ,origin_mkt_id = ORIGIN_CITY_MARKET_ID,
-           dest_mkt_id = DEST_CITY_MARKET_ID, passengers = PASSENGERS, op_carrier = CARRIER)
+           dest_mkt_id = DEST_CITY_MARKET_ID, passengers = PASSENGERS,
+           op_carrier = CARRIER, year = YEAR, quarter = QUARTER)
 
  }else{
 
    # Create Filter
    IntFilter <- International %>%
-      select(origin, dest, origin_mkt_id, dest_mkt_id,
-         passengers, quarter) %>%
-      filter(passengers > 0, quarter = 1) %>%
-      select(origin, dest, origin_mkt_id, dest_mkt_id, passengers)
+      filter(passengers > 0, quarter == Q)
 
  # Merges netMerged with international filter
 
@@ -53,7 +44,7 @@ make.netInt <- function(x = NULL, m, Q = NULL){
     select(origin, dest, origin_mkt_id, dest_mkt_id, passengers)
 
   netMergedInt <- rbind(netMergedInt, IntFilter)
-
+  attr(netMergedInt, "status") <- "int"
 
   return(netMergedInt)
 

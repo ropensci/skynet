@@ -2,10 +2,6 @@
 
 * Added a `NEWS.md` file to track changes to the package.
 
-# skynet 0.9.1
-
-* Jumped version
-
 # skynet 0.9.2
 
 * Added tests
@@ -21,7 +17,11 @@
 
 # skynet 0.9.4
 
-* Added T-100 import.
+* Added T-100 import
 * Corrected issue with general import for international option
 
+# skynet 0.9.7
 
+* Added new map function, now automatically printing different carriers with different colors.
+* Improved import functions
+* Importing from prezipped file, no longer requires extra function.

@@ -8,6 +8,7 @@
 #' @param x First csv file to be imported, in case of DB1B database, or in case of using
 #' the T-100 database, the only file to be included.
 #' @param y Second csv file to be imported.
+#' @param zip Should equal TRUE if original file comes from the BTS prezipped option.
 #'
 #' @examples
 #' \dontrun{
@@ -20,7 +21,7 @@
 #'
 #' @export
 
-netImport <- function(x, y){
+netImport <- function(x, y, zip = FALSE){
 
   if(grepl("T100", deparse(substitute(x)), ignore.case = TRUE) == TRUE){
 
@@ -43,11 +44,14 @@ netImport <- function(x, y){
                        basename(x)))
     assign(paste(filename), T100, envir = envir)
 
+  }else{
+
+    if(zip == FALSE){
+      do.call(DB1BImport, list(x,y))
+    }else{
+      do.call(DB1BRaw, list(x,y))
+    }
   }
-  else
-
-    do.call(DB1BImport, list(x,y))
-
 }
 
 
@@ -95,6 +99,56 @@ DB1BImport <- function(x, y){
                    tools::file_path_sans_ext(
                      basename(x)))
   filename <- substring(filename, (nchar(filename)-5))
+  assign(paste("OD",filename, sep = "_"), netMerged, envir = envir)
+
+}
+
+
+
+DB1BRaw <- function(x,y){
+
+
+  if(grepl("Ticket", deparse(substitute(x)), ignore.case = TRUE) == TRUE)
+    t = x
+  if(grepl("Ticket", deparse(substitute(y)), ignore.case = TRUE) == TRUE)
+    t = y
+  if(grepl("Coupon", deparse(substitute(x)), ignore.case = TRUE) == TRUE)
+    c = x
+  if(grepl("Coupon", deparse(substitute(y)), ignore.case = TRUE) == TRUE)
+    c = y
+
+
+  ticket <- fread(t, header = TRUE, sep = ",", stringsAsFactors = FALSE,
+                       integer64 = "numeric")
+
+  ticket <- ticket %>%
+    select("ItinID", "RoundTrip", "FarePerMile", "Passengers", "ItinFare", "BulkFare", "Distance") %>%
+    rename(itin_id = ItinID, roundtrip = RoundTrip, itin_yield = FarePerMile, passengers = Passengers,
+           itin_fare = ItinFare, bulk_fare = BulkFare, distance_full = Distance)
+
+  coupon <- fread(c, header = TRUE, sep = ",", stringsAsFactors = FALSE,
+                       integer64 = "numeric")
+
+  coupon <- coupon %>%
+    select("ItinID", "MktID", "SeqNum",
+           "OriginCityMarketID", "Origin",
+           "DestCityMarketID", "Dest", "Break",
+           "OpCarrier", "Distance","Year", "Quarter", "Gateway") %>%
+    rename(itin_id = ItinID, mkt_id = MktID, seq_num = SeqNum,
+           origin_mkt_id = OriginCityMarketID, origin = Origin, year = Year, quarter = Quarter,
+           dest_mkt_id = DestCityMarketID , dest = Dest, trip_break = Break,
+           op_carrier = OpCarrier, distance = Distance, gateway = Gateway)
+
+  #Merge data
+  netMerged <- merge(coupon, ticket, by = "itin_id", all.x = TRUE)
+  netMerged <- data.frame(netMerged)
+
+  # Get name from file
+  filename <- gsub(" ", "",
+                   tools::file_path_sans_ext(
+                     basename(x)))
+  filename <- substring(filename, (nchar(filename)-5))
+  filename <- gsub("_", "Q", filename)
   assign(paste("OD",filename, sep = "_"), netMerged, envir = envir)
 
 }
