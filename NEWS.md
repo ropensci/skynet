@@ -25,3 +25,7 @@
 * Added new map function, now automatically printing different carriers with different colors.
 * Improved import functions
 * Importing from prezipped file, no longer requires extra function.
+
+# skynet 0.9.7
+
+* Changed way itin_fare was calculated for Directed, Undirected and Metro Networks. Now it uses price per mile and distance between stops to generate that info.

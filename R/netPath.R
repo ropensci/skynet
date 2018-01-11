@@ -107,7 +107,7 @@ make.Path <- function(x, leg = FALSE, zero = FALSE, airlines = FALSE){
 
 
   # Count words
-  DT$legCount <- stringr::str_count(DT$path, "\\S+")
+  DT$legCount <- (stringr::str_count(DT$path, "\\S+"))-1
 
   return(list(netOD = netOD, netLegCount = DT))
 

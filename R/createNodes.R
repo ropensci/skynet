@@ -89,9 +89,9 @@ metroNodes <- function(y){
     group_by(origin) %>%
     summarize(passengers = sum(passengers))
 
-  airportCodeFull <- airportCodeFull %>%
-    select(city_mkt_id, latitude, longitude, airport_state, airport_city_name) %>%
-    rename(origin = city_mkt_id)
+#  airportCodeFull <- airportCodeFull %>%
+#    select(city_mkt_id, latitude, longitude, airport_state, airport_city_name) %>%
+#    rename(origin = city_mkt_id)
 
   nodes <- nodes %>%
     merge(nodesTemp, by = "origin", all = TRUE) %>%
@@ -99,13 +99,13 @@ metroNodes <- function(y){
            passengers.y = replace(passengers.y, is.na(passengers.y), 0),
            freq = (passengers.x + passengers.y)) %>%
     select(origin, freq) %>%
-    merge(airportCodeFull, by = "origin", all.x = TRUE)
+    merge(MetroFull, by = "origin", all.x = TRUE)
 
 }
 
 globalVariables(c("dest", "passengers", "origin", "passengers.x", "passengers.y",
                   "freq", "airportCode", "airport_state", "airport_city_name",
-                  "trip_break", "freq.y", "city.y", "city_mkt_id.y"))
+                  "trip_break", "freq.y", "city.y", "city_mkt_id.y", "MetroFull"))
 
 pos = 1
 envir = as.environment(pos)

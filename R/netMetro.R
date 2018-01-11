@@ -20,11 +20,11 @@
 make.netMetro <- function(x = NULL, undirected = FALSE, merge = TRUE){
 
   netMet <- x %>%
-    select(origin_mkt_id, dest_mkt_id, passengers, op_carrier, itin_fare, itin_yield, roundtrip) %>%
+    select(origin_mkt_id, dest_mkt_id, passengers, op_carrier, itin_yield, roundtrip) %>%
     group_by(origin_mkt_id, dest_mkt_id) %>%
-    mutate(itin_fare = itin_fare/(1+roundtrip)) %>%
+    mutate(itin_fare = itin_yield*distance) %>%
     summarise(weight = sum(passengers), fare_sd = round(sd(itin_fare), 2),
-              itin_fare = mean(itin_fare), itin_yield = mean(itin_yield)) %>%
+              itin_fare = round(mean(itin_fare), 2), itin_yield = mean(itin_yield)) %>%
     merge(MetroLookup, by = "origin_mkt_id", all.x = TRUE) %>%
     rename(origin_city = description)
 
@@ -63,5 +63,5 @@ make.netMetro <- function(x = NULL, undirected = FALSE, merge = TRUE){
 }
 
 globalVariables(c("origin_mkt_id", "dest_mkt_id", "dest_city", "MetroLookup",
-                  "origin_city"))
+                  "origin_city", "distance"))
 
