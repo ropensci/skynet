@@ -4,7 +4,7 @@
 \alias{make.Path}
 \title{Path and OD Network}
 \usage{
-make.Path(x, leg = FALSE, zero = FALSE, airlines = FALSE)
+make.Path(x, leg = FALSE, zero = FALSE, carrier = FALSE)
 }
 \arguments{
 \item{x}{Data frame}
@@ -13,7 +13,7 @@ make.Path(x, leg = FALSE, zero = FALSE, airlines = FALSE)
 
 \item{zero}{Displays percentage of 0 usd tickets}
 
-\item{airlines}{Groups data per airline
+\item{carrier}{Groups data per airline
 
 For example, all passengers doing the BOS-ATL-LAX path, are summed by Air Carrier.}
 }

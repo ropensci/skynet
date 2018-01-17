@@ -25,24 +25,26 @@ netImport <- function(x, y, zip = FALSE){
 
   if(grepl("T100", deparse(substitute(x)), ignore.case = TRUE) == TRUE){
 
-    T100 <- fread(x, header = TRUE, sep = ",", stringsAsFactors = FALSE,
-                  integer64 = "numeric")
+    importT100(x)
 
-    T100 <- T100 %>%
-      filter(AIRCRAFT_CONFIG == 1 | AIRCRAFT_CONFIG == 3, PASSENGERS > 0) %>%
-      select(ORIGIN, ORIGIN_CITY_MARKET_ID, DEST, DEST_CITY_MARKET_ID, UNIQUE_CARRIER,
-             PASSENGERS, QUARTER, YEAR, DISTANCE) %>%
-      rename(origin_mkt_id = ORIGIN_CITY_MARKET_ID, origin = ORIGIN, year = YEAR, quarter = QUARTER,
-             dest_mkt_id = DEST_CITY_MARKET_ID , dest = DEST,
-             op_carrier = UNIQUE_CARRIER, distance = DISTANCE, passengers = PASSENGERS)
-
-    T100 <- data.frame(T100)
-
-    #extracts name from file
-    filename <- gsub(" ", "",
-                     tools::file_path_sans_ext(
-                       basename(x)))
-    assign(paste(filename), T100, envir = envir)
+#    T100 <- fread(x, header = TRUE, sep = ",", stringsAsFactors = FALSE,
+#                  integer64 = "numeric")
+#
+#    T100 <- T100 %>%
+#      filter(AIRCRAFT_CONFIG == 1 | AIRCRAFT_CONFIG == 3, PASSENGERS > 0) %>%
+#      select(ORIGIN, ORIGIN_CITY_MARKET_ID, DEST, DEST_CITY_MARKET_ID, UNIQUE_CARRIER,
+#             PASSENGERS, QUARTER, YEAR, DISTANCE) %>%
+#      rename(origin_mkt_id = ORIGIN_CITY_MARKET_ID, origin = ORIGIN, year = YEAR, quarter = QUARTER,
+#             dest_mkt_id = DEST_CITY_MARKET_ID , dest = DEST,
+#             op_carrier = UNIQUE_CARRIER, distance = DISTANCE, passengers = PASSENGERS)
+#
+#    T100 <- data.frame(T100)
+#
+#    #extracts name from file
+#    filename <- gsub(" ", "",
+#                     tools::file_path_sans_ext(
+#                       basename(x)))
+#    assign(paste(filename), T100, envir = envir)
 
   }else{
 
@@ -156,7 +158,7 @@ DB1BRaw <- function(x,y){
 globalVariables(c("ITIN_ID", "MKT_ID", "SEQ_NUM", "YEAR", "QUARTER", "TRIP_BREAK",
                   "OPERATING_CARRIER", "DISTANCE", "GATEWAY", "ROUNDTRIP", "ITIN_YIELD",
                   "ITIN_FARE", "BULKFARE", "DISTANCE_FULL", "UNIQUE_CARRIER",
-                  "UNIQUE_CARRIER_NAME", "MONTH", "AIRCRAFT_CONFIG"))
+                  "UNIQUE_CARRIER_NAME", "MONTH", "AIRCRAFT_CONFIG", "CLASS", "netImport"))
 
 pos = 1
 envir = as.environment(pos)

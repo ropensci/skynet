@@ -14,24 +14,52 @@
 
 importT100 <- function(x){
 
-  t100 <- fread(x, header = TRUE, sep = ",", stringsAsFactors = FALSE,
+  T100 <- fread(x, header = TRUE, sep = ",", stringsAsFactors = FALSE,
                 integer64 = "numeric")
 
-  t100 <- t100 %>%
-    filter(AIRCRAFT_CONFIG == 1 | AIRCRAFT_CONFIG == 3, PASSENGERS > 0) %>%
-    select(ORIGIN, ORIGIN_CITY_MARKET_ID, DEST, DEST_CITY_MARKET_ID, UNIQUE_CARRIER,
-           PASSENGERS, QUARTER, YEAR, DISTANCE) %>%
-    rename(origin_mkt_id = ORIGIN_CITY_MARKET_ID, origin = ORIGIN, year = YEAR, quarter = QUARTER,
-           dest_mkt_id = DEST_CITY_MARKET_ID , dest = DEST,
-           op_carrier = UNIQUE_CARRIER, distance = DISTANCE, passengers = PASSENGERS) %>%
-    mutate(itin_fare = NA, itin_yield = NA, roundtrip = NA)
+  if(exists(x["AIRCRAFT_CONFIG"])){
 
-  filename <- gsub(" ", "",
-                   tools::file_path_sans_ext(
-                     basename(x)))
-  assign(paste(filename), t100, envir = envir)
+    # Segment
+    T100 <- T100 %>%
+      filter(CLASS == "F" | CLASS == "L", PASSENGERS > 0) %>%
+      select(ORIGIN, ORIGIN_CITY_MARKET_ID, DEST, DEST_CITY_MARKET_ID, UNIQUE_CARRIER,
+             PASSENGERS, QUARTER, YEAR, DISTANCE) %>%
+      rename(origin_mkt_id = ORIGIN_CITY_MARKET_ID, origin = ORIGIN, year = YEAR, quarter = QUARTER,
+             dest_mkt_id = DEST_CITY_MARKET_ID , dest = DEST,
+             op_carrier = UNIQUE_CARRIER, distance = DISTANCE, passengers = PASSENGERS) %>%
+      mutate(itin_fare = NA, itin_yield = NA, roundtrip = NA)
 
+    T100 <- data.frame(T100)
+
+    #extracts name from file
+    filename <- gsub(" ", "",
+                     tools::file_path_sans_ext(
+                       basename(x)))
+    assign(paste(filename), T100, envir = envir)
+
+  }else{
+
+    #Market
+    T100 <- T100 %>%
+      filter(CLASS == "F" | CLASS == "L", PASSENGERS > 0) %>%
+      select(ORIGIN, ORIGIN_CITY_MARKET_ID, DEST, DEST_CITY_MARKET_ID, UNIQUE_CARRIER,
+             PASSENGERS, QUARTER, YEAR, DISTANCE) %>%
+      rename(origin_mkt_id = ORIGIN_CITY_MARKET_ID, origin = ORIGIN, year = YEAR, quarter = QUARTER,
+             dest_mkt_id = DEST_CITY_MARKET_ID , dest = DEST,
+             op_carrier = UNIQUE_CARRIER, distance = DISTANCE, passengers = PASSENGERS) %>%
+      mutate(itin_fare = NA, itin_yield = NA, roundtrip = NA)
+
+    T100 <- data.frame(T100)
+
+    #extracts name from file
+    filename <- gsub(" ", "",
+                     tools::file_path_sans_ext(
+                       basename(x)))
+    assign(paste(filename), T100, envir = envir)
+
+  }
 }
+
 
 # For CRAN submission
 pos = 1

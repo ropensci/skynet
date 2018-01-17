@@ -5,7 +5,7 @@
 #' @param x Data frame
 #' @param leg Generates Leg Count Data frame, based on Path taken.
 #' @param zero Displays percentage of 0 usd tickets
-#' @param airlines Groups data per airline
+#' @param carrier Groups data per airline
 #'
 #' For example, all passengers doing the BOS-ATL-LAX path, are summed by Air Carrier.
 #'
@@ -20,7 +20,7 @@
 #'
 #'
 
-make.Path <- function(x, leg = FALSE, zero = FALSE, airlines = FALSE){
+make.Path <- function(x, leg = FALSE, zero = FALSE, carrier = FALSE){
 
   print("This code might take longer than usual to execute")
 
@@ -42,7 +42,7 @@ make.Path <- function(x, leg = FALSE, zero = FALSE, airlines = FALSE){
 
   }else{
 
-    if(airlines == TRUE){
+    if(carrier == TRUE){
 
       DT <- DT[, .(origin=origin[1], dest=dest[.N], itin_fare=itin_fare[1], passengers = passengers[1],
                    roundtrip = roundtrip[1], itin_yield = itin_yield[1], op_carrier = op_carrier[1], num_stops = .N), by=mkt_id]

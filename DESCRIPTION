@@ -1,7 +1,7 @@
 Package: skynet
 Type: Package
 Title: Generates networks from BTS data
-Version: 0.9.8
+Version: 0.9.8.9000
 Authors@R: person("Filipe", "Teixeira", email = "Filipe.MarquesTeixeira@Ugent.be", role = c("aut", "cre"))
 Maintainer: Filipe Teixeira <Filipe.MarquesTeixeira@Ugent.be>
 Description: This package generates networks based on the BTS Data.

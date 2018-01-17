@@ -53,8 +53,8 @@ convertRaw <- function(x,y){
            DEST_CITY_MARKET_ID = DestCityMarketID , DEST = Dest, TRIP_BREAK = Break,
            OPERATING_CARRIER = OpCarrier, DISTANCE = Distance, GATEWAY = Gateway)
 
-  write.csv(Ticket_temp, file = paste("/Filtered/Ticket", " ", Coupon_temp$YEAR[1], "Q", Coupon_temp$QUARTER[1], ".csv", sep = ""), row.names=FALSE)
-  write.csv(Coupon_temp, file = paste("/Filtered/Coupon", " ", Coupon_temp$YEAR[1], "Q", Coupon_temp$QUARTER[1], ".csv", sep = ""), row.names=FALSE)
+  write.csv(Ticket_temp, file = paste("Ticket", " ", Coupon_temp$YEAR[1], "Q", Coupon_temp$QUARTER[1], ".csv", sep = ""), row.names=FALSE)
+  write.csv(Coupon_temp, file = paste("Coupon", " ", Coupon_temp$YEAR[1], "Q", Coupon_temp$QUARTER[1], ".csv", sep = ""), row.names=FALSE)
 
 
 
