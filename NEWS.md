@@ -29,3 +29,9 @@
 # skynet 0.9.7
 
 * Changed way itin_fare was calculated for Directed, Undirected and Metro Networks. Now it uses price per mile and distance between stops to generate that info.
+
+# skynet 0.9.9
+
+* netImport now imports T100 market and segment files.
+* netPath airlines renamed to carrier.
+* updated vignettes

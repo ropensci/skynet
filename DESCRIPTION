@@ -1,10 +1,13 @@
 Package: skynet
 Type: Package
-Title: Generates networks from BTS data
-Version: 0.9.8.9000
+Title: Generates Networks From BTS Data
+Version: 0.9.9
 Authors@R: person("Filipe", "Teixeira", email = "Filipe.MarquesTeixeira@Ugent.be", role = c("aut", "cre"))
 Maintainer: Filipe Teixeira <Filipe.MarquesTeixeira@Ugent.be>
-Description: This package generates networks based on the BTS Data.
+URL: https://github.com/FilipeamTeixeira/skynet
+Description: SKYNET is a flexible R package that allows generating bespoke
+    air transport statistics for urban studies based on publicly available
+    data from the Bureau of Transport Statistics (BTS) in the United States.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
@@ -46,5 +49,6 @@ Imports:
     geosphere
 Suggests: knitr,
     rmarkdown,
-    testthat
+    testthat,
+    kableExtra
 VignetteBuilder: knitr

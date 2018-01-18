@@ -19,6 +19,13 @@ NA
 \references{
 NA
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/FilipeamTeixeira/skynet}
+}
+
+}
 \author{
 Filipe Teixeira
 }
