@@ -98,3 +98,8 @@ data("OD_Sample")
 test <- make.netDir(OD_Sample)
 netMap(test$netDir, pct = 10)
 ```
+
+## Extra Functions
+
+SKYNET, allows as well to perform quick searches on both airports and carriers, by their IATA code. `findAirport()`, `findCarrier()`.
+
