@@ -3,5 +3,6 @@
 #' Sample data to use with SKYNET functions
 #'
 #' @format A dataframe with 500.000 observations and 19 variables
+#' @name OD_Sample
 #'
-"OD_Sample"
+NULL
