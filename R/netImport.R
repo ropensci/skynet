@@ -53,8 +53,6 @@ DB1BImport <- function(x, y){
     c = y
 
   # Import Coupon file
-  # Include ItinID, MktID, Origin, Dest, SeqNum,
-  #OriginCityMarketID, DestCityMarketID and Trip Break (8 variables)
   coupon <- fread(c, header = TRUE, sep = ",", stringsAsFactors = FALSE,
                   integer64 = "numeric")
   coupon <- coupon %>%
@@ -65,7 +63,6 @@ DB1BImport <- function(x, y){
            op_carrier = OPERATING_CARRIER, distance = DISTANCE, gateway = GATEWAY)
 
   # Import Ticket file
-  # Include ItinID, RoundTrip, Passengers and ItinFare (4 variables)
   ticket <- fread(t, header = TRUE, sep = ",", stringsAsFactors = FALSE,
                   integer64 = "numeric")
   ticket <- ticket %>%
@@ -75,7 +72,9 @@ DB1BImport <- function(x, y){
 
   #Merge data
   netMerged <- merge(coupon, ticket, by = "itin_id", all.x = TRUE)
-  netMerged <- data.frame(netMerged)
+  netMerged <- netMerged %>%
+    data.frame() %>% #Convert to data.frame for data.table/dplyr compatibility
+    filter(distance != 0) #To clean data imput inconsistencies
 
   # Get name from file
   filename <- gsub(" ", "",
@@ -124,7 +123,9 @@ DB1BRaw <- function(x,y){
 
   #Merge data
   netMerged <- merge(coupon, ticket, by = "itin_id", all.x = TRUE)
-  netMerged <- data.frame(netMerged)
+  netMerged <- netMerged %>%
+    data.frame() %>% #Convert to data.frame for data.table/dplyr compatibility
+    filter(distance != 0) #To clean data imput inconsistencies
 
   # Get name from file
   filename <- gsub(" ", "",
