@@ -1,6 +1,7 @@
 #' Find Airport function
 #'
 #' Searches for airport information based on its IATA code or city name
+#' It will display multiple airports as it works with partial names.
 #'
 #' @param x airport IATA code or city name
 #'
