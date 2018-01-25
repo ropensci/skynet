@@ -18,7 +18,7 @@ You can install skynet from github with:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("FilipeamTeixeira/Skynet")
+devtools::install_github("FilipeamTeixeira/skynet")
 ```
 
 ## Example
