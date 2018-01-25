@@ -10,7 +10,7 @@ make.netUnd(x, disp = FALSE, cap = FALSE, merge = TRUE, alpha = 0.003,
 \arguments{
 \item{x}{Data frame}
 
-\item{disp}{Uses the Serrano's disparity filter (\url{http://www.pnas.org/content/106/16/6483.full})
+\item{disp}{Uses the Serrano's disparity filter (\url{https://en.wikipedia.org/wiki/Disparity_filter_algorithm_of_weighted_network})
 to extract the backbone of the network.}
 
 \item{cap}{Filters original data based on the edge weight.}

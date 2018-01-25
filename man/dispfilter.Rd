@@ -12,7 +12,7 @@ dispfilter(g, alpha = 0.003)
 \item{alpha}{Alpha value. Default 0.003}
 }
 \description{
-Uses the Serrano's disparity filter (\url{http://www.pnas.org/content/106/16/6483.full})
+Uses the Serrano's disparity filter (\url{https://en.wikipedia.org/wiki/Disparity_filter_algorithm_of_weighted_network})
 to extract the backbone of the network in "Extracting the multiscale backbone of complex weighted networks"
 }
 \examples{

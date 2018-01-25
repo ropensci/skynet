@@ -3,7 +3,7 @@
 #' Generates Undirected Network with an iGraph object and a Data Frame.
 #'
 #' @param x Data frame
-#' @param disp Uses the Serrano's disparity filter (\url{http://www.pnas.org/content/106/16/6483.full})
+#' @param disp Uses the Serrano's disparity filter (\url{https://en.wikipedia.org/wiki/Disparity_filter_algorithm_of_weighted_network})
 #' to extract the backbone of the network.
 #' @param alpha Argument for disparity filter.
 #' @param cap Filters original data based on the edge weight.
