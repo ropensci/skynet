@@ -7,7 +7,8 @@ Maintainer: Filipe Teixeira <Filipe.MarquesTeixeira@Ugent.be>
 URL: https://github.com/FilipeamTeixeira/skynet
 Description: A flexible tool that allows generating bespoke
     air transport statistics for urban studies based on publicly available
-    data from the Bureau of Transport Statistics (BTS) in the United States.
+    data from the Bureau of Transport Statistics (BTS) in the United States
+    <https://www.transtats.bts.gov/databases.asp?Mode_ID=1&Mode_Desc=Aviation&Subject_ID2=0>.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
