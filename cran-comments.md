@@ -1,6 +1,7 @@
 ## Resubmission
 This is a resubmission. In this version I have:
 
+* Fixed broken link
 * Added web referecnes in the Description above  for the BTS data.
 * Reduced the total tarball size to the CRAN requirements
 
