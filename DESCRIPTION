@@ -41,12 +41,8 @@ Imports:
     igraph,
     dplyr,
     ggplot2,
-    maps,
     ggrepel,
-    ggmap,
-    stringr,
-    poweRlaw,
-    geosphere
+    stringr
 Suggests: knitr,
     rmarkdown,
     testthat,
