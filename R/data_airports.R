@@ -3,7 +3,7 @@
 #' USA airport data from the RITA/Transtats database
 #'
 #' @format A dataframe with 6435 observations and 5 variables
-#' @name airporCode
+#' @name airportCode
 #'
 NULL
 
