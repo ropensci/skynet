@@ -17,6 +17,6 @@ Shows sample of 60% of flights
 }
 \examples{
 \dontrun{
-plot.netMap(list$netDir, pct = 10)
+netMap(list$netDir, pct = 10)
 }
 }

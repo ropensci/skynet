@@ -42,7 +42,8 @@ Imports:
     dplyr,
     ggplot2,
     ggrepel,
-    stringr
+    stringr,
+    maps
 Suggests: knitr,
     rmarkdown,
     testthat,

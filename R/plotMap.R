@@ -8,7 +8,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' plot.netMap(list$netDir, pct = 10)
+#' netMap(list$netDir, pct = 10)
 #' }
 #' @export
 #'
