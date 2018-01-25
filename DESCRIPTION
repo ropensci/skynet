@@ -20,7 +20,7 @@ Collate:
     'data_carriers.R'
     'data_metro.R'
     'disparityfilter.R'
-    'findAirport.R'
+    'findairport.R'
     'fromto.R'
     'convertRaw.R'
     'netDir.R'
