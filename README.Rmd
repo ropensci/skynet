@@ -29,7 +29,7 @@ You can install skynet from github with:
 
 ```{r gh-installation, eval = FALSE}
 # install.packages("devtools")
-devtools::install_github("FilipeamTeixeira/Skynet")
+devtools::install_github("FilipeamTeixeira/skynet")
 ```
 
 ## Example
