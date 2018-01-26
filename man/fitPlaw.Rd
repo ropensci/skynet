@@ -12,3 +12,9 @@ fitPlaw(graph)
 \description{
 Plots power law fit
 }
+\examples{
+\dontrun{
+netDir <- make.netDir(OD_Sample)
+fitPlaw(netDir$gDir)
+}
+}

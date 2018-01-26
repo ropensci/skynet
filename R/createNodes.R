@@ -34,6 +34,12 @@ createNodes <- function(y){
 #'
 #' @param y Data Frame
 #'
+#' @examples
+#' \dontrun{
+#'
+#' nodeStatsMetro(OD_Sample)
+#'
+#' }
 #' @export
 #'
 

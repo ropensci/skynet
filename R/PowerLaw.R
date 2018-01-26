@@ -4,6 +4,14 @@
 #'
 #' @param graph iGraph object
 #'
+#' @examples
+#' \dontrun{
+#' netDir <- make.netDir(OD_Sample)
+#' fitPlaw(netDir$gDir)
+#' }
+#' @export
+#'
+#'
 #' @export
 #'
 

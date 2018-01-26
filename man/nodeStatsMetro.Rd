@@ -12,3 +12,10 @@ nodeStatsMetro(y)
 \description{
 Create Metro Nodes
 }
+\examples{
+\dontrun{
+
+nodeStatsMetro(OD_Sample)
+
+}
+}

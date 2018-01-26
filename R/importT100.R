@@ -1,14 +1,18 @@
 #' Import T-100 Data
 #'
-#' Imports T-100 Data directly from zipped file
+#' Imports T-100 Data directly from BTS/RITA/Transtats website raw data (prezipped file),
+#' for SKYNET's import function.
 #' Please try to name original csv as e.g. "T100 2011Q1mkt.csv" or "T100 2011Q1seg.csv"
 #' respectively
 #'
-#' @param x T100 csv
+#' @param x T-100 csv
 #'
 #' @examples
-#' NA
+#' \dontrun{
 #'
+#' importT100(skynet_example("T100_2011_mkt.csv"))
+#'
+#' }
 #' @export
 #'
 
@@ -33,7 +37,7 @@ importT100 <- function(x){
     T100 <- data.frame(T100)
 
     #extracts name from file
-    filename <- gsub(" ", "",
+    filename <- gsub(" ", "_",
                      tools::file_path_sans_ext(
                        basename(x)))
     assign(paste(filename), T100, envir = envir)
@@ -53,7 +57,7 @@ importT100 <- function(x){
     T100 <- data.frame(T100)
 
     #extracts name from file
-    filename <- gsub(" ", "",
+    filename <- gsub(" ", "_",
                      tools::file_path_sans_ext(
                        basename(x)))
     assign(paste(filename), T100, envir = envir)

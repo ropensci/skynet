@@ -4,7 +4,7 @@
 \alias{convertRaw}
 \title{Convert Raw}
 \usage{
-convertRaw(x, y, path = "")
+convertRaw(x, y, path = NULL)
 }
 \arguments{
 \item{x}{First csv file to be processed}
@@ -14,15 +14,22 @@ convertRaw(x, y, path = "")
 \item{path}{Path to save file to}
 }
 \description{
-Converts T100 and DB1B files from BTS/RITA/Transtats website raw data (prezipped file), for SKYNET's import function.
+Converts DB1B files from BTS/RITA/Transtats website raw data (prezipped file), for SKYNET's import function.
 }
 \details{
-Reduces T100 zipped filesize, to an adequate SKYNET compatible format. This function will create a csv file for you.
+Reduces DB1B raw filesize, to an adequate SKYNET compatible format. This function will create a csv file for you.
 File order doesn't matter, but it is recomended to name the files using the following
 syntax: \emph{"Origin_and_Destination_Survey_DB1BCoupon_year_quarter.csv", "Origin_and_Destination_Survey_DB1BTicket_year_quarter.csv".}
 Note: We do recommend sparklyr to be used for larger sets of data.
 }
 \examples{
-NA
+\dontrun{
+
+temp <- tempdir()
+convertRaw(skynet_example("Origin_and_Destination_Survey_DB1BCoupon_2001_1.csv"),
+skynet_example("Origin_and_Destination_Survey_DB1BTicket_2001_1.csv"),
+path = temp)
+
+}
 
 }

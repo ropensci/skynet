@@ -11,12 +11,24 @@
 #' @param y Second csv file to be processed
 #' @param path Path to save file to
 #'
+#' @examples
+#' \dontrun{
+#'
+#' temp <- tempdir()
+#' convertRaw(skynet_example("Origin_and_Destination_Survey_DB1BCoupon_2001_1.csv"),
+#' skynet_example("Origin_and_Destination_Survey_DB1BTicket_2001_1.csv"),
+#' path = temp)
+#'
+#' }
 #'
 #' @export
 #'
 
-convertRaw <- function(x,y,path = ""){
+convertRaw <- function(x,y,path = NULL){
 
+  if(missing(path)){
+    stop("Please specify the path argument.")
+  }
 
   if(grepl("Ticket", deparse(substitute(x)), ignore.case = TRUE) == TRUE)
     t = x

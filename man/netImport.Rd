@@ -20,3 +20,10 @@ File order doesn't matter, but it is recomended to name the files using the foll
 syntax: \emph{"Coupon YearQuarter.csv", "Ticket YearQuarter.csv", "T100 Year".}
 Note: We do recommend sparklyr to be used for larger sets of data.
 }
+\examples{
+\dontrun{
+
+netImport(skynet_example("Coupon_2001Q1.csv"), skynet_example("Ticket_2001Q1.csv"))
+
+}
+}

@@ -9,7 +9,12 @@
 #' the T-100 database, the only file to be included.
 #' @param y Second csv file to be imported.
 #' @param zip Should equal TRUE if original file comes from the BTS prezipped option.
+#' @examples
+#' \dontrun{
 #'
+#' netImport(skynet_example("Coupon_2001Q1.csv"), skynet_example("Ticket_2001Q1.csv"))
+#'
+#' }
 #' @export
 
 netImport <- function(x, y, zip = FALSE){

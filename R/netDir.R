@@ -211,7 +211,8 @@ make.netDir <- function(x, disp = FALSE, cap = FALSE, alpha = 0.003, pct = 10, c
 
 globalVariables(c("op_carrier", "itin_fare", "itin_yield", "roundtrip", "sd",
                   "fare_sd", "city_mkt_id", "latitude.x", "latitude.x", "longitude.x",
-                  "longitude.y", "quantile", "distance", "MetroLookup"))
+                  "longitude.y", "quantile", "distance", "MetroLookup", "origin_mkt_id",
+                  "dest_mkt_id"))
 
 # ----------------------------------------------------------------------------- #
 # ----------------------------------------------------------------------------- #
