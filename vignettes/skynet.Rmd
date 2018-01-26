@@ -58,7 +58,7 @@ SKYNET creates three types of networks and an extra option:
 1. Directed Network - `make.netDir()`
 1. Undirected Network - `make.netUnd()`
 1. Path Network - `make.netPath()`
-1. Metro Network - `make.netMetro()`
+1. Metro Network - To be used as argument in `make.netDir()` and `make.netUnd()`
 1. International Option - `make.netInt()`
 
 When generating a network, SKYNET, creates a list which includes:

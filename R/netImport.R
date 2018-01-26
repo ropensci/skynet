@@ -10,15 +10,6 @@
 #' @param y Second csv file to be imported.
 #' @param zip Should equal TRUE if original file comes from the BTS prezipped option.
 #'
-#' @examples
-#' \dontrun{
-#' # DB1B Database Files - Ticket and Coupon order doesn't matter
-#' netImport("Coupon 2016Q1.csv", "Ticket 2016Q1.csv")
-#'
-#' # T-100
-#' netImport("T100 2016.csv")
-#' }
-#'
 #' @export
 
 netImport <- function(x, y, zip = FALSE){

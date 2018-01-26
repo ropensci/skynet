@@ -10,10 +10,11 @@ importT100(x)
 \item{x}{T100 csv}
 }
 \description{
-#Don't forget to add information on segment or market (to test)
+Imports T-100 Data directly from zipped file
+Please try to name original csv as e.g. "T100 2011Q1mkt.csv" or "T100 2011Q1seg.csv"
+respectively
 }
 \examples{
-\dontrun{
-importT100(x)
-}
+NA
+
 }

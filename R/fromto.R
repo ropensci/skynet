@@ -8,9 +8,10 @@
 #'
 #' @examples
 #' \dontrun{
-#' fromto.stat(netDir11$gDir, "JFK", orig = "from")
+#' netDir <- make.netDir(OD_Sample)
+#' fromto.stat(netDir$gDir, "JFK", orig = "from")
 #'
-#' fromto.stat(netDir11$gDir, "JFK", orig = "to")
+#' fromto.stat(netDir$gDir, "JFK", orig = "to")
 #' }
 #'
 #' @export

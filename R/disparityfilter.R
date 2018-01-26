@@ -9,7 +9,8 @@
 #'
 #' @examples
 #' \dontrun{
-#' dispfilter(g, alpha = 0.003)
+#' netDir <- make.netDir(OD_Sample)
+#' dispfilter(netDir$gDir, alpha = 0.003)
 #' }
 #' @export
 #'

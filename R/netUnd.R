@@ -11,26 +11,34 @@
 #' @param merge When set to FALSE, it keeps parallel edges instead of collapsing them
 #' and summing their weights.
 #' @param carrier Groups data per carrier and OD
+#' @param metro Groups data by metropolitan area (not compatible with plot)
 #'
 #' @examples
 #' \dontrun{
-#' make.netUnd(OD_2016Q1)
+#' make.netUnd(OD_Sample)
 #'
 #' # Apply Disparity Filter
-#' make.netUnd(OD_2016Q1, disp = TRUE, alpha = 0.05)
+#' make.netUnd(OD_Sample, disp = TRUE, alpha = 0.05)
 #'
 #' # Apply Percentage Cap
-#' make.netUnd(OD_2016Q1, cap = TRUE, pct = 20)
+#' make.netUnd(OD_Sample, cap = TRUE, pct = 20)
 #' }
 #'
 #' @export
 
-make.netUnd <- function(x, disp = FALSE, cap = FALSE, merge = TRUE, alpha = 0.003, pct = 10, carrier = FALSE){
+make.netUnd <- function(x, disp = FALSE, cap = FALSE, merge = TRUE, alpha = 0.003, pct = 10, carrier = FALSE, metro = FALSE){
 
   if(carrier == TRUE & disp == TRUE){
 
     stop("SKYNET doesn't support yet parallel edges on its disparity filter.
          Not including the carrier option on the disparity filter mode, or running the carriers option without the disparity filter mode, solves the issue for now.")
+  }
+
+  if(metro == TRUE){# Metro option
+    x <- x %>%
+      select(-origin, -dest) %>%
+      rename(origin = origin_mkt_id, dest = dest_mkt_id) %>%
+      mutate(origin = as.character(origin), dest = as.character(dest))
   }
 
   #-------------------------------------------------
@@ -62,7 +70,12 @@ make.netUnd <- function(x, disp = FALSE, cap = FALSE, merge = TRUE, alpha = 0.00
 
   #-------------------------------------------------
 
-  nodes <- nodeStats(x)
+  if(metro == FALSE){
+    nodes <- nodeStats(x)
+  }else{  # Metro option
+    nodes <- nodeStatsMetro(x)
+  }
+
 
   gUnd <- graph_from_data_frame(netUnd_all, directed = TRUE, vertices = nodes)
   gUnd <- as.undirected(gUnd, mode = "collapse", edge.attr.comb=list(weight = "sum", itin_fare = "mean", itin_yield = "mean", fare_sd = "mean"))
@@ -78,6 +91,8 @@ make.netUnd <- function(x, disp = FALSE, cap = FALSE, merge = TRUE, alpha = 0.00
     netUnd_disp <- netUnd_disp %>%
       rename(origin = from, dest = to, passengers = weight)
 
+    if(metro == FALSE){
+
     # Add city name
     netUnd_disp <- netUnd_disp %>%
       left_join(airportCode, by = "origin") %>%
@@ -89,6 +104,20 @@ make.netUnd <- function(x, disp = FALSE, cap = FALSE, merge = TRUE, alpha = 0.00
     netUnd_disp <- netUnd_disp %>%
       left_join(airtemp, by = "dest") %>%
       select(-latitude.x, -latitude.y, -longitude.x, -longitude.y)
+
+     }else{ # Metro Option
+
+      netUnd_disp <- netUnd_disp %>%
+        left_join(MetroLookup, by = "origin") %>%
+        rename(origin_city = description)
+
+      MetroTemp <- MetroLookup %>%
+        rename(dest = origin, dest_city = description)
+
+      netUnd_disp <- netUnd_disp %>%
+        left_join(MetroTemp, by = "dest")
+
+    }
 
     nodes <- as.data.frame(get.vertex.attribute(gUnd_disp))
 
@@ -111,6 +140,8 @@ make.netUnd <- function(x, disp = FALSE, cap = FALSE, merge = TRUE, alpha = 0.00
     netUnd_cap <- netUnd_cap %>%
       rename(origin = from, dest = to, passengers = weight)
 
+    if(metro == FALSE){
+
     # Add city name
     netUnd_cap <- netUnd_cap %>%
       left_join(airportCode, by = "origin") %>%
@@ -122,6 +153,19 @@ make.netUnd <- function(x, disp = FALSE, cap = FALSE, merge = TRUE, alpha = 0.00
     netUnd_cap <- netUnd_cap %>%
       left_join(airtemp, by = "dest") %>%
       select(-latitude.x, -latitude.y, -longitude.x, -longitude.y)
+
+    }else{ # Metro Option
+
+      netUnd_cap <- netUnd_cap %>%
+        left_join(MetroLookup, by = "origin") %>%
+        rename(origin_city = description)
+
+      MetroTemp <- MetroLookup %>%
+        rename(dest = origin, dest_city = description)
+
+      netUnd_cap <- netUnd_cap %>%
+        left_join(MetroTemp, by = "dest")
+    }
 
     nodes <- as.data.frame(get.vertex.attribute(gUnd_cap))
 
@@ -131,21 +175,6 @@ make.netUnd <- function(x, disp = FALSE, cap = FALSE, merge = TRUE, alpha = 0.00
     # End of 10% filter command #
     # ----------------------------------------------------------------------------- #
 
-
-  }else if(merge == FALSE){
-
-    # Run undirected with merge
-    netUnd_all <- x %>%
-      select(origin, dest, passengers) %>%
-      group_by(origin, dest) %>%
-      summarise(weight = sum(passengers))
-
-    nodes <- nodeStats(x)
-
-    gUnd <- graph_from_data_frame(netUnd_all, directed = FALSE, vertices = nodes)
-
-    return(list(netUnd = netUnd_all, gUnd = gUnd, nodes = nodes))
-
   }else{
 
     # Create dataframe based on collapsed edges graph
@@ -153,6 +182,8 @@ make.netUnd <- function(x, disp = FALSE, cap = FALSE, merge = TRUE, alpha = 0.00
 
     netUnd_all <- netUnd_all %>%
       rename(origin = from, dest = to, passengers = weight)
+
+    if(metro == FALSE){
 
     # Add city name
     netUnd_all <- netUnd_all %>%
@@ -166,8 +197,19 @@ make.netUnd <- function(x, disp = FALSE, cap = FALSE, merge = TRUE, alpha = 0.00
       left_join(airtemp, by = "dest") %>%
       select(-latitude.x, -latitude.y, -longitude.x, -longitude.y)
 
+    }else{ #Metro Option
 
-    nodes <- nodeStats(netUnd_all)
+      netUnd_all <- netUnd_all %>%
+        left_join(MetroLookup, by = "origin") %>%
+        rename(origin_city = description)
+
+      MetroTemp <- MetroLookup %>%
+        rename(dest = origin, dest_city = description)
+
+      netUnd_all <- netUnd_all %>%
+        left_join(MetroTemp, by = "dest")
+
+    }
 
     return(list(gUnd = gUnd, netUnd = netUnd_all, nodes = nodes))
 

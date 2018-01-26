@@ -8,7 +8,7 @@
 #' @examples
 #' \dontrun{
 #'
-#' nodeStats(OD_2011Q1)
+#' nodeStats(OD_Sample)
 #'
 #'}
 #' @export
@@ -36,7 +36,9 @@ if(!is.null(x[["trip_break"]])){
     rename(airport = dest)
 
     nodeStat <- merge(departures, arrivals, by = "airport", all = TRUE)
-    nodeStat <- merge(nodeStat, transfers, by = "airport", all = TRUE)
+    nodeStat <- nodeStat %>%
+      merge(transfers, by = "airport", all = TRUE) %>%
+      mutate_all(funs(ifelse(is.na(.), 0, .)))
 
 }else{
   nodeStat <- merge(departures, arrivals, by = "airport", all = TRUE)

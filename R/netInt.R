@@ -8,10 +8,6 @@
 #' @param m Data set to merge with
 #' @param Q Desired T-100 Quarter. Should be equal to 1, 2, 3 or 4.
 #'
-#' @examples
-#' \dontrun{
-#' make.netInt("T100 2016", OD_2016Q1, 1)
-#' }
 #' @export
 #'
 

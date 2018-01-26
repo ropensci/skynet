@@ -22,9 +22,9 @@ Generates an OD network and a Leg Count data frame(on demand)
 }
 \examples{
 \dontrun{
-make.Path(OD_2016Q1)
+make.Path(OD_Sample)
 
 # Generate Leg Count
-make.Path(OD_2016Q1, leg = TRUE)
+make.Path(OD_Sample, leg = TRUE)
 }
 }

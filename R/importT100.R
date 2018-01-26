@@ -1,13 +1,14 @@
 #' Import T-100 Data
 #'
-#' #Don't forget to add information on segment or market (to test)
+#' Imports T-100 Data directly from zipped file
+#' Please try to name original csv as e.g. "T100 2011Q1mkt.csv" or "T100 2011Q1seg.csv"
+#' respectively
 #'
 #' @param x T100 csv
 #'
 #' @examples
-#' \dontrun{
-#' importT100(x)
-#' }
+#' NA
+#'
 #' @export
 #'
 

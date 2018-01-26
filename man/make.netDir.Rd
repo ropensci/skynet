@@ -5,7 +5,7 @@
 \title{Directed network}
 \usage{
 make.netDir(x, disp = FALSE, cap = FALSE, alpha = 0.003, pct = 10,
-  carrier = FALSE)
+  carrier = FALSE, metro = FALSE)
 }
 \arguments{
 \item{x}{Data frame}
@@ -20,18 +20,20 @@ to extract the backbone of the network.}
 \item{pct}{Argument for cap filter. Value should be imput as percentage.}
 
 \item{carrier}{Groups data per carrier and OD}
+
+\item{metro}{Groups data by metropolitan area (not compatible with plot)}
 }
 \description{
 Generates Directed Network with an iGraph object and a Data Frame.
 }
 \examples{
 \dontrun{
-make.netDir(OD_2016Q1)
+make.netDir(OD_sample)
 
 # Apply Disparity Filter
-make.netDir(OD_2016Q1, disp = TRUE, alpha = 0.05)
+make.netDir(OD_sample, disp = TRUE, alpha = 0.05)
 
 # Apply Percentage Cap
-make.netDir(OD_2016Q1, cap = TRUE, pct = 20)
+make.netDir(OD_sample, cap = TRUE, pct = 20)
 }
 }

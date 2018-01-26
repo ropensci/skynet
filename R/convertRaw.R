@@ -2,24 +2,22 @@
 #'
 #' Converts T100 and DB1B files from BTS/RITA/Transtats website raw data (prezipped file), for SKYNET's import function.
 #'
+#' Reduces T100 zipped filesize, to an adequate SKYNET compatible format. This function will create a csv file for you.
 #' File order doesn't matter, but it is recomended to name the files using the following
 #' syntax: \emph{"Origin_and_Destination_Survey_DB1BCoupon_year_quarter.csv", "Origin_and_Destination_Survey_DB1BTicket_year_quarter.csv".}
 #' Note: We do recommend sparklyr to be used for larger sets of data.
 #'
 #' @param x First csv file to be processed
 #' @param y Second csv file to be processed
+#' @param path Path to save file to
 #'
 #' @examples
+#' NA
 #'
-#' # DB1B Database Files - Ticket and Coupon order doesn't matter
-#' \dontrun{
-#' netConvert("Origin_and_Destination_Survey_DB1BCoupon_2017_1.csv",
-#' "Origin_and_Destination_Survey_DB1BTicket_2017_1.csv")
-#' }
 #' @export
 #'
 
-convertRaw <- function(x,y){
+convertRaw <- function(x,y,path = ""){
 
 
   if(grepl("Ticket", deparse(substitute(x)), ignore.case = TRUE) == TRUE)
@@ -36,9 +34,11 @@ convertRaw <- function(x,y){
                        integer64 = "numeric")
 
   Ticket_temp <- Ticket_temp %>%
-    select("ItinID", "RoundTrip", "FarePerMile", "Passengers", "ItinFare", "BulkFare", "Distance") %>%
+    select("ItinID", "RoundTrip", "FarePerMile", "Passengers", "ItinFare", "BulkFare", "Distance",
+           "Year", "Quarter") %>%
     rename(ITIN_ID = ItinID, ROUNDTRIP = RoundTrip, ITIN_YIELD = FarePerMile, PASSENGERS = Passengers,
-           ITIN_FARE = ItinFare, BULKFARE = BulkFare, DISTANCE_FULL = Distance)
+           ITIN_FARE = ItinFare, BULKFARE = BulkFare, DISTANCE_FULL = Distance,
+           YEAR = Year, QUARTER = Quarter,)
 
   Coupon_temp <- fread(c, header = TRUE, sep = ",", stringsAsFactors = FALSE,
                        integer64 = "numeric")
@@ -53,9 +53,9 @@ convertRaw <- function(x,y){
            DEST_CITY_MARKET_ID = DestCityMarketID , DEST = Dest, TRIP_BREAK = Break,
            OPERATING_CARRIER = OpCarrier, DISTANCE = Distance, GATEWAY = Gateway)
 
-  write.csv(Ticket_temp, file = paste("Ticket", " ", Coupon_temp$YEAR[1], "Q", Coupon_temp$QUARTER[1], ".csv", sep = ""), row.names=FALSE)
-  write.csv(Coupon_temp, file = paste("Coupon", " ", Coupon_temp$YEAR[1], "Q", Coupon_temp$QUARTER[1], ".csv", sep = ""), row.names=FALSE)
 
+  write.csv(Ticket_temp, file = paste(path, "Ticket", " ", Ticket_temp$YEAR[1], "Q", Ticket_temp$QUARTER[1], ".csv", sep = ""), row.names=FALSE)
+  write.csv(Coupon_temp, file = paste(path, "Coupon", " ", Coupon_temp$YEAR[1], "Q", Coupon_temp$QUARTER[1], ".csv", sep = ""), row.names=FALSE)
 
 
 }

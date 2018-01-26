@@ -29,83 +29,55 @@ createNodes <- function(y){
 
 }
 
-
-#' Create Transfer nodes
-#'
-#'
-#' #@param x Original Data Frame to extract nodes from
-#' #@param y List to include it into
-#'
-
-#transferNodes <- function (x, y) {
-#  netTemp <- x
-#  netTemp <- dplyr::filter(netTemp, trip_break == "")
-
-#  nodesTemp <- netTemp %>%
-#    group_by(dest) %>%
-#    summarize(passengers = sum(passengers)) %>%
-#    rename(origin = dest)
-
-#  nodesTr <- netTemp %>%
-#    group_by(origin) %>%
-#    summarize(passengers = sum(passengers))
-
-#  nodesTr <- nodesTr %>%
-#    merge(nodesTemp, by = "origin", all = TRUE) %>%
-#    mutate(passengers.x = replace(passengers.x, is.na(passengers.x), 0),
-#           passengers.y = replace(passengers.y, is.na(passengers.y), 0),
-#           freq = (passengers.x + passengers.y)) %>%
-#    select(origin, freq) %>%
-#    merge(airportCode, by = "origin", all.x = TRUE)
-
-
-#  nodesTr <- left_join(y[["nodes"]], nodesTr, by = "origin") %>%
-#    select(origin, freq.y, city.y, city_mkt_id.y, latitude.y, longitude.y) %>%
-#    rename(freq = freq.y, city = city.y, city_mkt_id = city_mkt_id.y,
-#           latitude = latitude.y, longitude = longitude.y)
-
-
-#   assign(deparse(substitute(y)), c(y, list(nodesTr = nodesTr)), envir = envir)
-
-
-#}
-
-
-
 #' Create Metro Nodes
 #'
 #'
 #' @param y Data Frame
 #'
+#' @export
+#'
 
-metroNodes <- function(y){
+nodeStatsMetro <- function(y){
 
-  nodesTemp <- y %>%
-    group_by(dest) %>%
-    summarize(passengers = sum(passengers)) %>%
-    rename(origin = dest)
-
-  nodes <- y %>%
+  departures <- y %>%
     group_by(origin) %>%
-    summarize(passengers = sum(passengers))
+    summarise(pass_dep = sum(passengers)) %>%
+    rename(airport = origin)
 
-#  airportCodeFull <- airportCodeFull %>%
-#    select(city_mkt_id, latitude, longitude, airport_state, airport_city_name) %>%
-#    rename(origin = city_mkt_id)
+  arrivals <- y %>%
+    group_by(dest) %>%
+    summarise(pass_arr = sum(passengers)) %>%
+    rename(airport = dest)
 
-  nodes <- nodes %>%
-    merge(nodesTemp, by = "origin", all = TRUE) %>%
-    mutate(passengers.x = replace(passengers.x, is.na(passengers.x), 0),
-           passengers.y = replace(passengers.y, is.na(passengers.y), 0),
-           freq = (passengers.x + passengers.y)) %>%
-    select(origin, freq) %>%
-    merge(MetroFull, by = "origin", all.x = TRUE)
+  if(!is.null(y[["trip_break"]])){
+
+    transfers <- y %>%
+      group_by(dest) %>%
+      filter(trip_break == "") %>%
+      summarise(pass_tr = sum(passengers)) %>%
+      rename(airport = dest)
+
+
+    nodeStat <- merge(departures, arrivals, by = "airport", all = TRUE)
+    nodeStat <- nodeStat %>%
+      merge(transfers, by = "airport", all = TRUE) %>%
+      mutate_all(funs(ifelse(is.na(.), 0, .)))
+
+  }else{
+    nodeStat <- merge(departures, arrivals, by = "airport", all = TRUE)
+  }
+
+  nodeStat <- nodeStat %>%
+    merge(MetroLookup, by.x = "airport", by.y = "origin", all.x = TRUE) %>%
+    mutate(freq = pass_dep + pass_arr)
+
+  return(nodeStat)
 
 }
 
 globalVariables(c("dest", "passengers", "origin", "passengers.x", "passengers.y",
                   "freq", "airportCode", "airport_state", "airport_city_name",
-                  "trip_break", "freq.y", "city.y", "city_mkt_id.y", "MetroFull"))
+                  "trip_break", "freq.y", "city.y", "city_mkt_id.y", "MetroFull", "MetroLookup"))
 
 pos = 1
 envir = as.environment(pos)

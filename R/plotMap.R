@@ -8,7 +8,8 @@
 #'
 #' @examples
 #' \dontrun{
-#' netMap(list$netDir, pct = 10)
+#' network <- make.netDir(OD_Sample)
+#' netMap(network$netDir, pct = 10)
 #' }
 #' @export
 #'

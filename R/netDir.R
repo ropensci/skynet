@@ -9,27 +9,36 @@
 #' @param cap Filters original data based on the edge weight.
 #' @param pct Argument for cap filter. Value should be imput as percentage.
 #' @param carrier Groups data per carrier and OD
+#' @param metro Groups data by metropolitan area (not compatible with plot)
 #'
 #' @examples
 #' \dontrun{
-#' make.netDir(OD_2016Q1)
+#' make.netDir(OD_sample)
 #'
 #' # Apply Disparity Filter
-#' make.netDir(OD_2016Q1, disp = TRUE, alpha = 0.05)
+#' make.netDir(OD_sample, disp = TRUE, alpha = 0.05)
 #'
 #' # Apply Percentage Cap
-#' make.netDir(OD_2016Q1, cap = TRUE, pct = 20)
+#' make.netDir(OD_sample, cap = TRUE, pct = 20)
 #' }
 #' @export
 #'
 
-make.netDir <- function(x, disp = FALSE, cap = FALSE, alpha = 0.003, pct = 10, carrier = FALSE){
+make.netDir <- function(x, disp = FALSE, cap = FALSE, alpha = 0.003, pct = 10, carrier = FALSE, metro = FALSE){
 
   if(carrier == TRUE & disp == TRUE){
 
       stop("SKYNET doesn't support yet parallel edges on its disparity filter.
            Not including the carrier option on the disparity filter mode, or running the carriers option without the disparity filter mode, solves the issue for now.")
   }
+
+  if(metro == TRUE){# Metro option
+    x <- x %>%
+      select(-origin, -dest) %>%
+      rename(origin = origin_mkt_id, dest = dest_mkt_id) %>%
+      mutate(origin = as.character(origin), dest = as.character(dest))
+  }
+
 
   #-------------------------------------------------
   if(carrier == TRUE){
@@ -53,8 +62,11 @@ make.netDir <- function(x, disp = FALSE, cap = FALSE, alpha = 0.003, pct = 10, c
 
   #-------------------------------------------------
 
-  nodes <- nodeStats(x)
-
+    if(metro == FALSE){
+      nodes <- nodeStats(x)
+    }else{  # Metro option
+      nodes <- nodeStatsMetro(x)
+}
   gDir <- igraph::graph_from_data_frame(netDir_all, directed = TRUE, vertices = nodes)
 
   #-------------------------------------------------
@@ -70,19 +82,33 @@ make.netDir <- function(x, disp = FALSE, cap = FALSE, alpha = 0.003, pct = 10, c
       rename(origin = from, dest = to, passengers = weight)
 
 
-    # Add city name
+    if(metro == FALSE){
+
+      # Add city name
+      netDir_disp <- netDir_disp %>%
+        left_join(airportCode, by = "origin") %>%
+        rename(origin_city = city, origin_city_mkt_id = city_mkt_id)
+
+      airTemp <- airportCode %>%
+        rename(dest = origin, dest_city = city, dest_city_mkt_id = city_mkt_id)
+
+      netDir_disp <- netDir_disp %>%
+        left_join(airTemp, by = "dest") %>%
+        select(-latitude.x, -latitude.y, -longitude.x, -longitude.y)
+
+    }else{ # Metro Option
+
+      netDir_disp <- netDir_disp %>%
+      left_join(MetroLookup, by = "origin") %>%
+      rename(origin_city = description)
+
+    MetroTemp <- MetroLookup %>%
+      rename(dest = origin, dest_city = description)
+
     netDir_disp <- netDir_disp %>%
-      left_join(airportCode, by = "origin") %>%
-      rename(origin_city = city, origin_city_mkt_id = city_mkt_id)
+      left_join(MetroTemp, by = "dest")
 
-    airTemp <- airportCode %>%
-      rename(dest = origin, dest_city = city, dest_city_mkt_id = city_mkt_id)
-
-    netDir_disp <- netDir_disp %>%
-      left_join(airTemp, by = "dest") %>%
-      select(-latitude.x, -latitude.y, -longitude.x, -longitude.y)
-
-  #  nodes <- nodeStats(netDir_disp) - old code
+    }
 
      nodes <- as.data.frame(get.vertex.attribute(gDir_disp))
 
@@ -105,19 +131,32 @@ make.netDir <- function(x, disp = FALSE, cap = FALSE, alpha = 0.003, pct = 10, c
     netDir_cap <- netDir_cap %>%
       rename(origin = from, dest = to, passengers = weight)
 
-    # Add city name
+    if(metro == FALSE){
+
+      # Add city name
+      netDir_cap <- netDir_cap %>%
+        left_join(airportCode, by = "origin") %>%
+        rename(origin_city = city, origin_city_mkt_id = city_mkt_id)
+
+      airtemp <- airportCode %>%
+        rename(dest = origin, dest_city = city, dest_city_mkt_id = city_mkt_id)
+
+      netDir_cap <- netDir_cap %>%
+        left_join(airtemp, by = "dest") %>%
+        select(-latitude.x, -latitude.y, -longitude.x, -longitude.y)
+
+      }else{ # Metro Option
+
     netDir_cap <- netDir_cap %>%
-      left_join(airportCode, by = "origin") %>%
-      rename(origin_city = city, origin_city_mkt_id = city_mkt_id)
+      left_join(MetroLookup, by = "origin") %>%
+      rename(origin_city = description)
 
-    airtemp <- airportCode %>%
-      rename(dest = origin, dest_city = city, dest_city_mkt_id = city_mkt_id)
+    MetroTemp <- MetroLookup %>%
+      rename(dest = origin, dest_city = description)
 
     netDir_cap <- netDir_cap %>%
-      left_join(airtemp, by = "dest") %>%
-      select(-latitude.x, -latitude.y, -longitude.x, -longitude.y)
-
-  #  nodes <- nodeStats(netDir_cap) - old code
+      left_join(MetroTemp, by = "dest")
+    }
 
      nodes <- as.data.frame(get.vertex.attribute(gDir_cap))
 
@@ -133,18 +172,34 @@ make.netDir <- function(x, disp = FALSE, cap = FALSE, alpha = 0.003, pct = 10, c
     # Runs network with full data
     gDir <- graph_from_data_frame(netDir_all, directed = TRUE, vertices = nodes)
 
-    # Add city name
+
+    if(metro == FALSE){ # Metro Option
+
+      # Add city name
+      netDir_all <- netDir_all %>%
+        left_join(airportCode, by = "origin") %>%
+        rename(origin_city = city, origin_city_mkt_id = city_mkt_id, passengers = weight)
+
+      airtemp <- airportCode %>%
+        rename(dest = origin, dest_city = city, dest_city_mkt_id = city_mkt_id)
+
+      netDir_all <- netDir_all %>%
+        left_join(airtemp, by = "dest") %>%
+        select(-latitude.x, -latitude.y, -longitude.x, -longitude.y)
+
+    }else{
+
+      netDir_all <- netDir_all %>%
+      left_join(MetroLookup, by = "origin") %>%
+      rename(origin_city = description)
+
+    MetroTemp <- MetroLookup %>%
+      rename(dest = origin, dest_city = description)
+
     netDir_all <- netDir_all %>%
-      left_join(airportCode, by = "origin") %>%
-      rename(origin_city = city, origin_city_mkt_id = city_mkt_id, passengers = weight)
+      left_join(MetroTemp, by = "dest")
 
-    airtemp <- airportCode %>%
-      rename(dest = origin, dest_city = city, dest_city_mkt_id = city_mkt_id)
-
-    netDir_all <- netDir_all %>%
-      left_join(airtemp, by = "dest") %>%
-      select(-latitude.x, -latitude.y, -longitude.x, -longitude.y)
-
+    }
 
     return(list(gDir = gDir, netDir = netDir_all, nodes = nodes))
 
@@ -153,9 +208,10 @@ make.netDir <- function(x, disp = FALSE, cap = FALSE, alpha = 0.003, pct = 10, c
 
 }
 
+
 globalVariables(c("op_carrier", "itin_fare", "itin_yield", "roundtrip", "sd",
                   "fare_sd", "city_mkt_id", "latitude.x", "latitude.x", "longitude.x",
-                  "longitude.y", "quantile", "distance"))
+                  "longitude.y", "quantile", "distance", "MetroLookup"))
 
 # ----------------------------------------------------------------------------- #
 # ----------------------------------------------------------------------------- #

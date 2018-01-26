@@ -1,3 +1,9 @@
+## Resubmission 26/01/18
+This is a resubmission. In this version I have:
+
+* Examples are executable
+* Added more information to convertRaw which uses a necessary write.csv function, including option to select where to save file.
+
 ## Resubmission
 This is a resubmission. In this version I have:
 

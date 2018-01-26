@@ -1,6 +1,6 @@
 Type: Package
 Package: skynet
-Version: 0.9.9
+Version: 0.9.9.9000
 Title: Generates Networks from BTS Data
 Authors@R: person("Filipe", "Teixeira", email = "Filipe.MarquesTeixeira@Ugent.be", role = c("aut", "cre"))
 Maintainer: Filipe Teixeira <Filipe.MarquesTeixeira@Ugent.be>
@@ -25,7 +25,6 @@ Collate:
     'fromto.R'
     'convertRaw.R'
     'netDir.R'
-    'netMetro.R'
     'netUnd.R'
     'netImport.R'
     'netInt.R'

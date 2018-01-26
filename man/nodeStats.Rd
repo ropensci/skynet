@@ -16,7 +16,7 @@ Generates Number of Passenger Arrivals, Departures and Transfers
 \examples{
 \dontrun{
 
-nodeStats(OD_2011Q1)
+nodeStats(OD_Sample)
 
 }
 }
