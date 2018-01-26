@@ -36,6 +36,6 @@
 * netPath airlines renamed to carrier.
 * updated vignettes
 
-# skynet 0.9.9.9000
+# skynet 1.0
 
 * netMetro has been replaced by argument in `netDir()` and `netUnd()`
