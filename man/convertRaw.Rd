@@ -18,7 +18,7 @@ Converts DB1B files from BTS/RITA/Transtats website raw data (prezipped file), f
 }
 \details{
 Reduces DB1B raw filesize, to an adequate SKYNET compatible format. This function will create a csv file for you.
-File order doesn't matter, but it is recomended to name the files using the following
+File order doesn't matter, but it is recommended to name the files using the following
 syntax: \emph{"Origin_and_Destination_Survey_DB1BCoupon_year_quarter.csv", "Origin_and_Destination_Survey_DB1BTicket_year_quarter.csv".}
 Note: We do recommend sparklyr to be used for larger sets of data.
 }

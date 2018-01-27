@@ -1,7 +1,7 @@
 #' Import Data
 #'
 #' Imports data from BTS/RITA/Transtats website
-#' File order doesn't matter, but it is recomended to name the files using the following
+#' File order doesn't matter, but it is recommended to name the files using the following
 #' syntax: \emph{"Coupon YearQuarter.csv", "Ticket YearQuarter.csv", "T100 Year".}
 #' Note: We do recommend sparklyr to be used for larger sets of data.
 #'

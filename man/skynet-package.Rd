@@ -10,7 +10,7 @@ Creates networks from the BTS/Transtats data
 }
 \details{
 Given the DB1BCoupon and DB1BTicket, or the T-100 csv's exported
-this package allows creating sociomatrixes and subsequent igraph graphs.
+this package allows creating data frames and subsequent igraph graphs.
 }
 \examples{
 NA
