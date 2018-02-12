@@ -57,7 +57,7 @@ make.netUnd <- function(x, disp = FALSE, cap = FALSE, merge = TRUE, alpha = 0.00
   else{
 
    netUnd_all <- x %>%
-    select(origin, dest, passengers, op_carrier, itin_yield, roundtrip, distance) %>%
+    select(origin, dest, passengers, itin_yield, roundtrip, distance) %>%
     group_by(origin, dest) %>%
     mutate(itin_fare = itin_yield*distance) %>%
     summarise(weight = sum(passengers), fare_sd = round(sd(itin_fare), 2),
