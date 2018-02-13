@@ -44,11 +44,9 @@ convertRaw <- function(x,y,path = NULL){
                        integer64 = "numeric")
 
   Ticket_temp <- Ticket_temp %>%
-    select("ItinID", "RoundTrip", "FarePerMile", "Passengers", "ItinFare", "BulkFare", "Distance",
-           "Year", "Quarter") %>%
+    select("ItinID", "RoundTrip", "FarePerMile", "Passengers", "ItinFare", "BulkFare", "Distance") %>%
     rename(ITIN_ID = ItinID, ROUNDTRIP = RoundTrip, ITIN_YIELD = FarePerMile, PASSENGERS = Passengers,
-           ITIN_FARE = ItinFare, BULKFARE = BulkFare, DISTANCE_FULL = Distance,
-           YEAR = Year, QUARTER = Quarter)
+           ITIN_FARE = ItinFare, BULKFARE = BulkFare, DISTANCE_FULL = Distance)
 
   Coupon_temp <- fread(c, header = TRUE, sep = ",", stringsAsFactors = FALSE,
                        integer64 = "numeric")
