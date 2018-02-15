@@ -53,6 +53,18 @@ make.netUnd <- function(x, disp = FALSE, cap = FALSE, merge = TRUE, alpha = 0.00
                 itin_yield = mean(itin_yield)) %>%
       mutate(fare_sd = ifelse(is.na(fare_sd), 0, fare_sd))
 
+    if(carrier == TRUE & merge == TRUE){
+      print("For merged edges, op_carrier attribute can't be displayed as edges will be collapsed")
+      netUnd_all <- x %>%
+        select(origin, dest, passengers, itin_yield, distance) %>%
+        group_by(origin, dest) %>%
+        mutate(itin_fare = itin_yield*distance) %>%
+        summarise(weight = sum(passengers), fare_sd = round(sd(itin_fare), 2),
+                  itin_fare = round(mean(itin_fare), 2),
+                  itin_yield = mean(itin_yield)) %>%
+        mutate(fare_sd = ifelse(is.na(fare_sd), 0, fare_sd))
+
+    }
   }
   else{
 
@@ -76,10 +88,14 @@ make.netUnd <- function(x, disp = FALSE, cap = FALSE, merge = TRUE, alpha = 0.00
     nodes <- nodeStatsMetro(x)
   }
 
+  if(merge == FALSE){
+    gUnd <- graph_from_data_frame(netUnd_all, directed = FALSE, vertices = nodes)
+
+  }else{
 
   gUnd <- graph_from_data_frame(netUnd_all, directed = TRUE, vertices = nodes)
   gUnd <- as.undirected(gUnd, mode = "collapse", edge.attr.comb=list(weight = "sum", itin_fare = "mean", itin_yield = "mean", fare_sd = "mean"))
-
+  }
     if(disp == TRUE){
 
     # Run disparity filter
@@ -124,7 +140,7 @@ make.netUnd <- function(x, disp = FALSE, cap = FALSE, merge = TRUE, alpha = 0.00
     return(list(gUnd_disp = gUnd_disp, netUnd_disp = netUnd_disp, nodes = nodes))
 
     # ----------------------------------------------------------------------------- #
-                           # End of 10% filter command #
+                           # End of dispfilter command #
     # ----------------------------------------------------------------------------- #
 
 
