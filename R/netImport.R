@@ -9,6 +9,7 @@
 #' the T-100 database, the only file to be included.
 #' @param y Second csv file to be imported.
 #' @param zip Should equal TRUE if original file comes from the BTS prezipped option.
+#' @param nonsch Should equal TRUE to include non-scheduled flights
 #' @examples
 #' \dontrun{
 #'
@@ -17,11 +18,10 @@
 #' }
 #' @export
 
-netImport <- function(x, y, zip = FALSE){
+netImport <- function(x, y, zip = FALSE, nonsch = FALSE){
 
   if(grepl("T100", deparse(substitute(x)), ignore.case = TRUE) == TRUE){
-
-    importT100(x)
+    importT100(x, nonsch)
 
   }else{
 
@@ -136,7 +136,7 @@ DB1BRaw <- function(x,y){
 globalVariables(c("ITIN_ID", "MKT_ID", "SEQ_NUM", "YEAR", "QUARTER", "TRIP_BREAK",
                   "OPERATING_CARRIER", "DISTANCE", "GATEWAY", "ROUNDTRIP", "ITIN_YIELD",
                   "ITIN_FARE", "BULKFARE", "DISTANCE_FULL", "UNIQUE_CARRIER",
-                  "UNIQUE_CARRIER_NAME", "MONTH", "AIRCRAFT_CONFIG", "CLASS", "netImport"))
+                  "UNIQUE_CARRIER_NAME", "MONTH", "AIRCRAFT_CONFIG", "CLASS", "netImport", "nonsch"))
 
 pos = 1
 envir = as.environment(pos)
