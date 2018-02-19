@@ -46,7 +46,7 @@ if(!is.null(x[["trip_break"]])){
 
 nodeStat <- nodeStat %>%
   merge(airportCodeFull, by.x = "airport", by.y = "origin", all.x = TRUE) %>%
-  mutate(freq = pass_dep + pass_arr)
+  mutate(freq = (pass_dep + pass_arr)/2)
 
 return(nodeStat)
 
