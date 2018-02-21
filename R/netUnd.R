@@ -134,7 +134,8 @@ make.netUnd <- function(x, disp = FALSE, cap = FALSE, merge = TRUE, alpha = 0.00
         rename(dest = origin, dest_city = description)
 
       netUnd_disp <- netUnd_disp %>%
-        left_join(MetroTemp, by = "dest")
+        left_join(MetroTemp, by = "dest") %>%
+        select(-latitude.x, -latitude.y, -longitude.x, -longitude.y)
 
     }
 
@@ -183,7 +184,8 @@ make.netUnd <- function(x, disp = FALSE, cap = FALSE, merge = TRUE, alpha = 0.00
         rename(dest = origin, dest_city = description)
 
       netUnd_cap <- netUnd_cap %>%
-        left_join(MetroTemp, by = "dest")
+        left_join(MetroTemp, by = "dest") %>%
+        select(-latitude.x, -latitude.y, -longitude.x, -longitude.y)
     }
 
     nodes <- as.data.frame(get.vertex.attribute(gUnd_cap))
@@ -226,7 +228,8 @@ make.netUnd <- function(x, disp = FALSE, cap = FALSE, merge = TRUE, alpha = 0.00
         rename(dest = origin, dest_city = description)
 
       netUnd_all <- netUnd_all %>%
-        left_join(MetroTemp, by = "dest")
+        left_join(MetroTemp, by = "dest") %>%
+        select(-latitude.x, -latitude.y, -longitude.x, -longitude.y)
 
     }
 
