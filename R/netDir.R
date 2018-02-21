@@ -47,7 +47,9 @@ make.netDir <- function(x, disp = FALSE, cap = FALSE, alpha = 0.003, pct = 10, c
       select(origin, dest, passengers, op_carrier, itin_yield, distance) %>%
       group_by(origin, dest, op_carrier) %>%
       mutate(itin_fare = itin_yield*distance) %>%
-      summarise(weight = sum(passengers), fare_sd = round(sd(itin_fare), 2), itin_fare = round(mean(itin_fare), 2), itin_yield = mean(itin_yield)) %>%
+      summarise(weight = sum(passengers), fare_sd = round(sd(itin_fare), 2),
+                itin_fare = round(mean(itin_fare), 2), itin_yield = mean(itin_yield),
+                distance = mean(distance)) %>%
       mutate(fare_sd = ifelse(is.na(fare_sd), 0, fare_sd))
   }
   else{
@@ -55,7 +57,9 @@ make.netDir <- function(x, disp = FALSE, cap = FALSE, alpha = 0.003, pct = 10, c
       select(origin, dest, passengers, itin_yield, distance) %>%
       group_by(origin, dest) %>%
       mutate(itin_fare = itin_yield*distance) %>%
-      summarise(weight = sum(passengers), fare_sd = round(sd(itin_fare), 2), itin_fare = round(mean(itin_fare), 2), itin_yield = mean(itin_yield)) %>%
+      summarise(weight = sum(passengers), fare_sd = round(sd(itin_fare), 2),
+                itin_fare = round(mean(itin_fare), 2), itin_yield = mean(itin_yield),
+                distance = mean(distance)) %>%
       mutate(fare_sd = ifelse(is.na(fare_sd), 0, fare_sd))
   }
 

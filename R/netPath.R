@@ -96,7 +96,7 @@ make.Path <- function(x, leg = FALSE, zero = FALSE, carrier = FALSE){
 # Filter carriers
   y <- as.numeric(x[1, "year"])
   car <- carriers %>%
-    filter(from < y & (to > y | is.na(to))) %>%
+    filter(from <= y & (to >= y | is.na(to))) %>%
     select(op_carrier, carrier_name)
 
   DT <- DT[,.(passengers = sum(passengers)), by = .(path, op_carrier) ]

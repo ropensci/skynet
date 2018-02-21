@@ -50,7 +50,7 @@ make.netUnd <- function(x, disp = FALSE, cap = FALSE, merge = TRUE, alpha = 0.00
       mutate(itin_fare = itin_yield*distance) %>%
       summarise(weight = sum(passengers), fare_sd = round(sd(itin_fare), 2),
                 itin_fare = round(mean(itin_fare), 2),
-                itin_yield = mean(itin_yield)) %>%
+                itin_yield = mean(itin_yield), distance = mean(distance)) %>%
       mutate(fare_sd = ifelse(is.na(fare_sd), 0, fare_sd))
   }
 
@@ -64,7 +64,7 @@ make.netUnd <- function(x, disp = FALSE, cap = FALSE, merge = TRUE, alpha = 0.00
         mutate(itin_fare = itin_yield*distance) %>%
         summarise(weight = sum(passengers), fare_sd = round(sd(itin_fare), 2),
                   itin_fare = round(mean(itin_fare), 2),
-                  itin_yield = mean(itin_yield)) %>%
+                  itin_yield = mean(itin_yield), distance = mean(distance)) %>%
         mutate(fare_sd = ifelse(is.na(fare_sd), 0, fare_sd))
   }
   else{
@@ -75,7 +75,7 @@ make.netUnd <- function(x, disp = FALSE, cap = FALSE, merge = TRUE, alpha = 0.00
     mutate(itin_fare = itin_yield*distance) %>%
     summarise(weight = sum(passengers), fare_sd = round(sd(itin_fare), 2),
                itin_fare = round(mean(itin_fare), 2),
-               itin_yield = mean(itin_yield)) %>%
+               itin_yield = mean(itin_yield), distance = mean(distance)) %>%
     mutate(fare_sd = ifelse(is.na(fare_sd), 0, fare_sd))
 
   }
