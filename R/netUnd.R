@@ -97,7 +97,7 @@ make.netUnd <- function(x, disp = FALSE, cap = FALSE, merge = TRUE, alpha = 0.00
   }else{
 
   gUnd <- graph_from_data_frame(netUnd_all, directed = TRUE, vertices = nodes)
-  gUnd <- as.undirected(gUnd, mode = "collapse", edge.attr.comb=list(weight = "sum", itin_fare = "mean", itin_yield = "mean", fare_sd = "mean"))
+  gUnd <- as.undirected(gUnd, mode = "collapse", edge.attr.comb=list(weight = "sum", itin_fare = "mean", itin_yield = "mean", fare_sd = "mean", distance = "mean"))
   }
     if(disp == TRUE){
 
