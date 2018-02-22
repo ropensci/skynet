@@ -16,23 +16,35 @@
 
 netMap <- function(x, pct = 60){
 
-  airports <- select(airportCode, origin, latitude, longitude)
+  if(nchar(x[[1]][1]) == 5){
+    airports <- select(MetroLookup, origin, latitude, longitude)
+    nodes <- x %>%
+      nodeStatsMetro() %>%
+      rename(origin = airport)
 
+    x <- x %>%
+      filter(origin != dest)
+
+    }else{
+      airports <- select(airportCode, origin, latitude, longitude)
+      nodes <- x %>%
+        nodeStats() %>%
+        select(airport, latitude, longitude, freq) %>%
+        rename(origin = airport) %>%
+        mutate(description = origin)
+      }
   #-----------------------------------------------------
 
-  data <- x
 
   # Merges flights and airport data for Latitude/Longitude info
 
-  flights <- merge(data, airports, by = "origin")
+  flights <- merge(x, airports, by = "origin")
   if(!is.null(x[["op_carrier"]])){
     flights <- select(flights, origin, dest, passengers, latitude, longitude, op_carrier)
   }else{
     flights <- select(flights, origin, dest, passengers, latitude, longitude)
   }
   flights <- merge(flights, airports, by.x = "dest", by.y = "origin")
-
-  nodes <- createNodes(x)
 
   #-----------------------------------------------------
 
@@ -62,7 +74,7 @@ netMap <- function(x, pct = 60){
                aes(x = longitude, y = latitude), col = "royalblue", alpha = .8,
                size = .1) +
     ggrepel::geom_text_repel(data = nodes[nodes$freq > quantile(nodes$freq, prob = 1-4/100),], aes(x = longitude, y = latitude,
-                label = origin), col = "black", size = 2, segment.color = NA, fontface = "bold") +
+                label = description), col = "black", size = 2, segment.color = NA, fontface = "bold") +
     coord_cartesian(xlim = c(-160, -65), ylim = c(16, 65)) +
     theme(panel.background = element_rect(fill="white"),
           axis.line = element_blank(),
