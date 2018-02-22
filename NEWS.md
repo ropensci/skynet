@@ -46,4 +46,5 @@
 * Possible to filter non-scheduled flights.
 * Ground Transport is now included as a carrier.
 * Metro Network can be plotted.
+* Improved way of calculating airport passenger frequency.
 * Minor bug fixes.

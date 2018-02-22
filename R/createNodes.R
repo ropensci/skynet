@@ -77,7 +77,7 @@ nodeStatsMetro <- function(y){
 
   nodeStat <- nodeStat %>%
     merge(MetroLookup, by.x = "airport", by.y = "origin", all.x = TRUE) %>%
-    mutate(freq = (pass_dep + pass_arr)/2)
+    mutate(freq = (pass_arr + (pass_dep-pass_tr)))
 
   return(nodeStat)
 
