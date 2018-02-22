@@ -34,8 +34,16 @@
 
 * netImport now imports T100 market and segment files.
 * netPath airlines renamed to carrier.
-* updated vignettes
+* updated vignettes.
 
 # skynet 1.0
 
-* netMetro has been replaced by argument in `netDir()` and `netUnd()`
+* netMetro has been replaced by argument in `netDir()` and `netUnd()`.
+
+# skynet 1.0.1
+
+* Possible to include carriers for undirected networks.
+* Possible to filter non-scheduled flights.
+* Ground Transport is now included as a carrier.
+* Metro Network can be plotted.
+* Minor bug fixes.

@@ -27,7 +27,11 @@ netMap <- function(x, pct = 60){
 
     }else{
       airports <- select(airportCode, origin, latitude, longitude)
-      nodes <- createNodes(x)
+      nodes <- x %>%
+        nodeStats() %>%
+        select(airport, latitude, longitude, freq) %>%
+        rename(origin = airport) %>%
+        mutate(description = origin)
       }
   #-----------------------------------------------------
 
