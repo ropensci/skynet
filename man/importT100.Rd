@@ -4,10 +4,12 @@
 \alias{importT100}
 \title{Import T-100 Data}
 \usage{
-importT100(x)
+importT100(x, nonsch = FALSE)
 }
 \arguments{
 \item{x}{T-100 csv}
+
+\item{nonsch}{Should equal TRUE to include non-scheduled flights}
 }
 \description{
 Imports T-100 Data directly from BTS/RITA/Transtats website raw data (prezipped file),
