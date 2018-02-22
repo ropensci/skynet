@@ -28,12 +28,12 @@ Generates Directed Network with an iGraph object and a Data Frame.
 }
 \examples{
 \dontrun{
-make.netDir(OD_sample)
+make.netDir(OD_Sample)
 
 # Apply Disparity Filter
-make.netDir(OD_sample, disp = TRUE, alpha = 0.05)
+make.netDir(OD_Sample, disp = TRUE, alpha = 0.05)
 
 # Apply Percentage Cap
-make.netDir(OD_sample, cap = TRUE, pct = 20)
+make.netDir(OD_Sample, cap = TRUE, pct = 20)
 }
 }
