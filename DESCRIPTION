@@ -45,7 +45,8 @@ Imports:
     ggrepel,
     stringr,
     maps
-Suggests: knitr,
+Suggests:
+    knitr,
     rmarkdown,
     testthat,
     kableExtra

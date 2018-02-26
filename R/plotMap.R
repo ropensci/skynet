@@ -88,4 +88,4 @@ netMap <- function(x, pct = 60){
 
 }
 
-globalVariables(c("latitude", "longitude", "latitude.y", "gcurve"))
+globalVariables(c("latitude", "longitude", "latitude.y", "gcurve", "airport"))
