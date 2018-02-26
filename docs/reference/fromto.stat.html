@@ -69,7 +69,12 @@
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/FilipeamTeixeira/skynet">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
@@ -110,9 +115,10 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='fu'>fromto.stat</span>(<span class='no'>netDir11</span>$<span class='no'>gDir</span>, <span class='st'>"JFK"</span>, <span class='kw'>orig</span> <span class='kw'>=</span> <span class='st'>"from"</span>)
+<span class='no'>netDir</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='make.netDir.html'>make.netDir</a></span>(<span class='no'>OD_Sample</span>)
+<span class='fu'>fromto.stat</span>(<span class='no'>netDir</span>$<span class='no'>gDir</span>, <span class='st'>"JFK"</span>, <span class='kw'>orig</span> <span class='kw'>=</span> <span class='st'>"from"</span>)
 
-<span class='fu'>fromto.stat</span>(<span class='no'>netDir11</span>$<span class='no'>gDir</span>, <span class='st'>"JFK"</span>, <span class='kw'>orig</span> <span class='kw'>=</span> <span class='st'>"to"</span>)
+<span class='fu'>fromto.stat</span>(<span class='no'>netDir</span>$<span class='no'>gDir</span>, <span class='st'>"JFK"</span>, <span class='kw'>orig</span> <span class='kw'>=</span> <span class='st'>"to"</span>)
 <span class='co'># }</span><div class='input'>
 </div></pre>
   </div>

@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Generates networks from BTS data • skynet</title>
+<title>Generates Networks from BTS Data • skynet</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cerulean/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
@@ -44,7 +44,14 @@
   <a href="news/index.html">News</a>
 </li>
       </ul>
-<ul class="nav navbar-nav navbar-right"></ul>
+<ul class="nav navbar-nav navbar-right">
+<li>
+  <a href="https://github.com/FilipeamTeixeira/skynet">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
 </div>
 <!--/.nav-collapse -->
   </div>
@@ -64,7 +71,7 @@
 <div id="skynet" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#skynet" class="anchor"></a>skynet</h1></div>
-
+<p><a href="https://travis-ci.org/FilipeamTeixeira/skynet.svg"><img src="https://travis-ci.org/FilipeamTeixeira/skynet.svg" alt="Build Status"></a> <a href="https://cran.r-project.org/package=skynet"><img src="http://www.r-pkg.org/badges/version/skynet" alt="CRAN_Status_Badge"></a> <img src="https://cranlogs.r-pkg.org/badges/grand-total/skynet?color=brightgreen"></p>
 </div>
 <div id="overview" class="section level1">
 <h1 class="hasAnchor">
@@ -75,7 +82,7 @@
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>You can install skynet from github with:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># install.packages("devtools")</span>
-devtools::<span class="kw">install_github</span>(<span class="st">"FilipeamTeixeira/Skynet"</span>)</code></pre></div>
+devtools::<span class="kw">install_github</span>(<span class="st">"FilipeamTeixeira/skynet"</span>)</code></pre></div>
 </div>
 <div id="example" class="section level2">
 <h2 class="hasAnchor">
@@ -90,16 +97,18 @@ make.netDir(OD_2011Q1, disp = TRUE, alpha = 0.05)</code></pre>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2 class="hasAnchor">
-<a href="#sidebar" class="anchor"></a>License</h2>
-<p><a href="https://www.r-project.org/Licenses/GPL-3">GPL-3</a></p>
+<a href="#sidebar" class="anchor"></a>Links</h2>
+<ul class="list-unstyled">
+<li>Download from CRAN at <br><a href="https://cran.r-project.org/package=skynet">https://​cran.r-project.org/​package=skynet</a>
+</li>
+<li>Browse source code at <br><a href="https://github.com/FilipeamTeixeira/skynet">https://​github.com/​FilipeamTeixeira/​skynet</a>
+</li>
+</ul>
+<h2>License</h2>
+<p><a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE.html">LICENSE</a></p>
 <h2>Developers</h2>
 <ul class="list-unstyled">
 <li>Filipe Teixeira <br><small class="roles"> Author, maintainer </small> </li>
-</ul>
-<h2>Dev status</h2>
-<ul class="list-unstyled">
-<li><a href="https://travis-ci.com/FilipeamTeixeira/skynet.svg"><img src="https://travis-ci.com/FilipeamTeixeira/skynet.svg" alt="Build Status"></a></li>
-<li><a href="https://cran.r-project.org/package=skynet"><img src="http://www.r-pkg.org/badges/version/skynet" alt="CRAN_Status_Badge"></a></li>
 </ul>
 </div>
 

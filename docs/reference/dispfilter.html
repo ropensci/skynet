@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Path and OD Network — make.Path • skynet</title>
+<title>Disparity Filter — dispfilter • skynet</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -86,44 +86,34 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Path and OD Network</h1>
+    <h1>Disparity Filter</h1>
     </div>
 
     
-    <p>Generates an OD network and a Leg Count data frame(on demand)</p>
+    <p>Uses the Serrano's disparity filter (<a href='https://en.wikipedia.org/wiki/Disparity_filter_algorithm_of_weighted_network'>https://en.wikipedia.org/wiki/Disparity_filter_algorithm_of_weighted_network</a>)
+to extract the backbone of the network in "Extracting the multiscale backbone of complex weighted networks"</p>
     
 
-    <pre class="usage"><span class='fu'>make.Path</span>(<span class='no'>x</span>, <span class='kw'>leg</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>zero</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>carrier</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>dispfilter</span>(<span class='no'>g</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>0.003</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>x</th>
-      <td><p>Data frame</p></td>
+      <th>g</th>
+      <td><p>igraph object</p></td>
     </tr>
     <tr>
-      <th>leg</th>
-      <td><p>Generates Leg Count Data frame, based on Path taken.</p></td>
-    </tr>
-    <tr>
-      <th>zero</th>
-      <td><p>Displays percentage of 0 usd tickets</p></td>
-    </tr>
-    <tr>
-      <th>carrier</th>
-      <td><p>Groups data per airline</p>
-<p>For example, all passengers doing the BOS-ATL-LAX path, are summed by Air Carrier.</p></td>
+      <th>alpha</th>
+      <td><p>Alpha value. Default 0.003</p></td>
     </tr>
     </table>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='fu'>make.Path</span>(<span class='no'>OD_Sample</span>)
-
-<span class='co'># Generate Leg Count</span>
-<span class='fu'>make.Path</span>(<span class='no'>OD_Sample</span>, <span class='kw'>leg</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='no'>netDir</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='make.netDir.html'>make.netDir</a></span>(<span class='no'>OD_Sample</span>)
+<span class='fu'>dispfilter</span>(<span class='no'>netDir</span>$<span class='no'>gDir</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>0.003</span>)
 <span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

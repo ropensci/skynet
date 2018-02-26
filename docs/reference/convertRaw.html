@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Path and OD Network — make.Path • skynet</title>
+<title>Convert Raw — convertRaw • skynet</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -86,51 +86,57 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Path and OD Network</h1>
+    <h1>Convert Raw</h1>
     </div>
 
     
-    <p>Generates an OD network and a Leg Count data frame(on demand)</p>
+    <p>Converts DB1B files from BTS/RITA/Transtats website raw data (prezipped file), for SKYNET's import function.</p>
     
 
-    <pre class="usage"><span class='fu'>make.Path</span>(<span class='no'>x</span>, <span class='kw'>leg</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>zero</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>carrier</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>convertRaw</span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='kw'>path</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>Data frame</p></td>
+      <td><p>First csv file to be processed</p></td>
     </tr>
     <tr>
-      <th>leg</th>
-      <td><p>Generates Leg Count Data frame, based on Path taken.</p></td>
+      <th>y</th>
+      <td><p>Second csv file to be processed</p></td>
     </tr>
     <tr>
-      <th>zero</th>
-      <td><p>Displays percentage of 0 usd tickets</p></td>
-    </tr>
-    <tr>
-      <th>carrier</th>
-      <td><p>Groups data per airline</p>
-<p>For example, all passengers doing the BOS-ATL-LAX path, are summed by Air Carrier.</p></td>
+      <th>path</th>
+      <td><p>Path to save file to</p></td>
     </tr>
     </table>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>Reduces DB1B raw filesize, to an adequate SKYNET compatible format. This function will create a csv file for you.
+File order doesn't matter, but it is recommended to name the files using the following
+syntax: <em>"Origin_and_Destination_Survey_DB1BCoupon_year_quarter.csv", "Origin_and_Destination_Survey_DB1BTicket_year_quarter.csv".</em>
+Note: We do recommend sparklyr to be used for larger sets of data.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='fu'>make.Path</span>(<span class='no'>OD_Sample</span>)
+<span class='no'>temp</span> <span class='kw'>&lt;-</span> <span class='fu'>tempdir</span>()
+<span class='fu'>convertRaw</span>(<span class='fu'><a href='skynet_example.html'>skynet_example</a></span>(<span class='st'>"Origin_and_Destination_Survey_DB1BCoupon_2001_1.csv"</span>),
+<span class='fu'><a href='skynet_example.html'>skynet_example</a></span>(<span class='st'>"Origin_and_Destination_Survey_DB1BTicket_2001_1.csv"</span>),
+<span class='kw'>path</span> <span class='kw'>=</span> <span class='no'>temp</span>)
 
-<span class='co'># Generate Leg Count</span>
-<span class='fu'>make.Path</span>(<span class='no'>OD_Sample</span>, <span class='kw'>leg</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-<span class='co'># }</span></pre>
+<span class='co'># }</span><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-            
+      
+      <li><a href="#details">Details</a></li>
+      
       <li><a href="#examples">Examples</a></li>
     </ul>
 

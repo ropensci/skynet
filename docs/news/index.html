@@ -69,7 +69,12 @@
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/FilipeamTeixeira/skynet">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
@@ -91,13 +96,6 @@
 <a href="#skynet-0-9-0" class="anchor"></a>skynet 0.9.0</h1>
 <ul>
 <li>Added a <code>NEWS.md</code> file to track changes to the package.</li>
-</ul>
-</div>
-    <div id="skynet-0-9-1" class="section level1">
-<h1 class="hasAnchor">
-<a href="#skynet-0-9-1" class="anchor"></a>skynet 0.9.1</h1>
-<ul>
-<li>Jumped version</li>
 </ul>
 </div>
     <div id="skynet-0-9-2" class="section level1">
@@ -123,8 +121,52 @@
 <h1 class="hasAnchor">
 <a href="#skynet-0-9-4" class="anchor"></a>skynet 0.9.4</h1>
 <ul>
-<li>Added T-100 import.</li>
+<li>Added T-100 import</li>
 <li>Corrected issue with general import for international option</li>
+</ul>
+</div>
+    <div id="skynet-0-9-7" class="section level1">
+<h1 class="hasAnchor">
+<a href="#skynet-0-9-7" class="anchor"></a>skynet 0.9.7</h1>
+<ul>
+<li>Added new map function, now automatically printing different carriers with different colors.</li>
+<li>Improved import functions</li>
+<li>Importing from prezipped file, no longer requires extra function.</li>
+</ul>
+</div>
+    <div id="skynet-0-9-7-1" class="section level1">
+<h1 class="hasAnchor">
+<a href="#skynet-0-9-7-1" class="anchor"></a>skynet 0.9.7</h1>
+<ul>
+<li>Changed way itin_fare was calculated for Directed, Undirected and Metro Networks. Now it uses price per mile and distance between stops to generate that info.</li>
+</ul>
+</div>
+    <div id="skynet-0-9-9" class="section level1">
+<h1 class="hasAnchor">
+<a href="#skynet-0-9-9" class="anchor"></a>skynet 0.9.9</h1>
+<ul>
+<li>netImport now imports T100 market and segment files.</li>
+<li>netPath airlines renamed to carrier.</li>
+<li>updated vignettes.</li>
+</ul>
+</div>
+    <div id="skynet-1-0" class="section level1">
+<h1 class="hasAnchor">
+<a href="#skynet-1-0" class="anchor"></a>skynet 1.0</h1>
+<ul>
+<li>netMetro has been replaced by argument in <code>netDir()</code> and <code>netUnd()</code>.</li>
+</ul>
+</div>
+    <div id="skynet-1-0-1" class="section level1">
+<h1 class="hasAnchor">
+<a href="#skynet-1-0-1" class="anchor"></a>skynet 1.0.1</h1>
+<ul>
+<li>Possible to include carriers for undirected networks.</li>
+<li>Possible to filter non-scheduled flights.</li>
+<li>Ground Transport is now included as a carrier.</li>
+<li>Metro Network can be plotted.</li>
+<li>Improved way of calculating airport passenger frequency.</li>
+<li>Minor bug fixes.</li>
 </ul>
 </div>
     </div>
@@ -135,10 +177,14 @@
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
         <li><a href="#skynet-0-9-0">0.9.0</a></li>
-        <li><a href="#skynet-0-9-1">0.9.1</a></li>
         <li><a href="#skynet-0-9-2">0.9.2</a></li>
         <li><a href="#skynet-0-9-3">0.9.3</a></li>
         <li><a href="#skynet-0-9-4">0.9.4</a></li>
+        <li><a href="#skynet-0-9-7">0.9.7</a></li>
+        <li><a href="#skynet-0-9-7-1">0.9.7</a></li>
+        <li><a href="#skynet-0-9-9">0.9.9</a></li>
+        <li><a href="#skynet-1-0">1.0</a></li>
+        <li><a href="#skynet-1-0-1">1.0.1</a></li>
       </ul>
     </div>
   </div>

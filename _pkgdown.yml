@@ -4,23 +4,26 @@ template:
   params:
     bootswatch: cerulean
 
+output:
+  html_document:
+    smart: false
+
 reference:
 - title: All functions
   desc: ~
   contents:
   - '`createNodes`'
+  - '`convertRaw`'
+  - '`dispfilter`'
   - '`findAirport`'
+  - '`findCarrier`'
   - '`fitPlaw`'
   - '`fromto.stat`'
-  - '`make.gMap`'
+  - '`importT100`'
+  - '`netMap`'
   - '`make.netDir`'
   - '`make.netInt`'
-  - '`make.netMetro`'
   - '`make.netUnd`'
-  - '`make.nodesTr`'
   - '`make.Path`'
-  - '`MetroLookup`'
-  - '`metroNodes`'
-  - '`netConvert`'
+  - '`nodeStats`'
   - '`netImport`'
-  - '`transferNodes`'

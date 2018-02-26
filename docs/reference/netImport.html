@@ -69,7 +69,12 @@
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/FilipeamTeixeira/skynet">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
@@ -86,12 +91,12 @@
 
     
     <p>Imports data from BTS/RITA/Transtats website
-File order doesn't matter, but it is recomended to name the files using the following
+File order doesn't matter, but it is recommended to name the files using the following
 syntax: <em>"Coupon YearQuarter.csv", "Ticket YearQuarter.csv", "T100 Year".</em>
 Note: We do recommend sparklyr to be used for larger sets of data.</p>
     
 
-    <pre class="usage"><span class='fu'>netImport</span>(<span class='no'>x</span>, <span class='no'>y</span>)</pre>
+    <pre class="usage"><span class='fu'>netImport</span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='kw'>zip</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>nonsch</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -105,18 +110,22 @@ the T-100 database, the only file to be included.</p></td>
       <th>y</th>
       <td><p>Second csv file to be imported.</p></td>
     </tr>
+    <tr>
+      <th>zip</th>
+      <td><p>Should equal TRUE if original file comes from the BTS prezipped option.</p></td>
+    </tr>
+    <tr>
+      <th>nonsch</th>
+      <td><p>Should equal TRUE to include non-scheduled flights</p></td>
+    </tr>
     </table>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='co'># DB1B Database Files - Ticket and Coupon order doesn't matter</span>
-<span class='fu'>netImport</span>(<span class='st'>"Coupon 2016Q1.csv"</span>, <span class='st'>"Ticket 2016Q1.csv"</span>)
+<span class='fu'>netImport</span>(<span class='fu'><a href='skynet_example.html'>skynet_example</a></span>(<span class='st'>"Coupon_2001Q1.csv"</span>), <span class='fu'><a href='skynet_example.html'>skynet_example</a></span>(<span class='st'>"Ticket_2001Q1.csv"</span>))
 
-<span class='co'># T-100</span>
-<span class='fu'>netImport</span>(<span class='st'>"T100 2016.csv"</span>)
-<span class='co'># }</span><div class='input'>
-</div></pre>
+<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

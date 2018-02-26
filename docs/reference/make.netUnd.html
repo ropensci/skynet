@@ -69,7 +69,12 @@
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/FilipeamTeixeira/skynet">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
@@ -89,7 +94,7 @@
     
 
     <pre class="usage"><span class='fu'>make.netUnd</span>(<span class='no'>x</span>, <span class='kw'>disp</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>cap</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>merge</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>0.003</span>,
-  <span class='kw'>pct</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>carrier</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+  <span class='kw'>pct</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>carrier</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>metro</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -100,7 +105,7 @@
     </tr>
     <tr>
       <th>disp</th>
-      <td><p>Uses the Serrano's disparity filter (<a href='http://www.pnas.org/content/106/16/6483.full'>http://www.pnas.org/content/106/16/6483.full</a>)
+      <td><p>Uses the Serrano's disparity filter (<a href='https://en.wikipedia.org/wiki/Disparity_filter_algorithm_of_weighted_network'>https://en.wikipedia.org/wiki/Disparity_filter_algorithm_of_weighted_network</a>)
 to extract the backbone of the network.</p></td>
     </tr>
     <tr>
@@ -124,18 +129,22 @@ and summing their weights.</p></td>
       <th>carrier</th>
       <td><p>Groups data per carrier and OD</p></td>
     </tr>
+    <tr>
+      <th>metro</th>
+      <td><p>Groups data by metropolitan area (not compatible with plot)</p></td>
+    </tr>
     </table>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='fu'>make.netUnd</span>(<span class='no'>OD_2016Q1</span>)
+<span class='fu'>make.netUnd</span>(<span class='no'>OD_Sample</span>)
 
 <span class='co'># Apply Disparity Filter</span>
-<span class='fu'>make.netUnd</span>(<span class='no'>OD_2016Q1</span>, <span class='kw'>disp</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>0.05</span>)
+<span class='fu'>make.netUnd</span>(<span class='no'>OD_Sample</span>, <span class='kw'>disp</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>0.05</span>)
 
 <span class='co'># Apply Percentage Cap</span>
-<span class='fu'>make.netUnd</span>(<span class='no'>OD_2016Q1</span>, <span class='kw'>cap</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>pct</span> <span class='kw'>=</span> <span class='fl'>20</span>)
+<span class='fu'>make.netUnd</span>(<span class='no'>OD_Sample</span>, <span class='kw'>cap</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>pct</span> <span class='kw'>=</span> <span class='fl'>20</span>)
 <span class='co'># }</span><div class='input'>
 </div></pre>
   </div>

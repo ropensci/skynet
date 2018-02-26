@@ -1,19 +1,17 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+skynet
+======
 
-# skynet
+[![Build Status](https://travis-ci.org/FilipeamTeixeira/skynet.svg)](https://travis-ci.org/FilipeamTeixeira/skynet.svg) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/skynet)](https://cran.r-project.org/package=skynet) ![](https://cranlogs.r-pkg.org/badges/grand-total/skynet?color=brightgreen)
 
-[![Build Status](https://travis-ci.org/FilipeamTeixeira/skynet.svg)](https://travis-ci.org/FilipeamTeixeira/skynet.svg)
-[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/skynet)](https://cran.r-project.org/package=skynet)
-![](https://cranlogs.r-pkg.org/badges/grand-total/skynet?color=brightgreen)
+Overview
+========
 
-# Overview
+The rationale behind Skynet, is to provide researchers with a unifying tool overcoming some of the challenges faced when dealing with the Bureau of Transport Statistics, DB1B and T100 data.
 
-The rationale behind Skynet, is to provide researchers with a unifying
-tool overcoming some of the challenges faced when dealing with the
-Bureau of Transport Statistics, DB1B and T100 data.
-
-## Installation
+Installation
+------------
 
 You can install skynet from github with:
 
@@ -22,7 +20,8 @@ You can install skynet from github with:
 devtools::install_github("FilipeamTeixeira/skynet")
 ```
 
-## Example
+Example
+-------
 
 To generate a directed network, you only need to type:
 
