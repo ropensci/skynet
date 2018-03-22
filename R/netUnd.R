@@ -11,7 +11,7 @@
 #' @param merge When set to FALSE, it keeps parallel edges instead of collapsing them
 #' and summing their weights.
 #' @param carrier Groups data per carrier and OD
-#' @param metro Groups data by metropolitan area (not compatible with plot)
+#' @param metro Groups data by metropolitan area
 #'
 #' @examples
 #' \dontrun{

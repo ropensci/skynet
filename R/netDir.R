@@ -9,7 +9,7 @@
 #' @param cap Filters original data based on the edge weight.
 #' @param pct Argument for cap filter. Value should be imput as percentage.
 #' @param carrier Groups data per carrier and OD
-#' @param metro Groups data by metropolitan area (not compatible with plot)
+#' @param metro Groups data by metropolitan area
 #'
 #' @examples
 #' \dontrun{

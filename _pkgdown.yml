@@ -4,10 +4,6 @@ template:
   params:
     bootswatch: cerulean
 
-output:
-  html_document:
-    smart: false
-
 reference:
 - title: All functions
   desc: ~
