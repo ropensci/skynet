@@ -5,7 +5,7 @@ Some bugs have been fixed as well.
 The examples have the "\dontrun{}" tag as it would take too long to execute even with a small example due to the characteristics of this package.
 
 ## Test environments
-* local OS X install, R 3.4.2
+* local OS X install, R 3.4.4
 * ubuntu 12.04 (on travis-ci), R 3.4.2
 * win-builder (devel and release)
 
