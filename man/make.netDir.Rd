@@ -21,7 +21,7 @@ to extract the backbone of the network.}
 
 \item{carrier}{Groups data per carrier and OD}
 
-\item{metro}{Groups data by metropolitan area (not compatible with plot)}
+\item{metro}{Groups data by metropolitan area}
 }
 \description{
 Generates Directed Network with an iGraph object and a Data Frame.
