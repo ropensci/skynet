@@ -1,18 +1,8 @@
-## Resubmission 26/01/18
-This is a resubmission. In this version I have:
+## Release summary
+This is a new release with some functions added and some old functions improved.
+Some bugs have been fixed as well.
 
-* Corrected issue with convertRaw(). Now example writes to tempdir
-* Example files (csv) were added to inst/extdata folder
-* Examples are executable
-* Added more information to convertRaw which uses a necessary write.csv function, including option to select where to save file.
-
-## Resubmission
-This is a resubmission. In this version I have:
-
-* Fixed broken link
-* Added web references in the Description above  for the BTS data.
-* Reduced the total tarball size to the CRAN requirements
-
+The examples have the "\dontrun{}" tag as it would take too long to execute even with a small example due to the characteristics of this package.
 
 ## Test environments
 * local OS X install, R 3.4.2
