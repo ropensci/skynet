@@ -3,7 +3,7 @@
 skynet
 ======
 
-[![Build Status](https://travis-ci.org/FilipeamTeixeira/skynet.svg)](https://travis-ci.org/FilipeamTeixeira/skynet.svg) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/skynet)](https://cran.r-project.org/package=skynet) ![](https://cranlogs.r-pkg.org/badges/grand-total/skynet?color=brightgreen)
+[![Build Status](https://travis-ci.org/FilipeamTeixeira/skynet.svg?branch=master)](https://travis-ci.org/FilipeamTeixeira/skynet.svg?branch=master) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/skynet)](https://cran.r-project.org/package=skynet) ![](https://cranlogs.r-pkg.org/badges/grand-total/skynet?color=brightgreen)
 
 Overview
 ========
