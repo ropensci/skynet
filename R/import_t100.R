@@ -11,14 +11,14 @@
 #' @examples
 #' \dontrun{
 #'
-#' importT100(skynet_example("T100_2011_mkt.csv"))
+#' import_t100(skynet_example("T100_2011_mkt.csv"))
 #'
 #' }
 #' @export
 #'
 
 
-importT100 <- function(x, nonsch = FALSE){
+import_t100 <- function(x, nonsch = FALSE){
 
   T100 <- fread(x, header = TRUE, sep = ",", stringsAsFactors = FALSE,
                 integer64 = "numeric")

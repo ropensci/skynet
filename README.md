@@ -26,4 +26,5 @@ Example
 To generate a directed network, you only need to type:
 
     library(skynet)
+    import_db1b("folder/Coupon_2011Q1.csv", folder/Ticket_2011Q1.csv")
     make.netDir(OD_2011Q1, disp = TRUE, alpha = 0.05)

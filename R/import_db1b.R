@@ -1,43 +1,34 @@
-#' Import Data
+#' Import Data from DB1B files
 #'
 #' Imports data from BTS/RITA/Transtats website
 #' File order doesn't matter, but it is recommended to name the files using the following
-#' syntax: \emph{"Coupon YearQuarter.csv", "Ticket YearQuarter.csv", "T100 Year".}
+#' syntax: \emph{"Coupon YearQuarter.csv", "Ticket YearQuarter.csv".}
 #' Note: We do recommend sparklyr to be used for larger sets of data.
 #'
-#' @param x First csv file to be imported, in case of DB1B database, or in case of using
-#' the T-100 database, the only file to be included.
+#' @param x First csv file to be imported, in case of DB1B database
 #' @param y Second csv file to be imported.
 #' @param zip Should equal TRUE if original file comes from the BTS prezipped option.
-#' @param nonsch Should equal TRUE to include non-scheduled flights
 #' @examples
 #' \dontrun{
 #'
-#' netImport(skynet_example("Coupon_2001Q1.csv"), skynet_example("Ticket_2001Q1.csv"))
+#' import_db1b(skynet_example("Coupon_2001Q1.csv"), skynet_example("Ticket_2001Q1.csv"))
 #'
 #' }
 #' @export
 
-netImport <- function(x, y, zip = FALSE, nonsch = FALSE){
-
-  if(grepl("T100", deparse(substitute(x)), ignore.case = TRUE) == TRUE){
-    importT100(x, nonsch)
-
-  }else{
+import_db1b <- function(x, y, zip = FALSE){
 
     if(zip == FALSE){
-      do.call(DB1BImport, list(x,y))
+      do.call(ODImport, list(x,y))
     }else{
-      do.call(DB1BRaw, list(x,y))
+      do.call(ODRaw, list(x,y))
     }
   }
-}
-
 
 
 
 # netImport function
-DB1BImport <- function(x, y){
+ODImport <- function(x, y){
 
   if(grepl("Ticket", deparse(substitute(x)), ignore.case = TRUE) == TRUE)
     t = x
@@ -83,7 +74,7 @@ DB1BImport <- function(x, y){
 
 
 
-DB1BRaw <- function(x,y){
+ODRaw <- function(x,y){
 
 
   if(grepl("Ticket", deparse(substitute(x)), ignore.case = TRUE) == TRUE)
@@ -136,7 +127,8 @@ DB1BRaw <- function(x,y){
 globalVariables(c("ITIN_ID", "MKT_ID", "SEQ_NUM", "YEAR", "QUARTER", "TRIP_BREAK",
                   "OPERATING_CARRIER", "DISTANCE", "GATEWAY", "ROUNDTRIP", "ITIN_YIELD",
                   "ITIN_FARE", "BULKFARE", "DISTANCE_FULL", "UNIQUE_CARRIER",
-                  "UNIQUE_CARRIER_NAME", "MONTH", "AIRCRAFT_CONFIG", "netImport", "nonsch", "CLASS"))
+                  "UNIQUE_CARRIER_NAME", "MONTH", "AIRCRAFT_CONFIG", "import_db1b", "CLASS"))
+
 
 pos = 1
 envir = as.environment(pos)
