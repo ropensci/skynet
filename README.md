@@ -3,7 +3,7 @@
 skynet
 ======
 
-[![Build Status](https://travis-ci.org/FilipeamTeixeira/skynet.svg?branch=master)](https://travis-ci.org/FilipeamTeixeira/skynet.svg?branch=master) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/skynet)](https://cran.r-project.org/package=skynet) ![](https://cranlogs.r-pkg.org/badges/grand-total/skynet?color=brightgreen)
+[![Build Status](https://travis-ci.org/FilipeamTeixeira/skynet.svg)](https://travis-ci.org/FilipeamTeixeira/skynet.svg) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/skynet)](https://cran.r-project.org/package=skynet) ![](https://cranlogs.r-pkg.org/badges/grand-total/skynet?color=brightgreen)
 
 Overview
 ========
@@ -26,4 +26,5 @@ Example
 To generate a directed network, you only need to type:
 
     library(skynet)
+    import_db1b("folder/Coupon_2011Q1.csv", folder/Ticket_2011Q1.csv")
     make.netDir(OD_2011Q1, disp = TRUE, alpha = 0.05)
