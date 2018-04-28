@@ -34,9 +34,15 @@ devtools::install_github("FilipeamTeixeira/skynet")
 
 ## Example
 
-To generate a directed network, you only need to type:
+To generate a directed network, please type:
 
     library(skynet)
+    # For DB1B data
     import_db1b("folder/Coupon_2011Q1.csv", "folder/Ticket_2011Q1.csv")
     make.netDir(OD_2011Q1, disp = TRUE, alpha = 0.05)
+
+    # For T100 data
+    import_t100("folder/T100_2011.csv")
+    make.netDir(T100_2011Q1, disp = TRUE, alpha = 0.05)
+
 
