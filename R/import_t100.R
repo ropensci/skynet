@@ -29,9 +29,7 @@ import_t100 <- function(x, nonsch = FALSE){
       if(nonsch == FALSE){
       T100 <- T100 %>%
         filter(CLASS == "F", PASSENGERS > 0) %>%
-        select(ORIGIN, ORIGIN_CITY_MARKET_ID, DEST, DEST_CITY_MARKET_ID, UNIQUE_CARRIER,
-               PASSENGERS, QUARTER, YEAR, DISTANCE) %>%
-        rename(origin_mkt_id = ORIGIN_CITY_MARKET_ID, origin = ORIGIN, year = YEAR, quarter = QUARTER,
+        select(origin_mkt_id = ORIGIN_CITY_MARKET_ID, origin = ORIGIN, year = YEAR, quarter = QUARTER,
                dest_mkt_id = DEST_CITY_MARKET_ID , dest = DEST,
                op_carrier = UNIQUE_CARRIER, distance = DISTANCE, passengers = PASSENGERS) %>%
         mutate(itin_fare = NA, itin_yield = NA, roundtrip = NA)
@@ -40,9 +38,7 @@ import_t100 <- function(x, nonsch = FALSE){
 
       T100 <- T100 %>%
         filter(CLASS == "F" | CLASS == "L", PASSENGERS > 0) %>%
-        select(ORIGIN, ORIGIN_CITY_MARKET_ID, DEST, DEST_CITY_MARKET_ID, UNIQUE_CARRIER,
-               PASSENGERS, QUARTER, YEAR, DISTANCE) %>%
-        rename(origin_mkt_id = ORIGIN_CITY_MARKET_ID, origin = ORIGIN, year = YEAR, quarter = QUARTER,
+        select(origin_mkt_id = ORIGIN_CITY_MARKET_ID, origin = ORIGIN, year = YEAR, quarter = QUARTER,
                dest_mkt_id = DEST_CITY_MARKET_ID , dest = DEST,
                op_carrier = UNIQUE_CARRIER, distance = DISTANCE, passengers = PASSENGERS) %>%
         mutate(itin_fare = NA, itin_yield = NA, roundtrip = NA)
@@ -62,9 +58,7 @@ import_t100 <- function(x, nonsch = FALSE){
     if(nonsch == FALSE){
       T100 <- T100 %>%
         filter(CLASS == "F", PASSENGERS > 0) %>%
-        select(ORIGIN, ORIGIN_CITY_MARKET_ID, DEST, DEST_CITY_MARKET_ID, UNIQUE_CARRIER,
-               PASSENGERS, QUARTER, YEAR, DISTANCE) %>%
-        rename(origin_mkt_id = ORIGIN_CITY_MARKET_ID, origin = ORIGIN, year = YEAR, quarter = QUARTER,
+        select(origin_mkt_id = ORIGIN_CITY_MARKET_ID, origin = ORIGIN, year = YEAR, quarter = QUARTER,
                dest_mkt_id = DEST_CITY_MARKET_ID , dest = DEST,
                op_carrier = UNIQUE_CARRIER, distance = DISTANCE, passengers = PASSENGERS) %>%
         mutate(itin_fare = NA, itin_yield = NA, roundtrip = NA)
@@ -73,9 +67,7 @@ import_t100 <- function(x, nonsch = FALSE){
 
          T100 <- T100 %>%
         filter(CLASS == "F" | CLASS == "L", PASSENGERS > 0) %>%
-        select(ORIGIN, ORIGIN_CITY_MARKET_ID, DEST, DEST_CITY_MARKET_ID, UNIQUE_CARRIER,
-               PASSENGERS, QUARTER, YEAR, DISTANCE) %>%
-        rename(origin_mkt_id = ORIGIN_CITY_MARKET_ID, origin = ORIGIN, year = YEAR, quarter = QUARTER,
+        select(origin_mkt_id = ORIGIN_CITY_MARKET_ID, origin = ORIGIN, year = YEAR, quarter = QUARTER,
                dest_mkt_id = DEST_CITY_MARKET_ID , dest = DEST,
                op_carrier = UNIQUE_CARRIER, distance = DISTANCE, passengers = PASSENGERS) %>%
         mutate(itin_fare = NA, itin_yield = NA, roundtrip = NA)

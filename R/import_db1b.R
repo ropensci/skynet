@@ -91,19 +91,14 @@ ODRaw <- function(x,y){
                        integer64 = "numeric")
 
   ticket <- ticket %>%
-    select("ItinID", "RoundTrip", "FarePerMile", "Passengers", "ItinFare", "BulkFare", "Distance") %>%
-    rename(itin_id = ItinID, roundtrip = RoundTrip, itin_yield = FarePerMile, passengers = Passengers,
+    select(itin_id = ItinID, roundtrip = RoundTrip, itin_yield = FarePerMile, passengers = Passengers,
            itin_fare = ItinFare, bulk_fare = BulkFare, distance_full = Distance)
 
   coupon <- fread(c, header = TRUE, sep = ",", stringsAsFactors = FALSE,
                        integer64 = "numeric")
 
   coupon <- coupon %>%
-    select("ItinID", "MktID", "SeqNum",
-           "OriginCityMarketID", "Origin",
-           "DestCityMarketID", "Dest", "Break",
-           "OpCarrier", "Distance","Year", "Quarter", "Gateway") %>%
-    rename(itin_id = ItinID, mkt_id = MktID, seq_num = SeqNum,
+    select(itin_id = ItinID, mkt_id = MktID, seq_num = SeqNum,
            origin_mkt_id = OriginCityMarketID, origin = Origin, year = Year, quarter = Quarter,
            dest_mkt_id = DestCityMarketID , dest = Dest, trip_break = Break,
            op_carrier = OpCarrier, distance = Distance, gateway = Gateway)
