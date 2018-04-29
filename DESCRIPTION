@@ -24,6 +24,7 @@ Collate:
     'findAirport.R'
     'fromto.R'
     'convertRaw.R'
+    'netImport.R'
     'netDir.R'
     'netUnd.R'
     'netInt.R'
