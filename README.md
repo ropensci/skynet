@@ -3,7 +3,8 @@
 
 # skynet
 
-<https://travis-ci.org/FilipeamTeixeira/skynet.svg?branch=master>
+![Build
+Status](https://travis-ci.org/FilipeamTeixeira/skynet.svg?branch=master)
 [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/skynet)](https://cran.r-project.org/package=skynet)
 ![](https://cranlogs.r-pkg.org/badges/grand-total/skynet?color=brightgreen)
 
@@ -27,7 +28,7 @@ devtools::install_github("FilipeamTeixeira/skynet")
 To generate a directed network, please type:
 
     library(skynet)
-    # For db1b data
+    # For DB1B data
     import_db1b("folder/Coupon_2011Q1.csv", "folder/Ticket_2011Q1.csv")
     make.netDir(OD_2011Q1, disp = TRUE, alpha = 0.05)
     
