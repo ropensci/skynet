@@ -35,6 +35,7 @@ Collate:
     'findCarrier.R'
     'plotMap.R'
     'skynet_example.R'
+    'bootnet.R'
 Depends:
     R (>= 3.1.2)
 Imports:
