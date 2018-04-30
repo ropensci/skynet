@@ -9,12 +9,6 @@ netImport(x = NULL)
 \arguments{
 \item{x}{First csv file to be imported, in case of DB1B database, or in case of using
 the T-100 database, the only file to be included.}
-
-\item{y}{Second csv file to be imported.}
-
-\item{zip}{Should equal TRUE if original file comes from the BTS prezipped option.}
-
-\item{nonsch}{Should equal TRUE to include non-scheduled flights}
 }
 \description{
 Imports data from BTS/RITA/Transtats website

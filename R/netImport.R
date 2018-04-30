@@ -7,9 +7,6 @@
 #'
 #' @param x First csv file to be imported, in case of DB1B database, or in case of using
 #' the T-100 database, the only file to be included.
-#' @param y Second csv file to be imported.
-#' @param zip Should equal TRUE if original file comes from the BTS prezipped option.
-#' @param nonsch Should equal TRUE to include non-scheduled flights
 #' @examples
 #' \dontrun{
 #'
@@ -23,3 +20,8 @@
 netImport <- function(x = NULL){
   warning("netImport function is deprecated, please use `import_db1b()`, or `import_t100()`.")
 }
+
+
+
+pos = 1
+envir = as.environment(pos)
