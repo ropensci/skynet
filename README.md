@@ -12,7 +12,13 @@ Status](https://travis-ci.org/FilipeamTeixeira/skynet.svg?branch=master)
 
 The rationale behind Skynet, is to provide researchers with a unifying
 tool overcoming some of the challenges faced when dealing with the
-Bureau of Transport Statistics, DB1B and T100 data.
+Bureau of Transport Statistics, DB1B and T100 data. The DB1B data
+consists of 2 sets of files, Coupon and Ticket. They can be both
+downloaded at
+<https://www.transtats.bts.gov/DL_SelectFields.asp?Table_ID=289> and
+<https://www.transtats.bts.gov/DL_SelectFields.asp?Table_ID=272>
+respectively while the T100 data can be found here
+<https://www.transtats.bts.gov/Tables.asp?DB_ID=111>.
 
 ## Installation
 
