@@ -7,6 +7,8 @@
 Status](https://travis-ci.org/FilipeamTeixeira/skynet.svg?branch=master)
 [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/skynet)](https://cran.r-project.org/package=skynet)
 ![](https://cranlogs.r-pkg.org/badges/grand-total/skynet?color=brightgreen)
+[![Coverage
+status](https://codecov.io/gh/FilipeamTeixeira/Skynet/branch/master/graph/badge.svg)](https://codecov.io/github/FilipeamTeixeira/Skynet?branch=master)
 
 # Overview
 

@@ -47,9 +47,10 @@ Imports:
     ggrepel,
     stringr,
     maps
-Suggests:
+Suggests: 
     knitr,
     rmarkdown,
     testthat,
-    kableExtra
+    kableExtra,
+    covr
 VignetteBuilder: knitr
