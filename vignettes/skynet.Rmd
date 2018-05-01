@@ -20,7 +20,6 @@ SKYNET is effectively divided into four segments:
 1. Plot Air Networks
 
 
-
 ## Import Data
 
 To import data, simply type `import_db1b()` or `import_t100()` including the path to your desired file. 
@@ -47,7 +46,7 @@ Ticket = c("Itinerary ID", "Roundtrip", "Itinerary Yield", "Passengers",
 ```
 
 Since version 1.0.2 that the import method changed being the `netimport()` function no longer available.
-However, when importing from the prezipped DB1B file, just add the argument `zip = TRUE` to the `import_db1b()` function. This does not apply to the T100 file which can be simply imported by typing `import_t100()`.
+When importing from the prezipped DB1B file, just add the argument `zip = TRUE` to the `import_db1b()` function. This does not apply to the T100 file which can be simply imported by typing `import_t100()`.
 In order to save space, it is possible as well to import the prezipped file, and convert it to a smaller file with only the necessary variables, with the function `convertRaw()`. 
 
 When importing files from the T100 dataset, we recommend naming the file as `T100 year mkt` for the Market dataset and `T100 year seg` for the Segment dataset.
@@ -59,7 +58,7 @@ SKYNET creates three types of networks and an extra option:
 
 1. Directed Network - `make.netDir()`
 1. Undirected Network - `make.netUnd()`
-1. Path Network - `make.netPath()`
+1. Path Network - `make.Path()`
 1. Metro Network - To be used as argument in `make.netDir()` and `make.netUnd()`
 1. International Option - `make.netInt()`
 
@@ -103,5 +102,15 @@ netMap(test$netDir, pct = 10)
 
 ## Extra Functions
 
-SKYNET, allows as well to perform quick searches on both airports and carriers, by their IATA code. `findAirport()`, `findCarrier()`.
+SKYNET, allows as well to perform quick searches on both airports and carriers, by their IATA code. `findAirport()`, `findCarrier()`. 
+
+## Bootnet
+
+With version 1.0.2, we included the option to bootstrap networks and retrieve certain network statistics.
+
+```{r}
+library(skynet)
+test <- make.netDir(OD_Sample)
+bootnet(test$gDir, n = 10)
+```
 
