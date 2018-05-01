@@ -53,3 +53,8 @@
 
 * New import functions. Now there are separate functions to import csv files from both DB1B and T100 databases.
 * New bootnet function to bootstrap networks.
+
+# skynet 1.0.3
+
+* Minor adjustments
+* Improved readability
