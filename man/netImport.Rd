@@ -4,11 +4,13 @@
 \alias{netImport}
 \title{Import Data}
 \usage{
-netImport(x = NULL)
+netImport(x = NULL, y = NULL)
 }
 \arguments{
 \item{x}{First csv file to be imported, in case of DB1B database, or in case of using
 the T-100 database, the only file to be included.}
+
+\item{y}{Second csv file to be imported.}
 }
 \description{
 Imports data from BTS/RITA/Transtats website

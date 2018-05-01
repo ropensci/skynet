@@ -84,9 +84,11 @@ nodeStatsMetro <- function(y){
 
 }
 
-globalVariables(c("dest", "passengers", "origin", "passengers.x", "passengers.y",
-                  "freq", "airportCode", "airport_state", "airport_city_name",
-                  "trip_break", "freq.y", "city.y", "city_mkt_id.y", "MetroFull", "MetroLookup"))
+globalVariables(c("dest", "passengers", "origin",
+                  "passengers.x", "passengers.y", "freq",
+                  "airportCode", "airport_state", "airport_city_name",
+                  "trip_break", "freq.y", "city.y",
+                  "city_mkt_id.y", "MetroFull", "MetroLookup"))
 
-pos = 1
-envir = as.environment(pos)
+pos <- 1
+envir <- as.environment(pos)

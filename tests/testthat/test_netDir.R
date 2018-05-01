@@ -33,3 +33,13 @@ test_that("make.netDir with cap", {
   expect_output(str(class(test$gDir_cap)), "igraph")
 })
 
+test_that("make.netDir with metro", {
+  # Run simple net test
+  test <- make.netDir(OD_Sample, metro = TRUE)
+  expect_output(str(nrow(test$netDir)), "1781")
+  expect_length(test$gDir, 10)
+  expect_length(test$nodes, 8)
+  expect_output(str(class(test$netDir)), "data.frame")
+  expect_output(str(class(test$nodes)), "data.frame")
+  expect_output(str(class(test$gDir)), "igraph")
+})

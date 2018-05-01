@@ -31,13 +31,13 @@ import_db1b <- function(x, y, zip = FALSE){
 ODImport <- function(x, y){
 
   if(grepl("Ticket", deparse(substitute(x)), ignore.case = TRUE) == TRUE)
-    t = x
+    t <- x
   if(grepl("Ticket", deparse(substitute(y)), ignore.case = TRUE) == TRUE)
-    t = y
+    t <- y
   if(grepl("Coupon", deparse(substitute(x)), ignore.case = TRUE) == TRUE)
-    c = x
+    c <- x
   if(grepl("Coupon", deparse(substitute(y)), ignore.case = TRUE) == TRUE)
-    c = y
+    c <- y
 
   # Import Coupon file
   coupon <- fread(c, header = TRUE, sep = ",", stringsAsFactors = FALSE,
@@ -45,17 +45,21 @@ ODImport <- function(x, y){
   coupon <- coupon %>%
     select(-grep("V", names(coupon))) %>%
     rename(itin_id = ITIN_ID, mkt_id = MKT_ID, seq_num = SEQ_NUM,
-           origin_mkt_id = ORIGIN_CITY_MARKET_ID, origin = ORIGIN, year = YEAR, quarter = QUARTER,
-           dest_mkt_id = DEST_CITY_MARKET_ID , dest = DEST, trip_break = TRIP_BREAK,
-           op_carrier = OPERATING_CARRIER, distance = DISTANCE, gateway = GATEWAY)
+           origin_mkt_id = ORIGIN_CITY_MARKET_ID,
+           origin = ORIGIN, year = YEAR, quarter = QUARTER,
+           dest_mkt_id = DEST_CITY_MARKET_ID, dest = DEST,
+           trip_break = TRIP_BREAK, op_carrier = OPERATING_CARRIER,
+           distance = DISTANCE, gateway = GATEWAY)
 
   # Import Ticket file
   ticket <- fread(t, header = TRUE, sep = ",", stringsAsFactors = FALSE,
                   integer64 = "numeric")
   ticket <- ticket %>%
     select(-grep("V", names(ticket))) %>%
-    rename(itin_id = ITIN_ID, roundtrip = ROUNDTRIP, itin_yield = ITIN_YIELD, passengers = PASSENGERS,
-             itin_fare = ITIN_FARE, bulk_fare = BULKFARE, distance_full = DISTANCE_FULL)
+    rename(itin_id = ITIN_ID, roundtrip = ROUNDTRIP,
+           itin_yield = ITIN_YIELD, passengers = PASSENGERS,
+             itin_fare = ITIN_FARE, bulk_fare = BULKFARE,
+           distance_full = DISTANCE_FULL)
 
   #Merge data
   netMerged <- merge(coupon, ticket, by = "itin_id", all.x = TRUE)
@@ -78,28 +82,31 @@ ODRaw <- function(x,y){
 
 
   if(grepl("Ticket", deparse(substitute(x)), ignore.case = TRUE) == TRUE)
-    t = x
+    t <- x
   if(grepl("Ticket", deparse(substitute(y)), ignore.case = TRUE) == TRUE)
-    t = y
+    t <- y
   if(grepl("Coupon", deparse(substitute(x)), ignore.case = TRUE) == TRUE)
-    c = x
+    c <- x
   if(grepl("Coupon", deparse(substitute(y)), ignore.case = TRUE) == TRUE)
-    c = y
+    c <- y
 
 
   ticket <- fread(t, header = TRUE, sep = ",", stringsAsFactors = FALSE,
                        integer64 = "numeric")
 
   ticket <- ticket %>%
-    select(itin_id = ItinID, roundtrip = RoundTrip, itin_yield = FarePerMile, passengers = Passengers,
-           itin_fare = ItinFare, bulk_fare = BulkFare, distance_full = Distance)
+    select(itin_id = ItinID, roundtrip = RoundTrip,
+           itin_yield = FarePerMile, passengers = Passengers,
+           itin_fare = ItinFare, bulk_fare = BulkFare,
+           distance_full = Distance)
 
   coupon <- fread(c, header = TRUE, sep = ",", stringsAsFactors = FALSE,
                        integer64 = "numeric")
 
   coupon <- coupon %>%
     select(itin_id = ItinID, mkt_id = MktID, seq_num = SeqNum,
-           origin_mkt_id = OriginCityMarketID, origin = Origin, year = Year, quarter = Quarter,
+           origin_mkt_id = OriginCityMarketID,
+           origin = Origin, year = Year, quarter = Quarter,
            dest_mkt_id = DestCityMarketID , dest = Dest, trip_break = Break,
            op_carrier = OpCarrier, distance = Distance, gateway = Gateway)
 
@@ -119,14 +126,16 @@ ODRaw <- function(x,y){
 
 }
 
-globalVariables(c("ITIN_ID", "MKT_ID", "SEQ_NUM", "YEAR", "QUARTER", "TRIP_BREAK",
-                  "OPERATING_CARRIER", "DISTANCE", "GATEWAY", "ROUNDTRIP", "ITIN_YIELD",
+globalVariables(c("ITIN_ID", "MKT_ID", "SEQ_NUM", "YEAR", "QUARTER",
+                  "TRIP_BREAK", "OPERATING_CARRIER", "DISTANCE",
+                  "GATEWAY", "ROUNDTRIP", "ITIN_YIELD",
                   "ITIN_FARE", "BULKFARE", "DISTANCE_FULL", "UNIQUE_CARRIER",
-                  "UNIQUE_CARRIER_NAME", "MONTH", "AIRCRAFT_CONFIG", "import_db1b", "CLASS"))
+                  "UNIQUE_CARRIER_NAME", "MONTH",
+                  "AIRCRAFT_CONFIG", "import_db1b", "CLASS"))
 
 
-pos = 1
-envir = as.environment(pos)
+pos <- 1
+envir <- as.environment(pos)
 
 #--------------------------------------------------------------------------------
                               # END OF SCRIPT

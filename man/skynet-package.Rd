@@ -23,6 +23,7 @@ NA
 Useful links:
 \itemize{
   \item \url{https://github.com/FilipeamTeixeira/skynet}
+  \item Report bugs at \url{https://github.com/FilipeamTeixeira/skynet/issues}
 }
 
 }

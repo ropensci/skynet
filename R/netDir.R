@@ -24,12 +24,16 @@
 #' @export
 #'
 
-make.netDir <- function(x, disp = FALSE, cap = FALSE, alpha = 0.003, pct = 10, carrier = FALSE, metro = FALSE){
+make.netDir <- function(x, disp = FALSE, cap = FALSE,
+                        alpha = 0.003, pct = 10,
+                        carrier = FALSE, metro = FALSE){
 
   if(carrier == TRUE & disp == TRUE){
 
       stop("SKYNET doesn't support yet parallel edges on its disparity filter.
-           Not including the carrier option on the disparity filter mode, or running the carriers option without the disparity filter mode, solves the issue for now.")
+           Not including the carrier option on the disparity filter mode,
+           or running the carriers option without the disparity filter mode,
+           solves the issue for now.")
   }
 
   if(metro == TRUE){# Metro option
@@ -48,8 +52,8 @@ make.netDir <- function(x, disp = FALSE, cap = FALSE, alpha = 0.003, pct = 10, c
       group_by(origin, dest, op_carrier) %>%
       mutate(itin_fare = itin_yield*distance) %>%
       summarise(weight = sum(passengers), fare_sd = round(sd(itin_fare), 2),
-                itin_fare = round(mean(itin_fare), 2), itin_yield = mean(itin_yield),
-                distance = mean(distance)) %>%
+                itin_fare = round(mean(itin_fare), 2),
+                itin_yield = mean(itin_yield), distance = mean(distance)) %>%
       mutate(fare_sd = ifelse(is.na(fare_sd), 0, fare_sd))
   }
   else{
@@ -58,8 +62,8 @@ make.netDir <- function(x, disp = FALSE, cap = FALSE, alpha = 0.003, pct = 10, c
       group_by(origin, dest) %>%
       mutate(itin_fare = itin_yield*distance) %>%
       summarise(weight = sum(passengers), fare_sd = round(sd(itin_fare), 2),
-                itin_fare = round(mean(itin_fare), 2), itin_yield = mean(itin_yield),
-                distance = mean(distance)) %>%
+                itin_fare = round(mean(itin_fare), 2),
+                itin_yield = mean(itin_yield), distance = mean(distance)) %>%
       mutate(fare_sd = ifelse(is.na(fare_sd), 0, fare_sd))
   }
 
@@ -71,7 +75,8 @@ make.netDir <- function(x, disp = FALSE, cap = FALSE, alpha = 0.003, pct = 10, c
     }else{  # Metro option
       nodes <- nodeStatsMetro(x)
 }
-  gDir <- igraph::graph_from_data_frame(netDir_all, directed = TRUE, vertices = nodes)
+  gDir <- igraph::graph_from_data_frame(netDir_all,
+                                        directed = TRUE, vertices = nodes)
 
   #-------------------------------------------------
 
@@ -119,15 +124,19 @@ make.netDir <- function(x, disp = FALSE, cap = FALSE, alpha = 0.003, pct = 10, c
     return(list(gDir_disp = gDir_disp,netDir_disp = netDir_disp,
                 nodes = nodes))
 
-    # ----------------------------------------------------------------------------- #
-                          # End of disp filter command #
-    # ----------------------------------------------------------------------------- #
+    # ------------------------------------------------------------- #
+                     # End of disp filter command #
+    # ------------------------------------------------------------- #
 
   }else if(cap == TRUE){
 
     # Applies 10% cap
-    gDir_cap <- graph_from_data_frame(netDir_all, directed = TRUE, vertices = nodes)
-    gDir_cap <- subgraph.edges(gDir_cap, which(E(gDir_cap)$weight > quantile(E(gDir_cap)$weight, prob = 1-pct/100)), delete.vertices = TRUE)
+    gDir_cap <- graph_from_data_frame(netDir_all,
+                                      directed = TRUE, vertices = nodes)
+
+    gDir_cap <- subgraph.edges(gDir_cap,
+                     which(E(gDir_cap)$weight > quantile(E(gDir_cap)$weight,
+                     prob = 1-pct/100)), delete.vertices = TRUE)
 
     #Creates Dataframe from graph
     netDir_cap <- igraph::as_data_frame(gDir_cap)
@@ -166,9 +175,9 @@ make.netDir <- function(x, disp = FALSE, cap = FALSE, alpha = 0.003, pct = 10, c
 
     return(list(gDir_cap = gDir_cap, netDir_cap = netDir_cap, nodes = nodes))
 
-    # ----------------------------------------------------------------------------- #
+    # --------------------------------------------------------------------- #
                            # End of 10% filter command #
-    # ----------------------------------------------------------------------------- #
+    # --------------------------------------------------------------------- #
 
 
   }else{
@@ -182,7 +191,8 @@ make.netDir <- function(x, disp = FALSE, cap = FALSE, alpha = 0.003, pct = 10, c
       # Add city name
       netDir_all <- netDir_all %>%
         left_join(airportCode, by = "origin") %>%
-        rename(origin_city = city, origin_city_mkt_id = city_mkt_id, passengers = weight)
+        rename(origin_city = city,
+               origin_city_mkt_id = city_mkt_id, passengers = weight)
 
       airtemp <- airportCode %>%
         rename(dest = origin, dest_city = city, dest_city_mkt_id = city_mkt_id)
@@ -213,9 +223,10 @@ make.netDir <- function(x, disp = FALSE, cap = FALSE, alpha = 0.003, pct = 10, c
 }
 
 
-globalVariables(c("op_carrier", "itin_fare", "itin_yield", "roundtrip", "sd",
-                  "fare_sd", "city_mkt_id", "latitude.x", "latitude.x", "longitude.x",
-                  "longitude.y", "quantile", "distance", "MetroLookup", "origin_mkt_id",
+globalVariables(c("op_carrier", "itin_fare", "itin_yield", "roundtrip",
+                  "sd", "fare_sd", "city_mkt_id", "latitude.x",
+                  "latitude.x", "longitude.x", "longitude.y",
+                  "quantile", "distance", "MetroLookup", "origin_mkt_id",
                   "dest_mkt_id"))
 
 # ----------------------------------------------------------------------------- #

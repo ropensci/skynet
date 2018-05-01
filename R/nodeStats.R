@@ -55,5 +55,6 @@ return(nodeStat)
 
 }
 
-globalVariables(c("airportCodeFull", "departures", "arrivals", "transfers", "pass_dep", "pass_arr",
-                  "pass_tr"))
+globalVariables(c("airportCodeFull", "departures",
+                  "arrivals", "transfers", "pass_dep",
+                  "pass_arr", "pass_tr"))

@@ -1,6 +1,6 @@
 Type: Package
 Package: skynet
-Version: 1.0.2
+Version: 1.0.3
 Title: Generates Networks from BTS Data
 Authors@R: person("Filipe", "Teixeira", email = "Filipe.MarquesTeixeira@Ugent.be", role = c("aut", "cre"))
 Maintainer: Filipe Teixeira <Filipe.MarquesTeixeira@Ugent.be>
@@ -10,6 +10,7 @@ Description: A flexible tool that allows generating bespoke
     data from the Bureau of Transport Statistics (BTS) in the United States
     <https://www.transtats.bts.gov/databases.asp?Mode_ID=1&Mode_Desc=Aviation&Subject_ID2=0>.
 License: MIT + file LICENSE
+BugReports: https://github.com/FilipeamTeixeira/skynet/issues
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.0.1
@@ -45,8 +46,7 @@ Imports:
     dplyr,
     ggplot2,
     ggrepel,
-    stringr,
-    maps
+    stringr
 Suggests: 
     knitr,
     rmarkdown,

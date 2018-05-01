@@ -1,0 +1,11 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+^README\.Rmd$
+^README-.*\.png$
+^docs$
+^_pkgdown\.yml$
+^\.travis\.yml$
+^R_test$
+^cran-comments\.md$
+R/texSeg.R
+^codecov\.yml$

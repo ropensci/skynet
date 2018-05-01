@@ -33,7 +33,8 @@ fitPlaw <- function(graph) {
   print(paste("Alpha =", round(alpha, 3)))
   print(paste("R square =", round(R.square, 3)))
   # plot
-  plot(probability ~ degree, log = "xy", xlab = "Degree (log)", ylab = "Probability (log)",
+  plot(probability ~ degree, log = "xy",
+       xlab = "Degree (log)", ylab = "Probability (log)",
        col = 1, main = "Degree Distribution")
-  curve(power.law.fit, col = "red", add = T, n = length(d))
+  curve(power.law.fit, col = "red", add = TRUE, n = length(d))
 }

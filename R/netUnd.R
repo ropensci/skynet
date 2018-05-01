@@ -26,12 +26,16 @@
 #'
 #' @export
 
-make.netUnd <- function(x, disp = FALSE, cap = FALSE, merge = TRUE, alpha = 0.003, pct = 10, carrier = FALSE, metro = FALSE){
+make.netUnd <- function(x, disp = FALSE, cap = FALSE,
+                        merge = TRUE, alpha = 0.003, pct = 10,
+                        carrier = FALSE, metro = FALSE){
 
   if(carrier == TRUE & disp == TRUE){
 
     stop("SKYNET doesn't support yet parallel edges on its disparity filter.
-         Not including the carrier option on the disparity filter mode, or running the carriers option without the disparity filter mode, solves the issue for now.")
+         Not including the carrier option on the disparity filter mode,
+         or running the carriers option without the disparity filter mode,
+         solves the issue for now.")
   }
 
   if(metro == TRUE){# Metro option
@@ -90,14 +94,23 @@ make.netUnd <- function(x, disp = FALSE, cap = FALSE, merge = TRUE, alpha = 0.00
   }
 
   if(merge == FALSE){
-    gUnd <- graph_from_data_frame(netUnd_all, directed = FALSE, vertices = nodes)
+    gUnd <- graph_from_data_frame(netUnd_all,
+                                  directed = FALSE, vertices = nodes)
   }
   if(merge == TRUE & carrier == TRUE){
-    gUnd <- graph_from_data_frame(netUnd_all, directed = FALSE, vertices = nodes)
+    gUnd <- graph_from_data_frame(netUnd_all,
+                                  directed = FALSE, vertices = nodes)
   }else{
 
-  gUnd <- graph_from_data_frame(netUnd_all, directed = TRUE, vertices = nodes)
-  gUnd <- as.undirected(gUnd, mode = "collapse", edge.attr.comb=list(weight = "sum", itin_fare = "mean", itin_yield = "mean", fare_sd = "mean", distance = "mean"))
+  gUnd <- graph_from_data_frame(netUnd_all,
+                                directed = TRUE, vertices = nodes)
+
+  gUnd <- as.undirected(gUnd, mode = "collapse",
+                        edge.attr.comb=list(weight = "sum",
+                                            itin_fare = "mean",
+                                            itin_yield = "mean",
+                                            fare_sd = "mean",
+                                            distance = "mean"))
   }
     if(disp == TRUE){
 
@@ -141,18 +154,21 @@ make.netUnd <- function(x, disp = FALSE, cap = FALSE, merge = TRUE, alpha = 0.00
 
     nodes <- as.data.frame(get.vertex.attribute(gUnd_disp))
 
-    return(list(gUnd_disp = gUnd_disp, netUnd_disp = netUnd_disp, nodes = nodes))
+    return(list(gUnd_disp = gUnd_disp,
+                netUnd_disp = netUnd_disp, nodes = nodes))
 
-    # ----------------------------------------------------------------------------- #
+    # --------------------------------------------------------------- #
                            # End of dispfilter command #
-    # ----------------------------------------------------------------------------- #
+    # --------------------------------------------------------------- #
 
 
   }else if(cap == TRUE){
 
     #Run 10% cap
     gUnd_cap <- gUnd
-    gUnd_cap <- subgraph.edges(gUnd_cap, which(E(gUnd_cap)$weight > quantile(E(gUnd_cap)$weight, prob = 1-pct/100)), delete.vertices = TRUE)
+    gUnd_cap <- subgraph.edges(gUnd_cap,
+                    which(E(gUnd_cap)$weight > quantile(E(gUnd_cap)$weight,
+                    prob = 1-pct/100)), delete.vertices = TRUE)
 
     # Create datafram based on collapsed edges graph
     netUnd_cap <- igraph::as_data_frame(gUnd_cap)
@@ -192,9 +208,9 @@ make.netUnd <- function(x, disp = FALSE, cap = FALSE, merge = TRUE, alpha = 0.00
 
     return(list(gUnd_cap = gUnd_cap, netUnd_cap = netUnd_cap, nodes = nodes))
 
-    # ----------------------------------------------------------------------------- #
+    # --------------------------------------------------------------- #
     # End of 10% filter command #
-    # ----------------------------------------------------------------------------- #
+    # --------------------------------------------------------------- #
 
   }else{
 
@@ -240,8 +256,8 @@ make.netUnd <- function(x, disp = FALSE, cap = FALSE, merge = TRUE, alpha = 0.00
 }
 
 
-# ----------------------------------------------------------------------------- #
-# ----------------------------------------------------------------------------- #
-                            # End of netUnd command #
-# ----------------------------------------------------------------------------- #
-# ----------------------------------------------------------------------------- #
+# --------------------------------------------------------------- #
+# --------------------------------------------------------------- #
+                     # End of netUnd command #
+# --------------------------------------------------------------- #
+# --------------------------------------------------------------- #

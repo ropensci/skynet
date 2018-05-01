@@ -34,9 +34,12 @@ make.netInt <- function(x = NULL, m, Q = NULL){
     select(ORIGIN, ORIGIN_CITY_MARKET_ID, DEST, DEST_CITY_MARKET_ID,
            PASSENGERS, ORIGIN_CITY_NAME, DEST_CITY_NAME) %>%
     rename(origin = ORIGIN, dest = DEST, passengers = PASSENGERS,
-           origin_city_mkt_id = ORIGIN_CITY_MARKET_ID, origin_city = ORIGIN_CITY_NAME,
-           dest_city_mkt_id = DEST_CITY_MARKET_ID, dest_city = DEST_CITY_NAME) %>%
-    mutate(itin_fare = NA, itin_yield = NA, fare_sd = NA, passengers = as.integer(passengers)) %>%
+           origin_city_mkt_id = ORIGIN_CITY_MARKET_ID,
+           origin_city = ORIGIN_CITY_NAME,
+           dest_city_mkt_id = DEST_CITY_MARKET_ID,
+           dest_city = DEST_CITY_NAME) %>%
+    mutate(itin_fare = NA, itin_yield = NA, fare_sd = NA,
+           passengers = as.integer(passengers)) %>%
     select(origin, dest, passengers, fare_sd, itin_fare, itin_yield,
            origin_city_mkt_id, origin_city, dest_city_mkt_id, dest_city)
 
@@ -47,6 +50,8 @@ make.netInt <- function(x = NULL, m, Q = NULL){
 
 }
 
-globalVariables(c("ORIGIN", "DEST", "ORIGIN_CITY_MARKET_ID", "DEST_CITY_MARKET_ID",
-                  "PASSENGERS", "CARRIER", "origin_city_mkt_id", "dest_city_mkt_id", "quarter",
-                  "DEST_CITY_NAME", "ORIGIN_CITY_NAME", "dest_city", "origin_city"))
+globalVariables(c("ORIGIN", "DEST", "ORIGIN_CITY_MARKET_ID",
+                  "DEST_CITY_MARKET_ID", "PASSENGERS", "CARRIER",
+                  "origin_city_mkt_id", "dest_city_mkt_id", "quarter",
+                  "DEST_CITY_NAME", "ORIGIN_CITY_NAME",
+                  "dest_city", "origin_city"))
