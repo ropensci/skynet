@@ -14,5 +14,3 @@ test_that("Test netImport",{
                           skynet_example("Ticket_2001Q1.csv")))
 })
 
-
-netImport(skynet_example("Coupon_2001Q1.csv"), skynet_example("Ticket_2001Q1.csv"))
