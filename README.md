@@ -9,6 +9,7 @@ Status](https://travis-ci.org/FilipeamTeixeira/skynet.svg?branch=master)
 ![](https://cranlogs.r-pkg.org/badges/skynet?color=brightgreen)
 [![Coverage
 status](https://codecov.io/gh/FilipeamTeixeira/Skynet/branch/master/graph/badge.svg)](https://codecov.io/github/FilipeamTeixeira/Skynet?branch=master)
+[![](https://badges.ropensci.org/214_status.svg)](https://github.com/ropensci/onboarding/issues/214)
 
 # Overview
 
