@@ -28,7 +28,7 @@ make.Path <- function(x, leg = FALSE, zero = FALSE, carrier = FALSE){
   DT <- as.data.table(x)
   DT <- DT[order(mkt_id, seq_num)]
 
-  if(zero == TRUE){
+  if(zero == TRUE & carrier == FALSE){
 
     DT <- DT[, .(origin=origin[1], dest=dest[.N],
                  itin_fare=itin_fare[1], passengers = passengers[1],
@@ -47,9 +47,31 @@ make.Path <- function(x, leg = FALSE, zero = FALSE, carrier = FALSE){
                     mean_distance = round(sum(distance)/(.N), 2)),
                 by=.(origin, dest)][order(origin, dest)]
 
-  }else{
+  }
 
-    if(carrier == TRUE){
+  if(zero == TRUE & carrier == TRUE){
+
+    DT <- DT[, .(origin=origin[1], dest=dest[.N],
+                 itin_fare=itin_fare[1], passengers = passengers[1],
+                 roundtrip = roundtrip[1], itin_yield = itin_yield[1],
+                 op_carrier = op_carrier[1], num_stops = .N,
+                 pct_zero = ifelse(itin_fare == 0, 1, 0),
+                 distance = sum(distance)), by=mkt_id]
+
+    # Calculates averages and sums
+    DT <- DT[, itin_fare := itin_fare/(1+roundtrip)]
+    netOD <- DT[, .(passengers = sum(passengers),
+                    fare_sd = round(sd(itin_fare), 2),
+                    itin_fare = round(sum(itin_fare)/(.N), 2),
+                    itin_yield = round(sum(itin_yield)/(.N), 3),
+                    mean_stops = round(sum(num_stops)/(.N)),
+                    pct_zero = round((sum(pct_zero)*100), 2)/(.N),
+                    mean_distance = round(sum(distance)/(.N), 2)),
+                by=.(origin, dest, op_carrier)][order(origin, dest, op_carrier)]
+
+  }
+
+    if(carrier == TRUE & zero == FALSE){
 
       DT <- DT[, .(origin=origin[1], dest=dest[.N],
                    itin_fare=itin_fare[1], passengers = passengers[1],
@@ -68,7 +90,9 @@ make.Path <- function(x, leg = FALSE, zero = FALSE, carrier = FALSE){
             by=.(origin, dest, op_carrier)][order(origin, dest, op_carrier)]
 
 
-    }else{
+    }
+
+  if(carrier == FALSE & zero == FALSE){
 
       DT <- DT[, .(origin=origin[1],dest=dest[.N],
                    itin_fare=itin_fare[1], passengers = passengers[1],
@@ -131,7 +155,6 @@ make.Path <- function(x, leg = FALSE, zero = FALSE, carrier = FALSE){
 
       return(list(netOD = netOD, netLegCount = DT))
 
-    }
   }
 }
 
