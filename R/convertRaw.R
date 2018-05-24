@@ -68,8 +68,8 @@ convertRaw <- function(x,y,path = NULL){
 
 
   write.csv(Ticket_temp,
-            file = paste(path, "Ticket"," ", Ticket_temp$YEAR[1],
-                         "Q", Ticket_temp$QUARTER[1], ".csv", sep = ""),
+            file = paste(path, "Ticket"," ", Coupon_temp$YEAR[1],
+                         "Q", Coupon_temp$QUARTER[1], ".csv", sep = ""),
             row.names=FALSE)
   write.csv(Coupon_temp,
             file = paste(path, "Coupon", " ", Coupon_temp$YEAR[1],
