@@ -26,9 +26,9 @@
 #'
 #' @export
 
-make.netUnd <- function(x, disp = FALSE, cap = FALSE,
-                        merge = TRUE, alpha = 0.003, pct = 10,
-                        carrier = FALSE, metro = FALSE){
+make.netUnd <- function(x, disp = FALSE, alpha = 0.003,
+                        cap = FALSE, pct = 10,
+                        merge = TRUE, carrier = FALSE, metro = FALSE){
 
   if(carrier == TRUE & disp == TRUE){
 

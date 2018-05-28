@@ -4,8 +4,8 @@
 \alias{make.netUnd}
 \title{Undirected Network}
 \usage{
-make.netUnd(x, disp = FALSE, cap = FALSE, merge = TRUE, alpha = 0.003,
-  pct = 10, carrier = FALSE, metro = FALSE)
+make.netUnd(x, disp = FALSE, alpha = 0.003, cap = FALSE, pct = 10,
+  merge = TRUE, carrier = FALSE, metro = FALSE)
 }
 \arguments{
 \item{x}{Data frame}
@@ -13,14 +13,14 @@ make.netUnd(x, disp = FALSE, cap = FALSE, merge = TRUE, alpha = 0.003,
 \item{disp}{Uses the Serrano's disparity filter (\url{https://en.wikipedia.org/wiki/Disparity_filter_algorithm_of_weighted_network})
 to extract the backbone of the network.}
 
+\item{alpha}{Argument for disparity filter.}
+
 \item{cap}{Filters original data based on the edge weight.}
+
+\item{pct}{Argument for cap filter. Value should be imput as percentage.}
 
 \item{merge}{When set to FALSE, it keeps parallel edges instead of collapsing them
 and summing their weights.}
-
-\item{alpha}{Argument for disparity filter.}
-
-\item{pct}{Argument for cap filter. Value should be imput as percentage.}
 
 \item{carrier}{Groups data per carrier and OD}
 

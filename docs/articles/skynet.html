@@ -66,7 +66,7 @@
       <h1>Introduction to SKYNET</h1>
                         <h4 class="author">Filipe Teixeira</h4>
             
-            <h4 class="date">2018-02-26</h4>
+            <h4 class="date">2018-05-28</h4>
           </div>
 
     
@@ -86,9 +86,10 @@
 <div id="import-data" class="section level2">
 <h2 class="hasAnchor">
 <a href="#import-data" class="anchor"></a>Import Data</h2>
-<p>To import data, simply type <code><a href="../reference/netImport.html">netImport()</a></code> including the path to your desired file. Note: we recommend naming the files with a similar structure as <code>Ticket 2016Q1.csv</code> or <code>Coupon 2016Q1.csv</code> respectively.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"> <span class="kw">library</span>(skynet)
- <span class="kw"><a href="../reference/netImport.html">netImport</a></span>(<span class="st">"/folder1/Coupon 2016Q1.csv"</span>, <span class="st">"/folder/Ticket 2016Q1.csv"</span>) </code></pre></div>
+<p>To import data, simply type <code><a href="../reference/import_db1b.html">import_db1b()</a></code> or <code><a href="../reference/import_t100.html">import_t100()</a></code> including the path to your desired file. Note: we recommend naming the files with a similar structure as <code>Ticket 2016Q1.csv</code> or <code>Coupon 2016Q1.csv</code> respectively.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"> <span class="kw">library</span>(skynet)</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"> <span class="kw"><a href="../reference/import_db1b.html">import_db1b</a></span>(<span class="st">"folder/Coupon 2016Q1.csv"</span>, <span class="st">"folder/Ticket 2016Q1.csv"</span>)</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"> <span class="kw"><a href="../reference/import_t100.html">import_t100</a></span>(<span class="st">"folder/T100_2016.csv"</span>)</a></code></pre></div>
 <p>The BTS DB1B data consists of 2 sets of files, <code>Coupon</code> and <code>Ticket</code>. They can be both downloaded at <a href="https://www.transtats.bts.gov/DL_SelectFields.asp?Table_ID=289" class="uri">https://www.transtats.bts.gov/DL_SelectFields.asp?Table_ID=289</a> and <a href="https://www.transtats.bts.gov/DL_SelectFields.asp?Table_ID=272" class="uri">https://www.transtats.bts.gov/DL_SelectFields.asp?Table_ID=272</a> respectively.</p>
 <p>Despite being possible to download the complete zipped file, which includes all variables, due to its size, we recommend selecting the following set.</p>
 <table class="table">
@@ -151,7 +152,7 @@
 </tr>
 </tbody>
 </table>
-<p>However, when importing from the prezipped DB1B file, just add the argument <code>zip = TRUE</code> to the <code><a href="../reference/netImport.html">netImport()</a></code> function. This does not apply to the T100 file which can be simply imported by typing <code><a href="../reference/netImport.html">netImport()</a></code>. In order to save space, it is possible as well to import the prezipped file, and convert it to a smaller file with only the necessary variables, with the function <code><a href="../reference/convertRaw.html">convertRaw()</a></code>.</p>
+<p>Since version 1.0.2 that the import method changed being the <code>netimport()</code> function no longer available. When importing from the prezipped DB1B file, just add the argument <code>zip = TRUE</code> to the <code><a href="../reference/import_db1b.html">import_db1b()</a></code> function. This does not apply to the T100 file which can be simply imported by typing <code><a href="../reference/import_t100.html">import_t100()</a></code>. In order to save space, it is possible as well to import the prezipped file, and convert it to a smaller file with only the necessary variables, with the function <code><a href="../reference/convertRaw.html">convertRaw()</a></code>.</p>
 <p>When importing files from the T100 dataset, we recommend naming the file as <code>T100 year mkt</code> for the Market dataset and <code>T100 year seg</code> for the Segment dataset.</p>
 </div>
 <div id="create-networks" class="section level2">
@@ -163,7 +164,7 @@
 </li>
 <li>Undirected Network - <code><a href="../reference/make.netUnd.html">make.netUnd()</a></code>
 </li>
-<li>Path Network - <code>make.netPath()</code>
+<li>Path Network - <code><a href="../reference/make.Path.html">make.Path()</a></code>
 </li>
 <li>Metro Network - To be used as argument in <code><a href="../reference/make.netDir.html">make.netDir()</a></code> and <code><a href="../reference/make.netUnd.html">make.netUnd()</a></code>
 </li>
@@ -548,6 +549,18 @@ WN
 <a href="#extra-functions" class="anchor"></a>Extra Functions</h2>
 <p>SKYNET, allows as well to perform quick searches on both airports and carriers, by their IATA code. <code><a href="../reference/findAirport.html">findAirport()</a></code>, <code><a href="../reference/findCarrier.html">findCarrier()</a></code>.</p>
 </div>
+<div id="bootnet" class="section level2">
+<h2 class="hasAnchor">
+<a href="#bootnet" class="anchor"></a>Bootnet</h2>
+<p>With version 1.0.2, we included the option to bootstrap networks and retrieve certain network statistics.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">library</span>(skynet)</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">test &lt;-<span class="st"> </span><span class="kw"><a href="../reference/make.netDir.html">make.netDir</a></span>(OD_Sample)</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="kw"><a href="../reference/bootnet.html">bootnet</a></span>(test<span class="op">$</span>gDir, <span class="dt">n =</span> <span class="dv">10</span>)</a></code></pre></div>
+<pre><code>##                            0.5%       99.5% mean_random mean_empirical
+## average.path.length   2.4477293   2.4933536    2.467357      2.4479099
+## transitivity          0.3348205   0.3438924    0.340201      0.3302566
+## betweenness         276.8717928 286.8198805  282.343825    377.7058371</code></pre>
+</div>
 </div>
   </div>
 
@@ -561,6 +574,7 @@ WN
       <li><a href="#create-networks">Create networks</a></li>
       <li><a href="#create-maps">Create Maps</a></li>
       <li><a href="#extra-functions">Extra Functions</a></li>
+      <li><a href="#bootnet">Bootnet</a></li>
       </ul>
 </div>
       </div>

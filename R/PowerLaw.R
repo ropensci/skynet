@@ -28,13 +28,14 @@ fitPlaw <- function(graph) {
   reg <- lm(log(probability) ~ log(degree))
   cozf <- coef(reg)
   power.law.fit <- function(x) exp(cozf[[1]] + cozf[[2]] * log(x))
-  alpha <- -cozf[[2]]
-  R.square <- summary(reg)$r.squared
-  print(paste("Alpha =", round(alpha, 3)))
-  print(paste("R square =", round(R.square, 3)))
+  message(paste("Alpha =",
+                round(-cozf[[2]], 3)))
+  message(paste("R square =",
+                round(summary(reg)$r.squared, 3)))
   # plot
   plot(probability ~ degree, log = "xy",
        xlab = "Degree (log)", ylab = "Probability (log)",
-       col = 1, main = "Degree Distribution")
+       col = 1, main = "Degree Distribution",
+       pch = 19, cex = .5)
   curve(power.law.fit, col = "red", add = TRUE, n = length(d))
 }

@@ -4,7 +4,7 @@
 \alias{make.netDir}
 \title{Directed network}
 \usage{
-make.netDir(x, disp = FALSE, cap = FALSE, alpha = 0.003, pct = 10,
+make.netDir(x, disp = FALSE, alpha = 0.003, cap = FALSE, pct = 10,
   carrier = FALSE, metro = FALSE)
 }
 \arguments{
@@ -13,9 +13,9 @@ make.netDir(x, disp = FALSE, cap = FALSE, alpha = 0.003, pct = 10,
 \item{disp}{Uses the Serrano's disparity filter (\url{https://en.wikipedia.org/wiki/Disparity_filter_algorithm_of_weighted_network})
 to extract the backbone of the network.}
 
-\item{cap}{Filters original data based on the edge weight.}
-
 \item{alpha}{Argument for disparity filter.}
+
+\item{cap}{Filters original data based on the edge weight.}
 
 \item{pct}{Argument for cap filter. Value should be imput as percentage.}
 

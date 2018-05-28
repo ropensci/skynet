@@ -17,6 +17,7 @@ import_db1b(x, y, zip = FALSE)
 Imports data from BTS/RITA/Transtats website
 File order doesn't matter, but it is recommended to name the files using the following
 syntax: \emph{"Coupon YearQuarter.csv", "Ticket YearQuarter.csv".}
+Both files should belong to the same year and same quarter.
 Note: We do recommend sparklyr to be used for larger sets of data.
 }
 \examples{

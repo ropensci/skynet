@@ -71,25 +71,103 @@
 <div id="skynet" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#skynet" class="anchor"></a>skynet</h1></div>
-<p><a href="https://travis-ci.org/FilipeamTeixeira/skynet.svg"><img src="https://travis-ci.org/FilipeamTeixeira/skynet.svg" alt="Build Status"></a> <a href="https://cran.r-project.org/package=skynet"><img src="http://www.r-pkg.org/badges/version/skynet" alt="CRAN_Status_Badge"></a> <img src="https://cranlogs.r-pkg.org/badges/grand-total/skynet?color=brightgreen"></p>
+<p><img src="https://travis-ci.org/FilipeamTeixeira/skynet.svg?branch=master" alt="Build Status"><a href="https://cran.r-project.org/package=skynet"><img src="http://www.r-pkg.org/badges/version/skynet" alt="CRAN_Status_Badge"></a> <img src="https://cranlogs.r-pkg.org/badges/skynet?color=brightgreen"><a href="https://codecov.io/github/FilipeamTeixeira/Skynet?branch=master"><img src="https://codecov.io/gh/FilipeamTeixeira/Skynet/branch/master/graph/badge.svg" alt="Coverage status"></a> <a href="https://github.com/ropensci/onboarding/issues/214"><img src="https://badges.ropensci.org/214_status.svg"></a></p>
 </div>
 <div id="overview" class="section level1">
 <h1 class="hasAnchor">
 <a href="#overview" class="anchor"></a>Overview</h1>
-<p>The rationale behind Skynet, is to provide researchers with a unifying tool overcoming some of the challenges faced when dealing with the Bureau of Transport Statistics, DB1B and T100 data.</p>
+<p>The rationale behind Skynet, is to provide researchers with a unifying tool overcoming some of the challenges faced when dealing with the Bureau of Transport Statistics, DB1B and T100 data. The DB1B data consists of 2 sets of files, Coupon and Ticket. They can be both downloaded at <a href="https://www.transtats.bts.gov/DL_SelectFields.asp?Table_ID=289" class="uri">https://www.transtats.bts.gov/DL_SelectFields.asp?Table_ID=289</a> and <a href="https://www.transtats.bts.gov/DL_SelectFields.asp?Table_ID=272" class="uri">https://www.transtats.bts.gov/DL_SelectFields.asp?Table_ID=272</a> respectively while the T100 data can be found here <a href="https://www.transtats.bts.gov/Tables.asp?DB_ID=111" class="uri">https://www.transtats.bts.gov/Tables.asp?DB_ID=111</a>.</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>You can install skynet from github with:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># install.packages("devtools")</span>
-devtools::<span class="kw">install_github</span>(<span class="st">"FilipeamTeixeira/skynet"</span>)</code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co"># install.packages("devtools")</span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"FilipeamTeixeira/skynet"</span>)</a></code></pre></div>
+</div>
+<div id="import-data" class="section level2">
+<h2 class="hasAnchor">
+<a href="#import-data" class="anchor"></a>Import Data</h2>
+<p>To import data, simply type <code><a href="reference/import_db1b.html">import_db1b()</a></code> or <code><a href="reference/import_t100.html">import_t100()</a></code> including the path to your desired file. Note: we recommend naming the files with a similar structure as <code>Ticket 2016Q1.csv</code> or <code>Coupon 2016Q1.csv</code> respectively.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"> <span class="kw">library</span>(skynet)</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"> <span class="kw"><a href="reference/import_db1b.html">import_db1b</a></span>(<span class="st">"folder/Coupon 2016Q1.csv"</span>, <span class="st">"folder/Ticket 2016Q1.csv"</span>)</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"> <span class="kw"><a href="reference/import_t100.html">import_t100</a></span>(<span class="st">"folder/T100_2016.csv"</span>)</a></code></pre></div>
+<p>The BTS DB1B data consists of 2 sets of files, <code>Coupon</code> and <code>Ticket</code>. They can be both downloaded at <a href="https://www.transtats.bts.gov/DL_SelectFields.asp?Table_ID=289" class="uri">https://www.transtats.bts.gov/DL_SelectFields.asp?Table_ID=289</a> and <a href="https://www.transtats.bts.gov/DL_SelectFields.asp?Table_ID=272" class="uri">https://www.transtats.bts.gov/DL_SelectFields.asp?Table_ID=272</a> respectively.</p>
+<p>Despite being possible to download the complete zipped file, which includes all variables, due to its size, we recommend selecting the following set.</p>
+<table class="table">
+<thead><tr class="header">
+<th align="left">Coupon</th>
+<th align="left">Ticket</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">Itinerary ID</td>
+<td align="left">Itinerary ID</td>
+</tr>
+<tr class="even">
+<td align="left">Market ID</td>
+<td align="left">Roundtrip</td>
+</tr>
+<tr class="odd">
+<td align="left">Sequence Number</td>
+<td align="left">Itinerary Yield</td>
+</tr>
+<tr class="even">
+<td align="left">Origin City Market ID</td>
+<td align="left">Passengers</td>
+</tr>
+<tr class="odd">
+<td align="left">Origin</td>
+<td align="left">Itinerary Fare</td>
+</tr>
+<tr class="even">
+<td align="left">Year</td>
+<td align="left">Bulkfare Indicator</td>
+</tr>
+<tr class="odd">
+<td align="left">Quarter</td>
+<td align="left">Distance Full</td>
+</tr>
+<tr class="even">
+<td align="left">Destination City Market ID</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Destination</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">Trip Break</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Operating Carrier</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">Distance</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Gateway</td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+<p>Since version 1.0.2 that the import method changed being the <code>netimport()</code> function no longer available. When importing from the prezipped DB1B file, just add the argument <code>zip = TRUE</code> to the <code><a href="reference/import_db1b.html">import_db1b()</a></code> function. This does not apply to the T100 file which can be simply imported by typing <code><a href="reference/import_t100.html">import_t100()</a></code>. In order to save space, it is possible as well to import the prezipped file, and convert it to a smaller file with only the necessary variables, with the function <code><a href="reference/convertRaw.html">convertRaw()</a></code>.</p>
+<p>When importing files from the T100 dataset, we recommend naming the file as <code>T100 year mkt</code> for the Market dataset and <code>T100 year seg</code> for the Segment dataset.</p>
 </div>
 <div id="example" class="section level2">
 <h2 class="hasAnchor">
 <a href="#example" class="anchor"></a>Example</h2>
-<p>To generate a directed network, you only need to type:</p>
+<p>To generate a directed network, please type:</p>
 <pre><code>library(skynet)
-make.netDir(OD_2011Q1, disp = TRUE, alpha = 0.05)</code></pre>
+# For DB1B data
+import_db1b("folder/Coupon_2011Q1.csv", "folder/Ticket_2011Q1.csv")
+make.netDir(OD_2011Q1, disp = TRUE, alpha = 0.05)
+
+# For T100 data
+import_t100("folder/T100_2011.csv")
+make.netDir(T100_2011Q1, disp = TRUE, alpha = 0.05)</code></pre>
 </div>
 </div>
 </div>
@@ -102,6 +180,8 @@ make.netDir(OD_2011Q1, disp = TRUE, alpha = 0.05)</code></pre>
 <li>Download from CRAN at <br><a href="https://cran.r-project.org/package=skynet">https://​cran.r-project.org/​package=skynet</a>
 </li>
 <li>Browse source code at <br><a href="https://github.com/FilipeamTeixeira/skynet">https://​github.com/​FilipeamTeixeira/​skynet</a>
+</li>
+<li>Report a bug at <br><a href="https://github.com/FilipeamTeixeira/skynet/issues">https://​github.com/​FilipeamTeixeira/​skynet/​issues</a>
 </li>
 </ul>
 <h2>License</h2>

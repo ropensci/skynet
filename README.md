@@ -32,6 +32,58 @@ You can install skynet from github with:
 devtools::install_github("FilipeamTeixeira/skynet")
 ```
 
+## Import Data
+
+To import data, simply type `import_db1b()` or `import_t100()` including
+the path to your desired file. Note: we recommend naming the files with
+a similar structure as `Ticket 2016Q1.csv` or `Coupon 2016Q1.csv`
+respectively.
+
+``` r
+ library(skynet)
+ import_db1b("folder/Coupon 2016Q1.csv", "folder/Ticket 2016Q1.csv")
+ import_t100("folder/T100_2016.csv")
+```
+
+The BTS DB1B data consists of 2 sets of files, `Coupon` and `Ticket`.
+They can be both downloaded at
+<https://www.transtats.bts.gov/DL_SelectFields.asp?Table_ID=289> and
+<https://www.transtats.bts.gov/DL_SelectFields.asp?Table_ID=272>
+respectively.
+
+Despite being possible to download the complete zipped file, which
+includes all variables, due to its size, we recommend selecting the
+following set.
+
+| Coupon                     | Ticket             |
+| :------------------------- | :----------------- |
+| Itinerary ID               | Itinerary ID       |
+| Market ID                  | Roundtrip          |
+| Sequence Number            | Itinerary Yield    |
+| Origin City Market ID      | Passengers         |
+| Origin                     | Itinerary Fare     |
+| Year                       | Bulkfare Indicator |
+| Quarter                    | Distance Full      |
+| Destination City Market ID |                    |
+| Destination                |                    |
+| Trip Break                 |                    |
+| Operating Carrier          |                    |
+| Distance                   |                    |
+| Gateway                    |                    |
+
+Since version 1.0.2 that the import method changed being the
+`netimport()` function no longer available. When importing from the
+prezipped DB1B file, just add the argument `zip = TRUE` to the
+`import_db1b()` function. This does not apply to the T100 file which can
+be simply imported by typing `import_t100()`. In order to save space, it
+is possible as well to import the prezipped file, and convert it to a
+smaller file with only the necessary variables, with the function
+`convertRaw()`.
+
+When importing files from the T100 dataset, we recommend naming the file
+as `T100 year mkt` for the Market dataset and `T100 year seg` for the
+Segment dataset.
+
 ## Example
 
 To generate a directed network, please type:

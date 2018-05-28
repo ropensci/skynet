@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Import T-100 Data — importT100 • skynet</title>
+<title>Network bootstrapping — bootnet • skynet</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -86,35 +86,41 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Import T-100 Data</h1>
+    <h1>Network bootstrapping</h1>
     </div>
 
     
-    <p>Imports T-100 Data directly from BTS/RITA/Transtats website raw data (prezipped file),
-for SKYNET's import function.
-Please try to name original csv as e.g. "T100 2011Q1mkt.csv" or "T100 2011Q1seg.csv"
-respectively</p>
+    <p>Bootstraps a network and returns output containing three network statistics:
+Average Path Length, Transitivity, Mean Betweenness.</p>
     
 
-    <pre class="usage"><span class='fu'>importT100</span>(<span class='no'>x</span>, <span class='kw'>nonsch</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>bootnet</span>(<span class='no'>g</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>500</span>, <span class='kw'>left_ci</span> <span class='kw'>=</span> <span class='fl'>0.005</span>, <span class='kw'>right_ci</span> <span class='kw'>=</span> <span class='fl'>0.995</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>x</th>
-      <td><p>T-100 csv</p></td>
+      <th>g</th>
+      <td><p>iGraph graph.</p></td>
     </tr>
     <tr>
-      <th>nonsch</th>
-      <td><p>Should equal TRUE to include non-scheduled flights</p></td>
+      <th>n</th>
+      <td><p>Number of bootstraps to run. (500 default)</p></td>
+    </tr>
+    <tr>
+      <th>left_ci</th>
+      <td><p>Confidence interval left limit. (0.005 default)</p></td>
+    </tr>
+    <tr>
+      <th>right_ci</th>
+      <td><p>Confidence interval left limit (0.995 default)</p></td>
     </tr>
     </table>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='fu'>importT100</span>(<span class='fu'><a href='skynet_example.html'>skynet_example</a></span>(<span class='st'>"T100_2011_mkt.csv"</span>))
+<span class='fu'>bootnet</span>(<span class='no'>g</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>500</span>)
 
 <span class='co'># }</span></pre>
   </div>

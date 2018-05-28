@@ -22,7 +22,7 @@
 
 make.Path <- function(x, leg = FALSE, zero = FALSE, carrier = FALSE){
 
-  print("This code might take longer than usual to execute")
+  message("This code might take longer than usual to execute")
 
   # Gets lasts values by Market and Sequence number
   DT <- as.data.table(x)

@@ -96,7 +96,7 @@ syntax: <em>"Coupon YearQuarter.csv", "Ticket YearQuarter.csv", "T100 Year".</em
 Note: We do recommend sparklyr to be used for larger sets of data.</p>
     
 
-    <pre class="usage"><span class='fu'>netImport</span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='kw'>zip</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>nonsch</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>netImport</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -109,14 +109,6 @@ the T-100 database, the only file to be included.</p></td>
     <tr>
       <th>y</th>
       <td><p>Second csv file to be imported.</p></td>
-    </tr>
-    <tr>
-      <th>zip</th>
-      <td><p>Should equal TRUE if original file comes from the BTS prezipped option.</p></td>
-    </tr>
-    <tr>
-      <th>nonsch</th>
-      <td><p>Should equal TRUE to include non-scheduled flights</p></td>
     </tr>
     </table>
     

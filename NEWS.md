@@ -58,3 +58,9 @@
 
 * Minor adjustments
 * Improved readability
+
+# skynet 1.0.4
+
+* Improved ReadMe file
+* Fixed website
+* Added extra comments and help information

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Load data — carrier • skynet</title>
+<title>Import Data from DB1B files — import_db1b • skynet</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -69,7 +69,12 @@
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/FilipeamTeixeira/skynet">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
@@ -81,27 +86,49 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Load data</h1>
+    <h1>Import Data from DB1B files</h1>
     </div>
 
     
-    <p>Carrier codes</p>
+    <p>Imports data from BTS/RITA/Transtats website
+File order doesn't matter, but it is recommended to name the files using the following
+syntax: <em>"Coupon YearQuarter.csv", "Ticket YearQuarter.csv".</em>
+Note: We do recommend sparklyr to be used for larger sets of data.</p>
     
 
-    <pre class="usage"><span class='fu'>data</span>(<span class='no'>carrier</span>)</pre>
-        
-    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
-
-    <p>An object of class <code>"cross"</code>; see <code>read.cross</code>.</p>
+    <pre class="usage"><span class='fu'>import_db1b</span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='kw'>zip</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>x</th>
+      <td><p>First csv file to be imported, in case of DB1B database</p></td>
+    </tr>
+    <tr>
+      <th>y</th>
+      <td><p>Second csv file to be imported.</p></td>
+    </tr>
+    <tr>
+      <th>zip</th>
+      <td><p>Should equal TRUE if original file comes from the BTS prezipped option.</p></td>
+    </tr>
+    </table>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='fu'>import_db1b</span>(<span class='fu'><a href='skynet_example.html'>skynet_example</a></span>(<span class='st'>"Coupon_2001Q1.csv"</span>), <span class='fu'><a href='skynet_example.html'>skynet_example</a></span>(<span class='st'>"Ticket_2001Q1.csv"</span>))
+
+<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      
-      <li><a href="#format">Format</a></li>
-          </ul>
+      <li><a href="#arguments">Arguments</a></li>
+            
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>
