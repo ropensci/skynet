@@ -120,6 +120,7 @@ make.netDir <- function(x, disp = FALSE, alpha = 0.003,
     }
 
      nodes <- as.data.frame(get.vertex.attribute(gDir_disp))
+     nodes <- rename(nodes, airport = name)
 
     return(list(gDir_disp = gDir_disp,netDir_disp = netDir_disp,
                 nodes = nodes))
@@ -172,6 +173,7 @@ make.netDir <- function(x, disp = FALSE, alpha = 0.003,
     }
 
      nodes <- as.data.frame(get.vertex.attribute(gDir_cap))
+     nodes <- rename(nodes, airport = name)
 
     return(list(gDir_cap = gDir_cap, netDir_cap = netDir_cap, nodes = nodes))
 

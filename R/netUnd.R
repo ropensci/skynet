@@ -153,6 +153,7 @@ make.netUnd <- function(x, disp = FALSE, alpha = 0.003,
     }
 
     nodes <- as.data.frame(get.vertex.attribute(gUnd_disp))
+    nodes <- rename(nodes, airport = name)
 
     return(list(gUnd_disp = gUnd_disp,
                 netUnd_disp = netUnd_disp, nodes = nodes))
@@ -205,6 +206,7 @@ make.netUnd <- function(x, disp = FALSE, alpha = 0.003,
     }
 
     nodes <- as.data.frame(get.vertex.attribute(gUnd_cap))
+    nodes <- rename(nodes, airport = name)
 
     return(list(gUnd_cap = gUnd_cap, netUnd_cap = netUnd_cap, nodes = nodes))
 
