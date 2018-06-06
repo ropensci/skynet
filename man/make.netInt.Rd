@@ -4,7 +4,7 @@
 \alias{make.netInt}
 \title{International Data}
 \usage{
-make.netInt(x = NULL, m, Q = NULL)
+make.netInt(x = NULL, m = NULL, Q = NULL)
 }
 \arguments{
 \item{x}{T-100 International Segment csv file}
@@ -21,7 +21,7 @@ all the data the DB1B dataset contains.
 \examples{
 \dontrun{
 
-netInt(skynet_example("T100_2011_int.csv"), OD_Sample, 1)
+make.netInt(skynet_example("T100_2011_int.csv"), OD_Sample, 1)
 
 }
 
