@@ -87,7 +87,7 @@
 <div id="import-data" class="section level2">
 <h2 class="hasAnchor">
 <a href="#import-data" class="anchor"></a>Import Data</h2>
-<p>To import data, simply type <code><a href="reference/import_db1b.html">import_db1b()</a></code> or <code><a href="reference/import_t100.html">import_t100()</a></code> including the path to your desired file. Note: we recommend naming the files with a similar structure as <code>Ticket 2016Q1.csv</code> or <code>Coupon 2016Q1.csv</code> respectively.</p>
+<p>To import data, simply type <code><a href="reference/import_db1b.html">import_db1b()</a></code> or <code><a href="reference/import_t100.html">import_t100()</a></code> including the path to your desired file. Note: The Coupon file should take the first argument while the Ticket file should take the second argument.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"> <span class="kw">library</span>(skynet)</a>
 <a class="sourceLine" id="cb2-2" data-line-number="2"> <span class="kw"><a href="reference/import_db1b.html">import_db1b</a></span>(<span class="st">"folder/Coupon 2016Q1.csv"</span>, <span class="st">"folder/Ticket 2016Q1.csv"</span>)</a>
 <a class="sourceLine" id="cb2-3" data-line-number="3"> <span class="kw"><a href="reference/import_t100.html">import_t100</a></span>(<span class="st">"folder/T100_2016.csv"</span>)</a></code></pre></div>
@@ -125,7 +125,7 @@
 </tr>
 <tr class="odd">
 <td align="left">Quarter</td>
-<td align="left">Distance Full</td>
+<td align="left">Distance</td>
 </tr>
 <tr class="even">
 <td align="left">Destination City Market ID</td>

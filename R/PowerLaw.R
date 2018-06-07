@@ -29,7 +29,7 @@ fitPlaw <- function(graph) {
   cf <- coef(reg)
   plotnet <- data.frame(probability = probability, degree = degree)
   message(paste("Alpha =",
-                round(-cozf[[2]], 3)))
+                round(-cf[[2]], 3)))
   message(paste("R square =",
                 round(summary(reg)$r.squared, 3)))
   ggplot(plotnet, aes(y=log(probability), x=log(degree))) +
@@ -37,3 +37,6 @@ fitPlaw <- function(graph) {
     geom_smooth(method="lm", se=FALSE, col = "#E69F00")
 
 }
+
+
+globalVariables(c("cf", "geom_smooth"))

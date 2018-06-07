@@ -230,7 +230,7 @@ globalVariables(c("op_carrier", "itin_fare", "itin_yield", "roundtrip",
                   "sd", "fare_sd", "city_mkt_id", "latitude.x",
                   "latitude.x", "longitude.x", "longitude.y",
                   "quantile", "distance", "MetroLookup", "origin_mkt_id",
-                  "dest_mkt_id"))
+                  "dest_mkt_id", "name"))
 
 # ----------------------------------------------------------------------------- #
 # ----------------------------------------------------------------------------- #
