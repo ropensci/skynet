@@ -1,6 +1,7 @@
 #' Directed network
 #'
-#' Generates Directed Network with an iGraph object and a Data Frame.
+#' Generates Directed Network with an iGraph (**gDir**) object, a Data Frame (**netDir**) and a Data Frame with Airport/Nodes statistics (**nodes**).
+#'
 #'
 #' @param x Data frame
 #' @param disp Uses the Serrano's disparity filter (\url{https://en.wikipedia.org/wiki/Disparity_filter_algorithm_of_weighted_network})

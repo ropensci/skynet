@@ -2,7 +2,7 @@
 % Please edit documentation in R/plotMap.R
 \name{netMap}
 \alias{netMap}
-\title{PlotMap}
+\title{netMap}
 \usage{
 netMap(x, pct = 60)
 }

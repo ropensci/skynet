@@ -4,12 +4,12 @@
 \alias{import_db1b}
 \title{Import Data from DB1B files}
 \usage{
-import_db1b(x, y, zip = FALSE)
+import_db1b(c, t, zip = FALSE)
 }
 \arguments{
-\item{x}{First csv file to be imported, in case of DB1B database}
+\item{c}{Coupon csv file to be imported, in case of DB1B database}
 
-\item{y}{Second csv file to be imported.}
+\item{t}{Ticket csv file to be imported, in case of DB1B database}
 
 \item{zip}{Should equal TRUE if original file comes from the BTS prezipped option.}
 }

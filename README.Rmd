@@ -64,7 +64,6 @@ Since version 1.0.2 that the import method changed being the `netimport()` funct
 When importing from the prezipped DB1B file, just add the argument `zip = TRUE` to the `import_db1b()` function. This does not apply to the T100 file which can be simply imported by typing `import_t100()`.
 In order to save space, it is possible as well to import the prezipped file, and convert it to a smaller file with only the necessary variables, with the function `convertRaw()`. 
 
-When importing files from the T100 dataset, we recommend naming the file as `T100 year mkt` for the Market dataset and `T100 year seg` for the Segment dataset.
 
 ## Example
 

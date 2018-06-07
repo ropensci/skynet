@@ -64,3 +64,8 @@
 * Improved ReadMe file
 * Fixed website
 * Added extra comments and help information
+
+# skynet 1.1.0
+
+* Changed way files are imported. Now Coupon should take the first argument and Ticket the second.
+* Minor adjustmenst to the help files.

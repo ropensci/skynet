@@ -50,11 +50,8 @@ import_t100 <- function(x, nonsch = FALSE){
 
     T100 <- data.frame(T100)
 
-    #extracts name from file
-    filename <- gsub(" ", "_",
-                     tools::file_path_sans_ext(
-                       basename(x)))
-    assign(paste(filename), T100, envir = envir)
+    assign(paste("T100_", as.character(T100$year),
+                 "_seg", sep = ""), T100, envir = envir)
 
   }else{
 
@@ -85,11 +82,8 @@ import_t100 <- function(x, nonsch = FALSE){
 
     T100 <- data.frame(T100)
 
-    #extracts name from file
-    filename <- gsub(" ", "_",
-                     tools::file_path_sans_ext(
-                       basename(x)))
-    assign(paste(filename), T100, envir = envir)
+    assign(paste("T100_", as.character(T100$year)[1],
+                 "_mkt", sep = ""), T100, envir = envir)
 
   }
 }

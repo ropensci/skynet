@@ -6,8 +6,8 @@
 #' Both files should belong to the same year and same quarter.
 #' Note: We do recommend sparklyr to be used for larger sets of data.
 #'
-#' @param x First csv file to be imported, in case of DB1B database
-#' @param y Second csv file to be imported.
+#' @param c Coupon csv file to be imported, in case of DB1B database
+#' @param t Ticket csv file to be imported, in case of DB1B database
 #' @param zip Should equal TRUE if original file comes from the BTS prezipped option.
 #' @examples
 #' \dontrun{
@@ -17,28 +17,18 @@
 #' }
 #' @export
 
-import_db1b <- function(x, y, zip = FALSE){
+import_db1b <- function(c, t, zip = FALSE){
 
     if(zip == FALSE){
-      do.call(ODImport, list(x,y))
+      do.call(ODImport, list(c,t))
     }else{
-      do.call(ODRaw, list(x,y))
+      do.call(ODRaw, list(c,t))
     }
   }
 
 
-
 # netImport function
-ODImport <- function(x, y){
-
-  if(grepl("Ticket", deparse(substitute(x)), ignore.case = TRUE) == TRUE)
-    t <- x
-  if(grepl("Ticket", deparse(substitute(y)), ignore.case = TRUE) == TRUE)
-    t <- y
-  if(grepl("Coupon", deparse(substitute(x)), ignore.case = TRUE) == TRUE)
-    c <- x
-  if(grepl("Coupon", deparse(substitute(y)), ignore.case = TRUE) == TRUE)
-    c <- y
+ODImport <- function(c, t){
 
   # Import Coupon file
   coupon <- fread(c, header = TRUE, sep = ",", stringsAsFactors = FALSE,
@@ -68,38 +58,16 @@ ODImport <- function(x, y){
     data.frame() %>% #Convert to data.frame for data.table/dplyr compatibility
     filter(distance != 0) #To clean data imput inconsistencies
 
-  # Get name from file
-  filename <- gsub(" ", "",
-                   tools::file_path_sans_ext(
-                     basename(x)))
-  filename <- substring(filename, (nchar(filename)-5))
-  assign(paste("OD",filename, sep = "_"), netMerged, envir = envir)
+
+  assign(paste("OD_", as.character(coupon$year)[1], "Q",
+               as.character(coupon$quarter)[1], sep = ""),
+         netMerged, envir = envir)
 
 }
 
 
 
-ODRaw <- function(x,y){
-
-
-  if(grepl("Ticket", deparse(substitute(x)), ignore.case = TRUE) == TRUE)
-    t <- x
-  if(grepl("Ticket", deparse(substitute(y)), ignore.case = TRUE) == TRUE)
-    t <- y
-  if(grepl("Coupon", deparse(substitute(x)), ignore.case = TRUE) == TRUE)
-    c <- x
-  if(grepl("Coupon", deparse(substitute(y)), ignore.case = TRUE) == TRUE)
-    c <- y
-
-
-  ticket <- fread(t, header = TRUE, sep = ",", stringsAsFactors = FALSE,
-                       integer64 = "numeric")
-
-  ticket <- ticket %>%
-    select(itin_id = ItinID, roundtrip = RoundTrip,
-           itin_yield = FarePerMile, passengers = Passengers,
-           itin_fare = ItinFare, bulk_fare = BulkFare,
-           distance_full = Distance)
+ODRaw <- function(c,t){
 
   coupon <- fread(c, header = TRUE, sep = ",", stringsAsFactors = FALSE,
                        integer64 = "numeric")
@@ -111,19 +79,27 @@ ODRaw <- function(x,y){
            dest_mkt_id = DestCityMarketID , dest = Dest, trip_break = Break,
            op_carrier = OpCarrier, distance = Distance, gateway = Gateway)
 
+
+  ticket <- fread(t, header = TRUE, sep = ",", stringsAsFactors = FALSE,
+                  integer64 = "numeric")
+
+  ticket <- ticket %>%
+    select(itin_id = ItinID, roundtrip = RoundTrip,
+           itin_yield = FarePerMile, passengers = Passengers,
+           itin_fare = ItinFare, bulk_fare = BulkFare,
+           distance_full = Distance)
+
+
   #Merge data
   netMerged <- merge(coupon, ticket, by = "itin_id", all.x = TRUE)
   netMerged <- netMerged %>%
     data.frame() %>% #Convert to data.frame for data.table/dplyr compatibility
     filter(distance != 0) #To clean data imput inconsistencies
 
-  # Get name from file
-  filename <- gsub(" ", "",
-                   tools::file_path_sans_ext(
-                     basename(x)))
-  filename <- substring(filename, (nchar(filename)-5))
-  filename <- gsub("_", "Q", filename)
-  assign(paste("OD",filename, sep = "_"), netMerged, envir = envir)
+
+  assign(paste("OD_", as.character(coupon$year)[1], "Q",
+               as.character(coupon$quarter)[1], sep = ""),
+         netMerged, envir = envir)
 
 }
 

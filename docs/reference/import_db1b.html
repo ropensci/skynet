@@ -93,21 +93,22 @@
     <p>Imports data from BTS/RITA/Transtats website
 File order doesn't matter, but it is recommended to name the files using the following
 syntax: <em>"Coupon YearQuarter.csv", "Ticket YearQuarter.csv".</em>
+Both files should belong to the same year and same quarter.
 Note: We do recommend sparklyr to be used for larger sets of data.</p>
     
 
-    <pre class="usage"><span class='fu'>import_db1b</span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='kw'>zip</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>import_db1b</span>(<span class='no'>c</span>, <span class='no'>t</span>, <span class='kw'>zip</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>x</th>
-      <td><p>First csv file to be imported, in case of DB1B database</p></td>
+      <th>c</th>
+      <td><p>Coupon csv file to be imported, in case of DB1B database</p></td>
     </tr>
     <tr>
-      <th>y</th>
-      <td><p>Second csv file to be imported.</p></td>
+      <th>t</th>
+      <td><p>Ticket csv file to be imported, in case of DB1B database</p></td>
     </tr>
     <tr>
       <th>zip</th>

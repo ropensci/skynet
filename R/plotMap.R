@@ -1,4 +1,4 @@
-#' PlotMap
+#' netMap
 #'
 #' Creates OD ggplot2 generated maps from make.net functions
 #' Shows sample of 60% of flights

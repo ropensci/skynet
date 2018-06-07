@@ -90,11 +90,11 @@
     </div>
 
     
-    <p>Generates Undirected Network with an iGraph object and a Data Frame.</p>
+    <p>Generates Undirected Network with an iGraph (**gUnd**) object, a Data Frame (**netUnd**) and a Data Frame with Airport/Nodes statistics (**nodes**).</p>
     
 
-    <pre class="usage"><span class='fu'>make.netUnd</span>(<span class='no'>x</span>, <span class='kw'>disp</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>cap</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>merge</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>0.003</span>,
-  <span class='kw'>pct</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>carrier</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>metro</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>make.netUnd</span>(<span class='no'>x</span>, <span class='kw'>disp</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>0.003</span>, <span class='kw'>cap</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>pct</span> <span class='kw'>=</span> <span class='fl'>10</span>,
+  <span class='kw'>merge</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>carrier</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>metro</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -109,21 +109,21 @@
 to extract the backbone of the network.</p></td>
     </tr>
     <tr>
+      <th>alpha</th>
+      <td><p>Argument for disparity filter.</p></td>
+    </tr>
+    <tr>
       <th>cap</th>
       <td><p>Filters original data based on the edge weight.</p></td>
+    </tr>
+    <tr>
+      <th>pct</th>
+      <td><p>Argument for cap filter. Value should be imput as percentage.</p></td>
     </tr>
     <tr>
       <th>merge</th>
       <td><p>When set to FALSE, it keeps parallel edges instead of collapsing them
 and summing their weights.</p></td>
-    </tr>
-    <tr>
-      <th>alpha</th>
-      <td><p>Argument for disparity filter.</p></td>
-    </tr>
-    <tr>
-      <th>pct</th>
-      <td><p>Argument for cap filter. Value should be imput as percentage.</p></td>
     </tr>
     <tr>
       <th>carrier</th>

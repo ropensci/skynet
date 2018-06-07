@@ -80,10 +80,6 @@ is possible as well to import the prezipped file, and convert it to a
 smaller file with only the necessary variables, with the function
 `convertRaw()`.
 
-When importing files from the T100 dataset, we recommend naming the file
-as `T100 year mkt` for the Market dataset and `T100 year seg` for the
-Segment dataset.
-
 ## Example
 
 To generate a directed network, please type:

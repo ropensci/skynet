@@ -1,6 +1,6 @@
 #' Undirected Network
 #'
-#' Generates Undirected Network with an iGraph object and a Data Frame.
+#' Generates Undirected Network with an iGraph (**gUnd**) object, a Data Frame (**netUnd**) and a Data Frame with Airport/Nodes statistics (**nodes**).
 #'
 #' @param x Data frame
 #' @param disp Uses the Serrano's disparity filter (\url{https://en.wikipedia.org/wiki/Disparity_filter_algorithm_of_weighted_network})

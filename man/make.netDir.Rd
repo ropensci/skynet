@@ -24,7 +24,7 @@ to extract the backbone of the network.}
 \item{metro}{Groups data by metropolitan area}
 }
 \description{
-Generates Directed Network with an iGraph object and a Data Frame.
+Generates Directed Network with an iGraph (**gDir**) object, a Data Frame (**netDir**) and a Data Frame with Airport/Nodes statistics (**nodes**).
 }
 \examples{
 \dontrun{
