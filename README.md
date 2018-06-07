@@ -35,8 +35,9 @@ devtools::install_github("FilipeamTeixeira/skynet")
 ## Import Data
 
 To import data, simply type `import_db1b()` or `import_t100()` including
-the path to your desired file. Note: The Coupon file should take the
-first argument while the Ticket file should take the second argument.
+the path to your desired file.  
+**Note**: The Coupon file should take the first argument while the
+Ticket file should take the second argument.
 
 ``` r
  library(skynet)
