@@ -4,14 +4,14 @@
 \alias{convertRaw}
 \title{Convert Raw}
 \usage{
-convertRaw(x, y, path = NULL)
+convertRaw(c, t, path = NULL)
 }
 \arguments{
-\item{x}{First csv file to be processed}
-
-\item{y}{Second csv file to be processed}
-
 \item{path}{Path to save file to}
+
+\item{x}{Coupon csv file to be processed}
+
+\item{y}{Ticket csv file to be processed}
 }
 \description{
 Converts DB1B files from BTS/RITA/Transtats website raw data (prezipped file), for SKYNET's import function.
