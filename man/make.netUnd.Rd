@@ -27,7 +27,9 @@ and summing their weights.}
 \item{metro}{Groups data by metropolitan area}
 }
 \description{
-Generates Undirected Network with an iGraph (**gUnd**) object, a Data Frame (**netUnd**) and a Data Frame with Airport/Nodes statistics (**nodes**).
+Generates Undirected Network with an iGraph \strong{gUnd} object,
+a Data Frame \strong{netUnd} and a Data Frame
+with Airport/Nodes statistics \strong{nodes}.
 }
 \examples{
 \dontrun{

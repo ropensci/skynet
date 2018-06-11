@@ -1,10 +1,12 @@
 #' Import Data from DB1B files
 #'
-#' Imports data from BTS/RITA/Transtats website
-#' File order doesn't matter, but it is recommended to name the files using the following
-#' syntax: \emph{"Coupon YearQuarter.csv", "Ticket YearQuarter.csv".}
+#' Imports data from BTS/RITA/Transtats files
+#'
+#' Coupon files can be found at \url{https://www.transtats.bts.gov/DL_SelectFields.asp?Table_ID=289}.
+#' Ticket files can be found at \url{https://www.transtats.bts.gov/DL_SelectFields.asp?Table_ID=272}.
 #' Both files should belong to the same year and same quarter.
-#' Note: We do recommend sparklyr to be used for larger sets of data.
+#' \strong{Note}: We do recommend sparklyr to be used for larger sets of data.
+#' More information on variables to select and type of files to use can be found \href{https://github.com/FilipeamTeixeira/skynet}{here}
 #'
 #' @param c Coupon csv file to be imported, in case of DB1B database
 #' @param t Ticket csv file to be imported, in case of DB1B database

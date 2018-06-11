@@ -2,8 +2,9 @@
 #'
 #' Imports T-100 Data directly from BTS/RITA/Transtats website raw data (prezipped file),
 #' for SKYNET's import function.
-#' Please try to name original csv as e.g. "T100 2011Q1mkt.csv" or "T100 2011Q1seg.csv"
-#' respectively
+#'
+#' Files can be found here \url{https://www.transtats.bts.gov/Tables.asp?DB_ID=111}.
+#' More information on variables to select and type of files to use can be found \href{https://github.com/FilipeamTeixeira/skynet}{here}
 #'
 #' @param x T-100 csv
 #' @param nonsch Should equal TRUE to include non-scheduled flights
