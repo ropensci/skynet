@@ -8,14 +8,16 @@
 #' @examples
 #' \dontrun{
 #'
-#' nodeStats(OD_Sample)
+#' node_stats(OD_Sample)
 #'
 #'}
+#'
 #' @export
 #'
 
 
-nodeStats <- function(x){
+
+node_stats <- function(x){
 
 departures <- x %>%
   group_by(origin) %>%
@@ -53,6 +55,11 @@ nodeStat <- nodeStat %>%
 
 return(nodeStat)
 
+}
+
+nodeStats <- function(...){
+  warning(paste("nodeStats is deprecated, use node_stats(), instead."))
+  do.call(node_stats, list(...))
 }
 
 globalVariables(c("airportCodeFull", "departures",

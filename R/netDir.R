@@ -16,18 +16,18 @@
 #'
 #' @examples
 #' \dontrun{
-#' make.netDir(OD_Sample)
+#' make_net_dir(OD_Sample)
 #'
 #' # Apply Disparity Filter
-#' make.netDir(OD_Sample, disp = TRUE, alpha = 0.05)
+#' make_net_dir(OD_Sample, disp = TRUE, alpha = 0.05)
 #'
 #' # Apply Percentage Cap
-#' make.netDir(OD_Sample, cap = TRUE, pct = 20)
+#' make_net_dir(OD_Sample, cap = TRUE, pct = 20)
 #' }
 #' @export
 #'
 
-make.netDir <- function(x, disp = FALSE, alpha = 0.003,
+make_net_dir <- function(x, disp = FALSE, alpha = 0.003,
                         cap = FALSE, pct = 10,
                         carrier = FALSE, metro = FALSE){
 
@@ -87,7 +87,7 @@ make.netDir <- function(x, disp = FALSE, alpha = 0.003,
     # Run disparity filter
 
     # Create igraph
-    gDir_disp <- dispfilter(gDir, alpha = alpha)
+    gDir_disp <- disparity_filter(gDir, alpha = alpha)
     netDir_disp <- get.data.frame(gDir_disp)
 
     netDir_disp <- netDir_disp %>%
@@ -125,8 +125,10 @@ make.netDir <- function(x, disp = FALSE, alpha = 0.003,
      nodes <- as.data.frame(get.vertex.attribute(gDir_disp))
      nodes <- rename(nodes, airport = name)
 
-    return(list(gDir_disp = gDir_disp,netDir_disp = netDir_disp,
-                nodes = nodes))
+     netlist <- list(gDir_disp = gDir_disp,netDir_disp = netDir_disp,
+                     nodes = nodes)
+     class(netlist) <- "skynet"
+     return(netlist)
 
     # ------------------------------------------------------------- #
                      # End of disp filter command #
@@ -178,7 +180,10 @@ make.netDir <- function(x, disp = FALSE, alpha = 0.003,
      nodes <- as.data.frame(get.vertex.attribute(gDir_cap))
      nodes <- rename(nodes, airport = name)
 
-    return(list(gDir_cap = gDir_cap, netDir_cap = netDir_cap, nodes = nodes))
+    netlist <- list(gDir_cap = gDir_cap,
+                    netDir_cap = netDir_cap, nodes = nodes)
+    class(netlist) <- "skynet"
+    return(netlist)
 
     # --------------------------------------------------------------------- #
                            # End of 10% filter command #
@@ -220,11 +225,19 @@ make.netDir <- function(x, disp = FALSE, alpha = 0.003,
 
     }
 
-    return(list(gDir = gDir, netDir = netDir_all, nodes = nodes))
+    netlist <- list(gDir = gDir, netDir = netDir_all, nodes = nodes)
+    class(netlist) <- "skynet"
+
+    return(netlist)
 
 
   }
 
+}
+
+make.netDir <- function(...){
+  warning(paste("make.netDir is deprecated, use make_net_dir(), instead."))
+  do.call(make_net_dir, list(...))
 }
 
 

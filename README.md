@@ -23,6 +23,12 @@ downloaded at
 respectively while the T100 data can be found here
 <https://www.transtats.bts.gov/Tables.asp?DB_ID=111>.
 
+## Note
+
+To comply with R syntax guidelines, we changed to a clearer function
+naming from version 1.2.0. Deprecated functions are still present, but
+will be removed for the next versions.
+
 ## Installation
 
 You can install skynet from github with:

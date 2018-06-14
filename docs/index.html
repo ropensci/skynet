@@ -77,6 +77,11 @@
 <h1 class="hasAnchor">
 <a href="#overview" class="anchor"></a>Overview</h1>
 <p>The rationale behind Skynet, is to provide researchers with a unifying tool overcoming some of the challenges faced when dealing with the Bureau of Transport Statistics, DB1B and T100 data. The DB1B data consists of 2 sets of files, Coupon and Ticket. They can be both downloaded at <a href="https://www.transtats.bts.gov/DL_SelectFields.asp?Table_ID=289" class="uri">https://www.transtats.bts.gov/DL_SelectFields.asp?Table_ID=289</a> and <a href="https://www.transtats.bts.gov/DL_SelectFields.asp?Table_ID=272" class="uri">https://www.transtats.bts.gov/DL_SelectFields.asp?Table_ID=272</a> respectively while the T100 data can be found here <a href="https://www.transtats.bts.gov/Tables.asp?DB_ID=111" class="uri">https://www.transtats.bts.gov/Tables.asp?DB_ID=111</a>.</p>
+<div id="note" class="section level2">
+<h2 class="hasAnchor">
+<a href="#note" class="anchor"></a>Note</h2>
+<p>To comply with R syntax guidelines, we changed to a clearer function naming from version 1.2.0. Deprecated functions are still present, but will be removed for the next versions.</p>
+</div>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
@@ -153,7 +158,7 @@
 </tr>
 </tbody>
 </table>
-<p>Since version 1.0.2 that the import method changed being the <code>netimport()</code> function no longer available. When importing from the prezipped DB1B file, just add the argument <code>zip = TRUE</code> to the <code><a href="reference/import_db1b.html">import_db1b()</a></code> function. This does not apply to the T100 file which can be simply imported by typing <code><a href="reference/import_t100.html">import_t100()</a></code>. In order to save space, it is possible as well to import the prezipped file, and convert it to a smaller file with only the necessary variables, with the function <code><a href="reference/convertRaw.html">convertRaw()</a></code>.</p>
+<p>Since version 1.0.2 that the import method changed being the <code>netimport()</code> function no longer available. When importing from the prezipped DB1B file, just add the argument <code>zip = TRUE</code> to the <code><a href="reference/import_db1b.html">import_db1b()</a></code> function. This does not apply to the T100 file which can be simply imported by typing <code><a href="reference/import_t100.html">import_t100()</a></code>. In order to save space, it is possible as well to import the prezipped file, and convert it to a smaller file with only the necessary variables, with the function <code>convertRaw()</code>.</p>
 </div>
 <div id="example" class="section level2">
 <h2 class="hasAnchor">

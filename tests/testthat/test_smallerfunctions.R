@@ -17,10 +17,10 @@ test_that("From To function", {
 })
 
 
-test_that("Bootnet", {
+test_that("boot_network", {
   test <- make.netDir(OD_Sample)
-  expect_length(bootnet(test$gDir, n = 10), 4)
-  expect_gt(sum(bootnet(test$gDir, n = 10)), 0)
+  expect_length(boot_network(test$gDir, n = 10), 4)
+  expect_gt(sum(boot_network(test$gDir, n = 10)), 0)
 })
 
 test_that("Create Nodes",{
@@ -30,7 +30,7 @@ test_that("Create Nodes",{
 })
 
 test_that("Plot Map",{
-  test <- netMap(make.netDir(OD_Sample)$netDir)
+  test <- net_map(make_net_dir(OD_Sample))
   expect_output(print(class(test)[1]), "gg")
 })
 

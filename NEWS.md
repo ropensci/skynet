@@ -69,3 +69,7 @@
 
 * Changed way files are imported. Now Coupon should take the first argument and Ticket the second.
 * Minor adjustmenst to the help files.
+
+# skynet 1.2.0
+
+* Major function naming changes to match syntax etiquette

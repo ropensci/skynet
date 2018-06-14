@@ -6,18 +6,23 @@
 #'
 #' @examples
 #' \dontrun{
-#' findCarrier("United")
+#' find_carrier("United")
 #'
-#' findCarrier("UA")
+#' find_carrier("UA")
 #' }
 #' @export
 #'
 
 
-findCarrier <- function(x){
+find_carrier <- function(x){
   carriers %>%
     filter(grepl(x, op_carrier) | grepl (x, carrier_name)) %>%
     select(op_carrier, carrier_name, from, to)
+}
+
+findCarrier <- function(...){
+  warning(paste("findCarrier is deprecated, use find_carrier(), instead."))
+  do.call(find_carrier, list(...))
 }
 
 globalVariables(c("carriers", "carrier_name"))

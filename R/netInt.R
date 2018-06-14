@@ -17,10 +17,11 @@
 #'
 #' @export
 #'
+#'
 
 make.netInt <- function(x = NULL, m = NULL, Q = NULL){
 
-warning("netImport function is deprecated, please use `import_t100()`,
+warning("netInt function is deprecated, please use `import_t100()`,
         generate your desired network and rbind() with the db1b network of choice.")
 
 }

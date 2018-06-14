@@ -3,6 +3,7 @@
 #' Bootstraps a network and returns output containing three network statistics:
 #' Average Path Length, Transitivity, Mean Betweenness.
 #'
+#'
 #' @param g iGraph graph.
 #' @param n Number of bootstraps to run. (500 default)
 #' @param left_ci Confidence interval left limit. (0.005 default)
@@ -10,14 +11,16 @@
 #'
 #' @examples
 #' \dontrun{
-#' bootnet(g, n = 500)
+#' boot_net(g, n = 500)
 #'
 #' }
+#'
 #' @export
 #'
 
 
-bootnet <- function(g, n = 500, left_ci = 0.005, right_ci = 0.995){
+
+boot_network <- function(g, n = 500, left_ci = 0.005, right_ci = 0.995){
       avg <- c() # Creates empty vector for output
       trv <- c()
       btw <- c()
@@ -50,4 +53,9 @@ bootnet <- function(g, n = 500, left_ci = 0.005, right_ci = 0.995){
       bootstats <- as.data.frame(bootstats, col.names = colnames(bootstats))
 
       return(bootstats)
+}
+
+bootnet <- function(...){
+  warning(paste("bootnet is deprecated, use boot_network(), instead."))
+  do.call(boot_network, list(...))
 }

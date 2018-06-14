@@ -10,13 +10,12 @@
 #' @examples
 #' \dontrun{
 #' netDir <- make.netDir(OD_Sample)
-#' dispfilter(netDir$gDir, alpha = 0.003)
+#' disparity_filter(netDir$gDir, alpha = 0.003)
 #' }
 #' @export
 #'
-#'
 
-dispfilter <- function(g, alpha = 0.003){
+disparity_filter <- function(g, alpha = 0.003){
 
   if (igraph::has.multiple(g))
     stop("This disparity filter does not support yet multiple edges")
@@ -62,6 +61,11 @@ dispfilter <- function(g, alpha = 0.003){
 
   return(g)
 
+}
+
+dispfilter <- function(...){
+  warning(paste("dispfilter is deprecated, use disparity_filter(), instead."))
+  do.call(disparity_filter, list(...))
 }
 
 globalVariables(c("weight", "alpha_in", "alpha_out", "from", "to"))

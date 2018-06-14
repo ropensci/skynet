@@ -4,16 +4,16 @@ context("Create Directed Network")
 
 
 
-test_that("netUnd works", {
+test_that("make_net_und works", {
   # Run simple net test
-  test <- make.netUnd(OD_Sample)
+  test <- make_net_und(OD_Sample)
   expect_output(str(test), "List of 3")
   expect_output(str(nrow(test$netUnd)), "1531")
 })
 
-test_that("make.netUnd with disp", {
+test_that("make_net_und with disp", {
   # Run simple net test
-  test <- make.netUnd(OD_Sample, disp = TRUE, alpha = 0.003)
+  test <- make_net_und(OD_Sample, disp = TRUE, alpha = 0.003)
   expect_output(str(nrow(test$netUnd_disp)), "21")
   expect_length(test$gUnd_disp, 10)
   expect_length(test$nodes, 13)
@@ -22,9 +22,9 @@ test_that("make.netUnd with disp", {
   expect_output(str(class(test$gUnd_disp)), "igraph")
 })
 
-test_that("make.netUnd with cap", {
+test_that("make_net_und with cap", {
   # Run simple net test
-  test <- make.netUnd(OD_Sample, cap = TRUE, pct = 10)
+  test <- make_net_und(OD_Sample, cap = TRUE, pct = 10)
   expect_output(str(nrow(test$netUnd_cap)), "126")
   expect_length(test$gUnd_cap, 10)
   expect_length(test$nodes, 13)
@@ -34,9 +34,9 @@ test_that("make.netUnd with cap", {
 })
 
 
-test_that("make.netUnd with metro", {
+test_that("make_net_und with metro", {
   # Run simple net test
-  test <- make.netUnd(OD_Sample, metro = TRUE)
+  test <- make_net_und(OD_Sample, metro = TRUE)
   expect_output(str(nrow(test$netUnd)), "1211")
   expect_length(test$gUnd, 10)
   expect_length(test$nodes, 8)

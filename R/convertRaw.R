@@ -7,15 +7,15 @@
 #' Both files should belong to the same year and same quarter.
 #' More information on variables to select and type of files to use can be found \href{https://github.com/FilipeamTeixeira/skynet}{here}
 #'
-#' @param x Coupon csv file to be processed
-#' @param y Ticket csv file to be processed
+#' @param c Coupon csv file to be processed
+#' @param t Ticket csv file to be processed
 #' @param path Path to save file to
 #'
 #' @examples
 #' \dontrun{
 #'
 #' temp <- tempdir()
-#' convertRaw(skynet_example("Origin_and_Destination_Survey_DB1BCoupon_2001_1.csv"),
+#' convert_raw(skynet_example("Origin_and_Destination_Survey_DB1BCoupon_2001_1.csv"),
 #' skynet_example("Origin_and_Destination_Survey_DB1BTicket_2001_1.csv"),
 #' path = temp)
 #'
@@ -24,7 +24,7 @@
 #' @export
 #'
 
-convertRaw <- function(c,t,path = NULL){
+convert_raw <- function(c,t,path = NULL){
 
   if(missing(path)){
     stop("Please specify the path argument.")
@@ -67,6 +67,11 @@ convertRaw <- function(c,t,path = NULL){
             row.names=FALSE)
 
 
+}
+
+convertRaw <- function(...){
+  warning(paste("convertRaw is deprecated, use convert_raw(), instead."))
+  do.call(convert_raw, list(...))
 }
 
 globalVariables(c("ItinID", "RoundTrip", "FarePerMile",

@@ -17,18 +17,19 @@
 #'
 #' @examples
 #' \dontrun{
-#' make.netUnd(OD_Sample)
+#' make_net_und(OD_Sample)
 #'
 #' # Apply Disparity Filter
-#' make.netUnd(OD_Sample, disp = TRUE, alpha = 0.05)
+#' make_net_und(OD_Sample, disp = TRUE, alpha = 0.05)
 #'
 #' # Apply Percentage Cap
-#' make.netUnd(OD_Sample, cap = TRUE, pct = 20)
+#' make_net_und(OD_Sample, cap = TRUE, pct = 20)
 #' }
 #'
 #' @export
+#'
 
-make.netUnd <- function(x, disp = FALSE, alpha = 0.003,
+make_net_und <- function(x, disp = FALSE, alpha = 0.003,
                         cap = FALSE, pct = 10,
                         merge = TRUE, carrier = FALSE, metro = FALSE){
 
@@ -118,7 +119,7 @@ make.netUnd <- function(x, disp = FALSE, alpha = 0.003,
 
     # Run disparity filter
     # Creates igraph object
-    gUnd_disp <- dispfilter(gUnd, alpha = alpha)
+    gUnd_disp <- disparity_filter(gUnd, alpha = alpha)
     netUnd_disp <- get.data.frame(gUnd_disp)
 
     # Rename fields
@@ -157,11 +158,13 @@ make.netUnd <- function(x, disp = FALSE, alpha = 0.003,
     nodes <- as.data.frame(get.vertex.attribute(gUnd_disp))
     nodes <- rename(nodes, airport = name)
 
-    return(list(gUnd_disp = gUnd_disp,
-                netUnd_disp = netUnd_disp, nodes = nodes))
+    netlist <- list(gUnd_disp = gUnd_disp,
+                    netUnd_disp = netUnd_disp, nodes = nodes)
+    class(netlist) <- "skynet"
+    return(netlist)
 
     # --------------------------------------------------------------- #
-                           # End of dispfilter command #
+                           # End of disparity_filter command #
     # --------------------------------------------------------------- #
 
 
@@ -210,7 +213,11 @@ make.netUnd <- function(x, disp = FALSE, alpha = 0.003,
     nodes <- as.data.frame(get.vertex.attribute(gUnd_cap))
     nodes <- rename(nodes, airport = name)
 
-    return(list(gUnd_cap = gUnd_cap, netUnd_cap = netUnd_cap, nodes = nodes))
+    netlist <- list(gUnd_cap = gUnd_cap,
+                    netUnd_cap = netUnd_cap, nodes = nodes)
+    class(netlist) <- "skynet"
+    return(netlist)
+
 
     # --------------------------------------------------------------- #
     # End of 10% filter command #
@@ -253,12 +260,18 @@ make.netUnd <- function(x, disp = FALSE, alpha = 0.003,
 
     }
 
-    return(list(gUnd = gUnd, netUnd = netUnd_all, nodes = nodes))
+    netlist <- list(gUnd = gUnd, netUnd = netUnd_all, nodes = nodes)
+    class(netlist) <- "skynet"
+    return(netlist)
 
 
   }
 }
 
+make.netUnd <- function(...){
+  warning(paste("make.netUnd is deprecated, use make_net_und(), instead."))
+  do.call(make_net_und, list(...))
+}
 
 # --------------------------------------------------------------- #
 # --------------------------------------------------------------- #

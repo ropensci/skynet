@@ -47,7 +47,7 @@ Ticket = c("Itinerary ID", "Roundtrip", "Itinerary Yield", "Passengers",
 
 Since version 1.0.2 that the import method changed being the `netimport()` function no longer available.
 When importing from the prezipped DB1B file, just add the argument `zip = TRUE` to the `import_db1b()` function. This does not apply to the T100 file which can be simply imported by typing `import_t100()`.
-In order to save space, it is possible as well to import the prezipped file, and convert it to a smaller file with only the necessary variables, with the function `convertRaw()`. 
+In order to save space, it is possible as well to import the prezipped file, and convert it to a smaller file with only the necessary variables, with the function `convert_raw()`. 
 
 When importing files from the T100 dataset, we recommend naming the file as `T100 year mkt` for the Market dataset and `T100 year seg` for the Segment dataset.
 
@@ -56,11 +56,11 @@ When importing files from the T100 dataset, we recommend naming the file as `T10
 
 SKYNET creates three types of networks and an extra option:
 
-1. Directed Network - `make.netDir()`
-1. Undirected Network - `make.netUnd()`
-1. Path Network - `make.Path()`
-1. Metro Network - To be used as argument in `make.netDir()` and `make.netUnd()`
-1. International Option - `make.netInt()`
+1. Directed Network - `make_net_dir()`
+1. Undirected Network - `make_net_und()`
+1. Path Network - `make_net_path()`
+1. Metro Network - To be used as argument in `make_net_dir()` and `make_net_und()`
+1. International Option - `make_net_int()`
 
 When generating a network, SKYNET, creates a list which includes:
 
@@ -90,19 +90,19 @@ To extract the backbone of the network:
 
 One of SKYNET's advantages is the possibility of plotting maps without having to recur to external software.
 
-Typing `netMap(list$netDir)` plots a ggplot2 based map with OD information. When specifying the group by carrier option when generating a network, `netMap` distinguishes carriers with different colors. The `pct` argument allow to plot only a percentage of the available data.
+Typing `net_map(skynet_object)` plots a ggplot2 based map with OD information. When specifying the group by carrier option when generating a network, `net_map()` distinguishes carriers with different colors. The `pct` argument allow to plot only a percentage of the available data.
 It is important to point the path to the dataframe created by SKYNET.
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE,dpi = 300, fig.width = 6, fig.height= 4, out.width=500, }
 library(skynet)
 data("OD_Sample")
-test <- make.netDir(OD_Sample)
-netMap(test$netDir, pct = 10)
+test <- make_net_dir(OD_Sample)
+net_map(test, pct = 10)
 ```
 
 ## Extra Functions
 
-SKYNET, allows as well to perform quick searches on both airports and carriers, by their IATA code. `findAirport()`, `findCarrier()`. 
+SKYNET, allows as well to perform quick searches on both airports and carriers, by their IATA code. `find_airport()`, `find_carrier()`. 
 
 ## Bootnet
 
@@ -110,7 +110,7 @@ With version 1.0.2, we included the option to bootstrap networks and retrieve ce
 
 ```{r}
 library(skynet)
-test <- make.netDir(OD_Sample)
-bootnet(test$gDir, n = 10)
+test <- make_net_dir(OD_Sample)
+boot_network(test$gDir, n = 10)
 ```
 

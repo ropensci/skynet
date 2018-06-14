@@ -4,28 +4,28 @@ context("Create Path Network")
 
 
 
-test_that("netPath works", {
+test_that("make_net_path works", {
   # Run simple net test
-  test <- make.Path(OD_Sample)
+  test <- make_net_path(OD_Sample)
   expect_length(test, 12)
   expect_output(str(nrow(test)), "2182")
 })
 
-test_that("make.Path with leg", {
+test_that("make_net_path with leg", {
   # Run simple net test
-  test <- make.Path(OD_Sample, leg = TRUE)
+  test <- make_net_path(OD_Sample, leg = TRUE)
   expect_length(test$netLegCount$legCount, 2749)
   expect_length(test$netLegCount, 5)
 })
 
-test_that("make.Path with zero tickets", {
+test_that("make_net_path with zero tickets", {
   # Run simple net test
-  test <- make.Path(OD_Sample, zero = TRUE)
+  test <- make_net_path(OD_Sample, zero = TRUE)
   expect_length(test$pct_zero, 2182)
 })
 
-test_that("make.Path with carriers", {
+test_that("make_net_path with carriers", {
   # Run simple net test
-  test <- make.Path(OD_Sample, carrier = TRUE)
+  test <- make_net_path(OD_Sample, carrier = TRUE)
   expect_length(test$op_carrier, 2749)
 })

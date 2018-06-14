@@ -7,15 +7,12 @@
 #' @examples
 #' \dontrun{
 #' netDir <- make.netDir(OD_Sample)
-#' fitPlaw(netDir$gDir)
+#' fit_power(netDir$gDir)
 #' }
 #' @export
 #'
-#'
-#' @export
-#'
 
-fitPlaw <- function(graph) {
+fit_power <- function(graph) {
   # calculate degree
   d <- degree(graph, mode = "all")
   dd <- degree.distribution(graph, mode = "all", cumulative = FALSE)
@@ -36,6 +33,11 @@ fitPlaw <- function(graph) {
     geom_point(col = "#56B4E9")+
     geom_smooth(method="lm", se=FALSE, col = "#E69F00")
 
+}
+
+fitPlaw <- function(...){
+  warning(paste("fitPlaw is deprecated, use fit_power(), instead."))
+  do.call(fit_power, list(...))
 }
 
 

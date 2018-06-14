@@ -66,7 +66,7 @@
       <h1>Introduction to SKYNET</h1>
                         <h4 class="author">Filipe Teixeira</h4>
             
-            <h4 class="date">2018-06-11</h4>
+            <h4 class="date">2018-06-14</h4>
           </div>
 
     
@@ -152,7 +152,7 @@
 </tr>
 </tbody>
 </table>
-<p>Since version 1.0.2 that the import method changed being the <code>netimport()</code> function no longer available. When importing from the prezipped DB1B file, just add the argument <code>zip = TRUE</code> to the <code><a href="../reference/import_db1b.html">import_db1b()</a></code> function. This does not apply to the T100 file which can be simply imported by typing <code><a href="../reference/import_t100.html">import_t100()</a></code>. In order to save space, it is possible as well to import the prezipped file, and convert it to a smaller file with only the necessary variables, with the function <code><a href="../reference/convertRaw.html">convertRaw()</a></code>.</p>
+<p>Since version 1.0.2 that the import method changed being the <code>netimport()</code> function no longer available. When importing from the prezipped DB1B file, just add the argument <code>zip = TRUE</code> to the <code><a href="../reference/import_db1b.html">import_db1b()</a></code> function. This does not apply to the T100 file which can be simply imported by typing <code><a href="../reference/import_t100.html">import_t100()</a></code>. In order to save space, it is possible as well to import the prezipped file, and convert it to a smaller file with only the necessary variables, with the function <code><a href="../reference/convert_raw.html">convertRaw()</a></code>.</p>
 <p>When importing files from the T100 dataset, we recommend naming the file as <code>T100 year mkt</code> for the Market dataset and <code>T100 year seg</code> for the Segment dataset.</p>
 </div>
 <div id="create-networks" class="section level2">
@@ -160,15 +160,15 @@
 <a href="#create-networks" class="anchor"></a>Create networks</h2>
 <p>SKYNET creates three types of networks and an extra option:</p>
 <ol style="list-style-type: decimal">
-<li>Directed Network - <code><a href="../reference/make.netDir.html">make.netDir()</a></code>
+<li>Directed Network - <code><a href="../reference/make_net_dir.html">make.netDir()</a></code>
 </li>
-<li>Undirected Network - <code><a href="../reference/make.netUnd.html">make.netUnd()</a></code>
+<li>Undirected Network - <code><a href="../reference/make_net_und.html">make.netUnd()</a></code>
 </li>
-<li>Path Network - <code><a href="../reference/make.Path.html">make.Path()</a></code>
+<li>Path Network - <code><a href="../reference/make_net_path.html">make.Path()</a></code>
 </li>
-<li>Metro Network - To be used as argument in <code><a href="../reference/make.netDir.html">make.netDir()</a></code> and <code><a href="../reference/make.netUnd.html">make.netUnd()</a></code>
+<li>Metro Network - To be used as argument in <code><a href="../reference/make_net_dir.html">make.netDir()</a></code> and <code><a href="../reference/make_net_und.html">make.netUnd()</a></code>
 </li>
-<li>International Option - <code><a href="../reference/make.netInt.html">make.netInt()</a></code>
+<li>International Option - <code><a href="../reference/make_net_int.html">make.netInt()</a></code>
 </li>
 </ol>
 <p>When generating a network, SKYNET, creates a list which includes:</p>
@@ -541,25 +541,25 @@ WN
 <h2 class="hasAnchor">
 <a href="#create-maps" class="anchor"></a>Create Maps</h2>
 <p>One of SKYNET’s advantages is the possibility of plotting maps without having to recur to external software.</p>
-<p>Typing <code><a href="../reference/netMap.html">netMap(list$netDir)</a></code> plots a ggplot2 based map with OD information. When specifying the group by carrier option when generating a network, <code>netMap</code> distinguishes carriers with different colors. The <code>pct</code> argument allow to plot only a percentage of the available data. It is important to point the path to the dataframe created by SKYNET.</p>
+<p>Typing <code><a href="../reference/plot.skynet.html">netMap(list$netDir)</a></code> plots a ggplot2 based map with OD information. When specifying the group by carrier option when generating a network, <code>netMap</code> distinguishes carriers with different colors. The <code>pct</code> argument allow to plot only a percentage of the available data. It is important to point the path to the dataframe created by SKYNET.</p>
 <p><img src="skynet_files/figure-html/unnamed-chunk-4-1.png" width="500"></p>
 </div>
 <div id="extra-functions" class="section level2">
 <h2 class="hasAnchor">
 <a href="#extra-functions" class="anchor"></a>Extra Functions</h2>
-<p>SKYNET, allows as well to perform quick searches on both airports and carriers, by their IATA code. <code><a href="../reference/findAirport.html">findAirport()</a></code>, <code><a href="../reference/findCarrier.html">findCarrier()</a></code>.</p>
+<p>SKYNET, allows as well to perform quick searches on both airports and carriers, by their IATA code. <code><a href="../reference/find_airport.html">findAirport()</a></code>, <code><a href="../reference/find_carrier.html">findCarrier()</a></code>.</p>
 </div>
 <div id="bootnet" class="section level2">
 <h2 class="hasAnchor">
 <a href="#bootnet" class="anchor"></a>Bootnet</h2>
 <p>With version 1.0.2, we included the option to bootstrap networks and retrieve certain network statistics.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">library</span>(skynet)</a>
-<a class="sourceLine" id="cb2-2" data-line-number="2">test &lt;-<span class="st"> </span><span class="kw"><a href="../reference/make.netDir.html">make.netDir</a></span>(OD_Sample)</a>
-<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="kw"><a href="../reference/bootnet.html">bootnet</a></span>(test<span class="op">$</span>gDir, <span class="dt">n =</span> <span class="dv">10</span>)</a></code></pre></div>
-<pre><code>##                            0.5%       99.5% mean_random mean_empirical
-## average.path.length   2.4489011   2.4814882   2.4625823      2.4479099
-## transitivity          0.3346198   0.3484919   0.3425135      0.3302566
-## betweenness         275.9239841 285.8386853 281.5561753    377.7058371</code></pre>
+<a class="sourceLine" id="cb2-2" data-line-number="2">test &lt;-<span class="st"> </span><span class="kw"><a href="../reference/make_net_dir.html">make.netDir</a></span>(OD_Sample)</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="kw">bootnet</span>(test<span class="op">$</span>gDir, <span class="dt">n =</span> <span class="dv">10</span>)</a></code></pre></div>
+<pre><code>##                           0.5%       99.5% mean_random mean_empirical
+## average.path.length   2.454993   2.4756036    2.463604      2.4479099
+## transitivity          0.335065   0.3475811    0.340266      0.3302566
+## betweenness         277.500219 283.4820120  281.117131    377.7058371</code></pre>
 </div>
 </div>
   </div>

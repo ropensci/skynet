@@ -9,16 +9,16 @@
 #' @examples
 #' \dontrun{
 #' netDir <- make.netDir(OD_Sample)
-#' fromto.stat(netDir$gDir, "JFK", orig = "from")
+#' from_to_stats(netDir$gDir, "JFK", orig = "from")
 #'
-#' fromto.stat(netDir$gDir, "JFK", orig = "to")
+#' from_to_stats(netDir$gDir, "JFK", orig = "to")
 #' }
 #'
 #' @export
 #'
 
 
-fromto.stat <- function(x, y, orig){
+from_to_stats <- function(x, y, orig){
 
   orig <- as.character(orig)
 
@@ -27,6 +27,11 @@ fromto.stat <- function(x, y, orig){
 
   else
     sum(E(x)[to(V(x)[y])]$weight)
+}
+
+fromto.stat <- function(...){
+  warning(paste("fromto.stat is deprecated, use from_to_stats(), instead."))
+  do.call(from_to_stats, list(...))
 }
 
 globalVariables(c("from", "to"))

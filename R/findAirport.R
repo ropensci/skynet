@@ -7,16 +7,21 @@
 #'
 #' @examples
 #' \dontrun{
-#' findAirport("Atlanta")
+#' find_airport("Atlanta")
 #'
-#' findAirport("ATL")
+#' find_airport("ATL")
 #' }
 #' @export
 #'
 
 
-findAirport <- function(x){
+find_airport <- function(x){
   filter(airportCode, grepl(x, origin) | grepl (x, city))
+}
+
+findAirport <- function(...){
+  warning(paste("findAirport is deprecated, use find_airport(), instead."))
+  do.call(find_airport, list(...))
 }
 
 globalVariables(c("airportCode", "origin", "city"))

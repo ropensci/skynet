@@ -11,16 +11,15 @@
 #'
 #' @examples
 #' \dontrun{
-#' make.Path(OD_Sample)
+#' make_net_path(OD_Sample)
 #'
 #' # Generate Leg Count
-#' make.Path(OD_Sample, leg = TRUE)
+#' make_net_path(OD_Sample, leg = TRUE)
 #' }
 #' @export
 #'
-#'
 
-make.Path <- function(x, leg = FALSE, zero = FALSE, carrier = FALSE){
+make_net_path <- function(x, leg = FALSE, zero = FALSE, carrier = FALSE){
 
   message("This code might take longer than usual to execute")
 
@@ -125,6 +124,7 @@ make.Path <- function(x, leg = FALSE, zero = FALSE, carrier = FALSE){
       mutate(fare_sd = ifelse(is.na(fare_sd), 0, fare_sd))
 
     if(leg == FALSE){
+
       return(netOD)
     }
 
@@ -153,9 +153,16 @@ make.Path <- function(x, leg = FALSE, zero = FALSE, carrier = FALSE){
       # Count words
       DT$legCount <- (stringr::str_count(DT$path, "\\S+"))-1
 
-      return(list(netOD = netOD, netLegCount = DT))
+      netlist <- list(netOD = netOD, netLegCount = DT)
+      class(netlist) <- "skynet"
+      return(netlist)
 
   }
+}
+
+make.Path <- function(...){
+  warning(paste("make.Path is deprecated, use make_net_path(), instead."))
+  do.call(make_net_path, list(...))
 }
 
 globalVariables(c("mkt_id", "seq_num", "num_stops", "pct_zero",
