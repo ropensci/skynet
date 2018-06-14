@@ -65,3 +65,9 @@ test_that("make_net_und with metro", {
   expect_length(test$gUnd, 10)
 })
 
+test_that("make_net_und with metro", {
+  # Run simple net test
+  test <- make_net_und(OD_Sample, merge = FALSE)
+  expect_output(str(nrow(test$netUnd)), "1531")
+  expect_length(test$gUnd, 10)
+})
