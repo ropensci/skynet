@@ -158,7 +158,7 @@
 </tr>
 </tbody>
 </table>
-<p>Since version 1.0.2 that the import method changed being the <code>netimport()</code> function no longer available. When importing from the prezipped DB1B file, just add the argument <code>zip = TRUE</code> to the <code><a href="reference/import_db1b.html">import_db1b()</a></code> function. This does not apply to the T100 file which can be simply imported by typing <code><a href="reference/import_t100.html">import_t100()</a></code>. In order to save space, it is possible as well to import the prezipped file, and convert it to a smaller file with only the necessary variables, with the function <code>convertRaw()</code>.</p>
+<p>Since version 1.0.2 that the import method changed being the <code>netimport()</code> function no longer available. When importing from the prezipped DB1B file, just add the argument <code>zip = TRUE</code> to the <code><a href="reference/import_db1b.html">import_db1b()</a></code> function. This does not apply to the T100 file which can be simply imported by typing <code><a href="reference/import_t100.html">import_t100()</a></code>. In order to save space, it is possible as well to import the prezipped file, and convert it to a smaller file with only the necessary variables, with the function <code><a href="reference/convert_raw.html">convert_raw()</a></code>.</p>
 </div>
 <div id="example" class="section level2">
 <h2 class="hasAnchor">
@@ -167,11 +167,11 @@
 <pre><code>library(skynet)
 # For DB1B data
 import_db1b("folder/Coupon_2011Q1.csv", "folder/Ticket_2011Q1.csv")
-make.netDir(OD_2011Q1, disp = TRUE, alpha = 0.05)
+make_net_dir(OD_2011Q1, disp = TRUE, alpha = 0.05)
 
 # For T100 data
 import_t100("folder/T100_2011.csv")
-make.netDir(T100_2011Q1, disp = TRUE, alpha = 0.05)</code></pre>
+make_net_dir(T100_2011Q1, disp = TRUE, alpha = 0.05)</code></pre>
 </div>
 </div>
 </div>

@@ -84,7 +84,7 @@ prezipped DB1B file, just add the argument `zip = TRUE` to the
 be simply imported by typing `import_t100()`. In order to save space, it
 is possible as well to import the prezipped file, and convert it to a
 smaller file with only the necessary variables, with the function
-`convertRaw()`.
+`convert_raw()`.
 
 ## Example
 
@@ -93,8 +93,8 @@ To generate a directed network, please type:
     library(skynet)
     # For DB1B data
     import_db1b("folder/Coupon_2011Q1.csv", "folder/Ticket_2011Q1.csv")
-    make.netDir(OD_2011Q1, disp = TRUE, alpha = 0.05)
+    make_net_dir(OD_2011Q1, disp = TRUE, alpha = 0.05)
     
     # For T100 data
     import_t100("folder/T100_2011.csv")
-    make.netDir(T100_2011Q1, disp = TRUE, alpha = 0.05)
+    make_net_dir(T100_2011Q1, disp = TRUE, alpha = 0.05)

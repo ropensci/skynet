@@ -21,4 +21,5 @@ Shows sample of 60% of flights
 network <- make.netDir(OD_Sample)
 net_map(network, pct = 10)
 }
+
 }

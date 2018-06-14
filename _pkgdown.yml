@@ -16,7 +16,6 @@ reference:
   -  '`convert_raw`'
   -  '`make_net_dir`'
   -  '`make_net_und`'
-  -  '`make_net_int`'
   -  '`make_net_path`'
   -  '`node_stats`'
   -  '`import_t100`'

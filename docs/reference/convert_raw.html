@@ -99,16 +99,16 @@
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>path</th>
-      <td><p>Path to save file to</p></td>
-    </tr>
-    <tr>
-      <th>x</th>
+      <th>c</th>
       <td><p>Coupon csv file to be processed</p></td>
     </tr>
     <tr>
-      <th>y</th>
+      <th>t</th>
       <td><p>Ticket csv file to be processed</p></td>
+    </tr>
+    <tr>
+      <th>path</th>
+      <td><p>Path to save file to</p></td>
     </tr>
     </table>
     
@@ -123,7 +123,7 @@ More information on variables to select and type of files to use can be found <a
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
 <span class='no'>temp</span> <span class='kw'>&lt;-</span> <span class='fu'>tempdir</span>()
-<span class='fu'>convertRaw</span>(<span class='fu'><a href='skynet_example.html'>skynet_example</a></span>(<span class='st'>"Origin_and_Destination_Survey_DB1BCoupon_2001_1.csv"</span>),
+<span class='fu'>convert_raw</span>(<span class='fu'><a href='skynet_example.html'>skynet_example</a></span>(<span class='st'>"Origin_and_Destination_Survey_DB1BCoupon_2001_1.csv"</span>),
 <span class='fu'><a href='skynet_example.html'>skynet_example</a></span>(<span class='st'>"Origin_and_Destination_Survey_DB1BTicket_2001_1.csv"</span>),
 <span class='kw'>path</span> <span class='kw'>=</span> <span class='no'>temp</span>)
 
