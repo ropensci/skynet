@@ -44,3 +44,24 @@ test_that("make_net_und with metro", {
   expect_output(str(class(test$nodes)), "data.frame")
   expect_output(str(class(test$gUnd)), "igraph")
 })
+
+test_that("make_net_und with carrier and disp", {
+  # Run simple net test
+  expect_error(make_net_und(OD_Sample, carrier = TRUE, disp = TRUE))
+})
+
+
+test_that("make_net_und with metro", {
+  # Run simple net test
+  test <- make_net_und(OD_Sample, carrier = TRUE, merge = FALSE)
+  expect_output(str(nrow(test$netUnd)), "1531")
+  expect_length(test$gUnd, 10)
+})
+
+test_that("make_net_und with metro", {
+  # Run simple net test
+  test <- make_net_und(OD_Sample, carrier = TRUE, merge = TRUE)
+  expect_output(str(nrow(test$netUnd)), "2163")
+  expect_length(test$gUnd, 10)
+})
+
