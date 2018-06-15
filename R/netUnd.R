@@ -52,7 +52,7 @@ make_net_und <- function(x, disp = FALSE, alpha = 0.003,
   if(carrier == TRUE & merge == FALSE){
 
     netUnd_all <- x %>%
-      select(origin, dest, passengers, op_carrier, year, quarter
+      select(origin, dest, passengers, op_carrier, year, quarter,
              itin_yield, distance) %>%
       group_by(origin, dest, op_carrier) %>%
       mutate(itin_fare = itin_yield*distance) %>%
