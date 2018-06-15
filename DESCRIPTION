@@ -38,6 +38,7 @@ Collate:
     'plotMap.R'
     'skynet_example.R'
     'bootnet.R'
+    'summary.R'
 Depends:
     R (>= 3.1.2)
 Imports:
