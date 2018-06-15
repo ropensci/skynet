@@ -13,10 +13,10 @@
 summary.skynet <- function(object, ...){
 
   output <- paste("Skynet Object:", "\n",
-                  "Year:", paste0(t(distinct(object[[2]]["year"])),
-                                  collapse = ", "), "\n",
-                  "Quarter:", paste0(t(distinct(object[[2]]["quarter"])),
-                                  collapse = ", "), "\n",
+                 # "Year:", paste0(t(distinct(object[[2]]["year"])),
+                #                  collapse = ", "), "\n",
+                #  "Quarter:", paste0(t(distinct(object[[2]]["quarter"])),
+                 #                 collapse = ", "), "\n",
                   "Number of vertices/airports:", vcount(object[[1]]), "\n",
                   "Number of edges/routes:", ecount(object[[1]]), "\n")
 
