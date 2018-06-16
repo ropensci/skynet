@@ -8,6 +8,7 @@
 #'
 #' @param x T-100 csv
 #' @param nonsch Should equal TRUE to include non-scheduled flights
+#' @param auto Automatically assigns object
 #'
 #' @examples
 #' \dontrun{
@@ -19,7 +20,7 @@
 #'
 
 
-import_t100 <- function(x, nonsch = FALSE){
+import_t100 <- function(x, nonsch = FALSE, auto = TRUE){
 
   T100 <- fread(x, header = TRUE, sep = ",", stringsAsFactors = FALSE,
                 integer64 = "numeric")
@@ -83,8 +84,13 @@ import_t100 <- function(x, nonsch = FALSE){
 
     T100 <- data.frame(T100)
 
-    assign(paste("T100_", as.character(T100$year)[1],
-                 "_mkt", sep = ""), T100, envir = envir)
+    if (auto == TRUE){
+      assign(paste("T100_", as.character(T100$year)[1],
+                   "_mkt", sep = ""), T100, envir = envir)
+    }else{
+      return(T100)
+    }
+
 
   }
 }

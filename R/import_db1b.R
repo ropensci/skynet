@@ -11,6 +11,8 @@
 #' @param c Coupon csv file to be imported, in case of DB1B database
 #' @param t Ticket csv file to be imported, in case of DB1B database
 #' @param zip Should equal TRUE if original file comes from the BTS prezipped option.
+#' @param auto Automatically assigns object
+#'
 #' @examples
 #' \dontrun{
 #'
@@ -19,18 +21,18 @@
 #' }
 #' @export
 
-import_db1b <- function(c, t, zip = FALSE){
+import_db1b <- function(c, t, zip = FALSE, auto = TRUE){
 
     if(zip == FALSE){
-      do.call(ODImport, list(c,t))
+      do.call(ODImport, list(c, t, auto))
     }else{
-      do.call(ODRaw, list(c,t))
+      do.call(ODRaw, list(c, t, auto))
     }
   }
 
 
 # netImport function
-ODImport <- function(c, t){
+ODImport <- function(c, t, auto = TRUE){
 
   # Import Coupon file
   coupon <- fread(c, header = TRUE, sep = ",", stringsAsFactors = FALSE,
@@ -61,9 +63,14 @@ ODImport <- function(c, t){
     filter(distance != 0) #To clean data imput inconsistencies
 
 
-  assign(paste("OD_", as.character(coupon$year)[1], "Q",
-               as.character(coupon$quarter)[1], sep = ""),
-         netMerged, envir = envir)
+  if (auto == TRUE){
+    assign(paste("OD_", as.character(coupon$year)[1], "Q",
+                 as.character(coupon$quarter)[1], sep = ""),
+           netMerged, envir = envir)
+  }else{
+    return(netMerged)
+  }
+
 
 }
 
@@ -99,9 +106,13 @@ ODRaw <- function(c,t){
     filter(distance != 0) #To clean data imput inconsistencies
 
 
-  assign(paste("OD_", as.character(coupon$year)[1], "Q",
-               as.character(coupon$quarter)[1], sep = ""),
-         netMerged, envir = envir)
+  if (auto == TRUE){
+    assign(paste("OD_", as.character(coupon$year)[1], "Q",
+                 as.character(coupon$quarter)[1], sep = ""),
+           netMerged, envir = envir)
+  }else{
+    return(netMerged)
+  }
 
 }
 
@@ -110,7 +121,7 @@ globalVariables(c("ITIN_ID", "MKT_ID", "SEQ_NUM", "YEAR", "QUARTER",
                   "GATEWAY", "ROUNDTRIP", "ITIN_YIELD",
                   "ITIN_FARE", "BULKFARE", "DISTANCE_FULL", "UNIQUE_CARRIER",
                   "UNIQUE_CARRIER_NAME", "MONTH",
-                  "AIRCRAFT_CONFIG", "import_db1b", "CLASS"))
+                  "AIRCRAFT_CONFIG", "import_db1b", "CLASS", "auto"))
 
 
 pos <- 1
