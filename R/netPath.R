@@ -33,7 +33,7 @@ make_net_path <- function(x, leg = FALSE, zero = FALSE, carrier = FALSE){
                  itin_fare=itin_fare[1], passengers = passengers[1],
                  roundtrip = roundtrip[1], itin_yield = itin_yield[1],
                  num_stops = .N, pct_zero = ifelse(itin_fare == 0, 1, 0),
-                 distance = sum(distance)), by=mkt_id]
+                 distance = sum(distance), year, quarter), by=mkt_id]
 
     # Calculates averages and sums
     DT <- DT[, itin_fare := itin_fare/(1+roundtrip)]
@@ -44,7 +44,7 @@ make_net_path <- function(x, leg = FALSE, zero = FALSE, carrier = FALSE){
                     mean_stops = round(sum(num_stops)/(.N)),
                     pct_zero = round((sum(pct_zero)*100), 2)/(.N),
                     mean_distance = round(sum(distance)/(.N), 2)),
-                by=.(origin, dest)][order(origin, dest)]
+                by=.(origin, dest, year, quarter)][order(origin, dest)]
 
   }
 
@@ -55,7 +55,7 @@ make_net_path <- function(x, leg = FALSE, zero = FALSE, carrier = FALSE){
                  roundtrip = roundtrip[1], itin_yield = itin_yield[1],
                  op_carrier = op_carrier[1], num_stops = .N,
                  pct_zero = ifelse(itin_fare == 0, 1, 0),
-                 distance = sum(distance)), by=mkt_id]
+                 distance = sum(distance), year, quarter), by=mkt_id]
 
     # Calculates averages and sums
     DT <- DT[, itin_fare := itin_fare/(1+roundtrip)]
@@ -66,7 +66,7 @@ make_net_path <- function(x, leg = FALSE, zero = FALSE, carrier = FALSE){
                     mean_stops = round(sum(num_stops)/(.N)),
                     pct_zero = round((sum(pct_zero)*100), 2)/(.N),
                     mean_distance = round(sum(distance)/(.N), 2)),
-                by=.(origin, dest, op_carrier)][order(origin, dest, op_carrier)]
+                by=.(origin, dest, op_carrier, year, quarter)][order(origin, dest, op_carrier)]
 
   }
 
@@ -76,7 +76,7 @@ make_net_path <- function(x, leg = FALSE, zero = FALSE, carrier = FALSE){
                    itin_fare=itin_fare[1], passengers = passengers[1],
                    roundtrip = roundtrip[1], itin_yield = itin_yield[1],
                    op_carrier = op_carrier[1], num_stops = .N,
-                   distance = sum(distance)), by=mkt_id]
+                   distance = sum(distance), year, quarter), by=mkt_id]
 
       # Calculates averages and sums
       DT <- DT[, itin_fare := itin_fare/(1+roundtrip)]
@@ -86,7 +86,7 @@ make_net_path <- function(x, leg = FALSE, zero = FALSE, carrier = FALSE){
                       itin_yield = round(sum(itin_yield)/(.N), 3),
                       mean_stops = round(sum(num_stops)/(.N)),
                       mean_distance = round(sum(distance)/(.N), 2)),
-            by=.(origin, dest, op_carrier)][order(origin, dest, op_carrier)]
+            by=.(origin, dest, op_carrier, year, quarter)][order(origin, dest, op_carrier)]
 
 
     }
@@ -96,7 +96,8 @@ make_net_path <- function(x, leg = FALSE, zero = FALSE, carrier = FALSE){
       DT <- DT[, .(origin=origin[1],dest=dest[.N],
                    itin_fare=itin_fare[1], passengers = passengers[1],
                    roundtrip = roundtrip[1], itin_yield = itin_yield[1],
-                   num_stops = .N, distance = sum(distance)), by=mkt_id]
+                   num_stops = .N, distance = sum(distance),
+                   year, quarter), by=mkt_id]
 
       # Calculates averages and sums
       DT <- DT[, itin_fare := itin_fare/(1+roundtrip)]
@@ -106,7 +107,7 @@ make_net_path <- function(x, leg = FALSE, zero = FALSE, carrier = FALSE){
                       itin_yield = round(sum(itin_yield)/(.N), 3),
                       mean_stops = round(sum(num_stops)/(.N)),
                       mean_distance = round(sum(distance)/(.N), 2)),
-                  by=.(origin, dest)][order(origin, dest)]
+                  by=.(origin, dest, year, quarter)][order(origin, dest)]
 
     }
 
@@ -121,7 +122,8 @@ make_net_path <- function(x, leg = FALSE, zero = FALSE, carrier = FALSE){
     netOD <- netOD %>%
       left_join(airportCode, by = "dest") %>%
       select(-latitude.x, -latitude.y, -longitude.x, -longitude.y) %>%
-      mutate(fare_sd = ifelse(is.na(fare_sd), 0, fare_sd))
+      mutate(fare_sd = ifelse(is.na(fare_sd), 0, fare_sd)) %>%
+      select(-year, -quarter, everything())
 
     if(leg == FALSE){
 

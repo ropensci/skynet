@@ -73,3 +73,9 @@
 # skynet 1.2.0
 
 * Major function naming changes to match syntax etiquette
+* Skynet S3 class added
+
+# skynet 1.2.1
+
+* Year and quarter added to skynet object
+* Fixed site
