@@ -66,7 +66,7 @@
       <h1>Introduction to SKYNET</h1>
                         <h4 class="author">Filipe Teixeira</h4>
             
-            <h4 class="date">2018-06-14</h4>
+            <h4 class="date">2018-06-16</h4>
           </div>
 
     
@@ -554,14 +554,12 @@ WN
 <a href="#bootnet" class="anchor"></a>Bootnet</h2>
 <p>With version 1.0.2, we included the option to bootstrap networks and retrieve certain network statistics.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">library</span>(skynet)</a>
-<a class="sourceLine" id="cb2-2" data-line-number="2">test &lt;-<span class="st"> </span><span class="kw"><a href="../reference/make_net_dir.html">make_net_dir</a></span>(OD_Sample)</a></code></pre></div>
-<pre><code>## Warning in nodeStats(x): nodeStats is deprecated, use node_stats(),
-## instead.</code></pre>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="../reference/boot_network.html">boot_network</a></span>(test<span class="op">$</span>gDir, <span class="dt">n =</span> <span class="dv">10</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb2-2" data-line-number="2">test &lt;-<span class="st"> </span><span class="kw"><a href="../reference/make_net_dir.html">make_net_dir</a></span>(OD_Sample)</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="kw"><a href="../reference/boot_network.html">boot_network</a></span>(test<span class="op">$</span>gDir, <span class="dt">n =</span> <span class="dv">10</span>)</a></code></pre></div>
 <pre><code>##                            0.5%       99.5% mean_random mean_empirical
-## average.path.length   2.4566854   2.4817147   2.4709740      2.4479099
-## transitivity          0.3381245   0.3479205   0.3425104      0.3302566
-## betweenness         279.7714343 285.8823904 283.2980080    377.7058371</code></pre>
+## average.path.length   2.4532575   2.4743154   2.4683557      2.4479099
+## transitivity          0.3339559   0.3470368   0.3405099      0.3302566
+## betweenness         279.9525697 284.4547610 282.2864542    377.7058371</code></pre>
 </div>
 </div>
   </div>

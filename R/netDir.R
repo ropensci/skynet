@@ -52,22 +52,24 @@ make_net_dir <- function(x, disp = FALSE, alpha = 0.003,
 
     netDir_all <- x %>%
       select(origin, dest, passengers, op_carrier, itin_yield, distance, year, quarter) %>%
-      group_by(origin, dest, op_carrier) %>%
+      group_by(origin, dest, op_carrier, year, quarter) %>%
       mutate(itin_fare = itin_yield*distance) %>%
       summarise(weight = sum(passengers), fare_sd = round(sd(itin_fare), 2),
                 itin_fare = round(mean(itin_fare), 2),
                 itin_yield = mean(itin_yield), distance = mean(distance)) %>%
-      mutate(fare_sd = ifelse(is.na(fare_sd), 0, fare_sd))
+      mutate(fare_sd = ifelse(is.na(fare_sd), 0, fare_sd)) %>%
+      select(-year, -quarter, everything())
 
     }else{
     netDir_all <- x %>%
       select(origin, dest, passengers, itin_yield, distance, year, quarter) %>%
-      group_by(origin, dest) %>%
+      group_by(origin, dest, year, quarter) %>%
       mutate(itin_fare = itin_yield*distance) %>%
       summarise(weight = sum(passengers), fare_sd = round(sd(itin_fare), 2),
                 itin_fare = round(mean(itin_fare), 2),
                 itin_yield = mean(itin_yield), distance = mean(distance)) %>%
-      mutate(fare_sd = ifelse(is.na(fare_sd), 0, fare_sd))
+      mutate(fare_sd = ifelse(is.na(fare_sd), 0, fare_sd)) %>%
+      select(-year, -quarter, everything())
   }
 
 
