@@ -4,7 +4,7 @@
 #' Average Path Length, Transitivity, Mean Betweenness.
 #'
 #'
-#' @param g iGraph graph.
+#' @param g iGraph graph or skynet object.
 #' @param n Number of bootstraps to run. (500 default)
 #' @param left_ci Confidence interval left limit. (0.005 default)
 #' @param right_ci Confidence interval left limit (0.995 default)
@@ -19,8 +19,14 @@
 #'
 
 
-
 boot_network <- function(g, n = 500, left_ci = 0.005, right_ci = 0.995){
+
+  if (class(g) == "skynet"){
+    g <- g[[1]]
+  }else{
+    g <- g
+  }
+
       avg <- c() # Creates empty vector for output
       trv <- c()
       btw <- c()
