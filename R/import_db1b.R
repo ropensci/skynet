@@ -76,7 +76,7 @@ ODImport <- function(c, t, auto = TRUE){
 
 
 
-ODRaw <- function(c,t){
+ODRaw <- function(c,t, auto = TRUE){
 
   coupon <- fread(c, header = TRUE, sep = ",", stringsAsFactors = FALSE,
                        integer64 = "numeric")
