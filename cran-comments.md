@@ -1,4 +1,7 @@
 ## Release summary
+
+* Fixed license to follow CRAN's MIT template.
+
 This is a new release where the function names were adapted to a more consistent format.
 I've added as well more tests, improved the documentation, and added some extra functions.
 The overall stability was improved as well.
