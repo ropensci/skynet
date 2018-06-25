@@ -1,8 +1,7 @@
 ## Release summary
-This is a new release with some functions added and some old functions improved.
-Some bugs have been fixed as well.
-
-The examples have the "\dontrun{}" tag as it would take too long to execute even with a small example due to the characteristics of this package.
+This is a new release where the function names were adapted to a more consistent format.
+I've added as well more tests, improved the documentation, and added some extra functions.
+The overall stability was improved as well.
 
 ## Test environments
 * local OS X install, R 3.5.0
