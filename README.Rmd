@@ -12,7 +12,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# skynet
+# skynet <img src="man/figures/logo.png" align="right" />
 
 ![Build Status](https://travis-ci.org/FilipeamTeixeira/skynet.svg?branch=master)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/skynet)](https://cran.r-project.org/package=skynet)
