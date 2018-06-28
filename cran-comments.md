@@ -1,10 +1,12 @@
 ## Release summary
 
-* Fixed license to follow CRAN's MIT template.
+* This package was removed by Professor Brian Ripley as according to him:
 
-This is a new release where the function names were adapted to a more consistent format.
-I've added as well more tests, improved the documentation, and added some extra functions.
-The overall stability was improved as well.
+"This leaves behind files like
+Rtmp0wiA3ZCoupon 2001Q1.csv
+Rtmp0wiA3ZTicket 2001Q1.csv""
+
+These files are only created when running a function which creates indeed csv files. It is part of the package, documented and it exists since 3 submissions ago.
 
 ## Test environments
 * local OS X install, R 3.5.0
