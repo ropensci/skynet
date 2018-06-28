@@ -79,3 +79,7 @@
 
 * Year and quarter added to skynet object
 * Fixed site
+
+# skynet 1.2.2
+
+* Removed convert_raw as it is easier to import using the zip = TRUE argument and select the format to be saved to.

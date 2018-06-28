@@ -3,12 +3,11 @@
 
 # skynet <img src="man/figures/logo.png" align="right" />
 
-![Build
-Status](https://travis-ci.org/FilipeamTeixeira/skynet.svg?branch=master)
+![Build Status](https://travis-ci.org/ropensci/skynet.svg?branch=master)
 [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/skynet)](https://cran.r-project.org/package=skynet)
 ![](https://cranlogs.r-pkg.org/badges/skynet?color=brightgreen)
 [![Coverage
-status](https://codecov.io/gh/FilipeamTeixeira/Skynet/branch/master/graph/badge.svg)](https://codecov.io/github/FilipeamTeixeira/Skynet?branch=master)
+status](https://codecov.io/gh/ropensci/Skynet/branch/master/graph/badge.svg)](https://codecov.io/github/ropensci/Skynet?branch=master)
 [![](https://badges.ropensci.org/214_status.svg)](https://github.com/ropensci/onboarding/issues/214)
 
 # Overview
@@ -98,3 +97,5 @@ To generate a directed network, please type:
     # For T100 data
     import_t100("folder/T100_2011.csv")
     make_net_dir(T100_2011Q1, disp = TRUE, alpha = 0.05)
+
+[![ropensci\_footer](https://ropensci.org/public_images/ropensci_footer.png)](https://ropensci.org)
