@@ -1,12 +1,6 @@
 ## Release summary
 
-* This package was removed by Professor Brian Ripley as according to him:
-
-"This leaves behind files like
-Rtmp0wiA3ZCoupon 2001Q1.csv
-Rtmp0wiA3ZTicket 2001Q1.csv""
-
-These files are only created when running a function which creates indeed csv files. It is part of the package, documented and it exists since 3 submissions ago.
+* Removed problematic function which created csv files on a temp folder.
 
 ## Test environments
 * local OS X install, R 3.5.0

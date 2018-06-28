@@ -13,7 +13,6 @@ reference:
   -  '`find_airport`'
   -  '`find_carrier`'
   -  '`from_to_stats`'
-  -  '`convert_raw`'
   -  '`make_net_dir`'
   -  '`make_net_und`'
   -  '`make_net_path`'

@@ -7,7 +7,7 @@
 boot_network(g, n = 500, left_ci = 0.005, right_ci = 0.995)
 }
 \arguments{
-\item{g}{iGraph graph.}
+\item{g}{iGraph graph or skynet object.}
 
 \item{n}{Number of bootstraps to run. (500 default)}
 

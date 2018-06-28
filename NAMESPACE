@@ -2,7 +2,6 @@
 
 S3method(summary,skynet)
 export(boot_network)
-export(convert_raw)
 export(createNodes)
 export(disparity_filter)
 export(find_airport)

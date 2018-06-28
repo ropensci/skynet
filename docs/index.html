@@ -14,6 +14,7 @@
     air transport statistics for urban studies based on publicly available
     data from the Bureau of Transport Statistics (BTS) in the United States
     &lt;https://www.transtats.bts.gov/databases.asp?Mode_ID=1&amp;Mode_Desc=Aviation&amp;Subject_ID2=0&gt;.">
+<meta property="og:image" content="http://filipeamteixeira.github.io/skynet/logo.png">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -32,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">skynet</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.2.1</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.2.2</span>
       </span>
     </div>
 
@@ -79,7 +80,8 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 <div id="skynet" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#skynet" class="anchor"></a>skynet</h1></div>
+<a href="#skynet" class="anchor"></a>skynet <img src="../../OneDrive%20-%20UGent/skynet/man/figures/logo.png" align="right">
+</h1></div>
 <p><img src="https://travis-ci.org/FilipeamTeixeira/skynet.svg?branch=master" alt="Build Status"><a href="https://cran.r-project.org/package=skynet"><img src="http://www.r-pkg.org/badges/version/skynet" alt="CRAN_Status_Badge"></a> <img src="https://cranlogs.r-pkg.org/badges/skynet?color=brightgreen"><a href="https://codecov.io/github/FilipeamTeixeira/Skynet?branch=master"><img src="https://codecov.io/gh/FilipeamTeixeira/Skynet/branch/master/graph/badge.svg" alt="Coverage status"></a> <a href="https://github.com/ropensci/onboarding/issues/214"><img src="https://badges.ropensci.org/214_status.svg"></a></p>
 </div>
 <div id="overview" class="section level1">
@@ -167,7 +169,7 @@
 </tr>
 </tbody>
 </table>
-<p>Since version 1.0.2 that the import method changed being the <code>netimport()</code> function no longer available. When importing from the prezipped DB1B file, just add the argument <code>zip = TRUE</code> to the <code><a href="reference/import_db1b.html">import_db1b()</a></code> function. This does not apply to the T100 file which can be simply imported by typing <code><a href="reference/import_t100.html">import_t100()</a></code>. In order to save space, it is possible as well to import the prezipped file, and convert it to a smaller file with only the necessary variables, with the function <code><a href="reference/convert_raw.html">convert_raw()</a></code>.</p>
+<p>Since version 1.0.2 that the import method changed being the <code>netimport()</code> function no longer available. When importing from the prezipped DB1B file, just add the argument <code>zip = TRUE</code> to the <code><a href="reference/import_db1b.html">import_db1b()</a></code> function. This does not apply to the T100 file which can be simply imported by typing <code><a href="reference/import_t100.html">import_t100()</a></code>. In order to save space, it is possible as well to import the prezipped file, and convert it to a smaller file with only the necessary variables, with the function <code><a href="http://www.rdocumentation.org/packages/skynet/topics/convert_raw">convert_raw()</a></code>.</p>
 </div>
 <div id="example" class="section level2">
 <h2 class="hasAnchor">
