@@ -29,6 +29,16 @@ The DB1B data consists of 2 sets of files, Coupon and Ticket. They can be both d
 
 To comply with R syntax guidelines, we changed to a clearer function naming from version 1.2.0. Deprecated functions are still present, but will be removed for the next versions.
 
+## Note on importing from other data sources
+
+We are constantly working on new functions that allow importing data from different data sources. However, as we can't cover them all at least for now, in case you would like to work with a database which is not covered by skynet, simply create a data.frame with the following variables: 
+
+`itin_id, mkt_id, seq_num, origin_mkt_id, origin, year, quarter, dest_mkt_id, dest, trip_break, op_carrier, distance, gateway, roundtrip, itin_yield, passengers, itin_fare, bulk_fare, distance_full` 
+
+For more information on the variables, please visit https://www.transtats.bts.gov/DL_SelectFields.asp?Table_ID=289 and https://www.transtats.bts.gov/DL_SelectFields.asp?Table_ID=272.
+
+Skynet allows that some of this variables have a 0 or NA value, however, if you're working with a specific dataset which doesn't allow an easy conversion to our format, please feel free to create an issue so we can look into it. Please make sure to include at least one small example of a csv file with the data you're trying to import.
+
 ## Installation
 
 You can install skynet from github with:
