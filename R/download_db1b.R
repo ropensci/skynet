@@ -1,6 +1,6 @@
 #' Download Data from DB1B files
 #'
-#' Downloads data from BTS/RITA/Transtats files
+#' Downloads data from BTS/RITA/Transtats and imports it into R
 #'
 #' Coupon files are downloaded from \url{https://www.transtats.bts.gov/DL_SelectFields.asp?Table_ID=289}.
 #' Ticket files are downloaded from  \url{https://www.transtats.bts.gov/DL_SelectFields.asp?Table_ID=272}.

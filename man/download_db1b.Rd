@@ -12,7 +12,7 @@ download_db1b(y = NULL, q = NULL)
 \item{q}{quarter to be imported}
 }
 \description{
-Downloads data from BTS/RITA/Transtats files
+Downloads data from BTS/RITA/Transtats and imports it into R
 }
 \details{
 Coupon files are downloaded from \url{https://www.transtats.bts.gov/DL_SelectFields.asp?Table_ID=289}.
