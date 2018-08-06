@@ -1,6 +1,6 @@
 Type: Package
 Package: skynet
-Version: 1.2.2
+Version: 1.2.3
 Title: Generates Networks from BTS Data
 Authors@R: person("Filipe", "Teixeira", email = "Filipe.MarquesTeixeira@Ugent.be", role = c("aut", "cre"))
 Maintainer: Filipe Teixeira <Filipe.MarquesTeixeira@Ugent.be>
@@ -38,6 +38,7 @@ Collate:
     'skynet_example.R'
     'bootnet.R'
     'summary.R'
+    'download_db1b.R'
 Depends:
     R (>= 3.1.2)
 Imports:
