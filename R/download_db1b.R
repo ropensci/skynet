@@ -22,8 +22,6 @@
 
 download_db1b <- function(y = NULL, q = NULL){
 
-  dir.create(paste(path))
-
   couponname <- paste("https://transtats.bts.gov/PREZIP/Origin_and_Destination_Survey_DB1BCoupon_",
                       y, "_", q, ".zip", sep = "")
   ticketname <- paste("https://transtats.bts.gov/PREZIP/Origin_and_Destination_Survey_DB1BTicket_",
