@@ -19,7 +19,7 @@
 #' @importFrom dplyr left_join %>% filter arrange mutate_all funs
 #' @importFrom dplyr everything distinct ungroup
 #' @importFrom ggplot2 borders geom_curve ggplot element_blank element_rect geom_smooth
-#' @importFrom ggplot2 scale_size_continuous geom_point coord_cartesian theme aes
+#' @importFrom ggplot2 scale_size_continuous geom_point coord_cartesian theme aes geom_text
 #' @importFrom graphics curve plot
 #' @importFrom stats coef lm
 #' @importFrom utils write.csv globalVariables download.file unzip

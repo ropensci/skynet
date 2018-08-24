@@ -31,7 +31,11 @@ fit_power <- function(graph) {
                 round(summary(reg)$r.squared, 3)))
   ggplot(plotnet, aes(y=log(probability), x=log(degree))) +
     geom_point(col = "#56B4E9")+
-    geom_smooth(method="lm", se=FALSE, col = "#E69F00")
+    geom_smooth(method="lm", se=FALSE, col = "#E69F00") +
+    geom_text(data = plotnet[plotnet == max(plotnet$probability), ],
+              aes(x = log(degree), y = log(probability),
+                  label = paste(V(graph)$name[degree(graph) == max(degree(graph))])),
+              size = 3, vjust = 0.5, hjust = -0.5)
 
 }
 
@@ -41,4 +45,4 @@ fitPlaw <- function(...){
 }
 
 
-globalVariables(c("cf", "geom_smooth"))
+globalVariables(c("cf", "geom_smooth", "geom_text"))
