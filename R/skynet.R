@@ -23,5 +23,6 @@
 #' @importFrom graphics curve plot
 #' @importFrom stats coef lm
 #' @importFrom utils write.csv globalVariables download.file unzip
+#' @importFrom httr POST
 #'
 "_PACKAGE"

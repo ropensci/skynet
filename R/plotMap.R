@@ -32,7 +32,7 @@ net_map <- function(x, pct = 60){
     }else{
       airports <- select(airportCode, origin, latitude, longitude)
       nodes <- x %>%
-        nodeStats() %>%
+        node_stats() %>%
         select(airport, latitude, longitude, freq) %>%
         rename(origin = airport) %>%
         mutate(description = origin)
