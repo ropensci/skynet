@@ -25,7 +25,7 @@ import_t100 <- function(x, nonsch = FALSE, auto = TRUE){
   T100 <- fread(x, header = TRUE, sep = ",", stringsAsFactors = FALSE,
                 integer64 = "numeric")
 
-  if("AIRCRAFT_CONFIG" %in% colnames(x)){
+  if("AIRCRAFT_CONFIG" %in% colnames(T100)){
 
     # Segment
       if(nonsch == FALSE){
@@ -95,7 +95,7 @@ import_t100 <- function(x, nonsch = FALSE, auto = TRUE){
   }
 }
 
-globalVariables(c("AIR_TIME", "airtime"))
+globalVariables(c("AIR_TIME", "airtime", "T100"))
 
 # For CRAN submission
 pos <- 1
