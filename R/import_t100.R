@@ -35,9 +35,10 @@ import_t100 <- function(x, nonsch = FALSE, auto = TRUE){
                origin = ORIGIN, year = YEAR, quarter = QUARTER,
                dest_mkt_id = DEST_CITY_MARKET_ID , dest = DEST,
                op_carrier = UNIQUE_CARRIER, distance = DISTANCE,
-               passengers = PASSENGERS, airtime = AIR_TIME,
-               month = MONTH) %>%
-        mutate(itin_fare = NA, itin_yield = NA, roundtrip = NA)
+               passengers = PASSENGERS, airtime_avg = AIR_TIME,
+               month = MONTH, departures = DEPARTURES_PERFORMED) %>%
+        mutate(itin_fare = NA, itin_yield = NA, roundtrip = NA,
+               airtime_avg = round(airtime_avg/departures))
 
       }else{
 
@@ -47,9 +48,10 @@ import_t100 <- function(x, nonsch = FALSE, auto = TRUE){
                origin = ORIGIN, year = YEAR, quarter = QUARTER,
                dest_mkt_id = DEST_CITY_MARKET_ID , dest = DEST,
                op_carrier = UNIQUE_CARRIER, distance = DISTANCE,
-               passengers = PASSENGERS, airtime = AIR_TIME,
-               month = MONTH) %>%
-        mutate(itin_fare = NA, itin_yield = NA, roundtrip = NA)
+               passengers = PASSENGERS, airtime_avg = AIR_TIME,
+               month = MONTH, DEPARTURES_PERFORMED) %>%
+        mutate(itin_fare = NA, itin_yield = NA, roundtrip = NA,
+               airtime_avg = round(airtime_avg/departures))
     }
 
     T100 <- data.frame(T100)
@@ -97,7 +99,8 @@ import_t100 <- function(x, nonsch = FALSE, auto = TRUE){
   }
 }
 
-globalVariables(c("AIR_TIME", "airtime", "T100", "MONTH", "month"))
+globalVariables(c("AIR_TIME", "airtime_avg", "T100", "MONTH", "month",
+                  "DEPARTURES_PERFORMED", "departures"))
 
 # For CRAN submission
 pos <- 1
