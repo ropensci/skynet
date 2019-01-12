@@ -25,7 +25,7 @@ import_t100 <- function(x, nonsch = FALSE, auto = TRUE){
   T100 <- fread(x, header = TRUE, sep = ",", stringsAsFactors = FALSE,
                 integer64 = "numeric")
 
-  if(exists(x["AIRCRAFT_CONFIG"])){
+  if("AIRCRAFT_CONFIG" %in% colnames(a)){
 
     # Segment
       if(nonsch == FALSE){
@@ -52,7 +52,7 @@ import_t100 <- function(x, nonsch = FALSE, auto = TRUE){
 
     T100 <- data.frame(T100)
 
-    assign(paste("T100_", as.character(T100$year),
+    assign(paste("T100_", as.character(T100$year)[1],
                  "_seg", sep = ""), T100, envir = envir)
 
   }else{
