@@ -25,7 +25,7 @@ import_t100 <- function(x, nonsch = FALSE, auto = TRUE){
   T100 <- fread(x, header = TRUE, sep = ",", stringsAsFactors = FALSE,
                 integer64 = "numeric")
 
-  if("AIRCRAFT_CONFIG" %in% colnames(a)){
+  if("AIRCRAFT_CONFIG" %in% colnames(x)){
 
     # Segment
       if(nonsch == FALSE){
@@ -34,8 +34,8 @@ import_t100 <- function(x, nonsch = FALSE, auto = TRUE){
         select(origin_mkt_id = ORIGIN_CITY_MARKET_ID,
                origin = ORIGIN, year = YEAR, quarter = QUARTER,
                dest_mkt_id = DEST_CITY_MARKET_ID , dest = DEST,
-               op_carrier = UNIQUE_CARRIER,
-               distance = DISTANCE, passengers = PASSENGERS) %>%
+               op_carrier = UNIQUE_CARRIER, distance = DISTANCE,
+               passengers = PASSENGERS, airtime = AIR_TIME) %>%
         mutate(itin_fare = NA, itin_yield = NA, roundtrip = NA)
 
       }else{
@@ -46,7 +46,7 @@ import_t100 <- function(x, nonsch = FALSE, auto = TRUE){
                origin = ORIGIN, year = YEAR, quarter = QUARTER,
                dest_mkt_id = DEST_CITY_MARKET_ID , dest = DEST,
                op_carrier = UNIQUE_CARRIER, distance = DISTANCE,
-               passengers = PASSENGERS) %>%
+               passengers = PASSENGERS, airtime = AIR_TIME) %>%
         mutate(itin_fare = NA, itin_yield = NA, roundtrip = NA)
     }
 
@@ -95,6 +95,7 @@ import_t100 <- function(x, nonsch = FALSE, auto = TRUE){
   }
 }
 
+globalVariables(c("AIR_TIME", "airtime"))
 
 # For CRAN submission
 pos <- 1
