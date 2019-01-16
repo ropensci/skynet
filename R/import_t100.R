@@ -109,7 +109,7 @@ globalVariables(c("AIR_TIME", "airtime_avg", "T100", "MONTH", "month",
                   "DEPARTURES_PERFORMED", "departures",
                   "AIRCRAFT_TYPE", "aircraft_type",
                   "SEATS", "seats",
-                  "PASSENGERS", "passengers"))
+                  "PASSENGERS", "passengers", "Description"))
 
 # For CRAN submission
 pos <- 1
