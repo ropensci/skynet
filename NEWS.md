@@ -91,3 +91,7 @@
 # skynet 1.3
 
 * We have fixed some bugs and added the download_t100 function, making it finally possible to import both T100 and DB1B datasets without having to navigate to the BTS website.
+
+# skynet 1.3.2
+
+* We've added the possibility to import On-time performance data.
