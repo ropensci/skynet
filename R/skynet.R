@@ -17,7 +17,7 @@
 #' @importFrom data.table data.table fread as.data.table .N :=
 #' @importFrom dplyr rename summarize mutate group_by select summarise
 #' @importFrom dplyr left_join %>% filter arrange mutate_all funs
-#' @importFrom dplyr everything distinct ungroup
+#' @importFrom dplyr everything distinct ungroup as_tibble
 #' @importFrom ggplot2 borders geom_curve ggplot element_blank element_rect geom_smooth
 #' @importFrom ggplot2 scale_size_continuous geom_point coord_cartesian theme aes geom_text
 #' @importFrom graphics curve plot
