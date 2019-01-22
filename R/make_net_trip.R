@@ -22,7 +22,7 @@
 
 make_net_trip <- function(x, carrier = FALSE){
 
-  if(carrier == RUE){
+  if(carrier == TRUE){
     df <- x %>%
       select(itin_id,mkt_id, seq_num, origin, dest, passengers, op_carrier, year, quarter,
              itin_yield, distance)
@@ -73,7 +73,7 @@ make_net_trip <- function(x, carrier = FALSE){
   nodes <- node_stats(x)
 
   # Create directed network
-  gDir <- graph_from_data_frame(df,
+  gTrip <- graph_from_data_frame(df,
                                 directed = FALSE, vertices = nodes)
 
   # Add city name
