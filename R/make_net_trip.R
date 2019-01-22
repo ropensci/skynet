@@ -22,7 +22,7 @@
 
 make_net_trip <- function(x, carrier = FALSE){
 
-  if(carriers ==  TRUE){
+  if(carrier == RUE){
     df <- x %>%
       select(itin_id,mkt_id, seq_num, origin, dest, passengers, op_carrier, year, quarter,
              itin_yield, distance)
@@ -45,7 +45,7 @@ make_net_trip <- function(x, carrier = FALSE){
       select(-year, -quarter, everything())
   }
 
-  if(carriers == FALSE){
+  if(carrier == FALSE){
     df <- x %>%
       select(itin_id,mkt_id, seq_num, origin, dest, passengers, year, quarter,
              itin_yield, distance)
