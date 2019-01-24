@@ -15,7 +15,7 @@ test_that("make_net_path with leg", {
   # Run simple net test
   test <- make_net_path(OD_Sample, leg = TRUE)
   expect_length(test$netLegCount$legCount, 2749)
-  expect_length(test$netLegCount, 5)
+  expect_length(test$netLegCount, 7)
 })
 
 test_that("make_net_path with zero tickets", {
