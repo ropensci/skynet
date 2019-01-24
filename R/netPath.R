@@ -136,20 +136,28 @@ make_net_path <- function(x, leg = FALSE, zero = FALSE, carrier = FALSE){
 
       DT <- DT[order(mkt_id, seq_num)]
       DT <- DT[,.(passengers = passengers[1], op_carrier,
+                  carrier_list = paste(op_carrier, collapse = " "),
+                  origin = origin, dest = dest,
                   path = paste(origin[1], paste(dest, collapse = " "),
-                               collapse = " ")), by=mkt_id]
+                               collapse = " ")
+                  ),by=mkt_id]
 
       # Filter carriers
-      y <- as.numeric(x[1, "year"])
-      car <- carriers %>%
-        filter(from <= y & (to >= y | is.na(to))) %>%
-        select(op_carrier, carrier_name)
+#      y <- as.numeric(x[1, "year"])
+#      car <- carriers %>%
+#        filter(from <= y & (to >= y | is.na(to))) %>%
+#        select(op_carrier, carrier_name)
 
-      DT <- DT[,.(passengers = sum(passengers)), by = .(path, op_carrier) ]
-      DT <- DT %>%
-        left_join(car, by = "op_carrier") %>%
-        select(path, op_carrier, carrier_name, passengers) %>%
-        arrange(path)
+#      DT <- DT[,.(origin = origin[1], dest = dest[.N],
+#                  passengers = sum(passengers)), by = .(path, carrier_list) ]
+
+      DT <- DT[,.(passengers = sum(passengers)), by = .(origin, dest, path,
+                                                    op_carrier, carrier_list) ]
+
+#      DT <- DT %>%
+#       left_join(car, by = "op_carrier") %>%
+#        select(path, op_carrier, carrier_name, passengers, origin, dest) %>%
+#       arrange(path)
 
 
       # Count words
