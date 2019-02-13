@@ -42,6 +42,7 @@ Collate:
     'summary.R'
     'download_db1b.R'
     'download_t100.R'
+    'download_t100_int.R'
     'download_ontime.R'
 Depends:
     R (>= 3.1.2)
