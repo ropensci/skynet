@@ -75,7 +75,7 @@ import_t100 <- function(x, nonsch = FALSE, auto = TRUE){
                origin = ORIGIN, year = YEAR, quarter = QUARTER,
                dest_mkt_id = DEST_CITY_MARKET_ID , dest = DEST,
                op_carrier = UNIQUE_CARRIER, distance = DISTANCE,
-               passengers = PASSENGERS) %>%
+               passengers = PASSENGERS, month = MONTH) %>%
         mutate(itin_fare = NA, itin_yield = NA, roundtrip = NA)
 
        }else{
@@ -86,7 +86,7 @@ import_t100 <- function(x, nonsch = FALSE, auto = TRUE){
                origin = ORIGIN, year = YEAR, quarter = QUARTER,
                dest_mkt_id = DEST_CITY_MARKET_ID , dest = DEST,
                op_carrier = UNIQUE_CARRIER, distance = DISTANCE,
-               passengers = PASSENGERS) %>%
+               passengers = PASSENGERS, month = MONTH) %>%
         mutate(itin_fare = NA, itin_yield = NA, roundtrip = NA)
     }
 
