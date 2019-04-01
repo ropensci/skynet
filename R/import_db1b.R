@@ -128,7 +128,7 @@ globalVariables(c("ITIN_ID", "MKT_ID", "SEQ_NUM", "YEAR", "QUARTER",
                   "Passengers", "ItinFare", "BulkFare",
                   "Distance", "MktID", "SeqNum", "OriginCityMarketID",
                   "Origin", "Year", "Quarter", "DestCityMarketID",
-                  "Dest", "Break", "OpCarrier", "Gateway", "RPcarrier"))
+                  "Dest", "Break", "OpCarrier", "Gateway", "RPCarrier"))
 
 
 pos <- 1

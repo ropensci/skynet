@@ -177,4 +177,4 @@ make.Path <- function(...){
 
 globalVariables(c("mkt_id", "seq_num", "num_stops", "pct_zero",
                   "latitude.y", "carriers", "description", ".",
-                  "carrier_name"))
+                  "carrier_name", "carrier_list"))
