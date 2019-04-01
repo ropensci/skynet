@@ -44,8 +44,7 @@ ODImport <- function(c, t, auto = TRUE){
            origin = ORIGIN, year = YEAR, quarter = QUARTER,
            dest_mkt_id = DEST_CITY_MARKET_ID, dest = DEST,
            trip_break = TRIP_BREAK, op_carrier = OPERATING_CARRIER,
-           rp_carrier = REPORTING_CARRIER, distance = DISTANCE,
-           gateway = GATEWAY)
+           distance = DISTANCE, gateway = GATEWAY)
 
   # Import Ticket file
   ticket <- fread(t, header = TRUE, sep = ",", stringsAsFactors = FALSE,
@@ -87,8 +86,7 @@ ODRaw <- function(c,t, auto = TRUE){
            origin_mkt_id = OriginCityMarketID,
            origin = Origin, year = Year, quarter = Quarter,
            dest_mkt_id = DestCityMarketID , dest = Dest, trip_break = Break,
-           op_carrier = OpCarrier, rp_carrier = RPCarrier,
-           distance = Distance, gateway = Gateway)
+           op_carrier = OpCarrier, distance = Distance, gateway = Gateway)
 
 
   ticket <- fread(t, header = TRUE, sep = ",", stringsAsFactors = FALSE,
