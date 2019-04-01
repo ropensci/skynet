@@ -24,5 +24,7 @@
 #' @importFrom stats coef lm
 #' @importFrom utils write.csv globalVariables download.file unzip
 #' @importFrom httr POST
+#' @importFrom geosphere gcIntermediate
+#' @importFrom leaflet leaflet addProviderTiles addPolylines
 #'
 "_PACKAGE"

@@ -44,7 +44,8 @@ ODImport <- function(c, t, auto = TRUE){
            origin = ORIGIN, year = YEAR, quarter = QUARTER,
            dest_mkt_id = DEST_CITY_MARKET_ID, dest = DEST,
            trip_break = TRIP_BREAK, op_carrier = OPERATING_CARRIER,
-           distance = DISTANCE, gateway = GATEWAY)
+           rp_carrier = REPORTING_CARRIER, distance = DISTANCE,
+           gateway = GATEWAY)
 
   # Import Ticket file
   ticket <- fread(t, header = TRUE, sep = ",", stringsAsFactors = FALSE,
@@ -86,7 +87,8 @@ ODRaw <- function(c,t, auto = TRUE){
            origin_mkt_id = OriginCityMarketID,
            origin = Origin, year = Year, quarter = Quarter,
            dest_mkt_id = DestCityMarketID , dest = Dest, trip_break = Break,
-           op_carrier = OpCarrier, distance = Distance, gateway = Gateway)
+           op_carrier = OpCarrier, rp_carrier = RPCarrier,
+           distance = Distance, gateway = Gateway)
 
 
   ticket <- fread(t, header = TRUE, sep = ",", stringsAsFactors = FALSE,
@@ -120,13 +122,13 @@ globalVariables(c("ITIN_ID", "MKT_ID", "SEQ_NUM", "YEAR", "QUARTER",
                   "TRIP_BREAK", "OPERATING_CARRIER", "DISTANCE",
                   "GATEWAY", "ROUNDTRIP", "ITIN_YIELD",
                   "ITIN_FARE", "BULKFARE", "DISTANCE_FULL", "UNIQUE_CARRIER",
-                  "UNIQUE_CARRIER_NAME", "MONTH",
+                  "UNIQUE_CARRIER_NAME", "MONTH", "REPORTING_CARRIER",
                   "AIRCRAFT_CONFIG", "import_db1b", "CLASS", "auto",
                   "ItinID", "RoundTrip", "FarePerMile",
                   "Passengers", "ItinFare", "BulkFare",
                   "Distance", "MktID", "SeqNum", "OriginCityMarketID",
                   "Origin", "Year", "Quarter", "DestCityMarketID",
-                  "Dest", "Break", "OpCarrier", "Gateway"))
+                  "Dest", "Break", "OpCarrier", "Gateway", "RPcarrier"))
 
 
 pos <- 1

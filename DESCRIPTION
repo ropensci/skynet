@@ -54,7 +54,9 @@ Imports:
     ggrepel,
     stringr,
     maps,
-    httr
+    httr,
+    geosphere,
+    leaflet
 Suggests: 
     knitr,
     rmarkdown,
