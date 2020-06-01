@@ -3,7 +3,9 @@
 \name{airportCode}
 \alias{airportCode}
 \title{Airport Data - clean}
-\format{A dataframe with 6435 observations and 5 variables}
+\format{
+A dataframe with 6435 observations and 5 variables
+}
 \description{
 USA airport data from the RITA/Transtats database
 }

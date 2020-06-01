@@ -3,7 +3,9 @@
 \name{OD_Sample}
 \alias{OD_Sample}
 \title{Sample OD data}
-\format{A dataframe with 500.000 observations and 19 variables}
+\format{
+A dataframe with 500.000 observations and 19 variables
+}
 \description{
 Sample data to use with SKYNET functions
 }

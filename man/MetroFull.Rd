@@ -3,7 +3,9 @@
 \name{MetroFull}
 \alias{MetroFull}
 \title{Metro (Full) Data}
-\format{A dataframe with 5802 observations and 5 variables}
+\format{
+A dataframe with 5802 observations and 5 variables
+}
 \description{
 This data comes from the RITA/Transtats database
 }

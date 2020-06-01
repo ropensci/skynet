@@ -95,3 +95,7 @@
 # skynet 1.3.2
 
 * We've added the possibility to import On-time performance data.
+
+# skynet 1.3.6
+
+* Added dplyr 1.0.0 compatibility

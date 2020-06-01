@@ -3,7 +3,9 @@
 \name{MetroLookup}
 \alias{MetroLookup}
 \title{Metro Data}
-\format{A dataframe with 5802 observations and 2 variables}
+\format{
+A dataframe with 5802 observations and 2 variables
+}
 \description{
 This data comes from the RITA/Transtats database
 }

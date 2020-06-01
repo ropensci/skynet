@@ -3,7 +3,9 @@
 \name{aircraft_type}
 \alias{aircraft_type}
 \title{Aircraft type data}
-\format{A dataframe with 422 observations and 2 variables}
+\format{
+A dataframe with 422 observations and 2 variables
+}
 \description{
 This data comes from the RITA/Transtats database
 }

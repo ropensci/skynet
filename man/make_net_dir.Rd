@@ -4,8 +4,15 @@
 \alias{make_net_dir}
 \title{Directed network}
 \usage{
-make_net_dir(x, disp = FALSE, alpha = 0.003, cap = FALSE, pct = 10,
-  carrier = FALSE, metro = FALSE)
+make_net_dir(
+  x,
+  disp = FALSE,
+  alpha = 0.003,
+  cap = FALSE,
+  pct = 10,
+  carrier = FALSE,
+  metro = FALSE
+)
 }
 \arguments{
 \item{x}{Data frame}

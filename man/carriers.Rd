@@ -3,7 +3,9 @@
 \name{carriers}
 \alias{carriers}
 \title{Carrier data}
-\format{A dataframe with 1738 observations and 2 variables}
+\format{
+A dataframe with 1738 observations and 2 variables
+}
 \description{
 This data comes from the RITA/Transtats database
 }

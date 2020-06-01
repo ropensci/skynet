@@ -3,7 +3,9 @@
 \name{airportMaster}
 \alias{airportMaster}
 \title{Airport Data - master}
-\format{A dataframe with 13555 observations and 28 variables}
+\format{
+A dataframe with 13555 observations and 28 variables
+}
 \description{
 World airport data from the RITA/Transtats database
 }

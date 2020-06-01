@@ -4,8 +4,16 @@
 \alias{make_net_und}
 \title{Undirected Network}
 \usage{
-make_net_und(x, disp = FALSE, alpha = 0.003, cap = FALSE, pct = 10,
-  merge = TRUE, carrier = FALSE, metro = FALSE)
+make_net_und(
+  x,
+  disp = FALSE,
+  alpha = 0.003,
+  cap = FALSE,
+  pct = 10,
+  merge = TRUE,
+  carrier = FALSE,
+  metro = FALSE
+)
 }
 \arguments{
 \item{x}{Data frame}
