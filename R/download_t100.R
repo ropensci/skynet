@@ -235,7 +235,7 @@ download_t100 <- function(y = NULL, type = NULL){
                                     unlist(res$all_headers), value=TRUE))))
 
 writeBin(httr::content(res, as="raw"), save_to)
-unzip(save_to, exdir = paste(tempdir(), "/", sep = ""))
+unzip(save_to, exdir = tempdir())
 
 t100path <- paste(tempdir(), "/", unzip(save_to, list = TRUE)$Name
                   ,sep = "")

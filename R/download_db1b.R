@@ -35,10 +35,10 @@ download_db1b <- function(y = NULL, q = NULL){
 
   unzip(couponpath, paste("Origin_and_Destination_Survey_DB1BCoupon_",
                           y, "_", q, ".csv", sep = ""),
-        exdir = paste(tempdir(), "/", sep = ""))
+        exdir = tempdir())
   unzip(ticketpath, paste("Origin_and_Destination_Survey_DB1BTicket_",
                           y, "_", q, ".csv", sep = ""),
-       exdir = paste(tempdir(), "/", sep = ""))
+       exdir = tempdir())
 
   couponpath <- paste(tempdir(),"/Origin_and_Destination_Survey_DB1BCoupon_",
                       y, "_", q, ".csv", sep = "")

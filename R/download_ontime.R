@@ -26,8 +26,7 @@ download_ontime <- function(y,m, auto = TRUE){
   ontime_path <- paste(tempdir(), "/ontime.zip", sep = "")
   download.file(ontime, ontime_path)
   unzip(ontime_path, paste("On_Time_Reporting_Carrier_On_Time_Performance_(1987_present)_",
-                           y, "_", m, ".csv", sep = ""), exdir = paste(tempdir(),
-                                                                       "/", sep = ""))
+                           y, "_", m, ".csv", sep = ""), exdir = tempdir())
 
   ontime_path <- paste(tempdir(), "/On_Time_Reporting_Carrier_On_Time_Performance_(1987_present)_",
                        y, "_", m, ".csv", sep = "")
