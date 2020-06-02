@@ -1,9 +1,9 @@
 ## Release summary
 
-* Removed problematic function which created csv files on a temp folder.
+* Fixed testthat errors and added new functionalities
 
 ## Test environments
-* local OS X install, R 3.5.0
+* local OS X install, R 4.0.0
 * ubuntu 12.04 (on travis-ci), R 3.4.2
 * win-builder (devel and release)
 
