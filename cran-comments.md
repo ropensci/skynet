@@ -1,6 +1,7 @@
 ## Release summary
 
-* Fixed testthat errors and added new functionalities
+* Added message for failed downloads
+* Improved test time (currently about 3m)
 
 ## Test environments
 * local OS X install, R 4.0.0

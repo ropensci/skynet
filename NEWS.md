@@ -99,3 +99,7 @@
 # skynet 1.3.6
 
 * Added dplyr 1.0.0 compatibility
+
+# skynet 1.3.7
+
+* Improved test time
