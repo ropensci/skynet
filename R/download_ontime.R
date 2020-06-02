@@ -24,7 +24,16 @@ download_ontime <- function(y,m, auto = TRUE){
                   y, "_", m, ".zip", sep = "")
 
   ontime_path <- paste(tempdir(), "/ontime.zip", sep = "")
-  download.file(ontime, ontime_path)
+
+  oldw <- getOption("warn")
+  options(warn = -1)
+
+  tryCatch(download.file(ontime, ontime_path),
+           error = function(e) print('Download failed. Please try again'))
+
+  options(warn = oldw)
+
+
   unzip(ontime_path, paste("On_Time_Reporting_Carrier_On_Time_Performance_(1987_present)_",
                            y, "_", m, ".csv", sep = ""), exdir = tempdir())
 
@@ -35,7 +44,7 @@ download_ontime <- function(y,m, auto = TRUE){
 
 }
 
-globalVariables(c("auto", "m", "y"))
+globalVariables(c("auto", "m", "y", "oldw"))
 
 pos <- 1
 envir <- as.environment(pos)
