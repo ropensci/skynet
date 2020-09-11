@@ -40,7 +40,7 @@ import_t100 <- function(x, nonsch = FALSE, auto = TRUE){
                seats = SEATS, aircraft_type = AIRCRAFT_TYPE) %>%
         mutate(itin_fare = NA, itin_yield = NA, roundtrip = NA,
                airtime_avg = round(airtime_avg/departures)) %>%
-        left_join(., aircraft_type) %>%
+        left_join(., skynet::aircraft_type) %>%
         select(-aircraft_type, aircraft_type = Description)
 
       }else{
