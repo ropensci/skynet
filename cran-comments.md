@@ -1,10 +1,9 @@
 ## Release summary
 
-* Added message for failed downloads
-* Improved test time (currently about 3m)
+* Added message for failed downloads for download_t100 function
 
 ## Test environments
-* local OS X install, R 4.0.0
+* local OS X install, R 4.0.1
 * ubuntu 12.04 (on travis-ci), R 3.4.2
 * win-builder (devel and release)
 

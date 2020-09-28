@@ -230,6 +230,10 @@ download_t100 <- function(y = NULL, type = NULL){
     ) -> res
   }
 
+if(httr::http_error(res)){
+  message("No internet connection or data source broken")
+}else{
+
 (save_to <- file.path(tempdir(),
                       basename(grep("\\.zip",
                                     unlist(res$all_headers), value=TRUE))))
@@ -247,7 +251,7 @@ t100path <- paste(tempdir(), "/", "T100_", y,
                   "_", type, ".csv", sep = "")
 
 do.call(import_t100, list(t100path))
-
+}
 }
 
 globalVariables(c("writeBin", "unzip"))
