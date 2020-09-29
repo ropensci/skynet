@@ -19,7 +19,7 @@ for SKYNET's import function.
 }
 \details{
 Files can be found here \url{https://www.transtats.bts.gov/Tables.asp?DB_ID=111}.
-More information on variables to select and type of files to use can be found \href{https://github.com/FilipeamTeixeira/skynet}{here}
+More information on variables to select and type of files to use can be found \href{https://github.com/ropensci/skynet}{here}
 }
 \examples{
 \dontrun{

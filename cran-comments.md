@@ -1,6 +1,7 @@
 ## Release summary
 
 * Added message for failed downloads for download_t100 function
+* Fixed links
 
 ## Test environments
 * local OS X install, R 4.0.1

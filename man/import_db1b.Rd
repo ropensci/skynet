@@ -23,7 +23,7 @@ Coupon files can be found at \url{https://www.transtats.bts.gov/DL_SelectFields.
 Ticket files can be found at \url{https://www.transtats.bts.gov/DL_SelectFields.asp?Table_ID=272}.
 Both files should belong to the same year and same quarter.
 \strong{Note}: We do recommend sparklyr to be used for larger sets of data.
-More information on variables to select and type of files to use can be found \href{https://github.com/FilipeamTeixeira/skynet}{here}
+More information on variables to select and type of files to use can be found \href{https://github.com/ropensci/skynet}{here}
 }
 \examples{
 \dontrun{

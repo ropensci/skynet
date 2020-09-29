@@ -103,3 +103,8 @@
 # skynet 1.3.7
 
 * Improved test time
+
+# skynet 1.3.9
+
+* Fixed links
+* Added download failed message
