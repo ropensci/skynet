@@ -25,13 +25,19 @@ download_ontime <- function(y,m, auto = TRUE){
 
   ontime_path <- paste(tempdir(), "/ontime.zip", sep = "")
 
-  oldw <- getOption("warn")
-  options(warn = -1)
+  #oldw <- getOption("warn")
+  #options(warn = -1)
 
-  tryCatch(download.file(ontime, ontime_path),
-           error = function(e) print('Download failed. Please try again'))
 
-  options(warn = oldw)
+  #tryCatch(download.file(ontime, ontime_path),
+  #         error = function(e) print('Download failed. Please try again'))
+
+  #options(warn = oldw)
+
+  if(httr::http_error(ontime)){
+    message("No internet connection or data source broken")
+  }else{
+  download.file(ontime, ontime_path)
 
 
   unzip(ontime_path, paste("On_Time_Reporting_Carrier_On_Time_Performance_(1987_present)_",
@@ -42,6 +48,7 @@ download_ontime <- function(y,m, auto = TRUE){
 
   do.call(import_ontime, list(ontime_path, auto))
 
+  }
 }
 
 globalVariables(c("auto", "m", "y", "oldw"))

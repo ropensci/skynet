@@ -30,14 +30,21 @@ download_db1b <- function(y = NULL, q = NULL){
   couponpath <- paste(tempdir(), "/coupon.zip", sep = "")
   ticketpath <- paste(tempdir(), "/ticket.zip", sep = "")
 
-  oldw <- getOption("warn")
-  options(warn = -1)
-  tryCatch(download.file(couponname, couponpath),
-           error = function(e) print('Download failed. Please try again'))
-  tryCatch(download.file(ticketname, ticketpath),
-           error = function(e) print('Download failed. Please try again'))
-  options(warn = oldw)
+  #oldw <- getOption("warn")
+  #options(warn = -1)
+  #tryCatch(download.file(couponname, couponpath),
+  #         error = function(e) print('Download failed. Please try again'))
+  #tryCatch(download.file(ticketname, ticketpath),
+  #         error = function(e) print('Download failed. Please try again'))
+  #options(warn = oldw)
 
+
+  if(httr::http_error(couponname)){
+    message("No internet connection or data source broken")
+  }else{
+
+  download.file(couponname, couponpath)
+  download.file(ticketname, ticketpath)
 
   unzip(couponpath, paste("Origin_and_Destination_Survey_DB1BCoupon_",
                           y, "_", q, ".csv", sep = ""),
@@ -53,6 +60,7 @@ download_db1b <- function(y = NULL, q = NULL){
 
   do.call(import_db1b, list(couponpath, ticketpath, zip = TRUE))
 
+  }
 }
 
 globalVariables(c("download.file", "unzip"))
