@@ -15,8 +15,9 @@
 
 
 find_carrier <- function(x){
-  carriers %>%
-    filter(grepl(x, op_carrier) | grepl (x, carrier_name)) %>%
+  skynet::carriers %>%
+    filter(str_detect(op_carrier, regex(x, ignore_case = TRUE)) |
+             str_detect(carrier_name, regex(x, ignore_case = TRUE))) %>%
     select(op_carrier, carrier_name, from, to)
 }
 
