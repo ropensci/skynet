@@ -26,5 +26,5 @@
 #' @importFrom httr POST
 #' @importFrom geosphere gcIntermediate
 #' @importFrom leaflet leaflet addProviderTiles addPolylines
-#'
+#' @import RCurl
 "_PACKAGE"

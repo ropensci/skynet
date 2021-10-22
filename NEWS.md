@@ -108,3 +108,7 @@
 
 * Fixed links
 * Added download failed message
+
+# skynet 1.4.1
+
+* Fixed issue where download_t100 requires query to be encoded.
