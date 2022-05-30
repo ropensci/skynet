@@ -56,7 +56,8 @@ Imports:
     maps,
     httr,
     geosphere,
-    leaflet
+    leaflet,
+    RCurl
 Suggests: 
     knitr,
     rmarkdown,
