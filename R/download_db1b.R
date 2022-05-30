@@ -69,4 +69,4 @@ globalVariables(c("download.file", "unzip"))
 pos <- 1
 envir <- as.environment(pos)
 
-options(timeout = max(300, getOption("timeout"))) #Set larger timeout
+options(timeout = max(800, getOption("timeout"))) #Set larger timeout

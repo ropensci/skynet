@@ -15,7 +15,7 @@ test_that("make_net_und with disp", {
   # Run simple net test
   test <- make_net_und(OD_Sample, disp = TRUE, alpha = 0.003)
   expect_output(str(nrow(test$netUnd_disp)), "21")
-  expect_length(test$gUnd_disp, 10)
+  expect_length(test$gUnd_disp, 27)
   expect_length(test$nodes, 13)
   expect_output(str(class(test$netUnd_disp)), "data.frame")
   expect_output(str(class(test$nodes)), "data.frame")
@@ -26,7 +26,7 @@ test_that("make_net_und with cap", {
   # Run simple net test
   test <- make_net_und(OD_Sample, cap = TRUE, pct = 10)
   expect_output(str(nrow(test$netUnd_cap)), "126")
-  expect_length(test$gUnd_cap, 10)
+  expect_length(test$gUnd_cap, 61)
   expect_length(test$nodes, 13)
   expect_output(str(class(test$netUnd_cap)), "data.frame")
   expect_output(str(class(test$nodes)), "data.frame")
@@ -38,7 +38,7 @@ test_that("make_net_und with metro", {
   # Run simple net test
   test <- make_net_und(OD_Sample, metro = TRUE)
   expect_output(str(nrow(test$netUnd)), "1211")
-  expect_length(test$gUnd, 10)
+  expect_length(test$gUnd, 229)
   expect_length(test$nodes, 8)
   expect_output(str(class(test$netUnd)), "data.frame")
   expect_output(str(class(test$nodes)), "data.frame")
@@ -55,19 +55,19 @@ test_that("make_net_und with metro", {
   # Run simple net test
   test <- make_net_und(OD_Sample, carrier = TRUE, merge = FALSE)
   expect_output(str(nrow(test$netUnd)), "1531")
-  expect_length(test$gUnd, 10)
+  expect_length(test$gUnd, 251)
 })
 
 test_that("make_net_und with metro", {
   # Run simple net test
   test <- make_net_und(OD_Sample, carrier = TRUE, merge = TRUE)
   expect_output(str(nrow(test$netUnd)), "2163")
-  expect_length(test$gUnd, 10)
+  expect_length(test$gUnd, 251)
 })
 
 test_that("make_net_und with metro", {
   # Run simple net test
   test <- make_net_und(OD_Sample, merge = FALSE)
   expect_output(str(nrow(test$netUnd)), "1531")
-  expect_length(test$gUnd, 10)
+  expect_length(test$gUnd, 251)
 })
