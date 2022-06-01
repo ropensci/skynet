@@ -21,7 +21,7 @@
 
 boot_network <- function(g, n = 500, left_ci = 0.005, right_ci = 0.995){
 
-  if (class(g) == "skynet"){
+  if (inherits(g, "skynet")){
     g <- g[[1]]
   }else{
     g <- g
