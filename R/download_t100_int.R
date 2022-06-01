@@ -260,3 +260,5 @@ globalVariables(c("writeBin", "unzip"))
 
 pos <- 1
 envir <- as.environment(pos)
+
+options(timeout = max(800, getOption("timeout"))) #Set larger timeout
