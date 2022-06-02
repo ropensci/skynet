@@ -2,8 +2,8 @@
 #'
 #' Downloads data from BTS/RITA/Transtats and imports it into R
 #'
-#' Coupon files are downloaded from \url{https://www.transtats.bts.gov/DL_SelectFields.asp?Table_ID=289}.
-#' Ticket files are downloaded from  \url{https://www.transtats.bts.gov/DL_SelectFields.asp?Table_ID=272}.
+#' Coupon files can be found at \url{https://www.transtats.bts.gov/Fields.asp?gnoyr_VQ=FLM}.
+#' Ticket files can be found at \url{https://www.transtats.bts.gov/Fields.asp?gnoyr_VQ=FKF}.
 #'
 #' Note: The BTS often changes the way we can access these files. So please be warned that this is still an experimental feature.
 #'

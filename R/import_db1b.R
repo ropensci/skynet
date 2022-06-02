@@ -2,8 +2,8 @@
 #'
 #' Imports data from BTS/RITA/Transtats files
 #'
-#' Coupon files can be found at \url{https://www.transtats.bts.gov/DL_SelectFields.asp?Table_ID=289}.
-#' Ticket files can be found at \url{https://www.transtats.bts.gov/DL_SelectFields.asp?Table_ID=272}.
+#' Coupon files can be found at \url{https://www.transtats.bts.gov/Fields.asp?gnoyr_VQ=FLM}.
+#' Ticket files can be found at \url{https://www.transtats.bts.gov/Fields.asp?gnoyr_VQ=FKF}.
 #' Both files should belong to the same year and same quarter.
 #' \strong{Note}: We do recommend sparklyr to be used for larger sets of data.
 #' More information on variables to select and type of files to use can be found \href{https://github.com/ropensci/skynet}{here}

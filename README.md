@@ -17,10 +17,10 @@ tool overcoming some of the challenges faced when dealing with the
 Bureau of Transport Statistics, DB1B and T100 data. The DB1B data
 consists of 2 sets of files, Coupon and Ticket. They can be both
 downloaded at
-<https://www.transtats.bts.gov/DL_SelectFields.asp?Table_ID=289> and
-<https://www.transtats.bts.gov/DL_SelectFields.asp?Table_ID=272>
+<https://www.transtats.bts.gov/Fields.asp?gnoyr_VQ=FLM> and
+<https://www.transtats.bts.gov/Fields.asp?gnoyr_VQ=FKF>
 respectively while the T100 data can be found here
-<https://www.transtats.bts.gov/Tables.asp?DB_ID=111>.
+<https://www.transtats.bts.gov/Fields.asp?gnoyr_VQ=FIL>.
 
 ## Note
 
@@ -41,8 +41,8 @@ dest_mkt_id, dest, trip_break, op_carrier, distance, gateway, roundtrip,
 itin_yield, passengers, itin_fare, bulk_fare, distance_full`
 
 For more information on the variables, please visit
-<https://www.transtats.bts.gov/DL_SelectFields.asp?Table_ID=289> and
-<https://www.transtats.bts.gov/DL_SelectFields.asp?Table_ID=272>.
+<https://www.transtats.bts.gov/Fields.asp?gnoyr_VQ=FLM> and
+<https://www.transtats.bts.gov/Fields.asp?gnoyr_VQ=FKF>.
 
 Skynet allows that some of this variables have a 0 or NA value, however,
 if you’re working with a specific dataset which doesn’t allow an easy
@@ -74,8 +74,8 @@ Ticket file should take the second argument.
 
 The BTS DB1B data consists of 2 sets of files, `Coupon` and `Ticket`.
 They can be both downloaded at
-<https://www.transtats.bts.gov/DL_SelectFields.asp?Table_ID=289> and
-<https://www.transtats.bts.gov/DL_SelectFields.asp?Table_ID=272>
+<https://www.transtats.bts.gov/Fields.asp?gnoyr_VQ=FLM> and
+<https://www.transtats.bts.gov/Fields.asp?gnoyr_VQ=FKF>
 respectively.
 
 Despite being possible to download the complete zipped file, which

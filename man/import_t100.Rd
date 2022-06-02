@@ -18,7 +18,7 @@ Imports T-100 Data directly from BTS/RITA/Transtats website raw data (prezipped 
 for SKYNET's import function.
 }
 \details{
-Files can be found here \url{https://www.transtats.bts.gov/Tables.asp?DB_ID=111}.
+Files can be found here \url{https://www.transtats.bts.gov/Fields.asp?gnoyr_VQ=FIL}.
 More information on variables to select and type of files to use can be found \href{https://github.com/ropensci/skynet}{here}
 }
 \examples{

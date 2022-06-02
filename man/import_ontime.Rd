@@ -16,7 +16,7 @@ Imports on-time Data directly from BTS/RITA/Transtats website raw data (prezippe
 for SKYNET's import function.
 }
 \details{
-Files can be found here \url{https://www.transtats.bts.gov/DL_SelectFields.asp?Table_ID=236}.
+Files can be found here \url{https://www.transtats.bts.gov/Fields.asp?gnoyr_VQ=FGJ}.
 More information on variables to select and type of files to use can be found \href{https://github.com/ropensci/skynet}{here}
 }
 \examples{
