@@ -116,3 +116,7 @@
 # skynet 1.4.2
 
 * Skips test for download_t100 as BTS is transitioning to new download methodology.
+
+# skynet 1.4.3
+
+* Brings back download_t100.
