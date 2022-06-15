@@ -22,8 +22,6 @@
 
 download_db1b <- function(y = NULL, q = NULL){
 
-  options(timeout = max(800, getOption("timeout"))) #Set larger timeout
-
   couponname <- paste("https://transtats.bts.gov/PREZIP/Origin_and_Destination_Survey_DB1BCoupon_",
                       y, "_", q, ".zip", sep = "")
   ticketname <- paste("https://transtats.bts.gov/PREZIP/Origin_and_Destination_Survey_DB1BTicket_",
@@ -67,6 +65,9 @@ download_db1b <- function(y = NULL, q = NULL){
 
 globalVariables(c("download.file", "unzip"))
 
+options(timeout = max(800, getOption("timeout"))) #Set larger timeout
+
+options(timeout = 800)
 
 pos <- 1
 envir <- as.environment(pos)
