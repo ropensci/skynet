@@ -3,7 +3,7 @@
 
 # skynet <img src="man/figures/logo.png" align="right" />
 
-![Build Status](https://travis-ci.org/ropensci/skynet.svg?branch=master)
+![Build Status](https://github.com/ropensci/skynet/workflows/R-CMD-check/badge.svg)
 [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/skynet)](https://cran.r-project.org/package=skynet)
 ![](https://cranlogs.r-pkg.org/badges/skynet?color=brightgreen)
 [![Coverage
