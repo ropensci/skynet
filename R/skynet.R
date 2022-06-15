@@ -23,7 +23,7 @@
 #' @importFrom graphics curve plot
 #' @importFrom stats coef lm
 #' @importFrom utils write.csv globalVariables download.file unzip
-#' @importFrom httr POST progress
+#' @importFrom httr POST progress GET
 #' @importFrom geosphere gcIntermediate
 #' @importFrom leaflet leaflet addProviderTiles addPolylines
 #' @import stringr
