@@ -20,10 +20,9 @@
 #'
 #'
 
-options(timeout = max(800, getOption("timeout"))) #Set larger timeout
-
-
 download_db1b <- function(y = NULL, q = NULL){
+
+  options(timeout = max(800, getOption("timeout"))) #Set larger timeout
 
   couponname <- paste("https://transtats.bts.gov/PREZIP/Origin_and_Destination_Survey_DB1BCoupon_",
                       y, "_", q, ".zip", sep = "")
