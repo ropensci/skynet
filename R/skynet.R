@@ -23,9 +23,9 @@
 #' @importFrom graphics curve plot
 #' @importFrom stats coef lm
 #' @importFrom utils write.csv globalVariables download.file unzip
-#' @importFrom httr POST
+#' @importFrom httr POST progress
 #' @importFrom geosphere gcIntermediate
 #' @importFrom leaflet leaflet addProviderTiles addPolylines
 #' @import stringr
-#' @importFrom RCurl base64Encode
+#' @importFrom RCurl base64Encode getCurlHandle curlSetOpt getURL
 "_PACKAGE"

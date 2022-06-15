@@ -26,210 +26,121 @@ download_t100 <- function(y = NULL, type = NULL){
     stop()
   }
   if(type == "mkt"){
-  httr::POST(
-    url = "https://www.transtats.bts.gov/DownLoad_Table.asp?gnoyr_Vq=FIL&Un5_T4172=G&V5_mv22rq=D",
-    httr::add_headers(
-      Referer = "https://www.transtats.bts.gov/DL_SelectFields.asp?gnoyr_VQ=FIL&QO_fu146_anzr=Nv4%Pn44vr45"
 
-      #Table_ID=258
-    ),
-    body = list(
-      UserTableName = "T_100_Domestic_Market__U.S._Carriers",
-      DBShortName = "Air_Carriers", RawDataTable = "T_T100D_MARKET_US_CARRIER_ONLY",
-      sqlstr = base64Encode(paste(" SELECT PASSENGERS,FREIGHT,MAIL,DISTANCE,UNIQUE_CARRIER,AIRLINE_ID,UNIQUE_CARRIER_NAME,UNIQUE_CARRIER_ENTITY,REGION,CARRIER,CARRIER_NAME,CARRIER_GROUP,CARRIER_GROUP_NEW,ORIGIN_AIRPORT_ID,ORIGIN_AIRPORT_SEQ_ID,ORIGIN_CITY_MARKET_ID,ORIGIN,ORIGIN_CITY_NAME,ORIGIN_STATE_ABR,ORIGIN_STATE_FIPS,ORIGIN_STATE_NM,ORIGIN_WAC,DEST_AIRPORT_ID,DEST_AIRPORT_SEQ_ID,DEST_CITY_MARKET_ID,DEST,DEST_CITY_NAME,DEST_STATE_ABR,DEST_STATE_FIPS,DEST_STATE_NM,DEST_WAC,YEAR,QUARTER,MONTH,DISTANCE_GROUP,CLASS FROM T_T100D_MARKET_US_CARRIER_ONLY WHERE YEAR=", y, sep = "")),
-      varlist = "PASSENGERS,FREIGHT,MAIL,DISTANCE,UNIQUE_CARRIER,AIRLINE_ID,UNIQUE_CARRIER_NAME,UNIQUE_CARRIER_ENTITY,REGION,CARRIER,CARRIER_NAME,CARRIER_GROUP,CARRIER_GROUP_NEW,ORIGIN_AIRPORT_ID,ORIGIN_AIRPORT_SEQ_ID,ORIGIN_CITY_MARKET_ID,ORIGIN,ORIGIN_CITY_NAME,ORIGIN_STATE_ABR,ORIGIN_STATE_FIPS,ORIGIN_STATE_NM,ORIGIN_WAC,DEST_AIRPORT_ID,DEST_AIRPORT_SEQ_ID,DEST_CITY_MARKET_ID,DEST,DEST_CITY_NAME,DEST_STATE_ABR,DEST_STATE_FIPS,DEST_STATE_NM,DEST_WAC,YEAR,QUARTER,MONTH,DISTANCE_GROUP,CLASS",
-      grouplist = "", suml = "",
-      sumRegion = "", filter1 = "title=",
-      filter2 = "title=", geo = "All\xa0",
-      time = "All\xa0Months",
-      timename = "Month", GEOGRAPHY = "All",
-      XYEAR = y, FREQUENCY = "All",
-      AllVars = "All", VarName = "PASSENGERS",
-      VarDesc = "Passengers",
-      VarType = "Num", VarName = "FREIGHT",
-      VarDesc = "Freight", VarType = "Num",
-      VarName = "MAIL", VarDesc = "Mail",
-      VarType = "Num", VarName = "DISTANCE",
-      VarDesc = "Distance", VarType = "Num",
-      VarName = "UNIQUE_CARRIER",
-      VarDesc = "UniqueCarrier",
-      VarType = "Char", VarName = "AIRLINE_ID",
-      VarDesc = "AirlineID",
-      VarType = "Num", VarName = "UNIQUE_CARRIER_NAME",
-      VarDesc = "UniqueCarrierName",
-      VarType = "Char", VarName = "UNIQUE_CARRIER_ENTITY",
-      VarDesc = "UniqCarrierEntity",
-      VarType = "Char", VarName = "REGION",
-      VarDesc = "CarrierRegion",
-      VarType = "Char", VarName = "CARRIER",
-      VarDesc = "Carrier", VarType = "Char",
-      VarName = "CARRIER_NAME",
-      VarDesc = "CarrierName",
-      VarType = "Char", VarName = "CARRIER_GROUP",
-      VarDesc = "CarrierGroup",
-      VarType = "Num", VarName = "CARRIER_GROUP_NEW",
-      VarDesc = "CarrierGroupNew",
-      VarType = "Num", VarName = "ORIGIN_AIRPORT_ID",
-      VarDesc = "OriginAirportID",
-      VarType = "Num", VarName = "ORIGIN_AIRPORT_SEQ_ID",
-      VarDesc = "OriginAirportSeqID",
-      VarType = "Num", VarName = "ORIGIN_CITY_MARKET_ID",
-      VarDesc = "OriginCityMarketID",
-      VarType = "Num", VarName = "ORIGIN",
-      VarDesc = "Origin", VarType = "Char",
-      VarName = "ORIGIN_CITY_NAME",
-      VarDesc = "OriginCityName",
-      VarType = "Char", VarName = "ORIGIN_STATE_ABR",
-      VarDesc = "OriginState",
-      VarType = "Char", VarName = "ORIGIN_STATE_FIPS",
-      VarDesc = "OriginStateFips",
-      VarType = "Char", VarName = "ORIGIN_STATE_NM",
-      VarDesc = "OriginStateName",
-      VarType = "Char", VarName = "ORIGIN_WAC",
-      VarDesc = "OriginWac",
-      VarType = "Num", VarName = "DEST_AIRPORT_ID",
-      VarDesc = "DestAirportID",
-      VarType = "Num", VarName = "DEST_AIRPORT_SEQ_ID",
-      VarDesc = "DestAirportSeqID",
-      VarType = "Num", VarName = "DEST_CITY_MARKET_ID",
-      VarDesc = "DestCityMarketID",
-      VarType = "Num", VarName = "DEST",
-      VarDesc = "Dest", VarType = "Char",
-      VarName = "DEST_CITY_NAME",
-      VarDesc = "DestCityName",
-      VarType = "Char", VarName = "DEST_STATE_ABR",
-      VarDesc = "DestState",
-      VarType = "Char", VarName = "DEST_STATE_FIPS",
-      VarDesc = "DestStateFips",
-      VarType = "Char", VarName = "DEST_STATE_NM",
-      VarDesc = "DestStateName",
-      VarType = "Char", VarName = "DEST_WAC",
-      VarDesc = "DestWac", VarType = "Num",
-      VarName = "YEAR", VarDesc = "Year",
-      VarType = "Num", VarName = "QUARTER",
-      VarDesc = "Quarter", VarType = "Num",
-      VarName = "MONTH", VarDesc = "Month",
-      VarType = "Num", VarName = "DISTANCE_GROUP",
-      VarDesc = "DistanceGroup",
-      VarType = "Num", VarName = "CLASS",
-      VarDesc = "Class", VarType = "Char"
-    ),
-    encode = "form", query = list(
-      Table_ID = "258",
-      Has_Group = "0", Is_Zipped = "0"
-    )
-  ) -> res
-  }
-  if(type == "seg"){
+    # Get viewstate, and event
+    curl <- getCurlHandle()
+    curlSetOpt(cookiejar = paste(tempdir(), "/", "cookies.txt", sep = ""),
+               followlocation = TRUE, autoreferer = TRUE, curl = curl)
+
+    message("Connecting to T100")
+    html <- getURL('https://www.transtats.bts.gov/DL_SelectFields.aspx?gnoyr_VQ=FIL&QO_fu146_anzr=Nv4%20Pn44vr45', curl = curl)
+    message("Done")
+
+    viewstate <- as.character(sub('.*id="__VIEWSTATE" value="([0-9a-zA-Z+/=]*).*', '\\1', html))
+    viewstategenerator <- as.character(sub('.*id="__VIEWSTATEGENERATOR" value="([0-9a-zA-Z+/=]*).*', '\\1', html))
+
+    eventvalidation <- as.character(sub('.*id="__EVENTVALIDATION" value="([0-9a-zA-Z+/=]*).*', '\\1', html))
+
+    message("Downloading file")
     httr::POST(
-      url = "https://www.transtats.bts.gov/DownLoad_Table.asp?gnoyr_Vq=FIM&Un5_T4172=G&V5_mv22rq=D",
+      config = progress(),
+      url = "https://www.transtats.bts.gov/DL_SelectFields.aspx?gnoyr_VQ=FIL&QO_fu146_anzr=Nv4+Pn44vr45",
       httr::add_headers(
-        Referer = "https://www.transtats.bts.gov/DL_SelectFields.asp?gnoyr_VQ=FIM&QO_fu146_anzr=Nv4%Pn44vr45"
+        Referer = "https://www.transtats.bts.gov/DL_SelectFields.aspx?gnoyr_VQ=FIL&QO_fu146_anzr=Nv4%20Pn44vr45"
       ),
-     body = list(
-      UserTableName = "T_100_Domestic_Segment__U.S._Carriers",
-      DBShortName = "Air_Carriers",
-      RawDataTable = "T_T100D_SEGMENT_US_CARRIER_ONLY",
-      #sqlstr = paste(" SELECT DEPARTURES_SCHEDULED,DEPARTURES_PERFORMED,PAYLOAD,SEATS,PASSENGERS,FREIGHT,MAIL,DISTANCE,RAMP_TO_RAMP,AIR_TIME,UNIQUE_CARRIER,AIRLINE_ID,UNIQUE_CARRIER_NAME,UNIQUE_CARRIER_ENTITY,REGION,CARRIER,CARRIER_NAME,CARRIER_GROUP,CARRIER_GROUP_NEW,ORIGIN_AIRPORT_ID,ORIGIN_AIRPORT_SEQ_ID,ORIGIN_CITY_MARKET_ID,ORIGIN,ORIGIN_CITY_NAME,ORIGIN_STATE_ABR,ORIGIN_STATE_FIPS,ORIGIN_STATE_NM,ORIGIN_WAC,DEST_AIRPORT_ID,DEST_AIRPORT_SEQ_ID,DEST_CITY_MARKET_ID,DEST,DEST_CITY_NAME,DEST_STATE_ABR,DEST_STATE_FIPS,DEST_STATE_NM,DEST_WAC,AIRCRAFT_GROUP,AIRCRAFT_TYPE,AIRCRAFT_CONFIG,YEAR,QUARTER,MONTH,DISTANCE_GROUP,CLASS FROM T_T100D_SEGMENT_US_CARRIER_ONLY WHERE YEAR=",y),
-      sqlstr = base64Encode(paste(" SELECT DEPARTURES_SCHEDULED,DEPARTURES_PERFORMED,PAYLOAD,SEATS,PASSENGERS,FREIGHT,MAIL,DISTANCE,RAMP_TO_RAMP,AIR_TIME,UNIQUE_CARRIER,AIRLINE_ID,UNIQUE_CARRIER_NAME,UNIQUE_CARRIER_ENTITY,REGION,CARRIER,CARRIER_NAME,CARRIER_GROUP,CARRIER_GROUP_NEW,ORIGIN_AIRPORT_ID,ORIGIN_AIRPORT_SEQ_ID,ORIGIN_CITY_MARKET_ID,ORIGIN,ORIGIN_CITY_NAME,ORIGIN_STATE_ABR,ORIGIN_STATE_FIPS,ORIGIN_STATE_NM,ORIGIN_WAC,DEST_AIRPORT_ID,DEST_AIRPORT_SEQ_ID,DEST_CITY_MARKET_ID,DEST,DEST_CITY_NAME,DEST_STATE_ABR,DEST_STATE_FIPS,DEST_STATE_NM,DEST_WAC,AIRCRAFT_GROUP,AIRCRAFT_TYPE,AIRCRAFT_CONFIG,YEAR,QUARTER,MONTH,DISTANCE_GROUP,CLASS FROM T_T100D_SEGMENT_US_CARRIER_ONLY WHERE YEAR=",y, sep = "")),
-      varlist = "DEPARTURES_SCHEDULED,DEPARTURES_PERFORMED,PAYLOAD,SEATS,PASSENGERS,FREIGHT,MAIL,DISTANCE,RAMP_TO_RAMP,AIR_TIME,UNIQUE_CARRIER,AIRLINE_ID,UNIQUE_CARRIER_NAME,UNIQUE_CARRIER_ENTITY,REGION,CARRIER,CARRIER_NAME,CARRIER_GROUP,CARRIER_GROUP_NEW,ORIGIN_AIRPORT_ID,ORIGIN_AIRPORT_SEQ_ID,ORIGIN_CITY_MARKET_ID,ORIGIN,ORIGIN_CITY_NAME,ORIGIN_STATE_ABR,ORIGIN_STATE_FIPS,ORIGIN_STATE_NM,ORIGIN_WAC,DEST_AIRPORT_ID,DEST_AIRPORT_SEQ_ID,DEST_CITY_MARKET_ID,DEST,DEST_CITY_NAME,DEST_STATE_ABR,DEST_STATE_FIPS,DEST_STATE_NM,DEST_WAC,AIRCRAFT_GROUP,AIRCRAFT_TYPE,AIRCRAFT_CONFIG,YEAR,QUARTER,MONTH,DISTANCE_GROUP,CLASS",
-      grouplist = "", suml = "",
-      sumRegion = "", filter1 = "title=",
-      filter2 = "title=", geo = "All\xa0",
-      time = "All\xa0Months",
-      timename = "Month", GEOGRAPHY = "All",
-      XYEAR = y, FREQUENCY = "All",
-      AllVars = "All", VarName = "DEPARTURES_SCHEDULED",
-      VarDesc = "DepScheduled",
-      VarType = "Num", VarName = "DEPARTURES_PERFORMED",
-      VarDesc = "DepPerformed",
-      VarType = "Num", VarName = "PAYLOAD",
-      VarDesc = "Payload", VarType = "Num",
-      VarName = "SEATS", VarDesc = "Seats",
-      VarType = "Num", VarName = "PASSENGERS",
-      VarDesc = "Passengers",
-      VarType = "Num", VarName = "FREIGHT",
-      VarDesc = "Freight", VarType = "Num",
-      VarName = "MAIL", VarDesc = "Mail",
-      VarType = "Num", VarName = "DISTANCE",
-      VarDesc = "Distance", VarType = "Num",
-      VarName = "RAMP_TO_RAMP",
-      VarDesc = "RampTime", VarType = "Num",
-      VarName = "AIR_TIME", VarDesc = "AirTime",
-      VarType = "Num", VarName = "UNIQUE_CARRIER",
-      VarDesc = "UniqueCarrier",
-      VarType = "Char", VarName = "AIRLINE_ID",
-      VarDesc = "AirlineID",
-      VarType = "Num", VarName = "UNIQUE_CARRIER_NAME",
-      VarDesc = "UniqueCarrierName",
-      VarType = "Char", VarName = "UNIQUE_CARRIER_ENTITY",
-      VarDesc = "UniqCarrierEntity",
-      VarType = "Char", VarName = "REGION",
-      VarDesc = "CarrierRegion",
-      VarType = "Char", VarName = "CARRIER",
-      VarDesc = "Carrier", VarType = "Char",
-      VarName = "CARRIER_NAME",
-      VarDesc = "CarrierName",
-      VarType = "Char", VarName = "CARRIER_GROUP",
-      VarDesc = "CarrierGroup",
-      VarType = "Num", VarName = "CARRIER_GROUP_NEW",
-      VarDesc = "CarrierGroupNew",
-      VarType = "Num", VarName = "ORIGIN_AIRPORT_ID",
-      VarDesc = "OriginAirportID",
-      VarType = "Num", VarName = "ORIGIN_AIRPORT_SEQ_ID",
-      VarDesc = "OriginAirportSeqID",
-      VarType = "Num", VarName = "ORIGIN_CITY_MARKET_ID",
-      VarDesc = "OriginCityMarketID",
-      VarType = "Num", VarName = "ORIGIN",
-      VarDesc = "Origin", VarType = "Char",
-      VarName = "ORIGIN_CITY_NAME",
-      VarDesc = "OriginCityName",
-      VarType = "Char", VarName = "ORIGIN_STATE_ABR",
-      VarDesc = "OriginState",
-      VarType = "Char", VarName = "ORIGIN_STATE_FIPS",
-      VarDesc = "OriginStateFips",
-      VarType = "Char", VarName = "ORIGIN_STATE_NM",
-      VarDesc = "OriginStateName",
-      VarType = "Char", VarName = "ORIGIN_WAC",
-      VarDesc = "OriginWac",
-      VarType = "Num", VarName = "DEST_AIRPORT_ID",
-      VarDesc = "DestAirportID",
-      VarType = "Num", VarName = "DEST_AIRPORT_SEQ_ID",
-      VarDesc = "DestAirportSeqID",
-      VarType = "Num", VarName = "DEST_CITY_MARKET_ID",
-      VarDesc = "DestCityMarketID",
-      VarType = "Num", VarName = "DEST",
-      VarDesc = "Dest", VarType = "Char",
-      VarName = "DEST_CITY_NAME",
-      VarDesc = "DestCityName",
-      VarType = "Char", VarName = "DEST_STATE_ABR",
-      VarDesc = "DestState",
-      VarType = "Char", VarName = "DEST_STATE_FIPS",
-      VarDesc = "DestStateFips",
-      VarType = "Char", VarName = "DEST_STATE_NM",
-      VarDesc = "DestStateName",
-      VarType = "Char", VarName = "DEST_WAC",
-      VarDesc = "DestWac", VarType = "Num",
-      VarName = "AIRCRAFT_GROUP",
-      VarDesc = "AircraftGroup",
-      VarType = "Num", VarName = "AIRCRAFT_TYPE",
-      VarDesc = "AircraftType",
-      VarType = "Char", VarName = "AIRCRAFT_CONFIG",
-      VarDesc = "AircraftConfig",
-      VarType = "Num", VarName = "YEAR",
-      VarDesc = "Year", VarType = "Num",
-      VarName = "QUARTER", VarDesc = "Quarter",
-      VarType = "Num", VarName = "MONTH",
-      VarDesc = "Month", VarType = "Num",
-      VarName = "DISTANCE_GROUP",
-      VarDesc = "DistanceGroup",
-      VarType = "Num", VarName = "CLASS",
-      VarDesc = "Class", VarType = "Char"
-    ),
-    encode = "form", query = list(
-      Table_ID = "259",
-      Has_Group = "3", Is_Zipped = "0"
-    )
+      body = list(
+        '__EVENTARGUMENT' = "",
+        '__LASTFOCUS' = "",
+        "__VIEWSTATE" = viewstate,
+        '__VIEWSTATEGENERATOR' = viewstategenerator,
+        '__EVENTVALIDATION' = eventvalidation,
+        txtSearch = "",
+        btnDownload = "Download",
+        cboGeography = "All",
+        cboYear = y,
+        cboPeriod = "All",
+        chkAllVars = "on",
+        UNIQUE_CARRIER = "on",
+        UNIQUE_CARRIER_NAME = "on",
+        ORIGIN_AIRPORT_ID = "on",
+        ORIGIN = "on",
+        DEST_AIRPORT_ID = "on",
+        DEST = "on",
+        MONTH = "on"
+
+      ),
+      encode = "form",
+      query = list(
+        gnoyr_VQ = "FIL",
+        QO_fu146_anzr = "Nv4+Pn44vr45"
+      ),
+      postData = list(
+        text = paste("__EVENTTARGET=&__EVENTARGUMENT=&__LASTFOCUS=&__VIEWSTATE=", viewstate,
+                     "&__VIEWSTATEGENERATOR=", viewstategenerator,
+                     "&__EVENTVALIDATION=", eventvalidation,
+                     "&txtSearch=&cboGeography=All&cboYear=",y,"&cboPeriod=All&btnDownload=Download&UNIQUE_CARRIER=on&UNIQUE_CARRIER_NAME=on&ORIGIN_AIRPORT_ID=on&ORIGIN=on&DEST_AIRPORT_ID=on&DEST=on&MONTH=on",
+                     sep = "")
+      )
+    ) -> res
+
+  }
+
+  if(type == "seg"){
+
+    # Get viewstate, and event
+    curl <- getCurlHandle()
+    curlSetOpt(cookiejar = paste(tempdir(), "/", "cookies.txt", sep = ""),
+               followlocation = TRUE, autoreferer = TRUE, curl = curl)
+
+    message("Connecting to T100")
+    html <- getURL("https://www.transtats.bts.gov/DL_SelectFields.aspx?gnoyr_VQ=FIM&QO_fu146_anzr=Nv4%25Pn44vr45", curl = curl)
+    message("Done")
+
+    viewstate <- as.character(sub('.*id="__VIEWSTATE" value="([0-9a-zA-Z+/=]*).*', '\\1', html))
+    viewstategenerator <- as.character(sub('.*id="__VIEWSTATEGENERATOR" value="([0-9a-zA-Z+/=]*).*', '\\1', html))
+
+    eventvalidation <- as.character(sub('.*id="__EVENTVALIDATION" value="([0-9a-zA-Z+/=]*).*', '\\1', html))
+
+    message("Downloading file")
+
+    httr::POST(
+      config = progress(),
+      url = "https://www.transtats.bts.gov/DL_SelectFields.aspx?gnoyr_VQ=FIM&QO_fu146_anzr=Nv4+Pn44vr45",
+      httr::add_headers(
+        Referer = "https://www.transtats.bts.gov/DL_SelectFields.aspx?gnoyr_VQ=FIM&QO_fu146_anzr=Nv4%25Pn44vr45"
+      ),
+      body = list(
+        '__EVENTARGUMENT' = "",
+        '__LASTFOCUS' = "",
+        "__VIEWSTATE" = viewstate,
+        '__VIEWSTATEGENERATOR' = viewstategenerator,
+        '__EVENTVALIDATION' = eventvalidation,
+        txtSearch = "",
+        btnDownload = "Download",
+        cboGeography = "All",
+        cboYear = y,
+        cboPeriod = "All",
+        chkAllVars = "on",
+        UNIQUE_CARRIER = "on",
+        UNIQUE_CARRIER_NAME = "on",
+        ORIGIN_AIRPORT_ID = "on",
+        ORIGIN = "on",
+        DEST_AIRPORT_ID = "on",
+        DEST = "on",
+        MONTH = "on"
+
+      ),
+      encode = "form", query = list(
+        gnoyr_VQ = "FIM",
+        QO_fu146_anzr = "Nv4+Pn44vr45"
+      ),
+      postData = list(
+        text = paste("__EVENTTARGET=&__EVENTARGUMENT=&__LASTFOCUS=&__VIEWSTATE=", viewstate,
+                     "&__VIEWSTATEGENERATOR=", viewstategenerator,
+                     "&__EVENTVALIDATION=", eventvalidation,
+                     "&txtSearch=&cboGeography=All&cboYear=",y,"&cboPeriod=All&btnDownload=Download&UNIQUE_CARRIER=on&UNIQUE_CARRIER_NAME=on&ORIGIN_AIRPORT_ID=on&ORIGIN=on&DEST_AIRPORT_ID=on&DEST=on&MONTH=on",
+                     sep = "")
+      )
     ) -> res
   }
 
