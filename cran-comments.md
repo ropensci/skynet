@@ -1,8 +1,7 @@
 ## Release summary
 
 * Complies with CRAN policies on internet resources.
-* Replaced error in download_db1b, download_t100, download_t100int and
-download_ontime, with message.
+* Brings back function.
 
 ## Test environments
 * local OS X install, R 4.0.1
