@@ -3,23 +3,3 @@ url: http://filipeamteixeira.github.io/skynet/
 template:
   params:
     bootswatch: cerulean
-
-reference:
-- title: All functions
-  desc: ~
-  contents:
-  -  '`createNodes`'
-  -  '`disparity_filter`'
-  -  '`find_airport`'
-  -  '`find_carrier`'
-  -  '`from_to_stats`'
-  -  '`make_net_dir`'
-  -  '`make_net_und`'
-  -  '`make_net_path`'
-  -  '`node_stats`'
-  -  '`import_t100`'
-  -  '`import_db1b`'
-  -  '`net_map`'
-  -  '`boot_network`'
-  -  '`fit_power`'
-  -  '`summary.skynet`'
