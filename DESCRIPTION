@@ -4,7 +4,7 @@ Version: 1.4.3
 Title: Generates Networks from BTS Data
 Authors@R: person("Filipe", "Teixeira", email = "Filipe.MarquesTeixeira@Ugent.be", role = c("aut", "cre"))
 Maintainer: Filipe Teixeira <Filipe.MarquesTeixeira@Ugent.be>
-URL:  https://github.com/ropensci/skynet
+URL: https://github.com/ropensci/skynet
 Description: A flexible tool that allows generating bespoke
     air transport statistics for urban studies based on publicly available
     data from the Bureau of Transport Statistics (BTS) in the United States
@@ -13,7 +13,7 @@ License: MIT + file LICENSE
 BugReports: https://github.com/ropensci/skynet/issues
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.1.1
+RoxygenNote: 7.3.2
 Collate:
     'PowerLaw.R'
     'createNodes.R'
@@ -56,7 +56,8 @@ Imports:
     httr,
     geosphere,
     leaflet,
-    RCurl
+    RCurl,
+    maps
 Suggests: 
     knitr,
     rmarkdown,
