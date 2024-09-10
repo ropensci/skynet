@@ -13,6 +13,9 @@
 #' net_map(network, pct = 10)
 #' }
 #'
+# Import to avoid R CMD check NOTE
+# skynet > ggplot2::border() > ggplot2::map_data() > maps::map()
+#' @importFrom maps map
 #' @export
 #'
 
