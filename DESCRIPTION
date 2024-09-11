@@ -1,6 +1,6 @@
 Type: Package
 Package: skynet
-Version: 1.4.3
+Version: 1.4.4
 Title: Generates Networks from BTS Data
 Authors@R: person("Filipe", "Teixeira", email = "Filipe.MarquesTeixeira@Ugent.be", role = c("aut", "cre"))
 Maintainer: Filipe Teixeira <Filipe.MarquesTeixeira@Ugent.be>
@@ -13,11 +13,7 @@ License: MIT + file LICENSE
 BugReports: https://github.com/ropensci/skynet/issues
 Encoding: UTF-8
 LazyData: true
-<<<<<<< HEAD
-RoxygenNote: 7.2.0
-=======
 RoxygenNote: 7.3.2
->>>>>>> b667d23454f08e9e99a4f93251470f6a88f71c43
 Collate:
     'PowerLaw.R'
     'createNodes.R'
