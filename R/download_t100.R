@@ -33,8 +33,8 @@ download_t100 <- function(y = NULL, type = NULL){
                followlocation = TRUE, autoreferer = TRUE, curl = curl)
 
     message("Connecting to T100")
-    html <- getURL('https://www.transtats.bts.gov/DL_SelectFields.aspx?gnoyr_VQ=FIL&QO_fu146_anzr=Nv4%20Pn44vr45', curl = curl)
-    temp <- GET('https://www.transtats.bts.gov/DL_SelectFields.aspx?gnoyr_VQ=FIL&QO_fu146_anzr=Nv4%20Pn44vr45', curl = curl)
+    #html <- getURL('https://www.transtats.bts.gov/DL_SelectFields.aspx?gnoyr_VQ=FIL&QO_fu146_anzr=Nv4%20Pn44vr45', curl = curl)
+    html <- GET('https://www.transtats.bts.gov/DL_SelectFields.aspx?gnoyr_VQ=FIL&QO_fu146_anzr=Nv4%20Pn44vr45', curl = curl)
     message("Done")
 
     viewstate <- as.character(sub('.*id="__VIEWSTATE" value="([0-9a-zA-Z+/=]*).*', '\\1', html))
@@ -94,13 +94,12 @@ download_t100 <- function(y = NULL, type = NULL){
                followlocation = TRUE, autoreferer = TRUE, curl = curl)
 
     message("Connecting to T100")
-    html <- getURL("https://www.transtats.bts.gov/DL_SelectFields.aspx?gnoyr_VQ=FIM&QO_fu146_anzr=Nv4%25Pn44vr45", curl = curl)
-    temp <- GET("https://www.transtats.bts.gov/DL_SelectFields.aspx?gnoyr_VQ=FIM&QO_fu146_anzr=Nv4%25Pn44vr45", curl = curl)
+    #html <- getURL("https://www.transtats.bts.gov/DL_SelectFields.aspx?gnoyr_VQ=FIM&QO_fu146_anzr=Nv4%25Pn44vr45", curl = curl)
+    html <- GET("https://www.transtats.bts.gov/DL_SelectFields.aspx?gnoyr_VQ=FIM&QO_fu146_anzr=Nv4%25Pn44vr45", curl = curl)
     message("Done")
 
     viewstate <- as.character(sub('.*id="__VIEWSTATE" value="([0-9a-zA-Z+/=]*).*', '\\1', html))
     viewstategenerator <- as.character(sub('.*id="__VIEWSTATEGENERATOR" value="([0-9a-zA-Z+/=]*).*', '\\1', html))
-
     eventvalidation <- as.character(sub('.*id="__EVENTVALIDATION" value="([0-9a-zA-Z+/=]*).*', '\\1', html))
 
     message("Downloading file")
