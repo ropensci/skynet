@@ -70,7 +70,7 @@ make_net_und <- function(x, disp = FALSE, alpha = 0.003,
         select(origin, dest, passengers, op_carrier,
                itin_yield, distance, year, quarter) %>%
         graph_from_data_frame(directed = FALSE, vertices = nodes) %>%
-        get.data.frame() %>%
+        igraph::as_data_frame() %>%
         group_by(from, to, op_carrier, year, quarter) %>%
         mutate(itin_fare = itin_yield*distance) %>%
         summarise(weight = sum(passengers), fare_sd = round(sd(itin_fare), 2),
@@ -116,7 +116,7 @@ make_net_und <- function(x, disp = FALSE, alpha = 0.003,
 
   # Merges edges and keeps year and quarter
 
-  netUnd_all <- as_data_frame(gUnd)
+  netUnd_all <- igraph::as_data_frame(gUnd)
   netUnd_all <- netUnd_all %>%
     rename(origin = from, dest = to) %>%
     group_by(origin, dest, year, quarter) %>%
@@ -141,7 +141,7 @@ make_net_und <- function(x, disp = FALSE, alpha = 0.003,
     # Run disparity filter
     # Creates igraph object
     gUnd_disp <- disparity_filter(gUnd, alpha = alpha)
-    netUnd_disp <- get.data.frame(gUnd_disp)
+    netUnd_disp <- igraph::as_data_frame(gUnd_disp)
 
     # Rename fields
     netUnd_disp <- netUnd_disp %>%
@@ -176,7 +176,7 @@ make_net_und <- function(x, disp = FALSE, alpha = 0.003,
 
     }
 
-    nodes <- as.data.frame(get.vertex.attribute(gUnd_disp))
+    nodes <- as.data.frame(vertex_attr(gUnd_disp))
     nodes <- rename(nodes, airport = name)
 
     netlist <- list(gUnd_disp = gUnd_disp,
@@ -193,7 +193,7 @@ make_net_und <- function(x, disp = FALSE, alpha = 0.003,
 
     #Run 10% cap
     gUnd_cap <- gUnd
-    gUnd_cap <- subgraph.edges(gUnd_cap,
+    gUnd_cap <- subgraph_from_edges(gUnd_cap,
                     which(E(gUnd_cap)$weight > quantile(E(gUnd_cap)$weight,
                     prob = 1-pct/100)), delete.vertices = TRUE)
 
@@ -231,7 +231,7 @@ make_net_und <- function(x, disp = FALSE, alpha = 0.003,
         select(-latitude.x, -latitude.y, -longitude.x, -longitude.y)
     }
 
-    nodes <- as.data.frame(get.vertex.attribute(gUnd_cap))
+    nodes <- as.data.frame(vertex_attr(gUnd_cap))
     nodes <- rename(nodes, airport = name)
 
     netlist <- list(gUnd_cap = gUnd_cap,

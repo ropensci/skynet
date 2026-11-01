@@ -15,7 +15,7 @@
 fit_power <- function(graph) {
   # calculate degree
   d <- degree(graph, mode = "all")
-  dd <- degree.distribution(graph, mode = "all", cumulative = FALSE)
+  dd <- degree_distribution(graph, mode = "all", cumulative = FALSE)
   degree <- 1:max(d)
   probability <- dd[-1]
   # delete blank values
@@ -31,7 +31,7 @@ fit_power <- function(graph) {
                 round(summary(reg)$r.squared, 3)))
   ggplot(plotnet, aes(y=log(probability), x=log(degree))) +
     geom_point(col = "#56B4E9")+
-    geom_smooth(method="lm", se=FALSE, col = "#E69F00") +
+    geom_smooth(method="lm", formula = y ~ x, se=FALSE, col = "#E69F00") +
     geom_text(data = plotnet[plotnet == max(plotnet$probability), ],
               aes(x = log(degree), y = log(probability),
                   label = paste(V(graph)$name[degree(graph) == max(degree(graph))])),

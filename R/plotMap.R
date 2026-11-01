@@ -60,7 +60,7 @@ net_map <- function(x, pct = 60){
 
   # Create World and Plot Map
 
-  worldmap <- borders("world", colour="lightgrey",
+  worldmap <- annotation_borders("world", colour="lightgrey",
                       fill="lightgrey") # create a layer of borders
 
   # Chooses color for carriers when present
@@ -69,19 +69,19 @@ net_map <- function(x, pct = 60){
    gcurve <- geom_curve(data=flights[flights$passengers > quantile(flights$passengers,
                                                                    prob = 1-(pct/100)),],
                aes(x = longitude.x, y = latitude.x, xend = longitude.y,
-                   yend = latitude.y , size = passengers),
+                   yend = latitude.y , linewidth = passengers),
                alpha = .6, curvature = .2, color = "royalblue")
   }else{
     gcurve <- geom_curve(data=flights[flights$passengers > quantile(flights$passengers,
                                                                     prob = 1-(pct/100)),],
                aes(x = longitude.x, y = latitude.x, xend = longitude.y,
-                   yend = latitude.y , size = passengers, col = op_carrier),
+                   yend = latitude.y , linewidth = passengers, col = op_carrier),
                alpha = .6, curvature = .2)}
 
     #-----------------------------------------------------
 
   ggplot() + worldmap + gcurve +
-    scale_size_continuous(range = c(.0001,0.6)) +
+    scale_linewidth_continuous(range = c(.0001,0.6)) +
     geom_point(data = nodes[nodes$freq > quantile(flights$passengers, prob = 1-0.6),],
                aes(x = longitude, y = latitude), col = "royalblue", alpha = .8,
                size = .1) +

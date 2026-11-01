@@ -90,7 +90,7 @@ make_net_dir <- function(x, disp = FALSE, alpha = 0.003,
 
     # Create igraph
     gDir_disp <- disparity_filter(gDir, alpha = alpha)
-    netDir_disp <- get.data.frame(gDir_disp)
+    netDir_disp <- igraph::as_data_frame(gDir_disp)
 
     netDir_disp <- netDir_disp %>%
       rename(origin = from, dest = to, passengers = weight)
@@ -124,7 +124,7 @@ make_net_dir <- function(x, disp = FALSE, alpha = 0.003,
 
     }
 
-     nodes <- as.data.frame(get.vertex.attribute(gDir_disp))
+     nodes <- as.data.frame(vertex_attr(gDir_disp))
      nodes <- rename(nodes, airport = name)
 
      netlist <- list(gDir_disp = gDir_disp,netDir_disp = netDir_disp,
@@ -142,7 +142,7 @@ make_net_dir <- function(x, disp = FALSE, alpha = 0.003,
     gDir_cap <- graph_from_data_frame(netDir_all,
                                       directed = TRUE, vertices = nodes)
 
-    gDir_cap <- subgraph.edges(gDir_cap,
+    gDir_cap <- subgraph_from_edges(gDir_cap,
                      which(E(gDir_cap)$weight > quantile(E(gDir_cap)$weight,
                      prob = 1-pct/100)), delete.vertices = TRUE)
 
@@ -179,7 +179,7 @@ make_net_dir <- function(x, disp = FALSE, alpha = 0.003,
       left_join(MetroTemp, by = "dest")
     }
 
-     nodes <- as.data.frame(get.vertex.attribute(gDir_cap))
+     nodes <- as.data.frame(vertex_attr(gDir_cap))
      nodes <- rename(nodes, airport = name)
 
     netlist <- list(gDir_cap = gDir_cap,

@@ -17,7 +17,7 @@
 
 disparity_filter <- function(g, alpha = 0.003){
 
-  if (igraph::has.multiple(g))
+  if (igraph::any_multiple(g))
     stop("This disparity filter does not support yet multiple edges")
   if (is.null(V(g)$name)){
     g <- set_vertex_attr(g, "name", value = as.character(1:vcount(g)))
@@ -26,7 +26,7 @@ disparity_filter <- function(g, alpha = 0.003){
   e <- cbind(igraph::as_data_frame(g)[, 1:2 ], weight = E(g)$weight)
 
   # in
-  w_in <- graph.strength(g, mode = "in")
+  w_in <- strength(g, mode = "in")
   w_in <- data.frame(to = names(w_in), w_in, stringsAsFactors = FALSE)
   k_in <- degree(g, mode = "in")
   k_in <- data.frame(to = names(k_in), k_in, stringsAsFactors = FALSE)
@@ -38,7 +38,7 @@ disparity_filter <- function(g, alpha = 0.003){
 
   # out
 
-  w_out <- graph.strength(g, mode = "out")
+  w_out <- strength(g, mode = "out")
   w_out <- data.frame(from = names(w_out), w_out, stringsAsFactors = FALSE)
   k_out <- degree(g, mode = "out")
   k_out <- data.frame(from = names(k_out), k_out, stringsAsFactors = FALSE)
@@ -56,8 +56,8 @@ disparity_filter <- function(g, alpha = 0.003){
 
   E(g)$alpha <- e_full$alpha
 
-  g <- delete.edges(g, which(E(g)$alpha >= alpha))
-  g <- delete.vertices(g, which(degree(g) == 0))
+  g <- delete_edges(g, which(E(g)$alpha >= alpha))
+  g <- delete_vertices(g, which(degree(g) == 0))
 
   return(g)
 

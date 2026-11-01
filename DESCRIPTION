@@ -1,6 +1,6 @@
 Type: Package
 Package: skynet
-Version: 1.4.4
+Version: 1.5.0
 Title: Generates Networks from BTS Data
 Authors@R: person("Filipe", "Teixeira", email = "Filipe.MarquesTeixeira@Ugent.be", role = c("aut", "cre"))
 Maintainer: Filipe Teixeira <Filipe.MarquesTeixeira@Ugent.be>
@@ -13,7 +13,6 @@ License: MIT + file LICENSE
 BugReports: https://github.com/ropensci/skynet/issues
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.3.2
 Collate:
     'PowerLaw.R'
     'createNodes.R'
@@ -45,18 +44,17 @@ Collate:
     'download_t100_int.R'
     'download_ontime.R'
 Depends:
-    R (>= 3.1.2)
+    R (>= 4.1.0)
 Imports:
     data.table,
-    igraph,
-    dplyr,
-    ggplot2,
+    igraph (>= 2.0.0),
+    dplyr (>= 1.1.0),
+    ggplot2 (>= 4.0.0),
     ggrepel,
     stringr,
     httr,
     geosphere,
     leaflet,
-    RCurl,
     maps
 Suggests: 
     knitr,
@@ -65,3 +63,4 @@ Suggests:
     kableExtra,
     covr
 VignetteBuilder: knitr
+Config/roxygen2/version: 8.0.0

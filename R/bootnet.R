@@ -36,14 +36,14 @@ boot_network <- function(g, n = 500, left_ci = 0.005, right_ci = 0.995){
       rewire(keeping_degseq(loops = FALSE, niter = ecount(g)*10))
 
     # Runs and saves statistics of interest
-    avg[i] <- average.path.length(gBoot)
+    avg[i] <- mean_distance(gBoot)
     trv[i] <- transitivity(gBoot)
     btw[i] <- mean(betweenness(gBoot))
   }
       # Calculates mean values and CIs
       avg <- c(quantile(avg, left_ci), quantile(avg, right_ci),
                         mean_random = mean(avg),
-                        mean_empirical = average.path.length(g))
+                        mean_empirical = mean_distance(g))
 
       trv <- c(quantile(trv, left_ci), quantile(trv, right_ci),
                  mean_random = mean(trv),

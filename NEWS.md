@@ -120,3 +120,13 @@
 # skynet 1.4.3
 
 * Brings back download_t100.
+
+# skynet 1.5.0
+
+* Replaced deprecated `dplyr::funs()`/`mutate_all()` with `across()`.
+* Replaced deprecated igraph functions (`graph.strength()`, `get.data.frame()`, `get.vertex.attribute()`, `subgraph.edges()`,
+  `average.path.length()`, `delete.edges()`, `delete.vertices()`, `has.multiple()`, `degree.distribution()`).
+* `net_map()` uses `linewidth` and `annotation_borders()` (ggplot2 >= 4.0.0).
+* `download_t100()` no longer depends on RCurl; RCurl removed from Imports.
+* Silenced `geom_smooth()` formula message in `fit_power()`.
+* Requires R >= 4.1.0, dplyr >= 1.1.0, igraph >= 2.0.0, ggplot2 >= 4.0.0.
