@@ -1,5 +1,10 @@
 # skynet 1.6.0
 
+* `net_map()` draws great circle routes on a projected map (Albers for North America, Equal Earth otherwise; needs the suggested sf package), with map limits taken from the plotted airports
+* `net_map()` shows a carrier legend, groups smaller carriers as "Other" (`carriers` argument) and sizes airports by traffic
+* `net_map(interactive = TRUE)` returns a zoomable leaflet map with route and airport tooltips
+* `net_map()` now works with metro networks
+
 # skynet 0.9.0
 
 * Added a `NEWS.md` file to track changes to the package.

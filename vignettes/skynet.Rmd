@@ -90,7 +90,8 @@ To extract the backbone of the network:
 
 One of SKYNET's advantages is the possibility of plotting maps without having to recur to external software.
 
-Typing `net_map(skynet_object)` plots a ggplot2 based map with OD information. When specifying the group by carrier option when generating a network, `net_map()` distinguishes carriers with different colors. The `pct` argument allow to plot only a percentage of the available data.
+Typing `net_map(skynet_object)` plots a ggplot2 based map with OD information. Routes are drawn as great circles, with line width scaled by passengers, and airports are sized by traffic. When specifying the group by carrier option when generating a network, `net_map()` distinguishes carriers with different colors. The `pct` argument allows plotting only the busiest percentage of routes.
+Setting `interactive = TRUE` returns a zoomable leaflet map instead, where hovering over a route or airport shows its passengers.
 It is important to point the path to the dataframe created by SKYNET.
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE,dpi = 300, fig.width = 6, fig.height= 4, out.width=500, }

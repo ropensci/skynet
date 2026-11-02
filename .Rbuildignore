@@ -13,3 +13,4 @@ R/texSeg.R
 ^CODE_OF_CONDUCT\.md$
 ^csv$
 ^CRAN-SUBMISSION$
+^\.github$

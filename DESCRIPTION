@@ -7,7 +7,7 @@ Maintainer: Filipe Teixeira <Filipeamteixeira@gmail.com>
 URL: https://github.com/ropensci/skynet
 Description: A flexible tool that allows generating bespoke
     air transport statistics for urban studies based on publicly available
-    data from the Bureau of Transport Statistics (BTS) in the United States
+    data from the Bureau of Transportation Statistics (BTS) in the United States
     <https://www.transtats.bts.gov/databases.asp?Z1qr_VQ=E&Z1qr_Qr5p=N8vn6v10&f7owrp6_VQF=D>.
 License: MIT + file LICENSE
 BugReports: https://github.com/ropensci/skynet/issues
@@ -61,6 +61,7 @@ Suggests:
     rmarkdown,
     testthat,
     kableExtra,
-    covr
+    covr,
+    sf
 VignetteBuilder: knitr
 Config/roxygen2/version: 8.0.0

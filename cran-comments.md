@@ -1,25 +1,27 @@
-## Release summary
+## Resubmission
 
-* Complies with CRAN policies on internet resources.
-* Brings back function.
+This is a resubmission of a package archived on 2024-10-20 because the
+maintainer email was undeliverable. The maintainer email has been updated
+to a working address (Filipeamteixeira@gmail.com).
+
+In this version I have:
+
+* Excluded the `.github` directory from the package build.
+* Updated the moved codecov URL in README.md.
 
 ## Test environments
-* local OS X install, R 4.0.1
-* ubuntu 12.04 (on travis-ci), R 3.4.2
-* win-builder (devel and release)
+
+* local macOS install, R release
+* win-builder (devel)
 
 ## R CMD check results
 
-0 errors | 0 warnings | 0 note
+0 errors | 0 warnings | 1 note
 
-* This is a new release.
+* New submission / Package was archived on CRAN: see above.
+* Possibly misspelled words in DESCRIPTION: 'BTS' is the acronym for the
+  Bureau of Transportation Statistics, spelled out in the Description.
 
 ## Reverse dependencies
 
-This is a new release, so there are no reverse dependencies.
-
----
-
-* I have run R CMD check on the NUMBER downstream dependencies.
-
-* All revdep maintainers were notified of the release on RELEASE DATE.
+There are no reverse dependencies.

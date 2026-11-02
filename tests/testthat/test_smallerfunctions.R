@@ -32,5 +32,11 @@ test_that("Create Nodes",{
 test_that("Plot Map",{
   test <- net_map(make_net_dir(OD_Sample))
   expect_output(print(class(test)[1]), "gg")
+  expect_s3_class(net_map(make_net_dir(OD_Sample, carrier = TRUE), pct = 10),
+                  "ggplot")
+  expect_s3_class(net_map(make_net_dir(OD_Sample, metro = TRUE), pct = 10),
+                  "ggplot")
+  expect_s3_class(net_map(make_net_dir(OD_Sample), pct = 10,
+                          interactive = TRUE), "leaflet")
 })
 
