@@ -130,3 +130,11 @@
 * `download_t100()` no longer depends on RCurl; RCurl removed from Imports.
 * Silenced `geom_smooth()` formula message in `fit_power()`.
 * Requires R >= 4.1.0, dplyr >= 1.1.0, igraph >= 2.0.0, ggplot2 >= 4.0.0.
+
+# skynet 1.5.1
+
+* `make_net_path()` no longer multiplies passengers by the number of legs in multi-leg itineraries.
+* `make_net_und(merge = FALSE)` now keeps parallel edges, and keeps `op_carrier` when `carrier = TRUE`.
+* `import_t100()` respects `auto = FALSE` for segment files.
+* `download_t100_int()` queries the international tables instead of the domestic ones.
+* `net_map()` filters airport points by their own frequency.

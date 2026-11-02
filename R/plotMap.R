@@ -82,7 +82,7 @@ net_map <- function(x, pct = 60){
 
   ggplot() + worldmap + gcurve +
     scale_linewidth_continuous(range = c(.0001,0.6)) +
-    geom_point(data = nodes[nodes$freq > quantile(flights$passengers, prob = 1-0.6),],
+    geom_point(data = nodes[nodes$freq > quantile(nodes$freq, prob = 1-0.6),],
                aes(x = longitude, y = latitude), col = "royalblue", alpha = .8,
                size = .1) +
     ggrepel::geom_text_repel(data = nodes[nodes$freq > quantile(nodes$freq,

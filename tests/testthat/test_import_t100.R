@@ -15,3 +15,10 @@ test_that("Import T100 including non-scheduled flights", {
 })
 
 
+
+test_that("Import T100 segment with auto = FALSE", {
+  if(exists("T100_2011_seg", envir = globalenv())) rm("T100_2011_seg", envir = globalenv())
+  test <- import_t100(skynet_example("T100_2011_int.csv"), auto = FALSE)
+  expect_output(str(class(test)), "data.frame")
+  expect_false(exists("T100_2011_seg", envir = globalenv()))
+})

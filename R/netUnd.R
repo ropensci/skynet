@@ -79,7 +79,9 @@ make_net_und <- function(x, disp = FALSE, alpha = 0.003,
         mutate(fare_sd = ifelse(is.na(fare_sd), 0, fare_sd)) %>%
         select(-year, -quarter, everything())
 
-  }else{
+  }
+
+  if(carrier == FALSE){
 
    netUnd_all <- x %>%
     select(origin, dest, passengers, itin_yield, distance, year, quarter) %>%
@@ -105,8 +107,7 @@ make_net_und <- function(x, disp = FALSE, alpha = 0.003,
   if(merge == FALSE){
     gUnd <- graph_from_data_frame(netUnd_all,
                                   directed = FALSE, vertices = nodes)
-  }
-  if(merge == TRUE & carrier == TRUE){
+  }else if(carrier == TRUE){
     gUnd <- graph_from_data_frame(netUnd_all,
                                   directed = FALSE, vertices = nodes)
   }else{

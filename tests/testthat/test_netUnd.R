@@ -54,7 +54,8 @@ test_that("make_net_und with carrier and disp", {
 test_that("make_net_und with metro", {
   # Run simple net test
   test <- make_net_und(OD_Sample, carrier = TRUE, merge = FALSE)
-  expect_output(str(nrow(test$netUnd)), "1531")
+  expect_output(str(nrow(test$netUnd)), "2749")
+  expect_true("op_carrier" %in% names(test$netUnd))
   expect_length(test$gUnd, 251)
 })
 
@@ -68,6 +69,7 @@ test_that("make_net_und with metro", {
 test_that("make_net_und with metro", {
   # Run simple net test
   test <- make_net_und(OD_Sample, merge = FALSE)
-  expect_output(str(nrow(test$netUnd)), "1531")
+  expect_output(str(nrow(test$netUnd)), "2182")
+  expect_true(igraph::any_multiple(test$gUnd))
   expect_length(test$gUnd, 251)
 })
