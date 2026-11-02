@@ -1,6 +1,6 @@
 Type: Package
 Package: skynet
-Version: 1.5.1
+Version: 1.6.0
 Title: Generates Networks from BTS Data
 Authors@R: person("Filipe", "Teixeira", email = "Filipeamteixeira@gmail.com", role = c("aut", "cre"))
 Maintainer: Filipe Teixeira <Filipeamteixeira@gmail.com>
