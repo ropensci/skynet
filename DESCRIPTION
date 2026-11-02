@@ -2,8 +2,8 @@ Type: Package
 Package: skynet
 Version: 1.5.1
 Title: Generates Networks from BTS Data
-Authors@R: person("Filipe", "Teixeira", email = "Filipe.MarquesTeixeira@Ugent.be", role = c("aut", "cre"))
-Maintainer: Filipe Teixeira <Filipe.MarquesTeixeira@Ugent.be>
+Authors@R: person("Filipe", "Teixeira", email = "Filipeamteixeira@gmail.com", role = c("aut", "cre"))
+Maintainer: Filipe Teixeira <Filipeamteixeira@gmail.com>
 URL: https://github.com/ropensci/skynet
 Description: A flexible tool that allows generating bespoke
     air transport statistics for urban studies based on publicly available
