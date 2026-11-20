@@ -15,14 +15,21 @@ boot_network(g, n = 500, left_ci = 0.005, right_ci = 0.995)
 
 \item{right_ci}{Confidence interval left limit (0.995 default)}
 }
+\value{
+A data frame with one row per network statistic
+(\code{average.path.length}, \code{transitivity} and \code{betweenness})
+and four columns: the left and right confidence limits of the statistic in the
+bootstrapped (randomly rewired) networks, named after their quantiles
+(e.g. \code{0.5\%} and \code{99.5\%}), \code{mean_random}, the mean value in the
+bootstrapped networks, and \code{mean_empirical}, the value in the original network.
+}
 \description{
 Bootstraps a network and returns output containing three network statistics:
 Average Path Length, Transitivity, Mean Betweenness.
 }
 \examples{
-\dontrun{
-boot_net(g, n = 500)
+net <- make_net_dir(OD_Sample)
+boot_network(net, n = 10)
 
-}
 
 }

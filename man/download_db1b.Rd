@@ -11,6 +11,13 @@ download_db1b(y = NULL, q = NULL)
 
 \item{q}{quarter to be imported}
 }
+\value{
+Called mainly for its side effect: the merged coupon and ticket data
+frame, with one row per coupon (see \code{\link{import_db1b}}), is assigned to
+the global environment as \code{OD_yearQquarter} (e.g. \code{OD_2010Q1}) and
+returned invisibly. If the BTS website can't be reached a message is shown and
+\code{NULL} is returned.
+}
 \description{
 Downloads data from BTS/RITA/Transtats and imports it into R
 }
@@ -21,9 +28,10 @@ Ticket files can be found at \url{https://www.transtats.bts.gov/Fields.asp?gnoyr
 Note: The BTS often changes the way we can access these files. So please be warned that this is still an experimental feature.
 }
 \examples{
-\dontrun{
-
+\donttest{
+# Downloads a large file from the BTS website
+if(interactive()){
 download_db1b(2010, 1)
-
+}
 }
 }

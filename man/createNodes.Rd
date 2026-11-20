@@ -9,7 +9,17 @@ createNodes(y)
 \arguments{
 \item{y}{Data Frame}
 }
+\value{
+A data frame with one row per airport: \code{origin} (airport IATA code),
+\code{freq} (number of departing plus arriving passengers) and the airport
+information from \code{airportCode} (\code{city_mkt_id}, \code{city},
+\code{latitude} and \code{longitude}).
+}
 \description{
 Creates nodes for SKYNET's functions.
 Despite being possible to use it individually, it's mainly meant to be used as a complimentary function.
+}
+\examples{
+createNodes(OD_Sample)
+
 }

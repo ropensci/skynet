@@ -7,11 +7,14 @@
 #' @param g igraph object
 #' @param alpha Alpha value. Default 0.003
 #'
+#' @return An igraph object with the backbone of \code{g}: only the edges with a
+#' disparity filter value below \code{alpha} are kept, and that value is stored in
+#' the edge attribute \code{alpha}. Vertices left without edges are removed.
+#'
 #' @examples
-#' \dontrun{
-#' netDir <- make.netDir(OD_Sample)
+#' netDir <- make_net_dir(OD_Sample)
 #' disparity_filter(netDir$gDir, alpha = 0.003)
-#' }
+#'
 #' @export
 #'
 

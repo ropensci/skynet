@@ -13,15 +13,18 @@ from_to_stats(x, y, orig)
 
 \item{orig}{"from" or "to" options}
 }
+\value{
+A numeric value with the sum of the weights (passengers) of the edges
+leaving (\code{orig = "from"}) or arriving at (\code{orig = "to"}) airport \code{y}.
+}
 \description{
 Calculate edges weight from IATA Code
 }
 \examples{
-\dontrun{
-netDir <- make.netDir(OD_Sample)
+netDir <- make_net_dir(OD_Sample)
 from_to_stats(netDir$gDir, "JFK", orig = "from")
 
 from_to_stats(netDir$gDir, "JFK", orig = "to")
-}
+
 
 }

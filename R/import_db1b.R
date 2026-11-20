@@ -13,12 +13,18 @@
 #' @param zip Should equal TRUE if original file comes from the BTS prezipped option.
 #' @param auto Automatically assigns object
 #'
+#' @return A data frame with one row per coupon (flight leg) of the merged coupon
+#' and ticket files: itinerary, market and sequence ids, origin and destination
+#' airports and city market ids, trip break, operating carrier, distance, year,
+#' quarter, roundtrip, passengers, itinerary fare and yield, among others.
+#' With \code{auto = TRUE} it is assigned to the global environment as
+#' \code{OD_yearQquarter} (e.g. \code{OD_2001Q1}) and returned invisibly,
+#' otherwise it is returned.
+#'
 #' @examples
-#' \dontrun{
+#' import_db1b(skynet_example("Coupon_2001Q1.csv"), skynet_example("Ticket_2001Q1.csv"),
+#'             auto = FALSE)
 #'
-#' import_db1b(skynet_example("Coupon_2001Q1.csv"), skynet_example("Ticket_2001Q1.csv"))
-#'
-#' }
 #' @export
 
 import_db1b <- function(c, t, zip = FALSE, auto = TRUE){

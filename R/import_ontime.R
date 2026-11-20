@@ -9,12 +9,17 @@
 #' @param x On-time csv (from zipped file)
 #' @param auto Automatically assigns object
 #'
+#' @return A data frame (data.table) with one row per flight: origin and
+#' destination airports and city market ids, date, carrier, tail and flight
+#' numbers, scheduled and actual departure and arrival times, delays (by cause),
+#' taxi and air times, cancellations, diversions and distance.
+#' With \code{auto = TRUE} it is assigned to the global environment as
+#' \code{ontime_year_month} (e.g. \code{ontime_2011_1}) and returned invisibly,
+#' otherwise it is returned.
+#'
 #' @examples
-#' \dontrun{
+#' import_ontime(skynet_example("Ontime_2011_1.csv"), auto = FALSE)
 #'
-#' import_ontime(skynet_example("Ontime_2011_1.csv"))
-#'
-#' }
 #' @export
 #'
 

@@ -11,6 +11,11 @@
 
 \item{...}{other arguments ignored (for compatibility with generic)}
 }
+\value{
+No return value, called for side effects: prints the years,
+quarters, number of vertices/airports and number of edges/routes of the
+network to the console.
+}
 \description{
 Displays a summary of a skynet object
 }

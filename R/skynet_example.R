@@ -4,11 +4,13 @@
 #'
 #' @param path File name.
 #'
+#' @return A character vector with the names of the example files when
+#' \code{path} is \code{NULL}, otherwise the full path to the requested file.
+#'
 #' @examples
-#' \dontrun{
 #' skynet_example()
-#' skynet_example("Coupon 2001Q1.csv")
-#' }
+#' skynet_example("Coupon_2001Q1.csv")
+#'
 #' @export
 #'
 

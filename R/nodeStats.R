@@ -5,12 +5,15 @@
 #'
 #' @param x Data Frame to extract information from
 #'
-#' @examples
-#' \dontrun{
+#' @return A data frame with one row per airport: \code{airport} (IATA code),
+#' \code{pass_dep} (departing passengers), \code{pass_arr} (arriving passengers),
+#' \code{pass_tr} (transfer passengers, 0 when the data has no \code{trip_break}
+#' column), the airport information from \code{airportCodeFull} (city, coordinates,
+#' state, country, ...) and \code{freq} (arrivals plus departures minus transfers).
 #'
+#' @examples
 #' node_stats(OD_Sample)
 #'
-#'}
 #'
 #' @export
 #'

@@ -11,6 +11,14 @@ make_net_trip(x, carrier = FALSE)
 
 \item{carrier}{Groups data per carrier and OD}
 }
+\value{
+An object of class \code{skynet}: a list with \code{gDir}, the igraph
+directed network weighted by passengers, \code{netTrip}, a data frame with one
+row per origin, destination and \code{route_type} (OD, OT, TT or TD) with
+passengers, average fare and its standard deviation, yield, distance and city
+information, and \code{nodes}, a data frame with the airport/node statistics
+(see \code{\link{node_stats}}).
+}
 \description{
 Generates Trip/Route based Directed Network with an iGraph \strong{gDir} object,
 a Data Frame \strong{netDir} and a Data Frame
@@ -22,7 +30,6 @@ TT = Transfer/Transfer pair,
 TD = Transfer/Destination pair
 }
 \examples{
-\dontrun{
 make_net_trip(OD_Sample)
-}
+
 }

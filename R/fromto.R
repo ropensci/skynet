@@ -6,13 +6,15 @@
 #' @param y origin airport IATA code
 #' @param orig "from" or "to" options
 #'
+#' @return A numeric value with the sum of the weights (passengers) of the edges
+#' leaving (\code{orig = "from"}) or arriving at (\code{orig = "to"}) airport \code{y}.
+#'
 #' @examples
-#' \dontrun{
-#' netDir <- make.netDir(OD_Sample)
+#' netDir <- make_net_dir(OD_Sample)
 #' from_to_stats(netDir$gDir, "JFK", orig = "from")
 #'
 #' from_to_stats(netDir$gDir, "JFK", orig = "to")
-#' }
+#'
 #'
 #' @export
 #'

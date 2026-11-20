@@ -16,12 +16,14 @@
 #' @param carriers maximum number of carriers shown individually when the
 #' network is grouped by carrier. Remaining carriers are grouped as "Other".
 #'
+#' @return A ggplot object with the map. With \code{interactive = TRUE}, a
+#' leaflet htmlwidget instead.
+#'
 #' @examples
-#' \dontrun{
 #' network <- make_net_dir(OD_Sample)
 #' net_map(network, pct = 10)
 #' net_map(network, pct = 10, interactive = TRUE)
-#' }
+#'
 #'
 # Import to avoid R CMD check NOTE
 # skynet > ggplot2::annotation_borders() > ggplot2::map_data() > maps::map()

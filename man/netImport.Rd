@@ -12,6 +12,11 @@ the T-100 database, the only file to be included.}
 
 \item{y}{Second csv file to be imported.}
 }
+\value{
+No return value, called for side effects. The function is deprecated
+and only issues a warning pointing to \code{\link{import_db1b}} and
+\code{\link{import_t100}}.
+}
 \description{
 Imports data from BTS/RITA/Transtats website
 File order doesn't matter, but it is recommended to name the files using the following
@@ -19,9 +24,6 @@ syntax: \emph{"Coupon YearQuarter.csv", "Ticket YearQuarter.csv", "T100 Year".}
 Note: We do recommend sparklyr to be used for larger sets of data.
 }
 \examples{
-\dontrun{
-
 netImport(skynet_example("Coupon_2001Q1.csv"), skynet_example("Ticket_2001Q1.csv"))
 
-}
 }

@@ -9,15 +9,19 @@ node_stats(x)
 \arguments{
 \item{x}{Data Frame to extract information from}
 }
+\value{
+A data frame with one row per airport: \code{airport} (IATA code),
+\code{pass_dep} (departing passengers), \code{pass_arr} (arriving passengers),
+\code{pass_tr} (transfer passengers, 0 when the data has no \code{trip_break}
+column), the airport information from \code{airportCodeFull} (city, coordinates,
+state, country, ...) and \code{freq} (arrivals plus departures minus transfers).
+}
 \description{
 Creates node statistics
 Generates Number of Passenger Arrivals, Departures and Transfers
 }
 \examples{
-\dontrun{
-
 node_stats(OD_Sample)
 
-}
 
 }

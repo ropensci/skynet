@@ -15,6 +15,15 @@ import_db1b(c, t, zip = FALSE, auto = TRUE)
 
 \item{auto}{Automatically assigns object}
 }
+\value{
+A data frame with one row per coupon (flight leg) of the merged coupon
+and ticket files: itinerary, market and sequence ids, origin and destination
+airports and city market ids, trip break, operating carrier, distance, year,
+quarter, roundtrip, passengers, itinerary fare and yield, among others.
+With \code{auto = TRUE} it is assigned to the global environment as
+\code{OD_yearQquarter} (e.g. \code{OD_2001Q1}) and returned invisibly,
+otherwise it is returned.
+}
 \description{
 Imports data from BTS/RITA/Transtats files
 }
@@ -26,9 +35,7 @@ Both files should belong to the same year and same quarter.
 More information on variables to select and type of files to use can be found \href{https://github.com/ropensci/skynet}{here}
 }
 \examples{
-\dontrun{
+import_db1b(skynet_example("Coupon_2001Q1.csv"), skynet_example("Ticket_2001Q1.csv"),
+            auto = FALSE)
 
-import_db1b(skynet_example("Coupon_2001Q1.csv"), skynet_example("Ticket_2001Q1.csv"))
-
-}
 }

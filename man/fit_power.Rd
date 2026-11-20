@@ -9,12 +9,17 @@ fit_power(graph)
 \arguments{
 \item{graph}{iGraph object}
 }
+\value{
+A ggplot object plotting the log of the degree probability against
+the log of the degree, with the fitted linear regression line and the name of
+the node with the highest degree. The fitted alpha (minus the slope) and the
+R squared of the fit are printed as messages.
+}
 \description{
 Plots power law fit
 }
 \examples{
-\dontrun{
-netDir <- make.netDir(OD_Sample)
+netDir <- make_net_dir(OD_Sample)
 fit_power(netDir$gDir)
-}
+
 }

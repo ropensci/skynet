@@ -9,14 +9,18 @@ find_airport(x)
 \arguments{
 \item{x}{airport IATA code or city name}
 }
+\value{
+A data frame with the rows of \code{airportCode} whose IATA code
+(\code{origin}) or \code{city} matches \code{x}, including the city market id
+(\code{city_mkt_id}), \code{latitude} and \code{longitude}.
+}
 \description{
 Searches for airport information based on its IATA code or city name
 It will display multiple airports as it works with partial names.
 }
 \examples{
-\dontrun{
 find_airport("Atlanta")
 
 find_airport("ATL")
-}
+
 }

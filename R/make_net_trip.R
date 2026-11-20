@@ -13,10 +13,16 @@
 #' @param x Data frame
 #' @param carrier Groups data per carrier and OD
 #'
+#' @return An object of class \code{skynet}: a list with \code{gDir}, the igraph
+#' directed network weighted by passengers, \code{netTrip}, a data frame with one
+#' row per origin, destination and \code{route_type} (OD, OT, TT or TD) with
+#' passengers, average fare and its standard deviation, yield, distance and city
+#' information, and \code{nodes}, a data frame with the airport/node statistics
+#' (see \code{\link{node_stats}}).
+#'
 #' @examples
-#' \dontrun{
 #' make_net_trip(OD_Sample)
-#' }
+#'
 #' @export
 #'
 

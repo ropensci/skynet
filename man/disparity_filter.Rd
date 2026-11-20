@@ -11,13 +11,17 @@ disparity_filter(g, alpha = 0.003)
 
 \item{alpha}{Alpha value. Default 0.003}
 }
+\value{
+An igraph object with the backbone of \code{g}: only the edges with a
+disparity filter value below \code{alpha} are kept, and that value is stored in
+the edge attribute \code{alpha}. Vertices left without edges are removed.
+}
 \description{
 Uses the Serrano's disparity filter (\url{https://en.wikipedia.org/wiki/Disparity_filter_algorithm_of_weighted_network})
 to extract the backbone of the network in "Extracting the multiscale backbone of complex weighted networks"
 }
 \examples{
-\dontrun{
-netDir <- make.netDir(OD_Sample)
+netDir <- make_net_dir(OD_Sample)
 disparity_filter(netDir$gDir, alpha = 0.003)
-}
+
 }

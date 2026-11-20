@@ -9,13 +9,22 @@ nodeStatsMetro(y)
 \arguments{
 \item{y}{Data Frame}
 }
+\value{
+A data frame with one row per metropolitan area: \code{airport}
+(city market id), \code{pass_dep} (departing passengers), \code{pass_arr}
+(arriving passengers), \code{pass_tr} (transfer passengers, 0 when the data has
+no \code{trip_break} column), the metropolitan area information from
+\code{MetroLookup} (\code{latitude}, \code{longitude} and \code{description}) and
+\code{freq} (arrivals plus departures minus transfers).
+}
 \description{
 Create Metro Nodes
 }
 \examples{
-\dontrun{
+OD_Metro <- OD_Sample
+OD_Metro$origin <- OD_Metro$origin_mkt_id
+OD_Metro$dest <- OD_Metro$dest_mkt_id
 
-nodeStatsMetro(OD_Sample)
+nodeStatsMetro(OD_Metro)
 
-}
 }

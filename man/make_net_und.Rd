@@ -34,13 +34,22 @@ and summing their weights.}
 
 \item{metro}{Groups data by metropolitan area}
 }
+\value{
+An object of class \code{skynet}: a list with \code{gUnd}, the igraph
+undirected network weighted by passengers, \code{netUnd}, a data frame with one row per
+route (origin, destination, passengers, average fare and its standard
+deviation, yield, distance, year, quarter and city information), and
+\code{nodes}, a data frame with the airport/node statistics
+(see \code{\link{node_stats}}).
+With \code{disp = TRUE} or \code{cap = TRUE} the first two elements are named
+\code{gUnd_disp} and \code{netUnd_disp}, or \code{gUnd_cap} and \code{netUnd_cap}.
+}
 \description{
 Generates Undirected Network with an iGraph \strong{gUnd} object,
 a Data Frame \strong{netUnd} and a Data Frame
 with Airport/Nodes statistics \strong{nodes}.
 }
 \examples{
-\dontrun{
 make_net_und(OD_Sample)
 
 # Apply Disparity Filter
@@ -48,6 +57,5 @@ make_net_und(OD_Sample, disp = TRUE, alpha = 0.05)
 
 # Apply Percentage Cap
 make_net_und(OD_Sample, cap = TRUE, pct = 20)
-}
 
 }

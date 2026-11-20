@@ -11,6 +11,12 @@ download_t100_int(y = NULL, type = NULL)
 
 \item{type}{"mkt" for Market, "seg" for Segment databases respectively}
 }
+\value{
+Called mainly for its side effect: the T-100 data frame, with one row
+per route and carrier (see \code{\link{import_t100}}), is assigned to the global
+environment as \code{T100_year_mkt} or \code{T100_year_seg} (e.g.
+\code{T100_2010_mkt}) and returned invisibly.
+}
 \description{
 Downloads data from BTS/RITA/Transtats and imports it into R
 }
@@ -18,9 +24,10 @@ Downloads data from BTS/RITA/Transtats and imports it into R
 Note: The BTS often changes the way we can access these files. So please be warned that this is still an experimental feature.
 }
 \examples{
-\dontrun{
-
+\donttest{
+# Downloads a large file from the BTS website
+if(interactive()){
 download_t100_int(2010, "mkt")
-
+}
 }
 }

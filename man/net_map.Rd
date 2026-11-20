@@ -22,6 +22,10 @@ Requires the sf package; without it a simple lat/long map is drawn.}
 \item{carriers}{maximum number of carriers shown individually when the
 network is grouped by carrier. Remaining carriers are grouped as "Other".}
 }
+\value{
+A ggplot object with the map. With \code{interactive = TRUE}, a
+leaflet htmlwidget instead.
+}
 \description{
 Creates OD maps from make.net functions. Routes are drawn as great
 circles, with line width and opacity scaled by passengers, and airports
@@ -29,10 +33,9 @@ sized by traffic. By default a static ggplot2 map is returned; with
 \code{interactive = TRUE} a zoomable leaflet map is returned instead.
 }
 \examples{
-\dontrun{
 network <- make_net_dir(OD_Sample)
 net_map(network, pct = 10)
 net_map(network, pct = 10, interactive = TRUE)
-}
+
 
 }

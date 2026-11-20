@@ -8,12 +8,14 @@
 #' @param x First csv file to be imported, in case of DB1B database, or in case of using
 #' the T-100 database, the only file to be included.
 #' @param y Second csv file to be imported.
-#' @examples
-#' \dontrun{
 #'
+#' @return No return value, called for side effects. The function is deprecated
+#' and only issues a warning pointing to \code{\link{import_db1b}} and
+#' \code{\link{import_t100}}.
+#'
+#' @examples
 #' netImport(skynet_example("Coupon_2001Q1.csv"), skynet_example("Ticket_2001Q1.csv"))
 #'
-#' }
 #' @export
 #'
 #'

@@ -7,11 +7,17 @@
 #' @param y year to be imported
 #' @param type "mkt" for Market, "seg" for Segment databases respectively
 #'
+#' @return Called mainly for its side effect: the T-100 data frame, with one row
+#' per route and carrier (see \code{\link{import_t100}}), is assigned to the global
+#' environment as \code{T100_year_mkt} or \code{T100_year_seg} (e.g.
+#' \code{T100_2010_mkt}) and returned invisibly.
+#'
 #' @examples
-#' \dontrun{
-#'
+#' \donttest{
+#' # Downloads a large file from the BTS website
+#' if(interactive()){
 #' download_t100(2010, "mkt")
-#'
+#' }
 #' }
 #' @export
 #'
@@ -164,5 +170,3 @@ globalVariables(c("writeBin", "unzip"))
 
 pos <- 1
 envir <- as.environment(pos)
-
-options(timeout = max(800, getOption("timeout"))) #Set larger timeout

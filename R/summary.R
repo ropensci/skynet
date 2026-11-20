@@ -4,6 +4,9 @@
 #' @param ... other arguments ignored (for compatibility with generic)
 #' @method summary skynet
 #'
+#' @return No return value, called for side effects: prints the years,
+#' quarters, number of vertices/airports and number of edges/routes of the
+#' network to the console.
 #'
 #' @export
 #' @examples

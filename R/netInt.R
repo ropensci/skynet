@@ -8,12 +8,11 @@
 #' @param m Data set to merge with
 #' @param Q Desired T-100 Quarter. Should be equal to 1, 2, 3 or 4.
 #'
+#' @return No return value, called for side effects. The function is deprecated
+#' and only issues a warning pointing to \code{\link{import_t100}}.
+#'
 #' @examples
-#' \dontrun{
-#'
 #' make.netInt(skynet_example("T100_2011_int.csv"), OD_Sample, 1)
-#'
-#' }
 #'
 #' @export
 #'

@@ -11,6 +11,15 @@ import_ontime(x, auto = TRUE)
 
 \item{auto}{Automatically assigns object}
 }
+\value{
+A data frame (data.table) with one row per flight: origin and
+destination airports and city market ids, date, carrier, tail and flight
+numbers, scheduled and actual departure and arrival times, delays (by cause),
+taxi and air times, cancellations, diversions and distance.
+With \code{auto = TRUE} it is assigned to the global environment as
+\code{ontime_year_month} (e.g. \code{ontime_2011_1}) and returned invisibly,
+otherwise it is returned.
+}
 \description{
 Imports on-time Data directly from BTS/RITA/Transtats website raw data (prezipped file),
 for SKYNET's import function.
@@ -20,9 +29,6 @@ Files can be found here \url{https://www.transtats.bts.gov/Fields.asp?gnoyr_VQ=F
 More information on variables to select and type of files to use can be found \href{https://github.com/ropensci/skynet}{here}
 }
 \examples{
-\dontrun{
+import_ontime(skynet_example("Ontime_2011_1.csv"), auto = FALSE)
 
-import_ontime(skynet_example("Ontime_2011_1.csv"))
-
-}
 }

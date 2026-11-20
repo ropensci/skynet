@@ -9,12 +9,15 @@ skynet_example(path = NULL)
 \arguments{
 \item{path}{File name.}
 }
+\value{
+A character vector with the names of the example files when
+\code{path} is \code{NULL}, otherwise the full path to the requested file.
+}
 \description{
 To access csv examples from SKYNET
 }
 \examples{
-\dontrun{
 skynet_example()
-skynet_example("Coupon 2001Q1.csv")
-}
+skynet_example("Coupon_2001Q1.csv")
+
 }

@@ -7,12 +7,18 @@
 #' @param m month to be imported
 #' @param auto Automatically assigns object
 #'
+#' @return A data frame with one row per flight (see \code{\link{import_ontime}}).
+#' With \code{auto = TRUE} it is assigned to the global environment as
+#' \code{ontime_year_month} (e.g. \code{ontime_2011_1}) and returned invisibly,
+#' otherwise it is returned. If the BTS website can't be reached a message is
+#' shown and \code{NULL} is returned.
 #'
 #' @examples
-#' \dontrun{
-#'
-#' import_ontime(skynet_example("Ontime.csv"))
-#'
+#' \donttest{
+#' # Downloads a large file from the BTS website
+#' if(interactive()){
+#' download_ontime(2011, 1, auto = FALSE)
+#' }
 #' }
 #' @export
 #'

@@ -5,12 +5,15 @@
 #'
 #' @param x airport IATA code or city name
 #'
+#' @return A data frame with the rows of \code{airportCode} whose IATA code
+#' (\code{origin}) or \code{city} matches \code{x}, including the city market id
+#' (\code{city_mkt_id}), \code{latitude} and \code{longitude}.
+#'
 #' @examples
-#' \dontrun{
 #' find_airport("Atlanta")
 #'
 #' find_airport("ATL")
-#' }
+#'
 #' @export
 #'
 

@@ -73,10 +73,9 @@ When generating a network, SKYNET, creates a list which includes:
 library(skynet)
 library(dplyr)
 library(kableExtra)
-options(knitr.table.format = "html") 
 data("OD_Sample")
 rownames(OD_Sample) <- NULL
-knitr::kable(head(OD_Sample, 5)) %>% kable_styling()
+knitr::kable(head(OD_Sample, 5), format = "html") %>% kable_styling()
 ```
 
 When generating a network with SKYNET, it is possible use the following arguments:  

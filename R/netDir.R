@@ -14,8 +14,16 @@
 #' @param carrier Groups data per carrier and OD
 #' @param metro Groups data by metropolitan area
 #'
+#' @return An object of class \code{skynet}: a list with \code{gDir}, the igraph
+#' directed network weighted by passengers, \code{netDir}, a data frame with one row per
+#' route (origin, destination, passengers, average fare and its standard
+#' deviation, yield, distance, year, quarter and city information), and
+#' \code{nodes}, a data frame with the airport/node statistics
+#' (see \code{\link{node_stats}}).
+#' With \code{disp = TRUE} or \code{cap = TRUE} the first two elements are named
+#' \code{gDir_disp} and \code{netDir_disp}, or \code{gDir_cap} and \code{netDir_cap}.
+#'
 #' @examples
-#' \dontrun{
 #' make_net_dir(OD_Sample)
 #'
 #' # Apply Disparity Filter
@@ -23,7 +31,7 @@
 #'
 #' # Apply Percentage Cap
 #' make_net_dir(OD_Sample, cap = TRUE, pct = 20)
-#' }
+#'
 #' @export
 #'
 

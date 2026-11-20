@@ -10,12 +10,16 @@
 #' @param nonsch Should equal TRUE to include non-scheduled flights
 #' @param auto Automatically assigns object
 #'
+#' @return A data frame with one row per route, carrier and month: origin and
+#' destination airports and city market ids, carrier, distance, passengers, year,
+#' quarter and month (plus seats, departures and aircraft type for segment files).
+#' With \code{auto = TRUE} it is assigned to the global environment as
+#' \code{T100_year_mkt} or \code{T100_year_seg} (e.g. \code{T100_2011_mkt}) and
+#' returned invisibly, otherwise it is returned.
+#'
 #' @examples
-#' \dontrun{
+#' import_t100(skynet_example("T100_2011_mkt.csv"), auto = FALSE)
 #'
-#' import_t100(skynet_example("T100_2011_mkt.csv"))
-#'
-#' }
 #' @export
 #'
 

@@ -9,13 +9,17 @@ find_carrier(x)
 \arguments{
 \item{x}{Carrier}
 }
+\value{
+A data frame with the carriers whose code or name matches \code{x}:
+\code{op_carrier} (carrier code), \code{carrier_name}, and \code{from} and
+\code{to}, the years in which the code was used by that carrier.
+}
 \description{
 Searches for airport information based on its IATA code or city name
 }
 \examples{
-\dontrun{
 find_carrier("United")
 
 find_carrier("UA")
-}
+
 }

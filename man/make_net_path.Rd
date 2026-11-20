@@ -17,14 +17,23 @@ make_net_path(x, leg = FALSE, zero = FALSE, carrier = FALSE)
 
 For example, all passengers doing the BOS-ATL-LAX path, are summed by Air Carrier.}
 }
+\value{
+With \code{leg = FALSE}, a data frame (data.table) with one row per
+origin and destination pair: passengers, average fare and its standard
+deviation, yield, mean number of stops, mean distance, city information, year
+and quarter (plus the percentage of 0 usd tickets with \code{zero = TRUE}).
+With \code{leg = TRUE}, an object of class \code{skynet}: a list with
+\code{netOD}, the data frame above, and \code{netLegCount}, a data frame
+(data.table) with the passengers per \code{path} taken, its carriers and its
+number of legs (\code{legCount}).
+}
 \description{
 Generates an OD network and a Leg Count data frame(on demand)
 }
 \examples{
-\dontrun{
 make_net_path(OD_Sample)
 
 # Generate Leg Count
 make_net_path(OD_Sample, leg = TRUE)
-}
+
 }

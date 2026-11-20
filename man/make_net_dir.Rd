@@ -30,13 +30,22 @@ to extract the backbone of the network.}
 
 \item{metro}{Groups data by metropolitan area}
 }
+\value{
+An object of class \code{skynet}: a list with \code{gDir}, the igraph
+directed network weighted by passengers, \code{netDir}, a data frame with one row per
+route (origin, destination, passengers, average fare and its standard
+deviation, yield, distance, year, quarter and city information), and
+\code{nodes}, a data frame with the airport/node statistics
+(see \code{\link{node_stats}}).
+With \code{disp = TRUE} or \code{cap = TRUE} the first two elements are named
+\code{gDir_disp} and \code{netDir_disp}, or \code{gDir_cap} and \code{netDir_cap}.
+}
 \description{
 Generates Directed Network with an iGraph \strong{gDir} object,
 a Data Frame \strong{netDir} and a Data Frame
 with Airport/Nodes statistics \strong{nodes}.
 }
 \examples{
-\dontrun{
 make_net_dir(OD_Sample)
 
 # Apply Disparity Filter
@@ -44,5 +53,5 @@ make_net_dir(OD_Sample, disp = TRUE, alpha = 0.05)
 
 # Apply Percentage Cap
 make_net_dir(OD_Sample, cap = TRUE, pct = 20)
-}
+
 }
